@@ -1,12 +1,12 @@
 package com.ExceptionHandled.GameServer;
 
-import com.ExceptionHandled.GameMessages.Game.MoveMade;
 import com.ExceptionHandled.GameMessages.Packet;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.BlockingQueue;
 
@@ -17,15 +17,18 @@ public class ClientConnection implements Runnable {
     private int clientNo;
     private UUID id;
 
-    private BlockingQueue<MoveMade> moveQ;
+    private BlockingQueue<ServerPacket> messageQueue;
+    private List<ClientConnection> clientConnectionList;
     private Thread thread;
 
-    public ClientConnection(Socket socket, int clientNo, BlockingQueue<MoveMade> moveQ) {
+    public ClientConnection(Socket socket, int clientNo, BlockingQueue<ServerPacket> messageQueue, List<ClientConnection> clientConnectionList) {
         this.socket = socket;
         this.clientNo = clientNo;
-        this.moveQ = moveQ;
+        this.messageQueue = messageQueue;
+        this.clientConnectionList = clientConnectionList;
 
         id = UUID.randomUUID();
+        clientConnectionList.add(this);
 
         thread = new Thread(this);
         thread.start();
@@ -44,9 +47,16 @@ public class ClientConnection implements Runnable {
 
             while(true){
                 Packet packet = (Packet)inputFromClient.readObject();
+                ServerPacket serverPacket =new ServerPacket(this, packet);
+
+                System.out.println(serverPacket);
+                messageQueue.put(serverPacket);
             }
-        } catch (IOException | ClassNotFoundException e) {
+        } catch (IOException | ClassNotFoundException | InterruptedException e) {
             e.printStackTrace();
+        }
+        finally{
+            clientConnectionList.remove(this);
         }
 
     }
