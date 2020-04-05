@@ -14,15 +14,20 @@ public class Main {
         String user = "root";
         String pw = input.nextLine();
 
+        String query = "use 4blogin; " +
+                "INSERT INTO playerinfo " +
+                "VALUES (default, 'John', 'passw')";
+
         //1. Get a connection to the database
         Connection myConn = DriverManager.getConnection(URL2, user, pw);
         //2. Create a statement
         Statement myStatement = myConn.createStatement();
         //3. Execute SQL Query
-        ResultSet myRs = myStatement.executeQuery("SELECT * FROM sql_store.customers;");
+        myStatement.executeUpdate(query);
+//        ResultSet myRs = myStatement.executeQuery(query);
         //4. Process the result set
-        while(myRs.next()){
-            System.out.println(myRs.getString(1) + ", " + myRs.getString(2));
+//        while(myRs.next()){
+//            System.out.println(myRs.getString(1) + ", " + myRs.getString(2));
         }
     }
-}
+

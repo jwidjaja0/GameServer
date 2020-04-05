@@ -3,11 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="ed5a9275-b353-4784-9717-d5e8f1700b19" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameServer.iml" beforeDir="false" afterPath="$PROJECT_DIR$/GameServer.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/ClientConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/ClientConnection.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Server.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/ServerPacket.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/ServerPacket.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -84,7 +80,7 @@
       <updated>1585630159474</updated>
       <workItem from="1585630160839" duration="756000" />
       <workItem from="1585957428554" duration="322000" />
-      <workItem from="1586026283613" duration="11222000" />
+      <workItem from="1586026283613" duration="13053000" />
     </task>
     <servers />
   </component>
