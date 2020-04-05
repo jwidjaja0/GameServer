@@ -1,6 +1,12 @@
 package com.ExceptionHandled.GameServer;
 
 public class GameRoom {
-    private String p1;
-    private String p2;
+    private static int matchId;
+
+    private Player p1;
+    private Player p2;
+
+
+
+
 }

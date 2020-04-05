@@ -32,7 +32,6 @@ public class ClientConnection implements Runnable {
 
         thread = new Thread(this);
         thread.start();
-
     }
 
     public synchronized ObjectOutputStream getObjectOutputStream() {
