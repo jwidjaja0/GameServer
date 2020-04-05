@@ -2,7 +2,8 @@ package com.ExceptionHandled.GameServer;
 
 import com.ExceptionHandled.GameMessages.Login.SignUpRequest;
 import com.ExceptionHandled.GameMessages.MainMenu.ListActiveGames;
-import com.ExceptionHandled.GameMessages.Packet;
+import com.ExceptionHandled.GameMessages.Wrappers.Packet;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,7 +43,9 @@ public class Server implements Runnable {
                 ServerPacket serverPacket = messageQueue.take();
                 Packet packet = serverPacket.getPacket();
 
-                if(packet.getMessage() instanceof SignUpRequest)
+                if(packet.getMessage() instanceof SignUpRequest){
+
+                }
 
 
 

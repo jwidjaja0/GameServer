@@ -1,6 +1,7 @@
 package com.ExceptionHandled.GameServer;
 
-import com.ExceptionHandled.GameMessages.Packet;
+
+import com.ExceptionHandled.GameMessages.Wrappers.Packet;
 
 public class ServerPacket {
     private ClientConnection clientConnection;

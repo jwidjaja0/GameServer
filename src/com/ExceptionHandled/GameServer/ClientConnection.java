@@ -1,6 +1,6 @@
 package com.ExceptionHandled.GameServer;
 
-import com.ExceptionHandled.GameMessages.Packet;
+import com.ExceptionHandled.GameMessages.Wrappers.Packet;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -45,7 +45,7 @@ public class ClientConnection implements Runnable {
             this.objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
 
             while(true){
-                Packet packet = (Packet)inputFromClient.readObject();
+                Packet packet = (Packet) inputFromClient.readObject();
                 ServerPacket serverPacket =new ServerPacket(this, packet);
 
                 System.out.println(serverPacket);
