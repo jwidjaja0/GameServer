@@ -5,7 +5,18 @@ import java.util.Scanner;
 
 public class Main {
 
-    public static void main(String[] args) throws SQLException {
+    public static void main(String[] args){
+        Server gameServer = new Server();
+
+        Scanner in = new Scanner(System.in);
+        int a = 1;
+        while(a != 0){
+            a = in.nextInt();
+        }
+    }
+
+
+    public static void main2(String[] args) throws SQLException {
 
         Scanner input = new Scanner(System.in);
 

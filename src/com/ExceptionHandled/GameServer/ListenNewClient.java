@@ -22,7 +22,7 @@ public class ListenNewClient implements Runnable {
         this.messageQueue = messageQueue;
         clientNo = 0;
 
-        thread = new Thread();
+        thread = new Thread(this);
         thread.start();
     }
 
@@ -30,6 +30,7 @@ public class ListenNewClient implements Runnable {
     @Override
     public void run() {
         try {
+            System.out.println("ListenNewClient thread started");
             ServerSocket serverSocket = new ServerSocket(8000);
 
             while(true){

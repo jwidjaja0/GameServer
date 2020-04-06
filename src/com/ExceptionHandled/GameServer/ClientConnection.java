@@ -41,6 +41,7 @@ public class ClientConnection implements Runnable {
     @Override
     public void run() {
         try {
+            System.out.println("client connection thread started with ID: " + id);
             ObjectInputStream inputFromClient = new ObjectInputStream(socket.getInputStream());
             this.objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
 
