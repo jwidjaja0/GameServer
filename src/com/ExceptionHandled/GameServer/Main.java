@@ -10,12 +10,10 @@ public class Main {
 
         Scanner in = new Scanner(System.in);
 
-
-
-        int a = 1;
-        while(a != 0){
-            a = in.nextInt();
-        }
+//        int a = 1;
+//        while(a != 0){
+//            a = in.nextInt();
+//        }
     }
 
         public static void main2 (String[]args) throws SQLException {
@@ -34,16 +32,21 @@ public class Main {
 
             String query = "select * from 4blogin.playerinfo;";
 
-            String query2 = "INSERT INTO 4blogin.playerinfo values(default, 'John','passw')";
+            String query2 = "insert into 4blogin.playerinfo values(1, 'Ram', 'abcd')";
 
             //1. Get a connection to the database
             Connection myConn = DriverManager.getConnection(URL2, user, pw);
             //2. Create a statement
             Statement myStatement = myConn.createStatement();
             //3. Execute SQL Query
-            // myStatement.execute(query);
             //ResultSet myRs = myStatement.executeQuery(query);
-            myStatement.executeUpdate(query2);
+            try{
+                myStatement.executeUpdate(query2);
+            }
+            catch(SQLIntegrityConstraintViolationException e){
+                System.out.println("Username taken!");
+            }
+
             //4. Process the result set
 //        while(myRs.next()){
 //            System.out.println(myRs.getString(1) + ", " + myRs.getString(2));

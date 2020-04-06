@@ -1,16 +1,14 @@
 package com.ExceptionHandled.GameServer;
 
 import com.ExceptionHandled.GameMessages.Connection.ConnectionRequest;
+import com.ExceptionHandled.GameMessages.Login.SignUpFail;
 import com.ExceptionHandled.GameMessages.Login.SignUpRequest;
 import com.ExceptionHandled.GameMessages.Login.SignUpSuccess;
 import com.ExceptionHandled.GameMessages.Wrappers.Packet;
 
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ArrayBlockingQueue;
@@ -77,23 +75,30 @@ public class Server implements Runnable {
         System.out.println("Connection request from client");
     }
 
-    public void handleSignupRequest(ServerPacket serverPacket) throws IOException, SQLException {
+    public void handleSignupRequest(ServerPacket serverPacket) throws IOException {
         Packet packet = serverPacket.getPacket();
         SignUpRequest request = (SignUpRequest) packet.getMessage();
         String usernameRequest = request.getUsername();
         String passwordRequest = request.getPassword();
+        String id = serverPacket.getClientConnection().getId().toString();
 
-        String query2 = "INSERT INTO 4blogin.playerinfo values(default, 'Jan','paree')";
-        Statement myStatement = connection.createStatement();
-        myStatement.executeUpdate(query2);
+        String query2 = "INSERT INTO 4blogin.playerinfo values(" + id + "," + usernameRequest+"," + passwordRequest + ")";
+        Statement myStatement = null;
+        try {
+            myStatement = connection.createStatement();
+            myStatement.executeUpdate(query2);
 
+            //if insert successfully, return signupsuccess
+            serverPacket.getClientConnection().getObjectOutputStream().writeObject(new SignUpSuccess());
+        }
+        catch(SQLIntegrityConstraintViolationException e){
+            System.out.println("Duplicate username!");
+            serverPacket.getClientConnection().getObjectOutputStream().writeObject(new SignUpFail("duplicate username"));
+        }
 
-//        SignUpSuccess signUpSuccess = new SignUpSuccess();
-//        Packet packet = new Packet("SignUpSuccess", signUpSuccess);
-
-//        for(ClientConnection c: clientConnectionList){
-//            c.getObjectOutputStream().writeObject(packet);
-//        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
 
     }
 

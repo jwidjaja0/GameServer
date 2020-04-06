@@ -34,6 +34,10 @@ public class ClientConnection implements Runnable {
         thread.start();
     }
 
+    public UUID getId() {
+        return id;
+    }
+
     public synchronized ObjectOutputStream getObjectOutputStream() {
         return objectOutputStream;
     }
