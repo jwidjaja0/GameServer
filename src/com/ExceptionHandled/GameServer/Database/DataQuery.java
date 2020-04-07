@@ -16,7 +16,6 @@ public class DataQuery implements QueryHandle {
     private Connection connection;
 
     private DataQuery() {
-//        connection = setConnection();
     }
 
     public static DataQuery getInstance() {
@@ -24,14 +23,12 @@ public class DataQuery implements QueryHandle {
         return instance;
     }
 
-    public Connection setConnection() throws SQLException {
+    public void setConnection() throws SQLException {
         String URL = "jdbc:mysql://127.0.0.1:3306/";
         String user = "guest";
         String pw = "mypassword";
 
-        String query = "select * from 4blogin.playerinfo;";
-        Connection myConn = DriverManager.getConnection(URL, user, pw);
-        return myConn;
+        connection = DriverManager.getConnection(URL, user, pw);
     }
 
     public boolean isSignUpIDUnique(String id) throws SQLException {

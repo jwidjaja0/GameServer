@@ -55,6 +55,7 @@ public class Server implements Runnable {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        System.out.println("Connection established to MySQL");
         System.out.println("Server thread started");
 
         while (true){
@@ -83,6 +84,7 @@ public class Server implements Runnable {
                 else if(packet.getMessage() instanceof Game){
                     handleGameMessage(serverPacket);
                 }
+
             } catch (InterruptedException | IOException e) {
                 e.printStackTrace();
             }
@@ -117,46 +119,7 @@ public class Server implements Runnable {
         System.out.println("Connection request from client");
     }
 
-    public void handleSignupRequest(ServerPacket serverPacket) throws IOException, SQLException {
-        Packet packet = serverPacket.getPacket();
-        Login login = (Login)packet.getMessage();
-        SignUpRequest request = (SignUpRequest) login.getMessage();
-
-        String usernameRequest = "'" + request.getUsername() + "'";
-        String passwordRequest = "'" + request.getPassword() + "'";
-        String firstName = "'" + request.getFirstName() + "'";
-        String lastName = "'" + request.getLastName() + "'";
-        //String id = UUID.randomUUID().toString().substring(0,4);
-        String id = "123ass";
-        String id3 = "'" + id + "'";
-
-        System.out.println(usernameRequest);
-        System.out.println(passwordRequest);
-        System.out.println(id);
-
-        Statement myStatement = null;
-
-        String query2 = "INSERT INTO 4blogin.playerinfo values(" + id3 + "," + usernameRequest+ "," + passwordRequest + "," + firstName + "," + lastName + ")";
-        System.out.println(query2);
-        try {
-            myStatement = connection.createStatement();
-            myStatement.executeUpdate(query2);
-
-            //if insert successfully, return signupsuccess
-            serverPacket.getClientConnection().getObjectOutputStream().writeObject(new SignUpSuccess());
-        }
-        catch(SQLIntegrityConstraintViolationException e){
-            System.out.println("Cause: " + e.getErrorCode());
-            System.out.println("Duplicate username!");
-            //serverPacket.getClientConnection().getObjectOutputStream().writeObject(new SignUpFail("duplicate username"));
-        }
-
-        catch (SQLException e) {
-            e.printStackTrace();
-        }
+    public void handleLoginMessages(ServerPacket serverPacket){
 
     }
-
-
-
 }
