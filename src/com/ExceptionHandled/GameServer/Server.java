@@ -1,12 +1,14 @@
 package com.ExceptionHandled.GameServer;
 
 import com.ExceptionHandled.GameMessages.Connection.ConnectionRequest;
+import com.ExceptionHandled.GameMessages.Login.SignUpFail;
 import com.ExceptionHandled.GameMessages.Login.SignUpRequest;
 import com.ExceptionHandled.GameMessages.Login.SignUpSuccess;
 import com.ExceptionHandled.GameMessages.Wrappers.Packet;
 
 
 import java.io.IOException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ArrayBlockingQueue;
@@ -22,6 +24,8 @@ public class Server implements Runnable {
 
     private ListenNewClient listenNewClient;
 
+    private Connection connection;
+
     private Thread thread;
 
     public Server() {
@@ -34,6 +38,8 @@ public class Server implements Runnable {
         GameRoom gm = new GameRoom();
         gameRoomList.add(gm);
 
+
+
         thread = new Thread(this);
         thread.start();
         System.out.println("server instantiated");
@@ -42,8 +48,10 @@ public class Server implements Runnable {
     @Override
     public void run() {
         System.out.println("Server thread started");
+
         while (true){
             try {
+                connection = setConnection();
                 ServerPacket serverPacket = messageQueue.take();
                 Packet packet = serverPacket.getPacket();
 
@@ -56,7 +64,7 @@ public class Server implements Runnable {
 
 
 
-            } catch (InterruptedException | IOException e) {
+            } catch (InterruptedException | IOException | SQLException e) {
                 e.printStackTrace();
             }
         }
@@ -68,12 +76,39 @@ public class Server implements Runnable {
     }
 
     public void handleSignupRequest(ServerPacket serverPacket) throws IOException {
-        SignUpSuccess signUpSuccess = new SignUpSuccess();
-        Packet packet = new Packet("SignUpSuccess", signUpSuccess);
+        Packet packet = serverPacket.getPacket();
+        SignUpRequest request = (SignUpRequest) packet.getMessage();
+        String usernameRequest = request.getUsername();
+        String passwordRequest = request.getPassword();
+        String id = serverPacket.getClientConnection().getId().toString();
 
-        for(ClientConnection c: clientConnectionList){
-            c.getObjectOutputStream().writeObject(packet);
+        String query2 = "INSERT INTO 4blogin.playerinfo values(" + id + "," + usernameRequest+"," + passwordRequest + ")";
+        Statement myStatement = null;
+        try {
+            myStatement = connection.createStatement();
+            myStatement.executeUpdate(query2);
+
+            //if insert successfully, return signupsuccess
+            serverPacket.getClientConnection().getObjectOutputStream().writeObject(new SignUpSuccess());
+        }
+        catch(SQLIntegrityConstraintViolationException e){
+            System.out.println("Duplicate username!");
+            serverPacket.getClientConnection().getObjectOutputStream().writeObject(new SignUpFail("duplicate username"));
         }
 
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public Connection setConnection() throws SQLException {
+        String URL = "jdbc:mysql://127.0.0.1:3306/";
+        String user = "guest";
+        String pw = "mypassword";
+
+        String query = "select * from 4blogin.playerinfo;";
+        Connection myConn = DriverManager.getConnection(URL, user, pw);
+        return myConn;
     }
 }
