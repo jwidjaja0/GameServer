@@ -6,6 +6,10 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args){
+
+//        UUID id = UUID.randomUUID();
+//        System.out.println(id);
+
         Server gameServer = new Server();
 
         Scanner in = new Scanner(System.in);

@@ -15,7 +15,7 @@ public class ClientConnection implements Runnable {
     private Socket socket;
     private ObjectOutputStream objectOutputStream;
     private int clientNo;
-    private UUID id;
+    private UUID connectionID;
 
     private BlockingQueue<ServerPacket> messageQueue;
     private List<ClientConnection> clientConnectionList;
@@ -27,15 +27,15 @@ public class ClientConnection implements Runnable {
         this.messageQueue = messageQueue;
         this.clientConnectionList = clientConnectionList;
 
-        id = UUID.randomUUID();
+        connectionID = UUID.randomUUID();
         clientConnectionList.add(this);
 
         thread = new Thread(this);
         thread.start();
     }
 
-    public UUID getId() {
-        return id;
+    public String getConnectionID() {
+        return connectionID.toString();
     }
 
     public synchronized ObjectOutputStream getObjectOutputStream() {
@@ -45,7 +45,7 @@ public class ClientConnection implements Runnable {
     @Override
     public void run() {
         try {
-            System.out.println("client connection thread started with ID: " + id);
+            System.out.println("client connection thread started with ID: " + connectionID);
             ObjectInputStream inputFromClient = new ObjectInputStream(socket.getInputStream());
             this.objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
 
