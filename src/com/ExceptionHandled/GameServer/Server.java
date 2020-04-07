@@ -8,7 +8,7 @@ import com.ExceptionHandled.GameMessages.MainMenu.NewGameRequest;
 import com.ExceptionHandled.GameMessages.Wrappers.Game;
 import com.ExceptionHandled.GameMessages.Wrappers.Login;
 import com.ExceptionHandled.GameMessages.Wrappers.Packet;
-import com.ExceptionHandled.GameServer.Database.DataSource;
+import com.ExceptionHandled.GameServer.Database.DataQuery;
 
 
 import java.io.IOException;
@@ -51,7 +51,7 @@ public class Server implements Runnable {
 //            e.printStackTrace();
 //        }
         try {
-            DataSource.getInstance().setConnection();
+            DataQuery.getInstance().setConnection();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -67,16 +67,23 @@ public class Server implements Runnable {
                     handleConnectionRequest(serverPacket);
                 }
                 else if(packet.getMessageType().equals("Login")){
+                    Login login = (Login)packet.getMessage();
+                    if(login.getMessage() instanceof SignUpRequest){
+                        SignUpRequest s = (SignUpRequest)login.getMessage();
+                        Login response = DataQuery.getInstance().InsertNewUser(s);
 
-                    handleSignupRequest(serverPacket);
+                        String connectionID = serverPacket.getClientConnection().getConnectionID();
+                        for(ClientConnection c: clientConnectionList){
+                            if(c.getConnectionID().equals(connectionID)){
+                                c.getObjectOutputStream().writeObject(response);
+                            }
+                        }
+                    }
                 }
                 else if(packet.getMessage() instanceof Game){
                     handleGameMessage(serverPacket);
                 }
-
-
-
-            } catch (InterruptedException | IOException | SQLException e) {
+            } catch (InterruptedException | IOException e) {
                 e.printStackTrace();
             }
         }
@@ -127,12 +134,6 @@ public class Server implements Runnable {
         System.out.println(passwordRequest);
         System.out.println(id);
 
-        //check if id is unique;
-        while(!isIDUnique(id)){
-            System.out.println("ID is not unique!");
-            id = UUID.randomUUID().toString().substring(0,4);
-        }
-
         Statement myStatement = null;
 
         String query2 = "INSERT INTO 4blogin.playerinfo values(" + id3 + "," + usernameRequest+ "," + passwordRequest + "," + firstName + "," + lastName + ")";
@@ -156,28 +157,6 @@ public class Server implements Runnable {
 
     }
 
-    public Connection setConnection() throws SQLException {
-        String URL = "jdbc:mysql://127.0.0.1:3306/";
-        String user = "guest";
-        String pw = "mypassword";
 
-        String query = "select * from 4blogin.playerinfo;";
-        Connection myConn = DriverManager.getConnection(URL, user, pw);
-        return myConn;
-    }
 
-    public boolean isIDUnique(String id) throws SQLException {
-        //TODO: check databse if id already exist
-        Statement statement = connection.createStatement();
-
-        String query = "select playerID from 4blogin.playerinfo";
-        ResultSet resultSetID = statement.executeQuery(query);
-        while(resultSetID.next()){
-            System.out.println(resultSetID.getString(1));
-            if(resultSetID.getString(1).equals(id)){
-                return false;
-            }
-        }
-        return true;
-    }
 }
