@@ -12,7 +12,7 @@ public class DataQuery implements QueryHandle {
     private static DataQuery instance = new DataQuery();
     private Connection connection;
 
-    private static final String SQCONN = "jdbc:sqlite:playerInfo.sqlite";
+    private static final String SQCONN = "jdbc:sqlite:4bLogin.sqlite";
 
     private DataQuery() {
     }
@@ -37,7 +37,7 @@ public class DataQuery implements QueryHandle {
     public boolean isSignUpIDUnique(String id) throws SQLException {
         Statement statement = connection.createStatement();
 
-        String query = "select playerID from playerInfo";
+        String query = "select playerID from 4bLogin.playerInfo";
         ResultSet resultSetID = statement.executeQuery(query);
         while(resultSetID.next()){
             System.out.println(resultSetID.getString(1));
@@ -51,7 +51,7 @@ public class DataQuery implements QueryHandle {
     public Login InsertNewUser(SignUpRequest request) {
         StringBuilder sb = new StringBuilder();
 //        sb.append("INSERT INTO 4blogin.playerinfo values(");
-        sb.append("INSERT INTO playerInfo values(");
+        sb.append("INSERT INTO 4bLogin.playerInfo values(");
 
         String username = prepForQuery(request.getUsername());
         String password = prepForQuery(request.getPassword());
@@ -98,7 +98,7 @@ public class DataQuery implements QueryHandle {
         String username = loginRequest.getUsername();
         String password = loginRequest.getPassword();
 
-        sb.append("SELECT * FROM 4blogin.playerinfo");
+        sb.append("SELECT * FROM 4bLogin.playerInfo");
         ResultSet resultSet;
 
         //Get ResultSet from Database
