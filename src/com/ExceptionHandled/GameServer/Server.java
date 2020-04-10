@@ -7,7 +7,7 @@ import com.ExceptionHandled.GameMessages.MainMenu.NewGameRequest;
 import com.ExceptionHandled.GameMessages.Wrappers.Game;
 import com.ExceptionHandled.GameMessages.Wrappers.Login;
 import com.ExceptionHandled.GameMessages.Wrappers.Packet;
-import com.ExceptionHandled.GameServer.Database.DataQuery;
+import com.ExceptionHandled.GameServer.Database.SQLiteQuery;
 
 
 import java.io.IOException;
@@ -43,10 +43,8 @@ public class Server implements Runnable {
     @Override
     public void run() {
 
-        DataQuery.getInstance().getConnection();
+        SQLiteQuery.getInstance().setConnection();
 
-
-        System.out.println("Connection established to MySQL");
         System.out.println("Server thread started");
 
         while (true){
@@ -104,7 +102,7 @@ public class Server implements Runnable {
 
         if(login.getMessage() instanceof SignUpRequest){
             SignUpRequest s = (SignUpRequest)login.getMessage();
-            Login response = DataQuery.getInstance().InsertNewUser(s);
+            Login response = SQLiteQuery.getInstance().insertNewUser(s);
 
             String connectionID = serverPacket.getClientConnection().getConnectionID();
             for(ClientConnection c: clientConnectionList){
@@ -117,7 +115,7 @@ public class Server implements Runnable {
         else if(login.getMessage() instanceof LoginRequest){
             LoginRequest r = (LoginRequest)login.getMessage();
 
-            Login response = DataQuery.getInstance().userLoggingIn(r);
+            Login response = SQLiteQuery.getInstance().userLoggingIn(r);
             if(response.getMessage() instanceof LoginSuccess){
                 LoginSuccess lg = (LoginSuccess)response.getMessage();
                 activePlayerMapCC.put(lg.getPlayerID(), serverPacket.getClientConnection());

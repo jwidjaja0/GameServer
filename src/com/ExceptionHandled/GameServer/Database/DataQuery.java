@@ -6,7 +6,7 @@ import com.ExceptionHandled.GameMessages.Wrappers.Login;
 import java.sql.*;
 import java.util.UUID;
 
-public class DataQuery implements QueryHandle {
+public class DataQuery {
 
     //lazy instantiation because it throws exception from creating SQL connection
     private static DataQuery instance = new DataQuery();
@@ -142,7 +142,7 @@ public class DataQuery implements QueryHandle {
         return new Login("LoginFail", new LoginFail("Unknown cause"));
     }
 
-    @Override
+
     public void Insert(Object obj) {
         if(obj instanceof SignUpRequest){
         }

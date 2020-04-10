@@ -1,6 +1,10 @@
 package com.ExceptionHandled.GameServer.Database;
 
+import com.ExceptionHandled.GameMessages.Login.*;
+import com.ExceptionHandled.GameMessages.Wrappers.Login;
+
 import java.sql.*;
+import java.util.UUID;
 
 public class SQLiteQuery {
 
@@ -24,6 +28,84 @@ public class SQLiteQuery {
             e.printStackTrace();
             System.exit(-1);
         }
+    }
+
+    private boolean isSignUpIDUnique(String id) throws SQLException {
+        Statement statement = connection.createStatement();
+
+        String query = "Select playerID from playerinfo";
+        ResultSet rs = statement.executeQuery(query);
+
+        while(rs.next()){
+            if(rs.getString(1).equals(id)){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public Login insertNewUser(SignUpRequest request) {
+
+        String id = UUID.randomUUID().toString().substring(0,8);
+        try{
+            while(!isSignUpIDUnique(id)){
+                id = UUID.randomUUID().toString().substring(0,8);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            PreparedStatement prep = connection.prepareStatement("INSERT INTO playerInfo values(?,?,?,?,?)");
+            prep.setString(1, id);
+            prep.setString(2,request.getUsername());
+            prep.setString(3,request.getPassword());
+            prep.setString(4,request.getFirstName());
+            prep.setString(5,request.getLastName());
+            prep.execute();
+
+            Login login = new Login("SignUpSuccess", new SignUpSuccess());
+            return login;
+        }
+
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return new Login("SignUpFail", new SignUpFail("unknown"));
+    }
+
+    public Login userLoggingIn(LoginRequest loginRequest){
+
+        String username = loginRequest.getUsername();
+        String password = loginRequest.getPassword();
+
+        ResultSet rs;
+
+        try{
+            Statement statement = connection.createStatement();
+            rs = statement.executeQuery("Select * from playerInfo");
+
+            while(rs.next()){
+                String dbUsername = rs.getString(2);
+                String dbPassword = rs.getString(3);
+
+                if(username.equals(dbUsername) && password.equals(dbPassword)){
+                    System.out.println("Login Success");
+                    return new Login("LoginSuccess", new LoginSuccess(rs.getString(1)));
+                }
+                else if(username.equals(dbUsername) && !password.equals(dbPassword)){
+                    System.out.println("Incorrect password");
+                    return new Login("LoginFail", new LoginFail("Incorrect password"));
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return new Login("LoginFail", new LoginFail("no user exist"));
+
     }
 
     public void listUsers(){
