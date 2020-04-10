@@ -2,8 +2,7 @@ package com.ExceptionHandled.GameServer;
 
 import com.ExceptionHandled.GameMessages.Connection.ConnectionRequest;
 import com.ExceptionHandled.GameMessages.Game.MoveMade;
-import com.ExceptionHandled.GameMessages.Login.SignUpRequest;
-import com.ExceptionHandled.GameMessages.Login.SignUpSuccess;
+import com.ExceptionHandled.GameMessages.Login.*;
 import com.ExceptionHandled.GameMessages.MainMenu.NewGameRequest;
 import com.ExceptionHandled.GameMessages.Wrappers.Game;
 import com.ExceptionHandled.GameMessages.Wrappers.Login;
@@ -13,9 +12,7 @@ import com.ExceptionHandled.GameServer.Database.DataQuery;
 
 import java.io.IOException;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 
@@ -25,9 +22,9 @@ public class Server implements Runnable {
     private List<ClientConnection> clientConnectionList;
     private List<GameRoom> gameRoomList;
 
-    private ListenNewClient listenNewClient;
+    private Map<String, ClientConnection> activePlayerMapCC;
 
-    private Connection connection;
+    private ListenNewClient listenNewClient;
 
     private Thread thread;
 
@@ -36,7 +33,7 @@ public class Server implements Runnable {
         clientConnectionList = new ArrayList<>(100);
         gameRoomList = new ArrayList<>(100);
         listenNewClient = new ListenNewClient(clientConnectionList, messageQueue);
-
+        activePlayerMapCC = new HashMap<>();
 
         thread = new Thread(this);
         thread.start();
@@ -45,11 +42,6 @@ public class Server implements Runnable {
 
     @Override
     public void run() {
-//        try {
-//            setConnection();
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
         try {
             DataQuery.getInstance().setConnection();
         } catch (SQLException e) {
@@ -60,7 +52,6 @@ public class Server implements Runnable {
 
         while (true){
             try {
-//                connection = setConnection();
                 ServerPacket serverPacket = messageQueue.take();
                 Packet packet = serverPacket.getPacket();
 
@@ -68,18 +59,7 @@ public class Server implements Runnable {
                     handleConnectionRequest(serverPacket);
                 }
                 else if(packet.getMessageType().equals("Login")){
-                    Login login = (Login)packet.getMessage();
-                    if(login.getMessage() instanceof SignUpRequest){
-                        SignUpRequest s = (SignUpRequest)login.getMessage();
-                        Login response = DataQuery.getInstance().InsertNewUser(s);
-
-                        String connectionID = serverPacket.getClientConnection().getConnectionID();
-                        for(ClientConnection c: clientConnectionList){
-                            if(c.getConnectionID().equals(connectionID)){
-                                c.getObjectOutputStream().writeObject(response);
-                            }
-                        }
-                    }
+                    handleLoginMessages(serverPacket);
                 }
                 else if(packet.getMessage() instanceof Game){
                     handleGameMessage(serverPacket);
@@ -119,7 +99,45 @@ public class Server implements Runnable {
         System.out.println("Connection request from client");
     }
 
-    public void handleLoginMessages(ServerPacket serverPacket){
+    public void handleLoginMessages(ServerPacket serverPacket) throws IOException {
+        Packet packet = serverPacket.getPacket();
+        Login login = (Login)packet.getMessage();
 
+        if(login.getMessage() instanceof SignUpRequest){
+            SignUpRequest s = (SignUpRequest)login.getMessage();
+            Login response = DataQuery.getInstance().InsertNewUser(s);
+
+            String connectionID = serverPacket.getClientConnection().getConnectionID();
+            for(ClientConnection c: clientConnectionList){
+                if(c.getConnectionID().equals(connectionID)){
+                    c.getObjectOutputStream().writeObject(new Packet("Login", response));
+                }
+            }
+        }
+
+        else if(login.getMessage() instanceof LoginRequest){
+            LoginRequest r = (LoginRequest)login.getMessage();
+
+            Login response = DataQuery.getInstance().userLoggingIn(r);
+            if(response.getMessage() instanceof LoginSuccess){
+                LoginSuccess lg = (LoginSuccess)response.getMessage();
+                activePlayerMapCC.put(lg.getPlayerID(), serverPacket.getClientConnection());
+
+            }
+
+            for(ClientConnection cc : clientConnectionList){
+                if(cc.equals(serverPacket.getClientConnection())){
+                    Packet toSend = new Packet("Login", response);
+                    cc.getObjectOutputStream().writeObject(toSend);
+                }
+            }
+        }
+
+        else if(login.getMessage() instanceof SignOutRequest){
+            SignOutRequest signOutRequest = (SignOutRequest)login.getMessage();
+
+
+
+        }
     }
 }

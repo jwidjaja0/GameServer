@@ -1,8 +1,6 @@
 package com.ExceptionHandled.GameServer.Database;
 
-import com.ExceptionHandled.GameMessages.Login.SignUpFail;
-import com.ExceptionHandled.GameMessages.Login.SignUpRequest;
-import com.ExceptionHandled.GameMessages.Login.SignUpSuccess;
+import com.ExceptionHandled.GameMessages.Login.*;
 import com.ExceptionHandled.GameMessages.Wrappers.Login;
 
 import java.sql.*;
@@ -11,9 +9,10 @@ import java.util.UUID;
 public class DataQuery implements QueryHandle {
 
     //lazy instantiation because it throws exception from creating SQL connection
-
     private static DataQuery instance = new DataQuery();
     private Connection connection;
+
+    private static final String SQCONN = "jdbc:sqlite:playerInfo.sqlite";
 
     private DataQuery() {
     }
@@ -23,18 +22,22 @@ public class DataQuery implements QueryHandle {
         return instance;
     }
 
-    public void setConnection() throws SQLException {
-        String URL = "jdbc:mysql://127.0.0.1:3306/";
-        String user = "guest";
-        String pw = "mypassword";
+    public void setConnection() {
+//        String URL = SQCONN;
+//        String user = "guest";
+//        String pw = "mypassword";
 
-        connection = DriverManager.getConnection(URL, user, pw);
+        try {
+            connection = DriverManager.getConnection(SQCONN);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public boolean isSignUpIDUnique(String id) throws SQLException {
         Statement statement = connection.createStatement();
 
-        String query = "select playerID from 4blogin.playerinfo";
+        String query = "select playerID from playerInfo";
         ResultSet resultSetID = statement.executeQuery(query);
         while(resultSetID.next()){
             System.out.println(resultSetID.getString(1));
@@ -47,7 +50,8 @@ public class DataQuery implements QueryHandle {
 
     public Login InsertNewUser(SignUpRequest request) {
         StringBuilder sb = new StringBuilder();
-        sb.append("INSERT INTO 4blogin.playerinfo values(");
+//        sb.append("INSERT INTO 4blogin.playerinfo values(");
+        sb.append("INSERT INTO playerInfo values(");
 
         String username = prepForQuery(request.getUsername());
         String password = prepForQuery(request.getPassword());
@@ -85,9 +89,39 @@ public class DataQuery implements QueryHandle {
         catch(SQLException e){
             e.printStackTrace();
         }
-
         return new Login("SignUpFail", new SignUpFail("unknown error"));
+    }
 
+    public Login userLoggingIn(LoginRequest loginRequest){
+        StringBuilder sb = new StringBuilder();
+
+        String username = loginRequest.getUsername();
+        String password = loginRequest.getPassword();
+
+        sb.append("SELECT * FROM 4blogin.playerinfo");
+        ResultSet resultSet;
+
+        //Get ResultSet from Database
+        try {
+            Statement statement = connection.createStatement();
+            resultSet = statement.executeQuery(sb.toString());
+
+            while(resultSet.next()){
+                if(resultSet.getString(2).equals(username) &&
+                        resultSet.getString(3).equals(password)){
+                    return new Login("LoginSuccess", new LoginSuccess(resultSet.getString(1)));
+                }
+                else if(resultSet.getString(2).equals(username) &&
+                        resultSet.getString(3) != password){
+                    return new Login("LoginFail", new LoginFail("Wrong Password"));
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return new Login("LoginFail", new LoginFail("Unknown cause"));
     }
 
     @Override
