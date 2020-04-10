@@ -2,9 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ed5a9275-b353-4784-9717-d5e8f1700b19" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Database/SQLiteQuery.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Database/SQLiteTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameServer.iml" beforeDir="false" afterPath="$PROJECT_DIR$/GameServer.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Database/DataQuery.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Database/DataQuery.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Server.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -24,7 +27,17 @@
     <option name="HIDDEN_KINDS">
       <set />
     </option>
-    <expand />
+    <expand>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="4bLogin" type="feb32156:DbDataSourceImpl" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="4bLogin" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+      </path>
+    </expand>
     <select />
   </component>
   <component name="FileTemplateManagerImpl">
@@ -51,6 +64,7 @@
   <component name="PropertiesComponent">
     <property name="DatabaseDriversLRU" value="sqlite" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="C:/Code/Java/4BLibrary/sqlite-jdbc-3.30.1.jar!/" />
@@ -104,7 +118,7 @@
       <workItem from="1586280514888" duration="14830000" />
       <workItem from="1586309524369" duration="11478000" />
       <workItem from="1586399160888" duration="7816000" />
-      <workItem from="1586537858711" duration="1868000" />
+      <workItem from="1586537858711" duration="10365000" />
     </task>
     <servers />
   </component>

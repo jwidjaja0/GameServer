@@ -12,7 +12,7 @@ public class DataQuery implements QueryHandle {
     private static DataQuery instance = new DataQuery();
     private Connection connection;
 
-    private static final String SQCONN = "jdbc:sqlite:4bLogin.sqlite";
+    private static final String SQCONN = "jdbc:sqlite:UserDB.db";
 
     private DataQuery() {
     }
@@ -22,6 +22,15 @@ public class DataQuery implements QueryHandle {
         return instance;
     }
 
+    public void getConnection(){
+        try {
+//            Class.forName("org.sqlite.JDBC");
+            connection = DriverManager.getConnection("jdbc:sqlite:UserDB.db");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void setConnection() {
 //        String URL = SQCONN;
 //        String user = "guest";
@@ -29,6 +38,15 @@ public class DataQuery implements QueryHandle {
 
         try {
             connection = DriverManager.getConnection(SQCONN);
+            System.out.println("Connected to SQLITE");
+
+            System.out.println("schema: " + connection.getSchema());
+            System.out.println("catalog: " + connection.getCatalog());
+
+//            String test = ("Select * from playerInfo");
+//            Statement st = connection.createStatement();
+//            ResultSet rs = st.executeQuery(test);
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -51,7 +69,7 @@ public class DataQuery implements QueryHandle {
     public Login InsertNewUser(SignUpRequest request) {
         StringBuilder sb = new StringBuilder();
 //        sb.append("INSERT INTO 4blogin.playerinfo values(");
-        sb.append("INSERT INTO 4bLogin.playerInfo values(");
+        sb.append("INSERT INTO playerInfo values(");
 
         String username = prepForQuery(request.getUsername());
         String password = prepForQuery(request.getPassword());

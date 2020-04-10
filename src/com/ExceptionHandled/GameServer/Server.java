@@ -42,11 +42,10 @@ public class Server implements Runnable {
 
     @Override
     public void run() {
-        try {
-            DataQuery.getInstance().setConnection();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+
+        DataQuery.getInstance().getConnection();
+
+
         System.out.println("Connection established to MySQL");
         System.out.println("Server thread started");
 
