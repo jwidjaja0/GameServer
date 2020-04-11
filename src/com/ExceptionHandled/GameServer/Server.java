@@ -1,44 +1,39 @@
 package com.ExceptionHandled.GameServer;
 
 import com.ExceptionHandled.GameMessages.Connection.ConnectionRequest;
-import com.ExceptionHandled.GameMessages.Login.SignUpFail;
-import com.ExceptionHandled.GameMessages.Login.SignUpRequest;
-import com.ExceptionHandled.GameMessages.Login.SignUpSuccess;
+import com.ExceptionHandled.GameMessages.Game.MoveMade;
+import com.ExceptionHandled.GameMessages.Login.*;
+import com.ExceptionHandled.GameMessages.MainMenu.NewGameRequest;
+import com.ExceptionHandled.GameMessages.Wrappers.Game;
+import com.ExceptionHandled.GameMessages.Wrappers.Login;
 import com.ExceptionHandled.GameMessages.Wrappers.Packet;
+import com.ExceptionHandled.GameServer.Database.SQLiteQuery;
 
 
 import java.io.IOException;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 
 public class Server implements Runnable {
-    private int numRooms;
-
     private BlockingQueue<ServerPacket> messageQueue;
 
     private List<ClientConnection> clientConnectionList;
     private List<GameRoom> gameRoomList;
 
-    private ListenNewClient listenNewClient;
+    private Map<String, ClientConnection> activePlayerMapCC;
 
-    private Connection connection;
+    private ListenNewClient listenNewClient;
 
     private Thread thread;
 
     public Server() {
-        numRooms = 0;
         messageQueue = new ArrayBlockingQueue<>(500);
         clientConnectionList = new ArrayList<>(100);
         gameRoomList = new ArrayList<>(100);
         listenNewClient = new ListenNewClient(clientConnectionList, messageQueue);
-
-        GameRoom gm = new GameRoom();
-        gameRoomList.add(gm);
-
-
+        activePlayerMapCC = new HashMap<>();
 
         thread = new Thread(this);
         thread.start();
@@ -47,68 +42,93 @@ public class Server implements Runnable {
 
     @Override
     public void run() {
+        SQLiteQuery.getInstance().setConnection();
         System.out.println("Server thread started");
 
         while (true){
             try {
-                connection = setConnection();
                 ServerPacket serverPacket = messageQueue.take();
                 Packet packet = serverPacket.getPacket();
 
                 if(packet.getMessage() instanceof ConnectionRequest){
                     handleConnectionRequest(serverPacket);
                 }
-                else if(packet.getMessage() instanceof SignUpRequest){
-                    handleSignupRequest(serverPacket);
+                else if(packet.getMessageType().equals("Login")){
+                    handleLoginMessages(serverPacket);
+                }
+                else if(packet.getMessage() instanceof Game){
+                    handleGameMessage(serverPacket);
                 }
 
-
-
-            } catch (InterruptedException | IOException | SQLException e) {
+            } catch (InterruptedException | IOException e) {
                 e.printStackTrace();
             }
         }
 
     }
 
+    private void handleGameMessage(ServerPacket serverPacket) {
+        Packet packet = serverPacket.getPacket();
+        Game gameMessage = (Game)packet.getMessage();
+
+        String gameID = gameMessage.getGameID();
+
+        if(gameMessage.getMessage() instanceof NewGameRequest){
+            GameRoom gm = new GameRoom(gameID, serverPacket.getClientConnection().getConnectionID());
+            gameRoomList.add(gm);
+
+            //TODO:update query as well
+        }
+
+        if(gameMessage.getMessage() instanceof MoveMade){
+            //find the correct gameID
+            for(GameRoom gm : gameRoomList){
+                if(gm.getGameID().equals(gameID)){
+                    gm.addToMessageQ(serverPacket);
+                }
+            }
+        }
+    }
+
     public void handleConnectionRequest(ServerPacket serverPacket){
         System.out.println("Connection request from client");
     }
 
-    public void handleSignupRequest(ServerPacket serverPacket) throws IOException {
+    public void handleLoginMessages(ServerPacket serverPacket) throws IOException {
         Packet packet = serverPacket.getPacket();
-        SignUpRequest request = (SignUpRequest) packet.getMessage();
-        String usernameRequest = request.getUsername();
-        String passwordRequest = request.getPassword();
-        String id = serverPacket.getClientConnection().getId().toString();
+        Login login = (Login)packet.getMessage();
 
-        String query2 = "INSERT INTO 4blogin.playerinfo values(" + id + "," + usernameRequest+"," + passwordRequest + ")";
-        Statement myStatement = null;
-        try {
-            myStatement = connection.createStatement();
-            myStatement.executeUpdate(query2);
+        if(login.getMessage() instanceof SignUpRequest){
+            SignUpRequest s = (SignUpRequest)login.getMessage();
+            Login response = SQLiteQuery.getInstance().insertNewUser(s);
 
-            //if insert successfully, return signupsuccess
-            serverPacket.getClientConnection().getObjectOutputStream().writeObject(new SignUpSuccess());
+            String connectionID = serverPacket.getClientConnection().getConnectionID();
+            for(ClientConnection c: clientConnectionList){
+                if(c.getConnectionID().equals(connectionID)){
+                    c.getObjectOutputStream().writeObject(new Packet("Login", response));
+                }
+            }
         }
-        catch(SQLIntegrityConstraintViolationException e){
-            System.out.println("Duplicate username!");
-            serverPacket.getClientConnection().getObjectOutputStream().writeObject(new SignUpFail("duplicate username"));
+        else if(login.getMessage() instanceof LoginRequest){
+            LoginRequest r = (LoginRequest)login.getMessage();
+
+            Login response = SQLiteQuery.getInstance().userLoggingIn(r);
+            if(response.getMessage() instanceof LoginSuccess){
+                LoginSuccess lg = (LoginSuccess)response.getMessage();
+                activePlayerMapCC.put(lg.getPlayerID(), serverPacket.getClientConnection());
+            }
+
+            for(ClientConnection cc : clientConnectionList){
+                if(cc.equals(serverPacket.getClientConnection())){
+                    Packet toSend = new Packet("Login", response);
+                    cc.getObjectOutputStream().writeObject(toSend);
+                }
+            }
         }
 
-        catch (SQLException e) {
-            e.printStackTrace();
+        else if(login.getMessage() instanceof SignOutRequest){
+            SignOutRequest signOutRequest = (SignOutRequest)login.getMessage();
+
         }
-
-    }
-
-    public Connection setConnection() throws SQLException {
-        String URL = "jdbc:mysql://127.0.0.1:3306/";
-        String user = "guest";
-        String pw = "mypassword";
-
-        String query = "select * from 4blogin.playerinfo;";
-        Connection myConn = DriverManager.getConnection(URL, user, pw);
-        return myConn;
     }
 }
