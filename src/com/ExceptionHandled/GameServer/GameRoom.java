@@ -11,6 +11,7 @@ public class GameRoom implements Runnable {
     private String gameID;
     private String roomPassword;
 
+
     private String p1;
     private String p2;
 

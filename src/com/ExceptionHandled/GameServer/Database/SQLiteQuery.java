@@ -6,6 +6,7 @@ import com.ExceptionHandled.GameMessages.MainMenu.NewGameRequest;
 import com.ExceptionHandled.GameMessages.MainMenu.NewGameSuccess;
 import com.ExceptionHandled.GameMessages.Wrappers.Game;
 import com.ExceptionHandled.GameMessages.Wrappers.Login;
+import com.ExceptionHandled.GameMessages.Wrappers.MainMenu;
 
 import java.sql.*;
 import java.util.UUID;
@@ -115,7 +116,7 @@ public class SQLiteQuery {
     }
 
 
-    public Game insertNewGame(NewGameRequest request){
+    public MainMenu insertNewGame(NewGameRequest request){
         String gameID = UUID.randomUUID().toString();
 
         try {
@@ -132,11 +133,11 @@ public class SQLiteQuery {
             prep.setBoolean(5,request.isRequestingPlayerStart());
             prep.execute();
 
-            return new Game(gameID, "NewGameSuccess", new NewGameSuccess(gameID));
+            return new MainMenu(request.getRequestingPlayerID(), "NewGameSuccess", new NewGameSuccess(gameID, ""));
         }
         catch (SQLException e) {
             e.printStackTrace();
-            return new Game("", "NewGameFail", new NewGameFail());
+            return new MainMenu(request.getRequestingPlayerID(), "NewGameFail", new NewGameFail());
         }
     }
 
