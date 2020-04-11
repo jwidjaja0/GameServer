@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ed5a9275-b353-4784-9717-d5e8f1700b19" name="Default Changelist" comment="">
+    <list default="true" id="64757f09-7db7-4c32-8b35-8c92030568e6" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/ClientConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/ClientConnection.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Server.java" afterDir="false" />
     </list>
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -42,18 +39,6 @@
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.2" />
   </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
-  </component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true">
       <option name="MAIN_CLASS_NAME" value="com.ExceptionHandled.GameServer.Main" />
@@ -75,7 +60,7 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="ed5a9275-b353-4784-9717-d5e8f1700b19" name="Default Changelist" comment="" />
+      <changelist id="64757f09-7db7-4c32-8b35-8c92030568e6" name="Default Changelist" comment="" />
       <created>1585630159474</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -84,6 +69,7 @@
       <workItem from="1585957428554" duration="322000" />
       <workItem from="1586026283613" duration="13215000" />
       <workItem from="1586120495830" duration="15201000" />
+      <workItem from="1586631390281" duration="696000" />
     </task>
     <servers />
   </component>
@@ -103,10 +89,30 @@
       </map>
     </option>
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Merge branch 'master' of https://github.com/jwidjaja0/GameServer&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml" />
+    <option name="LAST_COMMIT_MESSAGE" value="Merge branch 'master' of https://github.com/jwidjaja0/GameServer&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml" />
+  </component>
   <component name="WindowStateProjectService">
     <state x="421" y="97" key="FileChooserDialogImpl" timestamp="1585957459038">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="421" y="97" key="FileChooserDialogImpl/0.0.1280.680@0.0.1280.680" timestamp="1585957459038" />
+    <state width="2517" height="421" key="GridCell.Tab.0.bottom" timestamp="1586231451002">
+      <screen x="0" y="0" width="2560" height="1440" />
+    </state>
+    <state width="2517" height="421" key="GridCell.Tab.0.bottom/-1920.0.1920.1080/0.0.2560.1440@0.0.2560.1440" timestamp="1586231451002" />
+    <state width="2517" height="421" key="GridCell.Tab.0.center" timestamp="1586231451002">
+      <screen x="0" y="0" width="2560" height="1440" />
+    </state>
+    <state width="2517" height="421" key="GridCell.Tab.0.center/-1920.0.1920.1080/0.0.2560.1440@0.0.2560.1440" timestamp="1586231451002" />
+    <state width="2517" height="421" key="GridCell.Tab.0.left" timestamp="1586231451002">
+      <screen x="0" y="0" width="2560" height="1440" />
+    </state>
+    <state width="2517" height="421" key="GridCell.Tab.0.left/-1920.0.1920.1080/0.0.2560.1440@0.0.2560.1440" timestamp="1586231451002" />
+    <state width="2517" height="421" key="GridCell.Tab.0.right" timestamp="1586231451002">
+      <screen x="0" y="0" width="2560" height="1440" />
+    </state>
+    <state width="2517" height="421" key="GridCell.Tab.0.right/-1920.0.1920.1080/0.0.2560.1440@0.0.2560.1440" timestamp="1586231451002" />
   </component>
 </project>
