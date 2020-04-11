@@ -23,7 +23,7 @@ public class SQLiteQuery {
     public void setConnection(){
         try {
             Class.forName("org.sqlite.JDBC");
-            connection = DriverManager.getConnection("jdbc:sqlite:UserDB.db");
+            connection = DriverManager.getConnection("jdbc:sqlite:TicTacToe.db");
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
             System.exit(-1);
@@ -56,12 +56,13 @@ public class SQLiteQuery {
         }
 
         try {
-            PreparedStatement prep = connection.prepareStatement("INSERT INTO playerInfo values(?,?,?,?,?)");
+            PreparedStatement prep = connection.prepareStatement("INSERT INTO playerInfo values(?,?,?,?,?,?)");
             prep.setString(1, id);
             prep.setString(2,request.getUsername());
             prep.setString(3,request.getPassword());
             prep.setString(4,request.getFirstName());
             prep.setString(5,request.getLastName());
+            prep.setBoolean(6,true);
             prep.execute();
 
             Login login = new Login("SignUpSuccess", new SignUpSuccess());
@@ -72,7 +73,7 @@ public class SQLiteQuery {
             e.printStackTrace();
         }
 
-        return new Login("SignUpFail", new SignUpFail("unknown"));
+        return new Login("SignUpFail", new SignUpFail());
     }
 
     public Login userLoggingIn(LoginRequest loginRequest){
@@ -91,21 +92,22 @@ public class SQLiteQuery {
                 String dbPassword = rs.getString(3);
 
                 if(username.equals(dbUsername) && password.equals(dbPassword)){
+//                    if(!rs.getBoolean(6)){
+//                        return new Login("LoginFail", new LoginFail("Account inactive"));
+//                    }
                     System.out.println("Login Success");
                     return new Login("LoginSuccess", new LoginSuccess(rs.getString(1)));
                 }
                 else if(username.equals(dbUsername) && !password.equals(dbPassword)){
                     System.out.println("Incorrect password");
-                    return new Login("LoginFail", new LoginFail("Incorrect password"));
+                    return new Login("LoginFail", new LoginFail(true,false));
                 }
             }
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-        return new Login("LoginFail", new LoginFail("no user exist"));
-
+        return new Login("LoginFail", new LoginFail());
     }
 
     public void listUsers(){

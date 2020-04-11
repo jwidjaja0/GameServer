@@ -42,9 +42,7 @@ public class Server implements Runnable {
 
     @Override
     public void run() {
-
         SQLiteQuery.getInstance().setConnection();
-
         System.out.println("Server thread started");
 
         while (true){
@@ -111,7 +109,6 @@ public class Server implements Runnable {
                 }
             }
         }
-
         else if(login.getMessage() instanceof LoginRequest){
             LoginRequest r = (LoginRequest)login.getMessage();
 
@@ -119,7 +116,6 @@ public class Server implements Runnable {
             if(response.getMessage() instanceof LoginSuccess){
                 LoginSuccess lg = (LoginSuccess)response.getMessage();
                 activePlayerMapCC.put(lg.getPlayerID(), serverPacket.getClientConnection());
-
             }
 
             for(ClientConnection cc : clientConnectionList){
@@ -132,8 +128,6 @@ public class Server implements Runnable {
 
         else if(login.getMessage() instanceof SignOutRequest){
             SignOutRequest signOutRequest = (SignOutRequest)login.getMessage();
-
-
 
         }
     }
