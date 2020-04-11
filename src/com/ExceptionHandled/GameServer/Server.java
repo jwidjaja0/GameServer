@@ -3,6 +3,7 @@ package com.ExceptionHandled.GameServer;
 import com.ExceptionHandled.GameMessages.Connection.ConnectionRequest;
 import com.ExceptionHandled.GameMessages.Game.MoveMade;
 import com.ExceptionHandled.GameMessages.Login.*;
+import com.ExceptionHandled.GameMessages.MainMenu.JoinGameRequest;
 import com.ExceptionHandled.GameMessages.MainMenu.NewGameRequest;
 import com.ExceptionHandled.GameMessages.Wrappers.Game;
 import com.ExceptionHandled.GameMessages.Wrappers.Login;
@@ -71,16 +72,37 @@ public class Server implements Runnable {
         Packet packet = serverPacket.getPacket();
         Game gameMessage = (Game)packet.getMessage();
 
-        String gameID = gameMessage.getGameID();
+        String gameID = gameMessage.getGameID(); //null for newgamerequest
 
+        //start new game
         if(gameMessage.getMessage() instanceof NewGameRequest){
-            GameRoom gm = new GameRoom(gameID, serverPacket.getClientConnection().getConnectionID());
+            NewGameRequest ng = (NewGameRequest)gameMessage.getMessage();
+            Game game = SQLiteQuery.getInstance().insertNewGame(ng);
+
+            gameID = game.getGameID();
+            String pw = ng.getGamePassword();
+
+            GameRoom gm = new GameRoom(gameID, pw, serverPacket.getClientConnection().getConnectionID());
             gameRoomList.add(gm);
 
-            //TODO:update query as well
         }
 
-        if(gameMessage.getMessage() instanceof MoveMade){
+        else if(gameMessage.getMessage() instanceof JoinGameRequest){
+            JoinGameRequest request = (JoinGameRequest)gameMessage.getMessage();
+            String idRequest = request.getGameId();
+            String pw = request.getGamePassword();
+
+            for(GameRoom g : gameRoomList){
+
+                //TODO: Add check two players already set, can't set p2 if another request comes.
+                if(g.getGameID().equals(idRequest) && g.getRoomPassword().equals(pw)){
+                    g.setP2(request.getRequestingPlayerId());
+                }
+            }
+
+        }
+
+        else if(gameMessage.getMessage() instanceof MoveMade){
             //find the correct gameID
             for(GameRoom gm : gameRoomList){
                 if(gm.getGameID().equals(gameID)){
@@ -128,7 +150,8 @@ public class Server implements Runnable {
 
         else if(login.getMessage() instanceof SignOutRequest){
             SignOutRequest signOutRequest = (SignOutRequest)login.getMessage();
-
+            String playerID = signOutRequest.getPlayerID();
+            activePlayerMapCC.remove(playerID);
         }
     }
 }

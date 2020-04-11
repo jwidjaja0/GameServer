@@ -1,6 +1,10 @@
 package com.ExceptionHandled.GameServer.Database;
 
 import com.ExceptionHandled.GameMessages.Login.*;
+import com.ExceptionHandled.GameMessages.MainMenu.NewGameFail;
+import com.ExceptionHandled.GameMessages.MainMenu.NewGameRequest;
+import com.ExceptionHandled.GameMessages.MainMenu.NewGameSuccess;
+import com.ExceptionHandled.GameMessages.Wrappers.Game;
 import com.ExceptionHandled.GameMessages.Wrappers.Login;
 
 import java.sql.*;
@@ -108,6 +112,32 @@ public class SQLiteQuery {
             e.printStackTrace();
         }
         return new Login("LoginFail", new LoginFail());
+    }
+
+
+    public Game insertNewGame(NewGameRequest request){
+        String gameID = UUID.randomUUID().toString();
+
+        try {
+            PreparedStatement prep = connection.prepareStatement("INSERT INTO gameList(gameID, startTime, player1ID, player2ID, isPlayer1Start) values(?,?,?,?,?)");
+            prep.setString(1, gameID);
+            prep.setDate(2, new Date(System.currentTimeMillis()));
+            prep.setString(3,request.getRequestingPlayerID());
+            if(request.getOpponent().equals("Ai")){
+                prep.setString(4,"Ai");
+            }
+            else{
+                prep.setString(4, "");
+            }
+            prep.setBoolean(5,request.isRequestingPlayerStart());
+            prep.execute();
+
+            return new Game(gameID, "NewGameSuccess", new NewGameSuccess(gameID));
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+            return new Game("", "NewGameFail", new NewGameFail());
+        }
     }
 
     public void listUsers(){
