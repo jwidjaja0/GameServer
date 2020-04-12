@@ -4,6 +4,7 @@ import com.ExceptionHandled.GameMessages.Interfaces.Login;
 import com.ExceptionHandled.GameMessages.Interfaces.MainMenu;
 import com.ExceptionHandled.GameMessages.Login.*;
 import com.ExceptionHandled.GameMessages.MainMenu.*;
+import com.ExceptionHandled.GameMessages.UserUpdate.UserDeleteFail;
 import com.ExceptionHandled.GameMessages.UserUpdate.UserDeleteSuccess;
 import com.ExceptionHandled.GameMessages.UserUpdate.UserUpdateRequest;
 import com.ExceptionHandled.GameMessages.UserUpdate.UserUpdateSuccess;
@@ -210,27 +211,39 @@ public class SQLiteQuery {
 
     }
 
-    public Packet userDelete(Packet packet) throws SQLException {
+    public Packet userDelete(Packet packet) {
         String playerID = packet.getPlayerID();
 
-        PreparedStatement prep = connection.prepareStatement("UPDATE playerInfo SET isActive = ? WHERE playerID = ?");
-        prep.setBoolean(1, false);
-        prep.setString(2, playerID);
+        try{
+            PreparedStatement prep = connection.prepareStatement("UPDATE playerInfo SET isActive = ? WHERE playerID = ?");
+            prep.setBoolean(1, false);
+            prep.setString(2, playerID);
 
-        return new Packet("UserUpdate", playerID, new UserDeleteSuccess());
+            return new Packet("UserUpdate", playerID, new UserDeleteSuccess());
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return new Packet("UserUpdate", playerID, new UserDeleteFail());
     }
 
-    public Packet updateUserInfo(Packet packet) throws SQLException {
+    public Packet updateUserInfo(Packet packet) {
         UserUpdateRequest userUpdateRequest = (UserUpdateRequest)packet.getMessage();
         boolean updateStatus = false;
         boolean isUsernameChanged = false;
         boolean isPasswordChanged = false;
         String playerID = packet.getPlayerID();
 
-        if(!userUpdateRequest.getNewUsername().equals("") && isSignUpIDUnique(userUpdateRequest.getNewUsername())){
-            isUsernameChanged = updateUsername(playerID, userUpdateRequest.getNewUsername());
-            updateStatus = isUsernameChanged;
+        try{
+            if(!userUpdateRequest.getNewUsername().equals("") && isSignUpIDUnique(userUpdateRequest.getNewUsername())){
+                isUsernameChanged = updateUsername(playerID, userUpdateRequest.getNewUsername());
+                updateStatus = isUsernameChanged;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
+
         if(!userUpdateRequest.getNewPassword().equals("")){
             isPasswordChanged = updatePassword(playerID, userUpdateRequest.getNewPassword());
             updateStatus = isPasswordChanged;

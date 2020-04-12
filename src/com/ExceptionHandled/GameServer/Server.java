@@ -79,7 +79,7 @@ public class Server implements Runnable {
 
     }
 
-    private void handeUserUpdateMessage(ServerPacket serverPacket) throws SQLException {
+    private void handeUserUpdateMessage(ServerPacket serverPacket) {
         Packet packet = serverPacket.getPacket();
         Packet response = null;
 
