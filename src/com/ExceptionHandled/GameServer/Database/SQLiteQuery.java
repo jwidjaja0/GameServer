@@ -1,12 +1,11 @@
 package com.ExceptionHandled.GameServer.Database;
 
+import com.ExceptionHandled.GameMessages.Interfaces.Login;
+import com.ExceptionHandled.GameMessages.Interfaces.MainMenu;
 import com.ExceptionHandled.GameMessages.Login.*;
-import com.ExceptionHandled.GameMessages.MainMenu.NewGameFail;
-import com.ExceptionHandled.GameMessages.MainMenu.NewGameRequest;
-import com.ExceptionHandled.GameMessages.MainMenu.NewGameSuccess;
-import com.ExceptionHandled.GameMessages.Wrappers.Game;
-import com.ExceptionHandled.GameMessages.Wrappers.Login;
-import com.ExceptionHandled.GameMessages.Wrappers.MainMenu;
+import com.ExceptionHandled.GameMessages.MainMenu.*;
+import com.ExceptionHandled.GameMessages.Wrappers.Packet;
+
 
 import java.sql.*;
 import java.util.UUID;
@@ -49,7 +48,8 @@ public class SQLiteQuery {
         return true;
     }
 
-    public Login insertNewUser(SignUpRequest request) {
+    public Packet insertNewUser(Packet packet) {
+        SignUpRequest request = (SignUpRequest)packet.getMessage();
 
         String id = UUID.randomUUID().toString().substring(0,8);
         try{
@@ -70,18 +70,18 @@ public class SQLiteQuery {
             prep.setBoolean(6,true);
             prep.execute();
 
-            Login login = new Login("SignUpSuccess", new SignUpSuccess());
-            return login;
+            return new Packet("Login", id, new SignUpSuccess());
         }
 
         catch (SQLException e) {
             e.printStackTrace();
         }
 
-        return new Login("SignUpFail", new SignUpFail());
+        return new Packet("Login", "", new SignUpFail());
     }
 
-    public Login userLoggingIn(LoginRequest loginRequest){
+    public Packet userLoggingIn(Packet packet){
+        LoginRequest loginRequest = (LoginRequest)packet.getMessage();
 
         String username = loginRequest.getUsername();
         String password = loginRequest.getPassword();
@@ -93,6 +93,7 @@ public class SQLiteQuery {
             rs = statement.executeQuery("Select * from playerInfo");
 
             while(rs.next()){
+                String playerID = rs.getString(1);
                 String dbUsername = rs.getString(2);
                 String dbPassword = rs.getString(3);
 
@@ -101,43 +102,79 @@ public class SQLiteQuery {
 //                        return new Login("LoginFail", new LoginFail("Account inactive"));
 //                    }
                     System.out.println("Login Success");
-                    return new Login("LoginSuccess", new LoginSuccess(rs.getString(1)));
+                    return new Packet("Login",playerID, new LoginSuccess(playerID));
                 }
                 else if(username.equals(dbUsername) && !password.equals(dbPassword)){
                     System.out.println("Incorrect password");
-                    return new Login("LoginFail", new LoginFail(true,false));
+                    return new Packet("Login", "", new LoginFail());
                 }
             }
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return new Login("LoginFail", new LoginFail());
+
+        return new Packet("Login", "", new LoginFail());
+    }
+
+    public Packet joinGame(Packet packet){
+        String playerID = packet.getPlayerID();
+
+        JoinGameRequest joinGameRequest = (JoinGameRequest)packet.getMessage();
+        String gameID = joinGameRequest.getGameId();
+
+        ResultSet rs = null;
+
+        try{
+            PreparedStatement prep = connection.prepareStatement("Select * from gameList");
+            rs = prep.executeQuery();
+
+            while(rs.next()){
+                if(rs.getString(1).equals(gameID) && rs.getString(5).equals("")){
+                    Statement statement = connection.createStatement();
+                    String id = "'" + playerID + "'";
+                    String gmID = "'" + gameID + "'";
+                    statement.executeUpdate("UPDATE gameList SET player2ID = " + id + " WHERE gameID = " + gmID +";");
+
+                    //TODO: replace playerID with playerName (lookup other table) and get GameName
+                    return new Packet("MainMenu", playerID, new JoinGameSuccess(gameID, rs.getString(4), ""));
+
+                }
+            }
+
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return new Packet("MainMenu", playerID, new JoinGameFail("", ""));
     }
 
 
-    public MainMenu insertNewGame(NewGameRequest request){
+    public Packet insertNewGame(Packet packet){
         String gameID = UUID.randomUUID().toString();
+        String player1ID = packet.getPlayerID();
+
+        NewGameRequest request = (NewGameRequest)packet.getMessage();
 
         try {
-            PreparedStatement prep = connection.prepareStatement("INSERT INTO gameList(gameID, startTime, player1ID, player2ID, isPlayer1Start) values(?,?,?,?,?)");
+            PreparedStatement prep = connection.prepareStatement("INSERT INTO gameList(gameID, startTime, player1ID, player2ID) values(?,?,?,?)");
             prep.setString(1, gameID);
             prep.setDate(2, new Date(System.currentTimeMillis()));
-            prep.setString(3,request.getRequestingPlayerID());
+            prep.setString(3,player1ID);
             if(request.getOpponent().equals("Ai")){
                 prep.setString(4,"Ai");
             }
             else{
                 prep.setString(4, "");
             }
-            prep.setBoolean(5,request.isRequestingPlayerStart());
             prep.execute();
 
-            return new MainMenu(request.getRequestingPlayerID(), "NewGameSuccess", new NewGameSuccess(gameID, ""));
+            return new Packet("MainMenu", player1ID, new NewGameSuccess(gameID, ""));
         }
         catch (SQLException e) {
             e.printStackTrace();
-            return new MainMenu(request.getRequestingPlayerID(), "NewGameFail", new NewGameFail());
+            return new Packet("MainMenu", player1ID, new NewGameFail());
         }
     }
 

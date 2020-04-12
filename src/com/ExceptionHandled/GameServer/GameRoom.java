@@ -1,7 +1,7 @@
 package com.ExceptionHandled.GameServer;
 
 import com.ExceptionHandled.GameMessages.Game.MoveMade;
-import com.ExceptionHandled.GameMessages.Wrappers.Game;
+import com.ExceptionHandled.GameMessages.Interfaces.Game;
 import com.ExceptionHandled.GameMessages.Wrappers.Packet;
 
 import java.util.concurrent.ArrayBlockingQueue;
@@ -10,7 +10,6 @@ import java.util.concurrent.BlockingQueue;
 public class GameRoom implements Runnable {
     private String gameID;
     private String roomPassword;
-
 
     private String p1;
     private String p2;
@@ -53,10 +52,9 @@ public class GameRoom implements Runnable {
 
                 //handle moves
                 if(packet.getMessage() instanceof Game){
-                    Game game = (Game)packet.getMessage();
 
-                    if(game.getMessage() instanceof MoveMade){
-                        MoveMade move = (MoveMade)game.getMessage();
+                    if(packet.getMessage() instanceof MoveMade){
+                        MoveMade move = (MoveMade)packet.getMessage();
                         //TODO: Send move to tictactoe game;
                     }
                 }
