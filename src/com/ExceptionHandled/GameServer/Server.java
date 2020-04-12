@@ -5,15 +5,19 @@ import com.ExceptionHandled.GameMessages.Game.MoveMade;
 import com.ExceptionHandled.GameMessages.Interfaces.Game;
 import com.ExceptionHandled.GameMessages.Interfaces.Login;
 import com.ExceptionHandled.GameMessages.Interfaces.MainMenu;
+import com.ExceptionHandled.GameMessages.Interfaces.UserUpdate;
 import com.ExceptionHandled.GameMessages.Login.*;
 import com.ExceptionHandled.GameMessages.MainMenu.JoinGameRequest;
 import com.ExceptionHandled.GameMessages.MainMenu.NewGameRequest;
 import com.ExceptionHandled.GameMessages.MainMenu.NewGameSuccess;
+import com.ExceptionHandled.GameMessages.UserUpdate.UserDeleteRequest;
+import com.ExceptionHandled.GameMessages.UserUpdate.UserUpdateRequest;
 import com.ExceptionHandled.GameMessages.Wrappers.Packet;
 import com.ExceptionHandled.GameServer.Database.SQLiteQuery;
 
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.*;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
@@ -64,12 +68,27 @@ public class Server implements Runnable {
                 else if(packet.getMessage() instanceof Game){
                     handleGameMessage(serverPacket);
                 }
+                else if(packet.getMessage() instanceof UserUpdate){
+                    handeUserUpdateMessage(serverPacket);
+                }
 
             } catch (InterruptedException | IOException e) {
                 e.printStackTrace();
             }
         }
 
+    }
+
+    private void handeUserUpdateMessage(ServerPacket serverPacket) throws SQLException {
+        Packet packet = serverPacket.getPacket();
+        Packet response = null;
+
+        if(packet.getMessage() instanceof UserUpdateRequest){
+            response = SQLiteQuery.getInstance().updateUserInfo(packet);
+        }
+        else if(packet.getMessage() instanceof UserDeleteRequest){
+            response = SQLiteQuery.getInstance().userDelete(packet);
+        }
     }
 
     private void handleMainMenuMessage(ServerPacket serverPacket) throws IOException {

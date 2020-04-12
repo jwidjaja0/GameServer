@@ -4,6 +4,9 @@ import com.ExceptionHandled.GameMessages.Interfaces.Login;
 import com.ExceptionHandled.GameMessages.Interfaces.MainMenu;
 import com.ExceptionHandled.GameMessages.Login.*;
 import com.ExceptionHandled.GameMessages.MainMenu.*;
+import com.ExceptionHandled.GameMessages.UserUpdate.UserDeleteSuccess;
+import com.ExceptionHandled.GameMessages.UserUpdate.UserUpdateRequest;
+import com.ExceptionHandled.GameMessages.UserUpdate.UserUpdateSuccess;
 import com.ExceptionHandled.GameMessages.Wrappers.Packet;
 
 
@@ -206,6 +209,99 @@ public class SQLiteQuery {
         }
 
     }
+
+    public Packet userDelete(Packet packet) throws SQLException {
+        String playerID = packet.getPlayerID();
+
+        PreparedStatement prep = connection.prepareStatement("UPDATE playerInfo SET isActive = ? WHERE playerID = ?");
+        prep.setBoolean(1, false);
+        prep.setString(2, playerID);
+
+        return new Packet("UserUpdate", playerID, new UserDeleteSuccess());
+    }
+
+    public Packet updateUserInfo(Packet packet) throws SQLException {
+        UserUpdateRequest userUpdateRequest = (UserUpdateRequest)packet.getMessage();
+        boolean updateStatus = false;
+        boolean isUsernameChanged = false;
+        boolean isPasswordChanged = false;
+        String playerID = packet.getPlayerID();
+
+        if(!userUpdateRequest.getNewUsername().equals("") && isSignUpIDUnique(userUpdateRequest.getNewUsername())){
+            isUsernameChanged = updateUsername(playerID, userUpdateRequest.getNewUsername());
+            updateStatus = isUsernameChanged;
+        }
+        if(!userUpdateRequest.getNewPassword().equals("")){
+            isPasswordChanged = updatePassword(playerID, userUpdateRequest.getNewPassword());
+            updateStatus = isPasswordChanged;
+        }
+        if(!userUpdateRequest.getNewFirstName().equals("")){
+            updateStatus = updateFirstName(playerID, userUpdateRequest.getNewFirstName());
+        }
+        if(!userUpdateRequest.getNewLastName().equals("")){
+            updateStatus = updateLastName(playerID, userUpdateRequest.getNewLastName());
+        }
+
+        //TODO: Figure out how to indicate firstname lastname is also changed
+        return new Packet("UserUpdate", playerID, new UserUpdateSuccess(isUsernameChanged, isPasswordChanged));
+
+    }
+
+    private boolean updateUsername(String playerID, String newUsername) {
+        try{
+            PreparedStatement prep = connection.prepareStatement("UPDATE playerInfo SET username = ? WHERE playerID = ?");
+            prep.setString(1, newUsername);
+            prep.setString(2, playerID);
+            prep.executeUpdate();
+
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    private boolean updatePassword(String playerID, String newPassword){
+        try{
+            PreparedStatement prep = connection.prepareStatement("UPDATE playerInfo SET password = ? WHERE playerID = ?");
+            prep.setString(1, newPassword);
+            prep.setString(2, playerID);
+            prep.executeUpdate();
+
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    private boolean updateFirstName(String playerID, String newFname){
+        try{
+            PreparedStatement prep = connection.prepareStatement("UPDATE playerInfo SET firstName = ? WHERE playerID = ?");
+            prep.setString(1, newFname);
+            prep.setString(2, playerID);
+            prep.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    private boolean updateLastName(String playerID, String newLname){
+        try{
+            PreparedStatement prep = connection.prepareStatement("UPDATE playerInfo SET lastName = ? WHERE playerID = ?");
+            prep.setString(1, newLname);
+            prep.setString(2, playerID);
+            prep.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+
 
 
 }
