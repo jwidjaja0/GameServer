@@ -137,7 +137,14 @@ public class SQLiteQuery {
                     statement.executeUpdate("UPDATE gameList SET player2ID = " + id + " WHERE gameID = " + gmID +";");
 
                     //TODO: replace playerID with playerName (lookup other table) and get GameName
-                    return new Packet("MainMenu", playerID, new JoinGameSuccess(gameID, rs.getString(4), ""));
+                    PreparedStatement preparedStatement = connection.prepareStatement("select gameID, gl.gameName, pi.playerID, pi.firstname, pi.lastname\n" +
+                            "from gameList gl\n" +
+                            "join playerInfo pi \n" +
+                            "ON gl.player1ID = pi.playerID");
+                    ResultSet resultSet = preparedStatement.executeQuery();
+                    String opponentPlayerName = resultSet.getString(4) + " " + resultSet.getString(5);
+
+                    return new Packet("MainMenu", playerID, new JoinGameSuccess(gameID, opponentPlayerName, resultSet.getString(2)));
 
                 }
             }

@@ -59,9 +59,6 @@ public class GameRoom implements Runnable {
                     }
                 }
 
-
-
-
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

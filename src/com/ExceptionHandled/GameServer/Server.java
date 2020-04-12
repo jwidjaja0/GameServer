@@ -14,7 +14,6 @@ import com.ExceptionHandled.GameServer.Database.SQLiteQuery;
 
 
 import java.io.IOException;
-import java.sql.*;
 import java.util.*;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
@@ -62,7 +61,6 @@ public class Server implements Runnable {
                 else if(packet.getMessage() instanceof MainMenu){
                     handleMainMenuMessage(serverPacket);
                 }
-
                 else if(packet.getMessage() instanceof Game){
                     handleGameMessage(serverPacket);
                 }
@@ -76,10 +74,8 @@ public class Server implements Runnable {
 
     private void handleMainMenuMessage(ServerPacket serverPacket) throws IOException {
         Packet packet = serverPacket.getPacket();
-
         Packet response = null;
 
-        //start new game
         if(packet.getMessage() instanceof NewGameRequest){
             NewGameRequest newGameRequest = (NewGameRequest)packet.getMessage();
             response = SQLiteQuery.getInstance().insertNewGame(packet);
