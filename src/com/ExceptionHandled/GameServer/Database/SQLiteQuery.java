@@ -1,7 +1,5 @@
 package com.ExceptionHandled.GameServer.Database;
 
-import com.ExceptionHandled.GameMessages.Interfaces.Login;
-import com.ExceptionHandled.GameMessages.Interfaces.MainMenu;
 import com.ExceptionHandled.GameMessages.Login.*;
 import com.ExceptionHandled.GameMessages.MainMenu.*;
 import com.ExceptionHandled.GameMessages.UserUpdate.UserDeleteFail;
@@ -149,10 +147,8 @@ public class SQLiteQuery {
                     String opponentPlayerName = resultSet.getString(4) + " " + resultSet.getString(5);
 
                     return new Packet("MainMenu", playerID, new JoinGameSuccess(gameID, opponentPlayerName, resultSet.getString(2)));
-
                 }
             }
-
         }
         catch (SQLException e) {
             e.printStackTrace();
@@ -168,8 +164,9 @@ public class SQLiteQuery {
 
         NewGameRequest request = (NewGameRequest)packet.getMessage();
 
+
         try {
-            PreparedStatement prep = connection.prepareStatement("INSERT INTO gameList(gameID, startTime, player1ID, player2ID) values(?,?,?,?)");
+            PreparedStatement prep = connection.prepareStatement("INSERT INTO gameList(gameID, startTime, player1ID, player2ID, gameName) values(?,?,?,?,?)");
             prep.setString(1, gameID);
             prep.setDate(2, new Date(System.currentTimeMillis()));
             prep.setString(3,player1ID);
@@ -179,9 +176,10 @@ public class SQLiteQuery {
             else{
                 prep.setString(4, "");
             }
+            prep.setString(5, request.getGameName());
             prep.execute();
 
-            return new Packet("MainMenu", player1ID, new NewGameSuccess(gameID, ""));
+            return new Packet("MainMenu", player1ID, new NewGameSuccess(gameID, request.getGameName()));
         }
         catch (SQLException e) {
             e.printStackTrace();

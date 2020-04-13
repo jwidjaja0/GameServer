@@ -105,6 +105,7 @@ public class Server implements Runnable {
                 String pw = newGameRequest.getGamePassword();
 
                 GameRoom gm = new GameRoom(gameID, pw, packet.getPlayerID());
+                System.out.println("New Game added");
                 gameRoomList.add(gm);
             }
         }
