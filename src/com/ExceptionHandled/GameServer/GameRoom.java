@@ -2,6 +2,7 @@ package com.ExceptionHandled.GameServer;
 
 import com.ExceptionHandled.GameMessages.Game.MoveMade;
 import com.ExceptionHandled.GameMessages.Interfaces.Game;
+import com.ExceptionHandled.GameMessages.MainMenu.ActiveGameHeader;
 import com.ExceptionHandled.GameMessages.Wrappers.Packet;
 
 import java.util.concurrent.ArrayBlockingQueue;
@@ -10,6 +11,7 @@ import java.util.concurrent.BlockingQueue;
 public class GameRoom implements Runnable {
     private String gameID;
     private String roomPassword;
+    private String gameName;
 
     private String p1;
     private String p2;
@@ -17,9 +19,10 @@ public class GameRoom implements Runnable {
     private BlockingQueue<ServerPacket> serverPacketQ;
     private Thread thread;
 
-    public GameRoom(String gameID, String roomPassword, String p1) {
+    public GameRoom(String gameID, String roomPassword, String gameName, String p1) {
         this.gameID = gameID;
         this.roomPassword = roomPassword;
+        this.gameName = gameName;
         this.p1 = p1;
 
         serverPacketQ = new ArrayBlockingQueue<>(20);
@@ -41,6 +44,11 @@ public class GameRoom implements Runnable {
 
     public void addToMessageQ(ServerPacket sp){
         serverPacketQ.add(sp);
+    }
+
+
+    public ActiveGameHeader getActiveGameHeader(){
+        return new ActiveGameHeader(gameID, gameName, p1, p2);
     }
 
     @Override
