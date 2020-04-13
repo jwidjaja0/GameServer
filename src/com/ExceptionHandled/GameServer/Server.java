@@ -2,17 +2,22 @@ package com.ExceptionHandled.GameServer;
 
 import com.ExceptionHandled.GameMessages.Connection.ConnectionRequest;
 import com.ExceptionHandled.GameMessages.Game.MoveMade;
+import com.ExceptionHandled.GameMessages.Interfaces.Game;
+import com.ExceptionHandled.GameMessages.Interfaces.Login;
+import com.ExceptionHandled.GameMessages.Interfaces.MainMenu;
+import com.ExceptionHandled.GameMessages.Interfaces.UserUpdate;
 import com.ExceptionHandled.GameMessages.Login.*;
 import com.ExceptionHandled.GameMessages.MainMenu.JoinGameRequest;
 import com.ExceptionHandled.GameMessages.MainMenu.NewGameRequest;
-import com.ExceptionHandled.GameMessages.Wrappers.Game;
-import com.ExceptionHandled.GameMessages.Wrappers.Login;
+import com.ExceptionHandled.GameMessages.MainMenu.NewGameSuccess;
+import com.ExceptionHandled.GameMessages.UserUpdate.UserDeleteRequest;
+import com.ExceptionHandled.GameMessages.UserUpdate.UserUpdateRequest;
 import com.ExceptionHandled.GameMessages.Wrappers.Packet;
 import com.ExceptionHandled.GameServer.Database.SQLiteQuery;
 
 
 import java.io.IOException;
-import java.sql.*;
+import java.sql.SQLException;
 import java.util.*;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
@@ -54,11 +59,17 @@ public class Server implements Runnable {
                 if(packet.getMessage() instanceof ConnectionRequest){
                     handleConnectionRequest(serverPacket);
                 }
-                else if(packet.getMessageType().equals("Login")){
+                else if(packet.getMessage() instanceof Login){
                     handleLoginMessages(serverPacket);
+                }
+                else if(packet.getMessage() instanceof MainMenu){
+                    handleMainMenuMessage(serverPacket);
                 }
                 else if(packet.getMessage() instanceof Game){
                     handleGameMessage(serverPacket);
+                }
+                else if(packet.getMessage() instanceof UserUpdate){
+                    handeUserUpdateMessage(serverPacket);
                 }
 
             } catch (InterruptedException | IOException e) {
@@ -68,27 +79,38 @@ public class Server implements Runnable {
 
     }
 
-    private void handleGameMessage(ServerPacket serverPacket) {
+    private void handeUserUpdateMessage(ServerPacket serverPacket) {
         Packet packet = serverPacket.getPacket();
-        Game gameMessage = (Game)packet.getMessage();
+        Packet response = null;
 
-        String gameID = gameMessage.getGameID(); //null for newgamerequest
-
-        //start new game
-        if(gameMessage.getMessage() instanceof NewGameRequest){
-            NewGameRequest ng = (NewGameRequest)gameMessage.getMessage();
-            Game game = SQLiteQuery.getInstance().insertNewGame(ng);
-
-            gameID = game.getGameID();
-            String pw = ng.getGamePassword();
-
-            GameRoom gm = new GameRoom(gameID, pw, serverPacket.getClientConnection().getConnectionID());
-            gameRoomList.add(gm);
-
+        if(packet.getMessage() instanceof UserUpdateRequest){
+            response = SQLiteQuery.getInstance().updateUserInfo(packet);
         }
+        else if(packet.getMessage() instanceof UserDeleteRequest){
+            response = SQLiteQuery.getInstance().userDelete(packet);
+        }
+    }
 
-        else if(gameMessage.getMessage() instanceof JoinGameRequest){
-            JoinGameRequest request = (JoinGameRequest)gameMessage.getMessage();
+    private void handleMainMenuMessage(ServerPacket serverPacket) throws IOException {
+        Packet packet = serverPacket.getPacket();
+        Packet response = null;
+
+        if(packet.getMessage() instanceof NewGameRequest){
+            NewGameRequest newGameRequest = (NewGameRequest)packet.getMessage();
+            response = SQLiteQuery.getInstance().insertNewGame(packet);
+
+            if(response.getMessage() instanceof NewGameSuccess){
+                NewGameSuccess ngs = (NewGameSuccess)response.getMessage();
+                String gameID = ngs.getGameId();
+                String pw = newGameRequest.getGamePassword();
+
+                GameRoom gm = new GameRoom(gameID, pw, packet.getPlayerID());
+                System.out.println("New Game added");
+                gameRoomList.add(gm);
+            }
+        }
+        else if(packet.getMessage() instanceof JoinGameRequest){
+            JoinGameRequest request = (JoinGameRequest)packet.getMessage();
             String idRequest = request.getGameId();
             String pw = request.getGamePassword();
 
@@ -97,12 +119,21 @@ public class Server implements Runnable {
                 //TODO: Add check two players already set, can't set p2 if another request comes.
                 if(g.getGameID().equals(idRequest) && g.getRoomPassword().equals(pw)){
                     g.setP2(request.getRequestingPlayerId());
+                    response = SQLiteQuery.getInstance().joinGame(packet);
                 }
             }
-
         }
 
-        else if(gameMessage.getMessage() instanceof MoveMade){
+        serverPacket.getClientConnection().getObjectOutputStream().writeObject(response);
+    }
+
+    private void handleGameMessage(ServerPacket serverPacket) {
+        Packet packet = serverPacket.getPacket();
+
+        Game gameMessage = (Game)packet.getMessage();
+        String gameID = gameMessage.getGameID();
+
+        if(gameMessage instanceof MoveMade){
             //find the correct gameID
             for(GameRoom gm : gameRoomList){
                 if(gm.getGameID().equals(gameID)){
@@ -118,40 +149,27 @@ public class Server implements Runnable {
 
     public void handleLoginMessages(ServerPacket serverPacket) throws IOException {
         Packet packet = serverPacket.getPacket();
-        Login login = (Login)packet.getMessage();
+        Packet response = null;
 
-        if(login.getMessage() instanceof SignUpRequest){
-            SignUpRequest s = (SignUpRequest)login.getMessage();
-            Login response = SQLiteQuery.getInstance().insertNewUser(s);
-
-            String connectionID = serverPacket.getClientConnection().getConnectionID();
-            for(ClientConnection c: clientConnectionList){
-                if(c.getConnectionID().equals(connectionID)){
-                    c.getObjectOutputStream().writeObject(new Packet("Login", response));
-                }
-            }
+        if(packet.getMessage() instanceof SignUpRequest){
+            response = SQLiteQuery.getInstance().insertNewUser(packet);
         }
-        else if(login.getMessage() instanceof LoginRequest){
-            LoginRequest r = (LoginRequest)login.getMessage();
+        else if(packet.getMessage() instanceof LoginRequest){
+            response = SQLiteQuery.getInstance().userLoggingIn(packet);
 
-            Login response = SQLiteQuery.getInstance().userLoggingIn(r);
             if(response.getMessage() instanceof LoginSuccess){
                 LoginSuccess lg = (LoginSuccess)response.getMessage();
                 activePlayerMapCC.put(lg.getPlayerID(), serverPacket.getClientConnection());
             }
-
-            for(ClientConnection cc : clientConnectionList){
-                if(cc.equals(serverPacket.getClientConnection())){
-                    Packet toSend = new Packet("Login", response);
-                    cc.getObjectOutputStream().writeObject(toSend);
-                }
-            }
         }
 
-        else if(login.getMessage() instanceof SignOutRequest){
-            SignOutRequest signOutRequest = (SignOutRequest)login.getMessage();
-            String playerID = signOutRequest.getPlayerID();
+        else if(packet.getMessage() instanceof SignOutRequest){
+            String playerID = packet.getPlayerID();
             activePlayerMapCC.remove(playerID);
+
+            response = new Packet("Login", playerID, new SignOutSuccess());
         }
+
+        serverPacket.getClientConnection().getObjectOutputStream().writeObject(response);
     }
 }
