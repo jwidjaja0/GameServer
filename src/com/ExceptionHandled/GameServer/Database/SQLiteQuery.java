@@ -1,5 +1,6 @@
 package com.ExceptionHandled.GameServer.Database;
 
+import com.ExceptionHandled.GameMessages.Game.MoveValid;
 import com.ExceptionHandled.GameMessages.Login.*;
 import com.ExceptionHandled.GameMessages.MainMenu.*;
 import com.ExceptionHandled.GameMessages.UserUpdate.UserDeleteFail;
@@ -158,12 +159,27 @@ public class SQLiteQuery {
     }
 
 
+
+    public void insertMoveHistory(MoveValid moveValid){
+        try {
+            PreparedStatement prep = connection.prepareStatement("INSERT INTO moveList(gameID, playerID, x_coord, y_coord) values (?,?,?,?)");
+            prep.setString(1, moveValid.getGameID());
+            prep.setString(2, moveValid.getPlayer());
+            prep.setInt(3,moveValid.getxCoord());
+            prep.setInt(4, moveValid.getyCoord());
+
+            prep.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+
     public Packet insertNewGame(Packet packet){
         String gameID = UUID.randomUUID().toString();
         String player1ID = packet.getPlayerID();
 
         NewGameRequest request = (NewGameRequest)packet.getMessage();
-
 
         try {
             PreparedStatement prep = connection.prepareStatement("INSERT INTO gameList(gameID, startTime, player1ID, player2ID, gameName) values(?,?,?,?,?)");
@@ -311,8 +327,5 @@ public class SQLiteQuery {
         }
         return false;
     }
-
-
-
 
 }
