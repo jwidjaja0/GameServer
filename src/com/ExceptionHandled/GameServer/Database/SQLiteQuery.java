@@ -1,8 +1,11 @@
 package com.ExceptionHandled.GameServer.Database;
 
+import com.ExceptionHandled.GameMessages.Game.MoveMade;
 import com.ExceptionHandled.GameMessages.Game.MoveValid;
 import com.ExceptionHandled.GameMessages.Login.*;
 import com.ExceptionHandled.GameMessages.MainMenu.*;
+import com.ExceptionHandled.GameMessages.Stats.GameHistoryDetail;
+import com.ExceptionHandled.GameMessages.Stats.GameHistorySummary;
 import com.ExceptionHandled.GameMessages.UserUpdate.UserDeleteFail;
 import com.ExceptionHandled.GameMessages.UserUpdate.UserDeleteSuccess;
 import com.ExceptionHandled.GameMessages.UserUpdate.UserUpdateRequest;
@@ -11,6 +14,8 @@ import com.ExceptionHandled.GameMessages.Wrappers.Packet;
 
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 public class SQLiteQuery {
@@ -159,6 +164,48 @@ public class SQLiteQuery {
     }
 
 
+    public Packet insertViewerToGame(Packet packet){
+        String playerID = packet.getPlayerID();
+        SpectateRequest sp = (SpectateRequest)packet.getMessage();
+
+        try {
+            PreparedStatement prep = connection.prepareStatement("INSERT INTO viewers(gameID, userID) values(?,?)");
+            prep.setString(1, sp.getGameId());
+            prep.setString(2, playerID);
+
+            prep.execute();
+
+            //TODO:JOin db with moveHistory
+            PreparedStatement prep2 = connection.prepareStatement("select * from moveList mL where mL.gameID = ?");
+            prep2.setString(1, sp.getGameId());
+            ResultSet moveSet = prep2.executeQuery();
+
+            List<MoveValid> moveList = new ArrayList<>(9);
+            while(moveSet.next()){
+                MoveValid m = new MoveValid(sp.getGameId(), moveSet.getString(3), moveSet.getInt(4), moveSet.getInt(5));
+                moveList.add(m);
+            }
+
+            PreparedStatement prep3 = connection.prepareStatement("select * from gameList gL where gL.gameID = ?");
+            prep3.setString(1, sp.getGameId());
+            ResultSet gameSet = prep3.executeQuery();
+
+            GameHistorySummary gameHistorySummary = new GameHistorySummary(sp.getGameId(), gameSet.getString(4), gameSet.getString(5), gameSet.getString(6));
+            java.sql.Date startDate = gameSet.getDate(2);
+            java.sql.Date endDate = gameSet.getDate(3);
+
+            java.util.Date sDate = new Date(startDate.getTime());
+            java.util.Date eDate = new Date(endDate.getTime());
+
+            GameHistoryDetail detail = new GameHistoryDetail(gameHistorySummary, sDate, eDate, moveList, null);
+            return new Packet("GameHistoryDetail", playerID, detail);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
 
     public void insertMoveHistory(MoveValid moveValid){
         try {
