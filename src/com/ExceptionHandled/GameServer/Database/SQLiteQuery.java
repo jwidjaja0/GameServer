@@ -186,8 +186,7 @@ public class SQLiteQuery {
             prep3.setString(1, sp.getGameId());
             ResultSet gameSet = prep3.executeQuery();
 
-            //TODO:CHANGE GAMESTATUS FROM WINNINGPLAYER
-            GameHistorySummary gameHistorySummary = new GameHistorySummary(sp.getGameId(), gameSet.getString(4), gameSet.getString(5), gameSet.getString(6));
+            GameHistorySummary gameHistorySummary = new GameHistorySummary(sp.getGameId(), gameSet.getString(4), gameSet.getString(5), gameSet.getInt(6));
             java.sql.Date startDate = gameSet.getDate(2);
             java.sql.Date endDate = gameSet.getDate(3);
 
