@@ -106,9 +106,6 @@ public class SQLiteQuery {
                 String dbPassword = rs.getString(3);
 
                 if(username.equals(dbUsername) && password.equals(dbPassword)){
-//                    if(!rs.getBoolean(6)){
-//                        return new Login("LoginFail", new LoginFail("Account inactive"));
-//                    }
                     System.out.println("Login Success");
                     return new Packet("Login",playerID, new LoginSuccess(playerID));
                 }
@@ -175,7 +172,6 @@ public class SQLiteQuery {
 
             prep.execute();
 
-            //TODO:JOin db with moveHistory
             PreparedStatement prep2 = connection.prepareStatement("select * from moveList mL where mL.gameID = ?");
             prep2.setString(1, sp.getGameId());
             ResultSet moveSet = prep2.executeQuery();
@@ -190,6 +186,7 @@ public class SQLiteQuery {
             prep3.setString(1, sp.getGameId());
             ResultSet gameSet = prep3.executeQuery();
 
+            //TODO:CHANGE GAMESTATUS FROM WINNINGPLAYER
             GameHistorySummary gameHistorySummary = new GameHistorySummary(sp.getGameId(), gameSet.getString(4), gameSet.getString(5), gameSet.getString(6));
             java.sql.Date startDate = gameSet.getDate(2);
             java.sql.Date endDate = gameSet.getDate(3);
@@ -251,7 +248,6 @@ public class SQLiteQuery {
     }
 
     public void listUsers(){
-
         try {
             Statement statement= connection.createStatement();
             ResultSet rs =statement.executeQuery("Select * from playerInfo");
@@ -269,7 +265,6 @@ public class SQLiteQuery {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
     }
 
     public Packet userDelete(Packet packet) {

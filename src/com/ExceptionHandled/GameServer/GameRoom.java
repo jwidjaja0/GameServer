@@ -4,6 +4,7 @@ import com.ExceptionHandled.GameMessages.Game.MoveMade;
 import com.ExceptionHandled.GameMessages.Interfaces.Game;
 import com.ExceptionHandled.GameMessages.MainMenu.ActiveGameHeader;
 import com.ExceptionHandled.GameMessages.Wrappers.Packet;
+import com.ExceptionHandled.GameServer.Game.TicTacToe;
 
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
@@ -16,6 +17,8 @@ public class GameRoom implements Runnable {
     private String p1;
     private String p2;
 
+    private TicTacToe ttt;
+
     private BlockingQueue<ServerPacket> serverPacketQ;
     private Thread thread;
 
@@ -24,6 +27,8 @@ public class GameRoom implements Runnable {
         this.roomPassword = roomPassword;
         this.gameName = gameName;
         this.p1 = p1;
+
+        ttt = new TicTacToe();
 
         serverPacketQ = new ArrayBlockingQueue<>(20);
         thread = new Thread(this);

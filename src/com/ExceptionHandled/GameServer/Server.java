@@ -76,7 +76,7 @@ public class Server implements Runnable {
 
     }
 
-    private void handeUserUpdateMessage(ServerPacket serverPacket) {
+    private void handeUserUpdateMessage(ServerPacket serverPacket) throws IOException {
         Packet packet = serverPacket.getPacket();
         Packet response = null;
 
@@ -86,6 +86,8 @@ public class Server implements Runnable {
         else if(packet.getMessage() instanceof UserDeleteRequest){
             response = SQLiteQuery.getInstance().userDelete(packet);
         }
+
+        serverPacket.getClientConnection().getObjectOutputStream().writeObject(response);
     }
 
     private void handleMainMenuMessage(ServerPacket serverPacket) throws IOException {
