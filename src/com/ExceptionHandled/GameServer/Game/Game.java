@@ -1,8 +1,8 @@
 package com.ExceptionHandled.GameServer.Game;
 
-import java.util.Observable;
+import com.ExceptionHandled.GameMessages.Game.MoveMade;
 
-public abstract class Game extends Observable{
+public abstract class Game {
     private TicTacToe ticTacToe;
     private boolean player2Turn;
     private char firstTurn;
@@ -74,5 +74,5 @@ public abstract class Game extends Observable{
         }
     }
 
-    public abstract void makeTurn(Move move);
+    public abstract void makeTurn(MoveMade moveMade);
 }

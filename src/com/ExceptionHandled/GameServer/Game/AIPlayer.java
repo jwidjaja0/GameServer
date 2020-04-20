@@ -1,8 +1,10 @@
 package com.ExceptionHandled.GameServer.Game;
 
 import java.io.IOException;
+import com.ExceptionHandled.GameMessages.Game.MoveMade;
+import com.ExceptionHandled.GameServer.Player;
 
-public class AIPlayer {//have implement observable
+public class AIPlayer extends Player {//have implement observable
     private TicTacToe board;
 
     public AIPlayer() throws IOException {
@@ -10,11 +12,11 @@ public class AIPlayer {//have implement observable
     }
 
     //returns the best move the AI could make to win
-    public Move makeMove(){
+    public MoveMade makeMove(){
         int bestMove = 100; //will be the fewest number of moves to win, or the largest number of moves to loose/draw
         int bestMoveX = -10; //board position of best move
         int bestMoveY = -5; //board position of best move
-        AITTT tempBoard = new AITTT(board); //copy of board to be used
+        TicTacToe tempBoard = new TicTacToe(board); //copy of board to be used
 
         ///iterate through all possible moves...
         for (int x = 0; x < tempBoard.getSideDim(); x++){
@@ -35,10 +37,10 @@ public class AIPlayer {//have implement observable
             }
         }
         //return the best move
-        return new Move(bestMoveX, bestMoveY);
+        return new MoveMade(bestMoveX, bestMoveY);
     }
 
-    public int minimax (AITTT board, int depth, boolean maxPlayer, int alpha, int beta) {
+    public int minimax (TicTacToe board, int depth, boolean maxPlayer, int alpha, int beta) {
         if (board.isWon('X')) return 10 + board.remainingMoves(); //X is max player
         if (board.isWon('O')) return -10 - board.remainingMoves(); //O is min player
         if (depth == 0) return 0; //tie)

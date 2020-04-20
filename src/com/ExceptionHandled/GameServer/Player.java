@@ -3,12 +3,17 @@ package com.ExceptionHandled.GameServer;
 import java.util.UUID;
 
 public class Player {
-    UUID id;
+    private UUID id;
     private String name;
 
     public Player(UUID id, String name) {
         this.id = id;
         this.name = name;
+    }
+
+    public Player() {
+        id = UUID.randomUUID();
+        name = "BOT";
     }
 
     public UUID getId() {

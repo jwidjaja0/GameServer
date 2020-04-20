@@ -51,7 +51,6 @@ public class GameRoom implements Runnable {
         serverPacketQ.add(sp);
     }
 
-
     public ActiveGameHeader getActiveGameHeader(){
         return new ActiveGameHeader(gameID, gameName, p1, p2);
     }
@@ -75,7 +74,6 @@ public class GameRoom implements Runnable {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-
         }
     }
 }

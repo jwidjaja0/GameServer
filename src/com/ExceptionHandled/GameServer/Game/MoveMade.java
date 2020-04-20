@@ -1,22 +1,22 @@
 package com.ExceptionHandled.GameServer.Game;
 
-public class Move {
+public class MoveMade {
     private int row;
     private int col;
 
-    private Move(){
+    private MoveMade(){
     }
 
-    public Move(int row, int col){
+    public MoveMade(int row, int col){
         this.row = row;
         this.col = col;
     }
 
-    public int getRow() {
+    public int getxCoord() {
         return row;
     }
 
-    public int getCol() {
+    public int getyCoord() {
         return col;
     }
 
