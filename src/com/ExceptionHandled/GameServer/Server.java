@@ -137,6 +137,7 @@ public class Server implements Runnable {
 
     private void handleGameMessage(ServerPacket serverPacket) {
         Packet packet = serverPacket.getPacket();
+        Packet response = null;
 
         Game gameMessage = (Game)packet.getMessage();
         String gameID = gameMessage.getGameID();
@@ -146,6 +147,36 @@ public class Server implements Runnable {
             for(GameRoom gm : gameRoomList){
                 if(gm.getGameID().equals(gameID)){
                     gm.addToMessageQ(serverPacket);
+                    //TODO: change comments to if statements
+
+                    //if invalid move
+                    {
+                        MoveInvalid move = new MoveInvalid(gameMessage.getGameID, gameMessage.getPlayer, gameMessage.getxCoord, gameMessage.getyCoord);
+                        response = new Packet("MoveInvalid", playerID, move);
+                    }
+                    //else update board
+                    {
+                        MoveValid move = new MoveValid(gameMessage.getGameID, gameMessage.getPlayer, gameMessage.getxCoord, gameMessage.getyCoord);
+                        response = new Packet("MoveValid", playerID, move);
+                        //if game over
+                        {
+                            //if win
+                            {
+                                response = new Packet("GameOverWin", gameMessage.getGameID(), gameMessage.getPlayer());
+                            }
+                            //else if loss
+                            {
+                                response = new Packet("GameOverLoss", gameMessage.getGameID(), gameMessage.getPlayer());
+                            }
+                            //else tie
+                            {
+                                response = new Packet("GameOverTie", gameMessage.getGameID(), gameMessage.getPlayer());
+                            }
+                        }
+                    }
+                    //...
+
+                    serverPacket.getClientConnection().getObjectOutputStream().writeObject(response);
                 }
             }
         }

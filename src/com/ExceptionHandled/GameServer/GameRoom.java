@@ -70,10 +70,17 @@ public class GameRoom implements Runnable {
                     if(packet.getMessage() instanceof MoveMade){
 
                         MoveMade move = (MoveMade)packet.getMessage();
-                        if (game.validMove(move.getxCoord(), move.getyCoord()) {
+                        if (!game.validMove(move.getxCoord(), move.getyCoord()) {
+
+                            serverPacket.getClientConnection().getObjectOutputStream().writeObject(response);
+                        }
+
+                        else {
 
                             //actually make the move
                             game.setMove(move.getxCoord(), move.getyCoord(), game.getTurnToken());
+
+                            if
                             game.switchTurn();
                         }
                         //TODO: complete game win and reset

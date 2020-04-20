@@ -3,11 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="ed5a9275-b353-4784-9717-d5e8f1700b19" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Game/AIPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Game/AIPlayer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Game/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Game/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Game/GameVsAI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Game/GameVsAI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Game/MoveMade.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/GameRoom.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/GameRoom.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Server.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -149,7 +146,7 @@
       <workItem from="1586885148197" duration="6233000" />
       <workItem from="1586996999381" duration="8046000" />
       <workItem from="1587267224121" duration="2993000" />
-      <workItem from="1587414828470" duration="5478000" />
+      <workItem from="1587414828470" duration="7479000" />
     </task>
     <task id="LOCAL-00001" summary="have duplicates in the code">
       <created>1587415756635</created>
@@ -165,7 +162,14 @@
       <option name="project" value="LOCAL" />
       <updated>1587417040848</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="removed bugs from moving game to server">
+      <created>1587420532881</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1587420532881</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -187,7 +191,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="have duplicates in the code" />
     <MESSAGE value="integrating the game logic" />
-    <option name="LAST_COMMIT_MESSAGE" value="integrating the game logic" />
+    <MESSAGE value="removed bugs from moving game to server" />
+    <option name="LAST_COMMIT_MESSAGE" value="removed bugs from moving game to server" />
   </component>
   <component name="WindowStateProjectService">
     <state x="376" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1587416263584">
@@ -198,10 +203,10 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="371" y="87" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1280.680@0.0.1280.680" timestamp="1587418328074" />
-    <state x="249" y="0" key="CommitChangelistDialog2" timestamp="1587417038536">
+    <state x="249" y="0" key="CommitChangelistDialog2" timestamp="1587420530817">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="249" y="0" key="CommitChangelistDialog2/0.0.1280.680@0.0.1280.680" timestamp="1587417038536" />
+    <state x="249" y="0" key="CommitChangelistDialog2/0.0.1280.680@0.0.1280.680" timestamp="1587420530817" />
     <state x="421" y="97" key="FileChooserDialogImpl" timestamp="1587415173128">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
