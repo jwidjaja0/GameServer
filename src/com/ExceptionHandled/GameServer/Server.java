@@ -66,7 +66,7 @@ public class Server implements Runnable {
                     handleGameMessage(serverPacket);
                 }
                 else if(packet.getMessage() instanceof UserUpdate){
-                    handeUserUpdateMessage(serverPacket);
+                    handleUserUpdateMessage(serverPacket);
                 }
 
             } catch (InterruptedException | IOException e) {
@@ -76,7 +76,7 @@ public class Server implements Runnable {
 
     }
 
-    private void handeUserUpdateMessage(ServerPacket serverPacket) throws IOException {
+    private void handleUserUpdateMessage(ServerPacket serverPacket) throws IOException {
         Packet packet = serverPacket.getPacket();
         Packet response = null;
 
@@ -137,12 +137,13 @@ public class Server implements Runnable {
 
     private void handleGameMessage(ServerPacket serverPacket) {
         Packet packet = serverPacket.getPacket();
-        Packet response = null;
+        Packet notice = null;
 
         Game gameMessage = (Game)packet.getMessage();
         String gameID = gameMessage.getGameID();
 
         if(gameMessage instanceof MoveMade){
+            MoveMade message = (MoveMade)gameMessage;
             //find the correct gameID
             for(GameRoom gm : gameRoomList){
                 if(gm.getGameID().equals(gameID)){
@@ -151,32 +152,33 @@ public class Server implements Runnable {
 
                     //if invalid move
                     {
-                        MoveInvalid move = new MoveInvalid(gameMessage.getGameID, gameMessage.getPlayer, gameMessage.getxCoord, gameMessage.getyCoord);
-                        response = new Packet("MoveInvalid", playerID, move);
+                        MoveInvalid move = new MoveInvalid(message.getGameID, message.getPlayer, message.getxCoord, message.getyCoord);
+                        notice = new Packet("MoveInvalid", playerID, move);
                     }
                     //else update board
                     {
-                        MoveValid move = new MoveValid(gameMessage.getGameID, gameMessage.getPlayer, gameMessage.getxCoord, gameMessage.getyCoord);
-                        response = new Packet("MoveValid", playerID, move);
+                        MoveValid move = new MoveValid(message.getGameID, message.getPlayer, message.getxCoord, message.getyCoord);
+                        notice = new Packet("MoveValid", playerID, move);
+
                         //if game over
                         {
                             //if win
                             {
-                                response = new Packet("GameOverWin", gameMessage.getGameID(), gameMessage.getPlayer());
+                                notice = new Packet("GameOverWin", message.getGameID(), message.getPlayer());
                             }
                             //else if loss
                             {
-                                response = new Packet("GameOverLoss", gameMessage.getGameID(), gameMessage.getPlayer());
+                                notice = new Packet("GameOverLoss", message.getGameID(), message.getPlayer());
                             }
                             //else tie
                             {
-                                response = new Packet("GameOverTie", gameMessage.getGameID(), gameMessage.getPlayer());
+                                notice = new Packet("GameOverTie", message.getGameID(), message.getPlayer());
                             }
                         }
                     }
                     //...
 
-                    serverPacket.getClientConnection().getObjectOutputStream().writeObject(response);
+                    serverPacket.getClientConnection().getObjectOutputStream().writeObject(notice);
                 }
             }
         }

@@ -2,7 +2,7 @@ package com.ExceptionHandled.GameServer.Game;
 
 import com.ExceptionHandled.GameMessages.Game.MoveMade;
 
-public abstract class Game {
+public class Game {
     private TicTacToe ticTacToe;
     private boolean player2Turn;
     private char firstTurn;
@@ -70,6 +70,4 @@ public abstract class Game {
             firstTurn = player1;
         }
     }
-
-    public abstract void makeTurn(MoveMade moveMade);
 }

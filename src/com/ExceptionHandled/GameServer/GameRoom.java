@@ -4,8 +4,7 @@ import com.ExceptionHandled.GameMessages.Game.MoveMade;
 import com.ExceptionHandled.GameMessages.Interfaces.Game;
 import com.ExceptionHandled.GameMessages.MainMenu.ActiveGameHeader;
 import com.ExceptionHandled.GameMessages.Wrappers.Packet;
-import com.ExceptionHandled.GameServer.Game.GameVsHuman;
-import com.ExceptionHandled.GameServer.Game.TicTacToe;
+import com.ExceptionHandled.GameServer.Game.Game;
 
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
@@ -18,7 +17,7 @@ public class GameRoom implements Runnable {
     private String p1;
     private String p2;
 
-    private TicTacToe ttt;
+    private Game game;
 
     private BlockingQueue<ServerPacket> serverPacketQ;
     private Thread thread;
@@ -29,7 +28,7 @@ public class GameRoom implements Runnable {
         this.gameName = gameName;
         this.p1 = p1;
 
-        ttt = new TicTacToe();
+        game = new Game();
 
         serverPacketQ = new ArrayBlockingQueue<>(20);
         thread = new Thread(this);
@@ -58,7 +57,6 @@ public class GameRoom implements Runnable {
 
     @Override
     public void run() {
-        GameVsHuman game = new GameVsHuman();
         while(true){
             try {
                 ServerPacket serverPacket = serverPacketQ.take();
@@ -70,20 +68,32 @@ public class GameRoom implements Runnable {
                     if(packet.getMessage() instanceof MoveMade){
 
                         MoveMade move = (MoveMade)packet.getMessage();
-                        if (!game.validMove(move.getxCoord(), move.getyCoord()) {
 
+                        //if invalid
+                        if (!game.validMove(move.getxCoord(), move.getyCoord())) {
                             serverPacket.getClientConnection().getObjectOutputStream().writeObject(response);
                         }
 
+                        //actually make the move
                         else {
-
-                            //actually make the move
                             game.setMove(move.getxCoord(), move.getyCoord(), game.getTurnToken());
 
-                            if
-                            game.switchTurn();
+                            if (game.gameOver()) {
+                                char win = game.whoWon();
+                                if (win == 'X') {
+                                    //TODO: send to server class to notify clients
+                                }
+                                else if (win == 'O') {
+                                    //TODO: send to server class to notify clients
+                                }
+                                else if (win == 'D') {
+                                    //TODO: send to server class to notify clients
+                                }
+                            }
+                            else {
+                                game.switchTurn();
+                            }
                         }
-                        //TODO: complete game win and reset
                     }
                 }
 
