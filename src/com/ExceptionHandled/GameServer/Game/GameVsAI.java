@@ -13,7 +13,7 @@ public class GameVsAI extends Game {
     @Override
     public void reset() {
         super.reset();
-        if(getTurn() == 'O'){
+        if(getWhoseTurn()){
             aiMove();
         }
     }
@@ -21,9 +21,6 @@ public class GameVsAI extends Game {
     //let the user and ai both make a move
     @Override
     public void makeTurn(MoveMade moveMade) {
-        //let the observers know and change as needed
-        setChanged();
-        //if its player2's turn then use the user's move and switch turn
         if (getWhoseTurn()) {
             setMove(moveMade.getxCoord(), moveMade.getyCoord(), getTurnToken());
             switchTurn();
@@ -41,8 +38,8 @@ public class GameVsAI extends Game {
     //update the AI's board and ask for its move.  then notify observers
     public void aiMove(){
         aiPlayer.updateBoard(getBoard());
-        setChanged();
-        notifyObservers(aiPlayer.makeMove());
+        int[] move = aiPlayer.makeMove();
+        setMove(move[1], move[2], getTurnToken());
     }
 }
 

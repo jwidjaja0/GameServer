@@ -4,6 +4,7 @@ import com.ExceptionHandled.GameMessages.Game.MoveMade;
 import com.ExceptionHandled.GameMessages.Interfaces.Game;
 import com.ExceptionHandled.GameMessages.MainMenu.ActiveGameHeader;
 import com.ExceptionHandled.GameMessages.Wrappers.Packet;
+import com.ExceptionHandled.GameServer.Game.GameVsHuman;
 import com.ExceptionHandled.GameServer.Game.TicTacToe;
 
 import java.util.concurrent.ArrayBlockingQueue;
@@ -57,6 +58,7 @@ public class GameRoom implements Runnable {
 
     @Override
     public void run() {
+        GameVsHuman game = new GameVsHuman();
         while(true){
             try {
                 ServerPacket serverPacket = serverPacketQ.take();
@@ -66,8 +68,15 @@ public class GameRoom implements Runnable {
                 if(packet.getMessage() instanceof Game){
 
                     if(packet.getMessage() instanceof MoveMade){
+
                         MoveMade move = (MoveMade)packet.getMessage();
-                        //TODO: Send move to tictactoe game;
+                        if (game.validMove(move.getxCoord(), move.getyCoord()) {
+
+                            //actually make the move
+                            game.setMove(move.getxCoord(), move.getyCoord(), game.getTurnToken());
+                            game.switchTurn();
+                        }
+                        //TODO: complete game win and reset
                     }
                 }
 

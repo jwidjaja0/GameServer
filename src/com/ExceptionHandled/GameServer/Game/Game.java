@@ -28,36 +28,33 @@ public abstract class Game {
         return '-';
     }
 
-    protected void setMove(int row, int col, char token){
+    public boolean validMove (int row, int col) {
+        return ticTacToe.getCharAt(row, col) == ' ';
+    }
+
+    public void setMove(int row, int col, char token){
         ticTacToe.setMove(row, col, token);
     }
 
-    protected boolean getWhoseTurn(){
+    public boolean getWhoseTurn(){
         return player2Turn;
     }
 
-    protected void switchTurn(){
+    public void switchTurn(){
         player2Turn = !player2Turn;
     }
 
-    protected char getTurnToken(){
+    public char getTurnToken(){
         if (player2Turn)
             return player2;
         return player1;
     }
 
-    protected char getTurn(){
-        if (player2Turn)
-            return player2;
-        else
-            return player1;
-    }
-
-    protected boolean gameOver(){
+    public boolean gameOver(){
         return ticTacToe.isGameOver();
     }
 
-    protected TicTacToe getBoard(){
+    public TicTacToe getBoard(){
         return ticTacToe;
     }
 

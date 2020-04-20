@@ -12,7 +12,7 @@ public class AIPlayer extends Player {//have implement observable
     }
 
     //returns the best move the AI could make to win
-    public MoveMade makeMove(){
+    public int[] makeMove(){
         int bestMove = 100; //will be the fewest number of moves to win, or the largest number of moves to loose/draw
         int bestMoveX = -10; //board position of best move
         int bestMoveY = -5; //board position of best move
@@ -37,14 +37,13 @@ public class AIPlayer extends Player {//have implement observable
             }
         }
         //return the best move
-        return new MoveMade(bestMoveX, bestMoveY);
+        return  new int[] {bestMoveX, bestMoveY};
     }
 
     public int minimax (TicTacToe board, int depth, boolean maxPlayer, int alpha, int beta) {
         if (board.isWon('X')) return 10 + board.remainingMoves(); //X is max player
         if (board.isWon('O')) return -10 - board.remainingMoves(); //O is min player
         if (depth == 0) return 0; //tie)
-
 
         int eval;
 
