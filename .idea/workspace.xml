@@ -3,8 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="ed5a9275-b353-4784-9717-d5e8f1700b19" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TicTacToe.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TicTacToe.db" beforeDir="false" afterPath="$PROJECT_DIR$/TicTacToe.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Database/SQLiteQuery.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Database/SQLiteQuery.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Server.java" afterDir="false" />
     </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -66,6 +69,18 @@
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.2" />
   </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true">
       <option name="MAIN_CLASS_NAME" value="com.ExceptionHandled.GameServer.Main" />
@@ -106,7 +121,7 @@
       <workItem from="1586831476833" duration="9518000" />
       <workItem from="1586885148197" duration="6233000" />
       <workItem from="1586996999381" duration="8239000" />
-      <workItem from="1587405200336" duration="8531000" />
+      <workItem from="1587405200336" duration="15870000" />
     </task>
     <servers />
   </component>
@@ -127,27 +142,7 @@
     </option>
   </component>
   <component name="WindowStateProjectService">
-    <state x="-1210" y="343" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1587444375878">
-      <screen x="-1920" y="0" width="1920" height="1080" />
-    </state>
-    <state x="-1210" y="343" key="#com.intellij.fileTypes.FileTypeChooser/-1920.0.1920.1080/0.0.2560.1440@-1920.0.1920.1080" timestamp="1587444375878" />
-    <state x="421" y="97" key="FileChooserDialogImpl" timestamp="1587440013818" />
-    <state x="421" y="97" key="FileChooserDialogImpl/0.0.1280.680@0.0.1280.680" timestamp="1587440013818" />
-    <state width="1877" height="294" key="GridCell.Tab.0.bottom" timestamp="1587447100600">
-      <screen x="-1920" y="0" width="1920" height="1080" />
-    </state>
-    <state width="1877" height="294" key="GridCell.Tab.0.bottom/-1920.0.1920.1080/0.0.2560.1440@-1920.0.1920.1080" timestamp="1587447100600" />
-    <state width="1877" height="294" key="GridCell.Tab.0.center" timestamp="1587447100600">
-      <screen x="-1920" y="0" width="1920" height="1080" />
-    </state>
-    <state width="1877" height="294" key="GridCell.Tab.0.center/-1920.0.1920.1080/0.0.2560.1440@-1920.0.1920.1080" timestamp="1587447100600" />
-    <state width="1877" height="294" key="GridCell.Tab.0.left" timestamp="1587447100600">
-      <screen x="-1920" y="0" width="1920" height="1080" />
-    </state>
-    <state width="1877" height="294" key="GridCell.Tab.0.left/-1920.0.1920.1080/0.0.2560.1440@-1920.0.1920.1080" timestamp="1587447100600" />
-    <state width="1877" height="294" key="GridCell.Tab.0.right" timestamp="1587447100600">
-      <screen x="-1920" y="0" width="1920" height="1080" />
-    </state>
-    <state width="1877" height="294" key="GridCell.Tab.0.right/-1920.0.1920.1080/0.0.2560.1440@-1920.0.1920.1080" timestamp="1587447100600" />
+    <state x="421" y="97" key="FileChooserDialogImpl" />
+    <state x="421" y="97" key="FileChooserDialogImpl/0.0.1280.680@0.0.1280.680" />
   </component>
 </project>
