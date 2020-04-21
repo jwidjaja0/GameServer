@@ -7,9 +7,7 @@ import com.ExceptionHandled.GameMessages.Interfaces.Login;
 import com.ExceptionHandled.GameMessages.Interfaces.MainMenu;
 import com.ExceptionHandled.GameMessages.Interfaces.UserUpdate;
 import com.ExceptionHandled.GameMessages.Login.*;
-import com.ExceptionHandled.GameMessages.MainMenu.JoinGameRequest;
-import com.ExceptionHandled.GameMessages.MainMenu.NewGameRequest;
-import com.ExceptionHandled.GameMessages.MainMenu.NewGameSuccess;
+import com.ExceptionHandled.GameMessages.MainMenu.*;
 import com.ExceptionHandled.GameMessages.UserUpdate.UserDeleteRequest;
 import com.ExceptionHandled.GameMessages.UserUpdate.UserUpdateRequest;
 import com.ExceptionHandled.GameMessages.Wrappers.Packet;
@@ -17,7 +15,6 @@ import com.ExceptionHandled.GameServer.Database.SQLiteQuery;
 
 
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.*;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
@@ -79,7 +76,7 @@ public class Server implements Runnable {
 
     }
 
-    private void handeUserUpdateMessage(ServerPacket serverPacket) {
+    private void handeUserUpdateMessage(ServerPacket serverPacket) throws IOException {
         Packet packet = serverPacket.getPacket();
         Packet response = null;
 
@@ -89,6 +86,8 @@ public class Server implements Runnable {
         else if(packet.getMessage() instanceof UserDeleteRequest){
             response = SQLiteQuery.getInstance().userDelete(packet);
         }
+
+        serverPacket.getClientConnection().getObjectOutputStream().writeObject(response);
     }
 
     private void handleMainMenuMessage(ServerPacket serverPacket) throws IOException {
@@ -103,8 +102,9 @@ public class Server implements Runnable {
                 NewGameSuccess ngs = (NewGameSuccess)response.getMessage();
                 String gameID = ngs.getGameId();
                 String pw = newGameRequest.getGamePassword();
+                String gameName = newGameRequest.getGameName();
 
-                GameRoom gm = new GameRoom(gameID, pw, packet.getPlayerID());
+                GameRoom gm = new GameRoom(gameID, pw, gameName, packet.getPlayerID());
                 System.out.println("New Game added");
                 gameRoomList.add(gm);
             }
@@ -122,6 +122,14 @@ public class Server implements Runnable {
                     response = SQLiteQuery.getInstance().joinGame(packet);
                 }
             }
+        }
+
+        else if(packet.getMessage() instanceof ListActiveGamesRequest){
+            List<ActiveGameHeader> gameList = new ArrayList<>(gameRoomList.size());
+            for(int i = 0; i < gameList.size(); i++){
+                gameList.set(i, gameRoomList.get(i).getActiveGameHeader());
+            }
+            response = new Packet("MainMenu", packet.getPlayerID(), new ListActiveGames(gameList));
         }
 
         serverPacket.getClientConnection().getObjectOutputStream().writeObject(response);
