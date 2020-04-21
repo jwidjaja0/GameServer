@@ -69,13 +69,13 @@ public class GameRoom implements Runnable {
 
                         MoveMade move = (MoveMade)packet.getMessage();
 
-                        //if invalid
+                        //if invalid move
                         if (!game.validMove(move.getxCoord(), move.getyCoord())) {
-                            serverPacket.getClientConnection().getObjectOutputStream().writeObject(response);
+                            //TODO: send to server class to notify player of invalid move
                         }
-
                         //actually make the move
                         else {
+                            //TODO: send to server class to notify player of valid move
                             game.setMove(move.getxCoord(), move.getyCoord(), game.getTurnToken());
 
                             if (game.gameOver()) {

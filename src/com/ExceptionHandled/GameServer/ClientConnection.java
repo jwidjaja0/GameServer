@@ -51,7 +51,7 @@ public class ClientConnection implements Runnable {
 
             while(true){
                 Packet packet = (Packet) inputFromClient.readObject();
-                ServerPacket serverPacket =new ServerPacket(this, packet);
+                ServerPacket serverPacket = new ServerPacket(this, packet);
 
                 System.out.println(serverPacket);
                 messageQueue.put(serverPacket);

@@ -3,10 +3,12 @@
   <component name="ChangeListManager">
     <list default="true" id="ed5a9275-b353-4784-9717-d5e8f1700b19" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/ClientConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/ClientConnection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Game/AIPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Game/AIPlayer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Game/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Game/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Game/GameVsAI.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Game/GameVsHuman.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/GameRoom.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/GameRoom.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/ListenNewClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/ListenNewClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Player.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Server.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -149,7 +151,7 @@
       <workItem from="1586885148197" duration="6233000" />
       <workItem from="1586996999381" duration="8046000" />
       <workItem from="1587267224121" duration="2993000" />
-      <workItem from="1587414828470" duration="10339000" />
+      <workItem from="1587414828470" duration="12215000" />
     </task>
     <task id="LOCAL-00001" summary="have duplicates in the code">
       <created>1587415756635</created>
@@ -179,7 +181,14 @@
       <option name="project" value="LOCAL" />
       <updated>1587422560944</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="making gameroom and server communicate properly">
+      <created>1587425855047</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1587425855047</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -203,7 +212,8 @@
     <MESSAGE value="integrating the game logic" />
     <MESSAGE value="removed bugs from moving game to server" />
     <MESSAGE value="moving connections from gameroom to server" />
-    <option name="LAST_COMMIT_MESSAGE" value="moving connections from gameroom to server" />
+    <MESSAGE value="making gameroom and server communicate properly" />
+    <option name="LAST_COMMIT_MESSAGE" value="making gameroom and server communicate properly" />
   </component>
   <component name="WindowStateProjectService">
     <state x="376" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1587416263584">
@@ -214,10 +224,10 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="371" y="87" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1280.680@0.0.1280.680" timestamp="1587423383717" />
-    <state x="249" y="0" key="CommitChangelistDialog2" timestamp="1587422559382">
+    <state x="249" y="0" key="CommitChangelistDialog2" timestamp="1587429900295">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="249" y="0" key="CommitChangelistDialog2/0.0.1280.680@0.0.1280.680" timestamp="1587422559382" />
+    <state x="249" y="0" key="CommitChangelistDialog2/0.0.1280.680@0.0.1280.680" timestamp="1587429900295" />
     <state x="421" y="97" key="FileChooserDialogImpl" timestamp="1587415173128">
       <screen x="0" y="0" width="1280" height="680" />
     </state>

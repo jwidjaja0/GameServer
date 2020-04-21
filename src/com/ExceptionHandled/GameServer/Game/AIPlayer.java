@@ -1,7 +1,6 @@
 package com.ExceptionHandled.GameServer.Game;
 
 import java.io.IOException;
-import com.ExceptionHandled.GameMessages.Game.MoveMade;
 import com.ExceptionHandled.GameServer.Player;
 
 public class AIPlayer extends Player {//have implement observable

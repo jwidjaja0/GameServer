@@ -1,6 +1,5 @@
 package com.ExceptionHandled.GameServer.Game;
 
-import com.ExceptionHandled.GameMessages.Game.MoveMade;
 
 public class Game {
     private TicTacToe ticTacToe;
@@ -11,7 +10,7 @@ public class Game {
     final char player2 = 'O';
 
     //create new board, let player1 start, add observer
-    protected Game() {
+    public Game() {
         ticTacToe = new TicTacToe();
         player2Turn = false;
         firstTurn = player1;
