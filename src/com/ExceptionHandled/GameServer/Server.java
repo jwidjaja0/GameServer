@@ -78,6 +78,7 @@ public class Server implements Runnable {
 
     private void handeUserUpdateMessage(ServerPacket serverPacket) throws IOException {
         Packet packet = serverPacket.getPacket();
+        System.out.println("handleUserUpdateMessage, playerID: " + packet.getPlayerID());
         Packet response = null;
 
         if(packet.getMessage() instanceof UserUpdateRequest){
@@ -164,6 +165,7 @@ public class Server implements Runnable {
         }
         else if(packet.getMessage() instanceof LoginRequest){
             response = SQLiteQuery.getInstance().userLoggingIn(packet);
+            System.out.println("LoginSuccess response");
 
             if(response.getMessage() instanceof LoginSuccess){
                 LoginSuccess lg = (LoginSuccess)response.getMessage();
@@ -178,6 +180,9 @@ public class Server implements Runnable {
             response = new Packet("Login", playerID, new SignOutSuccess());
         }
 
+        if(response.getMessage() instanceof LoginSuccess){
+            System.out.println(response.getPlayerID());
+        }
         serverPacket.getClientConnection().getObjectOutputStream().writeObject(response);
     }
 }

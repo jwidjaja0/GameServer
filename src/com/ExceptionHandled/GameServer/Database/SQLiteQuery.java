@@ -289,6 +289,7 @@ public class SQLiteQuery {
         boolean isUsernameChanged = false;
         boolean isPasswordChanged = false;
         String playerID = packet.getPlayerID();
+        System.out.println("playerID from packet: " + playerID);
 
         try{
             if(!userUpdateRequest.getNewUsername().equals("") && isSignUpIDUnique(userUpdateRequest.getNewUsername())){
@@ -316,6 +317,8 @@ public class SQLiteQuery {
     }
 
     private boolean updateUsername(String playerID, String newUsername) {
+        System.out.println("updateUsername called");
+        System.out.println("PlayerID: " + playerID);
         try{
             PreparedStatement prep = connection.prepareStatement("UPDATE playerInfo SET username = ? WHERE playerID = ?");
             prep.setString(1, newUsername);
@@ -330,6 +333,7 @@ public class SQLiteQuery {
     }
 
     private boolean updatePassword(String playerID, String newPassword){
+        System.out.println("updatePassword called");
         try{
             PreparedStatement prep = connection.prepareStatement("UPDATE playerInfo SET password = ? WHERE playerID = ?");
             prep.setString(1, newPassword);
