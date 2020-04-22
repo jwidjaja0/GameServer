@@ -180,7 +180,9 @@ public class Server implements Runnable {
             response = new Packet("Login", playerID, new SignOutSuccess());
         }
 
+        //TODO: delete later, only for debugging
         if(response.getMessage() instanceof LoginSuccess){
+            
             System.out.println(response.getPlayerID());
         }
         serverPacket.getClientConnection().getObjectOutputStream().writeObject(response);
