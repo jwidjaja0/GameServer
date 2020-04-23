@@ -3,11 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="ed5a9275-b353-4784-9717-d5e8f1700b19" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TicTacToe.db" beforeDir="false" afterPath="$PROJECT_DIR$/TicTacToe.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Database/SQLiteQuery.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Database/SQLiteQuery.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Server.java" afterDir="false" />
     </list>
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -69,18 +65,6 @@
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.2" />
   </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
-  </component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true">
       <option name="MAIN_CLASS_NAME" value="com.ExceptionHandled.GameServer.Main" />
@@ -122,6 +106,8 @@
       <workItem from="1586885148197" duration="6233000" />
       <workItem from="1586996999381" duration="8239000" />
       <workItem from="1587405200336" duration="15870000" />
+      <workItem from="1587511609432" duration="56000" />
+      <workItem from="1587602472836" duration="593000" />
     </task>
     <servers />
   </component>
@@ -142,7 +128,11 @@
     </option>
   </component>
   <component name="WindowStateProjectService">
-    <state x="421" y="97" key="FileChooserDialogImpl" />
-    <state x="421" y="97" key="FileChooserDialogImpl/0.0.1280.680@0.0.1280.680" />
+    <state x="421" y="97" key="FileChooserDialogImpl" timestamp="1587511607432" />
+    <state x="421" y="97" key="FileChooserDialogImpl/0.0.1280.680@0.0.1280.680" timestamp="1587511607433" />
+    <state x="-1264" y="364" key="com.intellij.ide.util.TipDialog" timestamp="1587511614921">
+      <screen x="-1920" y="0" width="1920" height="1080" />
+    </state>
+    <state x="-1264" y="364" key="com.intellij.ide.util.TipDialog/-1920.0.1920.1080/0.0.2560.1440@-1920.0.1920.1080" timestamp="1587511614921" />
   </component>
 </project>
