@@ -285,7 +285,7 @@ public class SQLiteQuery {
             e.printStackTrace();
         }
 
-        return new Packet("UserUpdate", playerID, new UserDeleteFail());
+        return new Packet("UserUpdate", playerID, new UserDeleteFail("server error"));
     }
 
     public Packet updateUserInfo(Packet packet) {
