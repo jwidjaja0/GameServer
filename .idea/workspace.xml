@@ -21,8 +21,7 @@
   <component name="ChangeListManager">
     <list default="true" id="ed5a9275-b353-4784-9717-d5e8f1700b19" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TicTacToe.db" beforeDir="false" afterPath="$PROJECT_DIR$/TicTacToe.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Database/SQLiteQuery.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Database/SQLiteQuery.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Server.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -151,12 +150,12 @@
                   </entry>
                 </map>
               </option>
-              <option name="COLUMN_ORDER" />
             </State>
           </value>
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <ignored-roots>

@@ -176,16 +176,21 @@ public class Server implements Runnable {
             }
         }
 
-        else if(packet.getMessage() instanceof SignOutRequest){
+        else if(packet.getMessage() instanceof LogoutRequest){
             String playerID = packet.getPlayerID();
-            activePlayerMapCC.remove(playerID);
-
-            response = new Packet("Login", playerID, new SignOutSuccess());
+            if(playerID.equals(null)){
+                response = new Packet("Login", playerID, new LogoutFail());
+            }
+            else{
+                activePlayerMapCC.remove(playerID);
+                response = new Packet("Login", playerID, new LogoutSuccess());
+            }
         }
 
         //TODO: delete later, only for debugging
         if(response.getMessage() instanceof LoginSuccess){
             
+            System.out.println(response.getPlayerID());
             System.out.println(response.getPlayerID());
         }
         serverPacket.getClientConnection().getObjectOutputStream().writeObject(response);
