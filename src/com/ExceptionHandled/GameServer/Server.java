@@ -38,6 +38,8 @@ public class Server implements Runnable {
         listenNewClient = new ListenNewClient(clientConnectionList, messageQueue);
         activePlayerMapCC = new HashMap<>();
 
+        gameRoomList.add(new GameRoom("sampleID", "", "sample", "x"));
+
         thread = new Thread(this);
         thread.start();
         System.out.println("server instantiated");
@@ -126,10 +128,11 @@ public class Server implements Runnable {
         }
 
         else if(packet.getMessage() instanceof ListActiveGamesRequest){
-            List<ActiveGameHeader> gameList = new ArrayList<>(gameRoomList.size());
-            for(int i = 0; i < gameList.size(); i++){
-                gameList.set(i, gameRoomList.get(i).getActiveGameHeader());
+            List<ActiveGameHeader> gameList = new ArrayList<>();
+            for(int i = 0; i < gameRoomList.size(); i++){
+                gameList.add(gameRoomList.get(i).getActiveGameHeader());
             }
+            System.out.println("Sending list active games, size: " + gameList.size());
             response = new Packet("MainMenu", packet.getPlayerID(), new ListActiveGames(gameList));
         }
 
@@ -180,7 +183,9 @@ public class Server implements Runnable {
             response = new Packet("Login", playerID, new SignOutSuccess());
         }
 
+        //TODO: delete later, only for debugging
         if(response.getMessage() instanceof LoginSuccess){
+            
             System.out.println(response.getPlayerID());
         }
         serverPacket.getClientConnection().getObjectOutputStream().writeObject(response);
