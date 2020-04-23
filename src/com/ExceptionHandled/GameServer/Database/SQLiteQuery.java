@@ -278,6 +278,7 @@ public class SQLiteQuery {
             PreparedStatement prep = connection.prepareStatement("UPDATE playerInfo SET isActive = ? WHERE playerID = ?");
             prep.setBoolean(1, false);
             prep.setString(2, playerID);
+            prep.executeUpdate();
 
             return new Packet("UserUpdate", playerID, new UserDeleteSuccess());
 
