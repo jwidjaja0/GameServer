@@ -104,8 +104,13 @@ public class SQLiteQuery {
                 String playerID = rs.getString(1);
                 String dbUsername = rs.getString(2);
                 String dbPassword = rs.getString(3);
+                boolean isActive = rs.getBoolean("isActive");
 
                 if(username.equals(dbUsername) && password.equals(dbPassword)){
+                    //TODO: Check is account active in database
+                    if(!isActive){
+                        return new Packet("Login", playerID, new LoginFail());
+                    }
                     System.out.println("Login Success");
                     return new Packet("Login",playerID, new LoginSuccess(playerID));
                 }
