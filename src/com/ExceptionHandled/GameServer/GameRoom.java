@@ -6,6 +6,7 @@ import com.ExceptionHandled.GameMessages.MainMenu.ActiveGameHeader;
 import com.ExceptionHandled.GameMessages.Wrappers.Packet;
 import com.ExceptionHandled.GameServer.Game.Game;
 
+import java.util.ArrayList;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 
@@ -16,6 +17,7 @@ public class GameRoom implements Runnable {
 
     private String p1;
     private String p2;
+    private ArrayList<String> viewers;
 
     private Game game;
 
@@ -29,6 +31,8 @@ public class GameRoom implements Runnable {
         this.p1 = p1;
 
         game = new Game();
+
+        viewers = new ArrayList<String>();
 
         serverPacketQ = new ArrayBlockingQueue<>(20);
         thread = new Thread(this);
@@ -51,6 +55,13 @@ public class GameRoom implements Runnable {
         serverPacketQ.add(sp);
     }
 
+    public void addViewer (String viewer) {
+        viewers.add(viewer);
+        EnterGame board = new EnterGame (gameID, game.getBoard());
+        Packet notice = new Packet("EnterGame", viewer, board);
+        serverPacket.getClientConnection().getObjectOutputStream().writeObject(notice);
+    }
+
     public ActiveGameHeader getActiveGameHeader(){
         return new ActiveGameHeader(gameID, gameName, p1, p2);
     }
@@ -59,8 +70,8 @@ public class GameRoom implements Runnable {
     public void run() {
         while(true){
             try {
-                ServerPacket serverPacket = serverPacketQ.take();
-                Packet packet = serverPacket.getPacket();
+                ServerPacket packet = serverPacketQ.take();
+                Packet notice = null;
 
                 //handle moves
                 if(packet.getMessage() instanceof Game){
@@ -70,28 +81,73 @@ public class GameRoom implements Runnable {
                         MoveMade move = (MoveMade)packet.getMessage();
 
                         //if invalid move
-                        if (!game.validMove(move.getxCoord(), move.getyCoord())) {
-                            //TODO: send to server class to notify player of invalid move
-                        }
-                        //actually make the move
+                        if (!game.validMove(move.getxCoord(), move.getyCoord())) { {
+                                MoveInvalid moveInvalid = new MoveInvalid(gameID, message.getPlayer(), message.getxCoord(), message.getyCoord());
+                                notice = new Packet("MoveInvalid", message.getPlayer(), moveInvalid);
+                                serverPacket.getClientConnection().getObjectOutputStream().writeObject(notice);
+                        }                        }
                         else {
-                            //TODO: send to server class to notify player of valid move
+                            MoveValid moveValid = new MoveValid(gameID, move.getPlayer(), move.getxCoord(), move.getyCoord();
+
+                            notice = new Packet("MoveValid", p1, moveValid);
+                            serverPacket.getClientConnection().getObjectOutputStream().writeObject(notice);
+
+                            notice = new Packet("MoveValid", p2, moveValid);
+                            serverPacket.getClientConnection().getObjectOutputStream().writeObject(notice);
+
+                            for (String viewer : viewers) {
+                                notice = new Packet("MoveValid", viewer, moveValid);
+                                serverPacket.getClientConnection().getObjectOutputStream().writeObject(notice);
+                            }
+
                             game.setMove(move.getxCoord(), move.getyCoord(), game.getTurnToken());
 
                             if (game.gameOver()) {
                                 char win = game.whoWon();
+                                GameOver gameOver;
                                 if (win == 'X') {
-                                    //TODO: send to server class to notify clients
+                                    notice = new Packet("GameOverWin", gameID, p1);
+                                    serverPacket.getClientConnection().getObjectOutputStream().writeObject(notice);
+
+                                    notice = new Packet("GameOverLoss", gameID, p2);
+                                    serverPacket.getClientConnection().getObjectOutputStream().writeObject(notice);
+
+                                    gameOver = new GameOver(gameID, p1);
                                 }
                                 else if (win == 'O') {
-                                    //TODO: send to server class to notify clients
+                                    notice = new Packet("GameOverWin", gameID, p2);
+                                    serverPacket.getClientConnection().getObjectOutputStream().writeObject(notice);
+
+                                    notice = new Packet("GameOverLoss", gameID, p1);
+                                    serverPacket.getClientConnection().getObjectOutputStream().writeObject(notice);
+
+                                    gameOver = new GameOver(gameID, p2);
                                 }
-                                else if (win == 'D') {
-                                    //TODO: send to server class to notify clients
+                                else {
+                                    notice = new Packet("GameOverTie", gameID, p1);
+                                    serverPacket.getClientConnection().getObjectOutputStream().writeObject(notice);
+
+                                    notice = new Packet("GameOverTie", gameID, p2);
+                                    serverPacket.getClientConnection().getObjectOutputStream().writeObject(notice);
+
+                                    gameOver = new GameOver(gameID, "tie");
+                                }
+
+                                for (String viewer : viewers) {
+                                    notice = new Packet("GameOver", viewer, gameOver);
+                                    serverPacket.getClientConnection().getObjectOutputStream().writeObject(notice);
                                 }
                             }
+
                             else {
                                 game.switchTurn();
+                                WhoseTurn turn = new WhoseTurn(gameID, game.getWhoseTurn());
+
+                                notice = new Package("WhoseTurn", p1, turn);
+                                serverPacket.getClientConnection().getObjectOutputStream().writeObject(notice);
+
+                                notice = new Package("WhoseTurn", p2, turn);
+                                serverPacket.getClientConnection().getObjectOutputStream().writeObject(notice);
                             }
                         }
                     }

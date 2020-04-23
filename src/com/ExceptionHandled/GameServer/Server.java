@@ -142,56 +142,29 @@ public class Server implements Runnable {
         Game gameMessage = (Game)packet.getMessage();
         String gameID = gameMessage.getGameID();
 
-        if(gameMessage instanceof MoveMade){
-            MoveMade message = (MoveMade)gameMessage;
             //find the correct gameID
-            for(GameRoom gm : gameRoomList){
-                if(gm.getGameID().equals(gameID)){
-                    gm.addToMessageQ(serverPacket);
-                    //TODO: change comments to if statements from GameRoom
-
-                    //if (invalid move)
-                    {
-                        MoveInvalid move = new MoveInvalid(message.getGameID, message.getPlayer, message.getxCoord, message.getyCoord);
-                        notice = new Packet("MoveInvalid", playerID, move);
+            for(GameRoom gm : gameRoomList) {
+                if (gm.getGameID().equals(gameID)) {
+                    if (gameMessage instanceof MoveMade) {
+                        MoveMade message = (MoveMade) gameMessage;
+                        gm.addToMessageQ(serverPacket);
                     }
-                    //else (update board)
-                    {
-                        MoveValid move = new MoveValid(message.getGameID, message.getPlayer, message.getxCoord, message.getyCoord);
-                        notice = new Packet("MoveValid", playerID, move);
 
-                        //if (game over)
-                        {
-                            //if (win)
-                            {
-                                notice = new Packet("GameOverWin", message.getGameID(), message.getPlayer());
-                            }
-                            //else if (loss)
-                            {
-                                notice = new Packet("GameOverLoss", message.getGameID(), message.getPlayer());
-                            }
-                            //else (tie)
-                            {
-                                notice = new Packet("GameOverTie", message.getGameID(), message.getPlayer());
-                            }
-                        }
+                    else if (gameMessage instanceof RematchRequest) {
+                        RematchRequest message = (RematchRequest) gameMessage;
+                        notice = new Packet("RematchRequest", message.getGameID(), message.getOpponentPlayer());
+                        serverPacket.getClientConnection().getObjectOutputStream().writeObject(notice);
                     }
-                    //...
+
+                    else if (gameMessage instanceof RematchRespond) {
+                        RematchRespond message = (RematchRespond) gameMessage;
+                        notice = new Packet("RematchRespond", message.getGameID(), message.getRequesterPlayerID());
+                        serverPacket.getClientConnection().getObjectOutputStream().writeObject(notice);
+
+                    }
                 }
             }
         }
-
-        if (gameMessage instanceof RematchRequest) {
-            RematchRequest message = (RematchRequest)gameMessage;
-            notice = new Packet("RematchRequest", message.getGameID(), message.getOpponentPlayer());
-        }
-
-        if (gameMessage instanceof RematchRespond) {
-            RematchRespond message = (RematchRespond)gameMessage;
-            notice = new Packet("RematchRespond", message.getGameID(), message.getRequesterPlayerID());
-        }
-
-        serverPacket.getClientConnection().getObjectOutputStream().writeObject(notice);
     }
 
     public void handleConnectionRequest(ServerPacket serverPacket){
