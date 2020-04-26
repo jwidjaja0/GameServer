@@ -24,9 +24,7 @@ public class Server implements Runnable {
 
     private List<ClientConnection> clientConnectionList;
     private List<GameRoom> gameRoomList;
-
     private Map<String, ClientConnection> activePlayerMapCC;
-
     private ListenNewClient listenNewClient;
 
     private Thread thread;
@@ -179,7 +177,8 @@ public class Server implements Runnable {
         else if(packet.getMessage() instanceof LogoutRequest){
             String playerID = packet.getPlayerID();
             if(playerID.equals(null)){
-                response = new Packet("Login", playerID, new LogoutFail());
+                //TODO: FIX LOGOUTFAIL
+                response = new Packet("Login", playerID, new LogoutFail(""));
             }
             else{
                 activePlayerMapCC.remove(playerID);
