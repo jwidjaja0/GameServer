@@ -56,8 +56,12 @@ public class ClientConnection implements Runnable {
                 System.out.println(serverPacket);
                 messageQueue.put(serverPacket);
             }
-        } catch (IOException | ClassNotFoundException | InterruptedException e) {
-            e.printStackTrace();
+        } catch (IOException e) {
+            System.out.println("Connection from client interrupted");
+        } catch( ClassNotFoundException e){
+            System.out.println("ClassNotFound");
+        } catch( InterruptedException e){
+            System.out.println("InterruptedException");
         }
         finally{
             clientConnectionList.remove(this);

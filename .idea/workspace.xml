@@ -20,12 +20,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ed5a9275-b353-4784-9717-d5e8f1700b19" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Factory/MessageFactory.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TicTacToe.db" beforeDir="false" afterPath="$PROJECT_DIR$/TicTacToe.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Database/SQLiteQuery.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Database/SQLiteQuery.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Server.java" afterDir="false" />
     </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -81,11 +79,23 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../TicTacToe" />
+    <property name="last_opened_file_path" value="$USER_HOME$/JavaLib/4BLibrary/sqlite-jdbc-3.30.1.jar!/" />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
+    <property name="settings.editor.selected.configurable" value="application.passwordSafe" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
   </component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true">
@@ -129,7 +139,8 @@
       <workItem from="1586996999381" duration="8239000" />
       <workItem from="1587405200336" duration="19716000" />
       <workItem from="1587489763336" duration="4232000" />
-      <workItem from="1587607180517" duration="1855000" />
+      <workItem from="1587533982017" duration="2627000" />
+      <workItem from="1587869457364" duration="1176000" />
     </task>
     <servers />
   </component>
@@ -153,12 +164,12 @@
                   </entry>
                 </map>
               </option>
+              <option name="COLUMN_ORDER" />
             </State>
           </value>
         </entry>
       </map>
     </option>
-    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <ignored-roots>
@@ -166,58 +177,30 @@
     </ignored-roots>
   </component>
   <component name="WindowStateProjectService">
-    <state x="-1368" y="198" key="#SQL_Dialects" timestamp="1587608808965">
-      <screen x="-1920" y="0" width="1920" height="1080" />
-    </state>
-    <state x="-1368" y="198" key="#SQL_Dialects/-1920.0.1920.1080/0.0.2560.1440@-1920.0.1920.1080" timestamp="1587608808965" />
-    <state x="421" y="97" width="878" height="654" key="FileChooserDialogImpl" timestamp="1587845719700">
+    <state x="421" y="97" width="878" height="654" key="FileChooserDialogImpl" timestamp="1587535548806">
       <screen x="70" y="27" width="1850" height="1053" />
     </state>
     <state x="421" y="97" key="FileChooserDialogImpl/0.0.1280.680@0.0.1280.680" timestamp="1587534884760" />
-    <state x="421" y="97" width="878" height="654" key="FileChooserDialogImpl/70.27.1850.1053@70.27.1850.1053" timestamp="1587845719700" />
-    <state width="1782" height="241" key="GridCell.Tab.0.bottom" timestamp="1587855293936">
+    <state x="421" y="97" width="878" height="654" key="FileChooserDialogImpl/70.27.1850.1053@70.27.1850.1053" timestamp="1587535548806" />
+    <state width="1794" height="247" key="GridCell.Tab.0.bottom" timestamp="1587535335944">
       <screen x="70" y="27" width="1850" height="1053" />
     </state>
-    <state width="1877" height="300" key="GridCell.Tab.0.bottom/-1920.0.1920.1080/0.0.2560.1440@-1920.0.1920.1080" timestamp="1587608946597" />
-    <state width="1782" height="241" key="GridCell.Tab.0.bottom/70.27.1850.1053@70.27.1850.1053" timestamp="1587855293936" />
-    <state width="1782" height="241" key="GridCell.Tab.0.center" timestamp="1587855293936">
+    <state width="1794" height="247" key="GridCell.Tab.0.bottom/70.27.1850.1053@70.27.1850.1053" timestamp="1587535335944" />
+    <state width="1794" height="247" key="GridCell.Tab.0.center" timestamp="1587535335941">
       <screen x="70" y="27" width="1850" height="1053" />
     </state>
-    <state width="1877" height="300" key="GridCell.Tab.0.center/-1920.0.1920.1080/0.0.2560.1440@-1920.0.1920.1080" timestamp="1587608946596" />
-    <state width="1782" height="241" key="GridCell.Tab.0.center/70.27.1850.1053@70.27.1850.1053" timestamp="1587855293936" />
-    <state width="1782" height="241" key="GridCell.Tab.0.left" timestamp="1587855293935">
+    <state width="1794" height="247" key="GridCell.Tab.0.center/70.27.1850.1053@70.27.1850.1053" timestamp="1587535335941" />
+    <state width="1794" height="247" key="GridCell.Tab.0.left" timestamp="1587535335939">
       <screen x="70" y="27" width="1850" height="1053" />
     </state>
-    <state width="1877" height="300" key="GridCell.Tab.0.left/-1920.0.1920.1080/0.0.2560.1440@-1920.0.1920.1080" timestamp="1587608946596" />
-    <state width="1782" height="241" key="GridCell.Tab.0.left/70.27.1850.1053@70.27.1850.1053" timestamp="1587855293935" />
-    <state width="1782" height="241" key="GridCell.Tab.0.right" timestamp="1587855293936">
+    <state width="1794" height="247" key="GridCell.Tab.0.left/70.27.1850.1053@70.27.1850.1053" timestamp="1587535335939" />
+    <state width="1794" height="247" key="GridCell.Tab.0.right" timestamp="1587535335942">
       <screen x="70" y="27" width="1850" height="1053" />
     </state>
-    <state width="1877" height="300" key="GridCell.Tab.0.right/-1920.0.1920.1080/0.0.2560.1440@-1920.0.1920.1080" timestamp="1587608946597" />
-    <state width="1782" height="241" key="GridCell.Tab.0.right/70.27.1850.1053@70.27.1850.1053" timestamp="1587855293936" />
-    <state width="1877" height="363" key="GridCell.Tab.1.bottom" timestamp="1587607527650">
-      <screen x="-1920" y="0" width="1920" height="1080" />
-    </state>
-    <state width="1877" height="363" key="GridCell.Tab.1.bottom/-1920.0.1920.1080/0.0.2560.1440@-1920.0.1920.1080" timestamp="1587607527650" />
-    <state width="1877" height="363" key="GridCell.Tab.1.center" timestamp="1587607527650">
-      <screen x="-1920" y="0" width="1920" height="1080" />
-    </state>
-    <state width="1877" height="363" key="GridCell.Tab.1.center/-1920.0.1920.1080/0.0.2560.1440@-1920.0.1920.1080" timestamp="1587607527650" />
-    <state width="1877" height="363" key="GridCell.Tab.1.left" timestamp="1587607527650">
-      <screen x="-1920" y="0" width="1920" height="1080" />
-    </state>
-    <state width="1877" height="363" key="GridCell.Tab.1.left/-1920.0.1920.1080/0.0.2560.1440@-1920.0.1920.1080" timestamp="1587607527650" />
-    <state width="1877" height="363" key="GridCell.Tab.1.right" timestamp="1587607527650">
-      <screen x="-1920" y="0" width="1920" height="1080" />
-    </state>
-    <state width="1877" height="363" key="GridCell.Tab.1.right/-1920.0.1920.1080/0.0.2560.1440@-1920.0.1920.1080" timestamp="1587607527650" />
-    <state x="359" y="27" width="1280" height="1053" key="SettingsEditor" timestamp="1587614653432">
+    <state width="1794" height="247" key="GridCell.Tab.0.right/70.27.1850.1053@70.27.1850.1053" timestamp="1587535335942" />
+    <state x="359" y="27" width="1280" height="1053" key="SettingsEditor" timestamp="1587535638788">
       <screen x="70" y="27" width="1850" height="1053" />
     </state>
-    <state x="359" y="27" width="1280" height="1053" key="SettingsEditor/70.27.1850.1053@70.27.1850.1053" timestamp="1587614653432" />
-    <state x="154" y="191" width="1671" height="732" key="new project wizard" timestamp="1587798080787">
-      <screen x="70" y="27" width="1850" height="1053" />
-    </state>
-    <state x="154" y="191" width="1671" height="732" key="new project wizard/70.27.1850.1053@70.27.1850.1053" timestamp="1587798080787" />
+    <state x="359" y="27" width="1280" height="1053" key="SettingsEditor/70.27.1850.1053@70.27.1850.1053" timestamp="1587535638788" />
   </component>
 </project>
