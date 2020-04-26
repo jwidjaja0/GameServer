@@ -1,6 +1,5 @@
 package com.ExceptionHandled.GameServer.Database;
 
-import com.ExceptionHandled.GameMessages.Game.MoveMade;
 import com.ExceptionHandled.GameMessages.Game.MoveValid;
 import com.ExceptionHandled.GameMessages.Login.*;
 import com.ExceptionHandled.GameMessages.MainMenu.*;
@@ -43,15 +42,22 @@ public class SQLiteQuery {
     }
 
     private boolean isSignUpIDUnique(String id) throws SQLException {
-        Statement statement = connection.createStatement();
+        PreparedStatement prep = connection.prepareStatement(
+                "select count(playerID) from playerInfo where playerID = ?");
+        prep.setString(1, id);
+        ResultSet rs = prep.executeQuery();
+        if(rs.getInt(1) > 0){
+            return false;
+        }
+        return true;
+    }
 
-        String query = "Select playerID from playerinfo";
-        ResultSet rs = statement.executeQuery(query);
-
-        while(rs.next()){
-            if(rs.getString(1).equals(id)){
-                return false;
-            }
+    private boolean isUsernameUnique(String username) throws SQLException {
+        PreparedStatement p = connection.prepareStatement("select count(username)from playerInfo where username = ?");
+        p.setString(1, username);
+        ResultSet r = p.executeQuery();
+        if(r.getInt(1) > 0){
+            return false;
         }
         return true;
     }
@@ -61,6 +67,12 @@ public class SQLiteQuery {
 
         String id = UUID.randomUUID().toString().substring(0,8);
         try{
+            //check if username already exist
+            if(!isUsernameUnique(request.getUsername())){
+                return new Packet("Login", null, new SignUpFail("Username already exist"));
+            }
+
+
             while(!isSignUpIDUnique(id)){
                 id = UUID.randomUUID().toString().substring(0,8);
             }
@@ -85,7 +97,7 @@ public class SQLiteQuery {
             e.printStackTrace();
         }
 
-        return new Packet("Login", "", new SignUpFail());
+        return new Packet("Login", "", new SignUpFail("Unknown SignUp Error"));
     }
 
     public Packet userLoggingIn(Packet packet){
@@ -107,16 +119,15 @@ public class SQLiteQuery {
                 boolean isActive = rs.getBoolean("isActive");
 
                 if(username.equals(dbUsername) && password.equals(dbPassword)){
-                    //TODO: Check is account active in database
                     if(!isActive){
-                        return new Packet("Login", playerID, new LoginFail());
+                        return new Packet("Login", playerID, new LoginFail("Account inactive"));
                     }
                     System.out.println("Login Success");
                     return new Packet("Login",playerID, new LoginSuccess(playerID));
                 }
                 else if(username.equals(dbUsername) && !password.equals(dbPassword)){
                     System.out.println("Incorrect password");
-                    return new Packet("Login", "", new LoginFail());
+                    return new Packet("Login", "", new LoginFail("Wrong password"));
                 }
             }
 
@@ -124,7 +135,7 @@ public class SQLiteQuery {
             e.printStackTrace();
         }
 
-        return new Packet("Login", "", new LoginFail());
+        return new Packet("Login", "", new LoginFail("Unknown login error"));
     }
 
     public Packet joinGame(Packet packet){
@@ -141,20 +152,34 @@ public class SQLiteQuery {
 
             while(rs.next()){
                 if(rs.getString(1).equals(gameID) && rs.getString(5).equals("")){
-                    Statement statement = connection.createStatement();
-                    String id = "'" + playerID + "'";
-                    String gmID = "'" + gameID + "'";
-                    statement.executeUpdate("UPDATE gameList SET player2ID = " + id + " WHERE gameID = " + gmID +";");
+                    PreparedStatement prep1 = connection.prepareStatement(
+                            "UPDATE gameList SET player2ID = ? " +
+                            "WHERE gameID = ? ");
+                    prep1.setString(1, playerID);
+                    prep1.setString(2, gameID);
+                    prep1.executeUpdate();
 
-                    //TODO: replace playerID with playerName (lookup other table) and get GameName
-                    PreparedStatement preparedStatement = connection.prepareStatement("select gameID, gl.gameName, pi.playerID, pi.firstname, pi.lastname\n" +
+                    PreparedStatement preparedStatement = connection.prepareStatement(
+                            "select gameID, gl.gameName, pi.playerID, pi.firstname, pi.lastname\n" +
                             "from gameList gl\n" +
                             "join playerInfo pi \n" +
                             "ON gl.player1ID = pi.playerID");
                     ResultSet resultSet = preparedStatement.executeQuery();
                     String opponentPlayerName = resultSet.getString(4) + " " + resultSet.getString(5);
+                    String gameName = resultSet.getString(2);
 
-                    return new Packet("MainMenu", playerID, new JoinGameSuccess(gameID, opponentPlayerName, resultSet.getString(2)));
+                    PreparedStatement prep2 = connection.prepareStatement(
+                            "select * from moveList mL where mL.gameID = ?");
+                    prep2.setString(1, gameID);
+                    ResultSet moveSet = prep2.executeQuery();
+
+                    ArrayList<MoveValid> moveList = new ArrayList<>(9);
+                    while(moveSet.next()){
+                        MoveValid m = new MoveValid(gameID, moveSet.getString(3), moveSet.getInt(4), moveSet.getInt(5));
+                        moveList.add(m);
+                    }
+
+                    return new Packet("MainMenu", playerID, new JoinGameSuccess(gameID, gameName, opponentPlayerName, moveList));
                 }
             }
         }
@@ -162,7 +187,7 @@ public class SQLiteQuery {
             e.printStackTrace();
         }
 
-        return new Packet("MainMenu", playerID, new JoinGameFail("", ""));
+        return new Packet("MainMenu", playerID, new JoinGameFail("Unknown join game error"));
     }
 
 
@@ -174,8 +199,8 @@ public class SQLiteQuery {
             PreparedStatement prep = connection.prepareStatement("INSERT INTO viewers(gameID, userID) values(?,?)");
             prep.setString(1, sp.getGameId());
             prep.setString(2, playerID);
-
             prep.execute();
+
 
             PreparedStatement prep2 = connection.prepareStatement("select * from moveList mL where mL.gameID = ?");
             prep2.setString(1, sp.getGameId());
@@ -205,7 +230,7 @@ public class SQLiteQuery {
             e.printStackTrace();
         }
 
-        return null;
+        return new Packet("MainMenu", playerID, new SpectateFail("Unknown spectate fail error"));
     }
 
     public void insertMoveHistory(MoveValid moveValid){
@@ -247,7 +272,7 @@ public class SQLiteQuery {
         }
         catch (SQLException e) {
             e.printStackTrace();
-            return new Packet("MainMenu", player1ID, new NewGameFail());
+            return new Packet("MainMenu", player1ID, new NewGameFail(""));
         }
     }
 
