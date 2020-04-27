@@ -124,7 +124,6 @@ public class Server implements Runnable {
                 }
             }
         }
-
         else if(packet.getMessage() instanceof ListActiveGamesRequest){
             List<ActiveGameHeader> gameList = new ArrayList<>();
             for(int i = 0; i < gameRoomList.size(); i++){
@@ -132,6 +131,20 @@ public class Server implements Runnable {
             }
             System.out.println("Sending list active games, size: " + gameList.size());
             response = new Packet("MainMenu", packet.getPlayerID(), new ListActiveGames(gameList));
+        }
+        //TODO: write functions for spectator to request joining game
+        else if(packet.getMessage() instanceof SpectateRequest){
+            SpectateRequest sr = (SpectateRequest)packet.getMessage();
+            String gameID = sr.getGameId();
+
+            for(GameRoom gm : gameRoomList){
+                if(gm.getGameID().equals(gameID)){
+                    gm.addSpectator(packet.getPlayerID());
+                    response = SQLiteQuery.getInstance().insertViewerToGame(packet);
+                }
+            }
+
+
         }
 
         serverPacket.getClientConnection().getObjectOutputStream().writeObject(response);

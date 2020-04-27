@@ -186,10 +186,8 @@ public class SQLiteQuery {
         catch (SQLException e) {
             e.printStackTrace();
         }
-
         return new Packet("MainMenu", playerID, new JoinGameFail("Unknown join game error"));
     }
-
 
     public Packet insertViewerToGame(Packet packet){
         String playerID = packet.getPlayerID();
@@ -200,7 +198,6 @@ public class SQLiteQuery {
             prep.setString(1, sp.getGameId());
             prep.setString(2, playerID);
             prep.execute();
-
 
             PreparedStatement prep2 = connection.prepareStatement("select * from moveList mL where mL.gameID = ?");
             prep2.setString(1, sp.getGameId());
