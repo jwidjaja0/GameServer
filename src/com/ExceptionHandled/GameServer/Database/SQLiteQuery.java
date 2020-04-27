@@ -5,6 +5,7 @@ import com.ExceptionHandled.GameMessages.Login.*;
 import com.ExceptionHandled.GameMessages.MainMenu.*;
 import com.ExceptionHandled.GameMessages.Stats.GameHistoryDetail;
 import com.ExceptionHandled.GameMessages.Stats.GameHistorySummary;
+import com.ExceptionHandled.GameMessages.Stats.PlayerStatsInfo;
 import com.ExceptionHandled.GameMessages.UserUpdate.UserDeleteFail;
 import com.ExceptionHandled.GameMessages.UserUpdate.UserDeleteSuccess;
 import com.ExceptionHandled.GameMessages.UserUpdate.UserUpdateRequest;
@@ -189,6 +190,91 @@ public class SQLiteQuery {
         return new Packet("MainMenu", playerID, new JoinGameFail("Unknown join game error"));
     }
 
+    public Packet getGameHistoryDetail(Packet packet, String gameID){
+        String playerID = packet.getPlayerID();
+
+        try {
+            PreparedStatement prep = connection.prepareStatement("SELECT * FROM moveList mL where mL.gameID = ?");
+            prep.setString(1, gameID);
+            ResultSet rs = prep.executeQuery();
+
+            List<MoveValid> moveList = new ArrayList<>();
+            while(rs.next()){
+                MoveValid m = new MoveValid(gameID, rs.getString(3), rs.getInt(4), rs.getInt(5));
+                moveList.add(m);
+            }
+
+            PreparedStatement prep1 = connection.prepareStatement("select * from gameList gL where gL.gameID = ?");
+            prep1.setString(1, gameID);
+            ResultSet gameSet = prep1.executeQuery();
+
+            GameHistorySummary gameHistorySummary = new GameHistorySummary(gameID, gameSet.getString(4), gameSet.getString(5), gameSet.getInt(6));
+            java.sql.Date startDate = gameSet.getDate(2);
+            java.sql.Date endDate = gameSet.getDate(3);
+
+            java.util.Date sDate = new Date(startDate.getTime());
+            java.util.Date eDate = new Date(endDate.getTime());
+
+            GameHistoryDetail detail = new GameHistoryDetail(gameHistorySummary, sDate, eDate, moveList, null);
+            return new Packet("GameHistoryDetail", playerID, detail);
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return new Packet("GameHistoryDetailFail", playerID, null);
+    }
+
+    public Packet getPlayerStatsInfo(Packet packet){
+        String playerID = packet.getPlayerID();
+
+        try {
+            PreparedStatement prep = connection.prepareStatement("SELECT * from playerStats where playerID = ?");
+            prep.setString(1, playerID);
+            ResultSet rs = prep.executeQuery();
+            rs.first();
+
+            int win = rs.getInt(3);
+            int loss = rs.getInt(4);
+            int draw = rs.getInt(5);
+
+            //Get list of games this player played
+            List<GameHistorySummary> gameHistorySummaries = new ArrayList<>();
+
+            PreparedStatement prep1 = connection.prepareStatement("Select * from gameList where player1ID = ?");
+            prep1.setString(1, playerID);
+            ResultSet rs1 = prep1.executeQuery();
+
+            while(rs1.next()){
+                gameHistorySummaries.add(new GameHistorySummary(
+                        rs1.getString(1),
+                        playerID,
+                        rs1.getString(5),
+                        rs1.getInt(6)));
+            }
+
+            //Now get games where this player is player2
+            PreparedStatement prep2 = connection.prepareStatement("Select * from gameList where player2ID = ?");
+            prep2.setString(1, playerID);
+            ResultSet rs2 = prep2.executeQuery();
+            while(rs2.next()){
+                gameHistorySummaries.add(new GameHistorySummary(
+                        rs2.getString(1),
+                        rs2.getString(4),
+                        playerID,
+                        rs2.getInt(6)));
+            }
+
+            PlayerStatsInfo info = new PlayerStatsInfo(win, loss, draw, gameHistorySummaries);
+            return new Packet("PlayerStatsInfo", playerID, info);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return new Packet("PlayerStatsInfo", playerID, null);
+    }
+
     public Packet insertViewerToGame(Packet packet){
         String playerID = packet.getPlayerID();
         SpectateRequest sp = (SpectateRequest)packet.getMessage();
@@ -199,29 +285,9 @@ public class SQLiteQuery {
             prep.setString(2, playerID);
             prep.execute();
 
-            PreparedStatement prep2 = connection.prepareStatement("select * from moveList mL where mL.gameID = ?");
-            prep2.setString(1, sp.getGameId());
-            ResultSet moveSet = prep2.executeQuery();
-
-            List<MoveValid> moveList = new ArrayList<>(9);
-            while(moveSet.next()){
-                MoveValid m = new MoveValid(sp.getGameId(), moveSet.getString(3), moveSet.getInt(4), moveSet.getInt(5));
-                moveList.add(m);
-            }
-
-            PreparedStatement prep3 = connection.prepareStatement("select * from gameList gL where gL.gameID = ?");
-            prep3.setString(1, sp.getGameId());
-            ResultSet gameSet = prep3.executeQuery();
-
-            GameHistorySummary gameHistorySummary = new GameHistorySummary(sp.getGameId(), gameSet.getString(4), gameSet.getString(5), gameSet.getInt(6));
-            java.sql.Date startDate = gameSet.getDate(2);
-            java.sql.Date endDate = gameSet.getDate(3);
-
-            java.util.Date sDate = new Date(startDate.getTime());
-            java.util.Date eDate = new Date(endDate.getTime());
-
-            GameHistoryDetail detail = new GameHistoryDetail(gameHistorySummary, sDate, eDate, moveList, null);
-            return new Packet("GameHistoryDetail", playerID, detail);
+            //TODO: reimplement this.. perhaps it's better to send SpectateSuccess and put the GameHistoryDetail inside that.
+            Packet toReturn = getGameHistoryDetail(packet, sp.getGameId());
+            return toReturn;
 
         } catch (SQLException e) {
             e.printStackTrace();
