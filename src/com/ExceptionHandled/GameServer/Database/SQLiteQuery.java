@@ -160,7 +160,6 @@ public class SQLiteQuery {
         return new Packet("MainMenu", playerID, new JoinGameFail("", ""));
     }
 
-
     public Packet insertViewerToGame(Packet packet){
         String playerID = packet.getPlayerID();
         SpectateRequest sp = (SpectateRequest)packet.getMessage();
@@ -216,7 +215,6 @@ public class SQLiteQuery {
             e.printStackTrace();
         }
     }
-
 
     public Packet insertNewGame(Packet packet){
         String gameID = UUID.randomUUID().toString();
@@ -368,5 +366,4 @@ public class SQLiteQuery {
         }
         return false;
     }
-
 }

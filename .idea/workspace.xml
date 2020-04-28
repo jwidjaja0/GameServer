@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="ed5a9275-b353-4784-9717-d5e8f1700b19" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Database/SQLiteQuery.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Database/SQLiteQuery.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/GameRoom.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/GameRoom.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Server.java" afterDir="false" />
     </list>
@@ -142,7 +143,10 @@
       <workItem from="1586996999381" duration="8046000" />
       <workItem from="1587267224121" duration="2993000" />
       <workItem from="1587414828470" duration="12215000" />
-      <workItem from="1587682874365" duration="2956000" />
+      <workItem from="1587682874365" duration="3149000" />
+      <workItem from="1587686269851" duration="4189000" />
+      <workItem from="1587836063560" duration="2139000" />
+      <workItem from="1588029450352" duration="5744000" />
     </task>
     <task id="LOCAL-00001" summary="have duplicates in the code">
       <created>1587415756635</created>
@@ -179,7 +183,14 @@
       <option name="project" value="LOCAL" />
       <updated>1587425855047</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="let gameroom handle connections to players/viewers in the game">
+      <created>1587686025176</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1587686025176</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -204,21 +215,22 @@
     <MESSAGE value="removed bugs from moving game to server" />
     <MESSAGE value="moving connections from gameroom to server" />
     <MESSAGE value="making gameroom and server communicate properly" />
-    <option name="LAST_COMMIT_MESSAGE" value="making gameroom and server communicate properly" />
+    <MESSAGE value="let gameroom handle connections to players/viewers in the game" />
+    <option name="LAST_COMMIT_MESSAGE" value="let gameroom handle connections to players/viewers in the game" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="376" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1587416263584">
+    <state x="211" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1588029972462">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="376" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1280.680@0.0.1280.680" timestamp="1587416263584" />
+    <state x="211" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1280.680@0.0.1280.680" timestamp="1588029972462" />
     <state x="371" y="87" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1587423383717">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="371" y="87" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1280.680@0.0.1280.680" timestamp="1587423383717" />
-    <state x="249" y="0" key="CommitChangelistDialog2" timestamp="1587429900295">
+    <state x="249" y="0" key="CommitChangelistDialog2" timestamp="1587686023351">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="249" y="0" key="CommitChangelistDialog2/0.0.1280.680@0.0.1280.680" timestamp="1587429900295" />
+    <state x="249" y="0" key="CommitChangelistDialog2/0.0.1280.680@0.0.1280.680" timestamp="1587686023351" />
     <state x="421" y="97" key="FileChooserDialogImpl" timestamp="1587415173128">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
@@ -227,10 +239,14 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="121" y="0" key="SettingsEditor/0.0.1280.680@0.0.1280.680" timestamp="1587683084501" />
-    <state x="337" y="164" key="com.intellij.ide.util.TipDialog" timestamp="1587414828638">
+    <state x="233" y="62" key="Vcs.Push.Dialog.v2" timestamp="1587686036651">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="337" y="164" key="com.intellij.ide.util.TipDialog/0.0.1280.680@0.0.1280.680" timestamp="1587414828638" />
+    <state x="233" y="62" key="Vcs.Push.Dialog.v2/0.0.1280.680@0.0.1280.680" timestamp="1587686036651" />
+    <state x="337" y="164" key="com.intellij.ide.util.TipDialog" timestamp="1588029550312">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="337" y="164" key="com.intellij.ide.util.TipDialog/0.0.1280.680@0.0.1280.680" timestamp="1588029550312" />
   </component>
   <component name="simpleUML.UMLToolWindowPlugin">
     <General>
