@@ -19,13 +19,9 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ed5a9275-b353-4784-9717-d5e8f1700b19" name="Default Changelist" comment="">
+    <list default="true" id="ed5a9275-b353-4784-9717-d5e8f1700b19" name="Default Changelist" comment="builds without errors">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Database/SQLiteQuery.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Database/SQLiteQuery.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Game/AIPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Game/AIPlayer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Game/HumanPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Game/HumanPlayer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/GameRoom.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/GameRoom.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Server.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameServer.iml" beforeDir="false" afterPath="$PROJECT_DIR$/GameServer.iml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -112,7 +108,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$USER_HOME$/JavaLib/4BLibrary/sqlite-jdbc-3.30.1.jar!/" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../sqlite-jdbc-3.30.1.jar!/" />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -164,8 +160,17 @@
       <workItem from="1587533982017" duration="2627000" />
       <workItem from="1587869457364" duration="2656000" />
       <workItem from="1587949648891" duration="9231000" />
-      <workItem from="1588044978969" duration="1598000" />
+      <workItem from="1588044978969" duration="1648000" />
+      <workItem from="1588048659135" duration="1416000" />
     </task>
+    <task id="LOCAL-00001" summary="builds without errors">
+      <created>1588046625789</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1588046625789</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -199,40 +204,47 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/GameServer" />
     </ignored-roots>
+    <MESSAGE value="builds without errors" />
+    <option name="LAST_COMMIT_MESSAGE" value="builds without errors" />
   </component>
   <component name="WindowStateProjectService">
     <state x="490" y="229" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog" timestamp="1588045327597">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="490" y="229" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog/0.0.1280.680@0.0.1280.680" timestamp="1588045327597" />
-    <state x="421" y="97" width="878" height="654" key="FileChooserDialogImpl" timestamp="1587535548806">
-      <screen x="70" y="27" width="1850" height="1053" />
+    <state x="252" y="0" key="CommitChangelistDialog2" timestamp="1588049161217">
+      <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="421" y="97" key="FileChooserDialogImpl/0.0.1280.680@0.0.1280.680" timestamp="1587534884760" />
+    <state x="252" y="0" key="CommitChangelistDialog2/0.0.1280.680@0.0.1280.680" timestamp="1588049161217" />
+    <state x="421" y="97" width="878" height="654" key="FileChooserDialogImpl" timestamp="1588049606887">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="421" y="97" key="FileChooserDialogImpl/0.0.1280.680@0.0.1280.680" timestamp="1588049606887" />
     <state x="421" y="97" width="878" height="654" key="FileChooserDialogImpl/70.27.1850.1053@70.27.1850.1053" timestamp="1587535548806" />
-    <state width="1237" height="163" key="GridCell.Tab.0.bottom" timestamp="1588046574254">
+    <state width="1237" height="289" key="GridCell.Tab.0.bottom" timestamp="1588049694560">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="163" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1588046574254" />
+    <state width="1237" height="289" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1588049694560" />
     <state width="1794" height="247" key="GridCell.Tab.0.bottom/70.27.1850.1053@70.27.1850.1053" timestamp="1587535335944" />
-    <state width="1237" height="163" key="GridCell.Tab.0.center" timestamp="1588046574253">
+    <state width="1237" height="289" key="GridCell.Tab.0.center" timestamp="1588049694560">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="163" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1588046574253" />
+    <state width="1237" height="289" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1588049694560" />
     <state width="1794" height="247" key="GridCell.Tab.0.center/70.27.1850.1053@70.27.1850.1053" timestamp="1587535335941" />
-    <state width="1237" height="163" key="GridCell.Tab.0.left" timestamp="1588046574253">
+    <state width="1237" height="289" key="GridCell.Tab.0.left" timestamp="1588049694559">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="163" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1588046574253" />
+    <state width="1237" height="289" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1588049694559" />
     <state width="1794" height="247" key="GridCell.Tab.0.left/70.27.1850.1053@70.27.1850.1053" timestamp="1587535335939" />
-    <state width="1237" height="163" key="GridCell.Tab.0.right" timestamp="1588046574254">
+    <state width="1237" height="289" key="GridCell.Tab.0.right" timestamp="1588049694560">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="163" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1588046574254" />
+    <state width="1237" height="289" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1588049694560" />
     <state width="1794" height="247" key="GridCell.Tab.0.right/70.27.1850.1053@70.27.1850.1053" timestamp="1587535335942" />
-    <state x="359" y="27" width="1280" height="1053" key="SettingsEditor" timestamp="1587535638788">
-      <screen x="70" y="27" width="1850" height="1053" />
+    <state x="200" y="0" width="1280" height="1053" key="SettingsEditor" timestamp="1588049618048">
+      <screen x="0" y="0" width="1280" height="680" />
     </state>
+    <state x="200" y="0" key="SettingsEditor/0.0.1280.680@0.0.1280.680" timestamp="1588049618048" />
     <state x="359" y="27" width="1280" height="1053" key="SettingsEditor/70.27.1850.1053@70.27.1850.1053" timestamp="1587535638788" />
   </component>
   <component name="simpleUML.UMLToolWindowPlugin">
