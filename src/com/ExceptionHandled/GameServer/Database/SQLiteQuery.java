@@ -232,11 +232,16 @@ public class SQLiteQuery {
             PreparedStatement prep = connection.prepareStatement("SELECT * from playerStats where playerID = ?");
             prep.setString(1, playerID);
             ResultSet rs = prep.executeQuery();
-            rs.first();
 
-            int win = rs.getInt(3);
-            int loss = rs.getInt(4);
-            int draw = rs.getInt(5);
+            int win = -1;
+            int loss = -1;
+            int draw = -1;
+            //TODO: fix later to only get once. this works because sql only return one row
+            while(rs.next()){
+                win = rs.getInt(3);
+                loss = rs.getInt(4);
+                draw = rs.getInt(5);
+            }
 
             //Get list of games this player played
             List<GameHistorySummary> gameHistorySummaries = new ArrayList<>();
