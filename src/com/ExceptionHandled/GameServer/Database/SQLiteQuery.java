@@ -319,6 +319,7 @@ public class SQLiteQuery {
     public Packet insertNewGame(Packet packet){
         String gameID = UUID.randomUUID().toString();
         String player1ID = packet.getPlayerID();
+        String player2Type = "";
 
         NewGameRequest request = (NewGameRequest)packet.getMessage();
 
@@ -329,6 +330,7 @@ public class SQLiteQuery {
             prep.setString(3,player1ID);
             if(request.getOpponent().equals("Ai")){
                 prep.setString(4,"Ai");
+                player2Type = "Ai";
             }
             else{
                 prep.setString(4, "");
@@ -336,7 +338,7 @@ public class SQLiteQuery {
             prep.setString(5, request.getGameName());
             prep.execute();
 
-            return new Packet("MainMenu", player1ID, new NewGameSuccess(gameID, request.getGameName()));
+            return new Packet("MainMenu", player1ID, new NewGameSuccess(gameID, request.getGameName(), player2Type));
         }
         catch (SQLException e) {
             e.printStackTrace();

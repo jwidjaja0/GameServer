@@ -19,10 +19,9 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ed5a9275-b353-4784-9717-d5e8f1700b19" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/MessageSender.java" afterDir="false" />
+    <list default="true" id="aefb3591-25b9-418d-8adf-7b35b803d267" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Factory/MessageFactory.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Database/SQLiteQuery.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Database/SQLiteQuery.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -180,30 +179,18 @@
     </ignored-roots>
   </component>
   <component name="WindowStateProjectService">
-    <state x="421" y="97" width="878" height="654" key="FileChooserDialogImpl" timestamp="1587535548806">
-      <screen x="70" y="27" width="1850" height="1053" />
-    </state>
-    <state x="421" y="97" key="FileChooserDialogImpl/0.0.1280.680@0.0.1280.680" timestamp="1587534884760" />
-    <state x="421" y="97" width="878" height="654" key="FileChooserDialogImpl/70.27.1850.1053@70.27.1850.1053" timestamp="1587535548806" />
-    <state width="1794" height="247" key="GridCell.Tab.0.bottom" timestamp="1587535335944">
-      <screen x="70" y="27" width="1850" height="1053" />
-    </state>
-    <state width="1794" height="247" key="GridCell.Tab.0.bottom/70.27.1850.1053@70.27.1850.1053" timestamp="1587535335944" />
-    <state width="1794" height="247" key="GridCell.Tab.0.center" timestamp="1587535335941">
-      <screen x="70" y="27" width="1850" height="1053" />
-    </state>
-    <state width="1794" height="247" key="GridCell.Tab.0.center/70.27.1850.1053@70.27.1850.1053" timestamp="1587535335941" />
-    <state width="1794" height="247" key="GridCell.Tab.0.left" timestamp="1587535335939">
-      <screen x="70" y="27" width="1850" height="1053" />
-    </state>
-    <state width="1794" height="247" key="GridCell.Tab.0.left/70.27.1850.1053@70.27.1850.1053" timestamp="1587535335939" />
-    <state width="1794" height="247" key="GridCell.Tab.0.right" timestamp="1587535335942">
-      <screen x="70" y="27" width="1850" height="1053" />
-    </state>
-    <state width="1794" height="247" key="GridCell.Tab.0.right/70.27.1850.1053@70.27.1850.1053" timestamp="1587535335942" />
-    <state x="359" y="27" width="1280" height="1053" key="SettingsEditor" timestamp="1587535638788">
-      <screen x="70" y="27" width="1850" height="1053" />
-    </state>
-    <state x="359" y="27" width="1280" height="1053" key="SettingsEditor/70.27.1850.1053@70.27.1850.1053" timestamp="1587535638788" />
+    <state x="421" y="97" width="878" height="654" key="FileChooserDialogImpl" />
+    <state x="421" y="97" key="FileChooserDialogImpl/0.0.1280.680@0.0.1280.680" />
+    <state x="421" y="97" width="878" height="654" key="FileChooserDialogImpl/70.27.1850.1053@70.27.1850.1053" />
+    <state width="1794" height="247" key="GridCell.Tab.0.bottom" />
+    <state width="1794" height="247" key="GridCell.Tab.0.bottom/70.27.1850.1053@70.27.1850.1053" />
+    <state width="1794" height="247" key="GridCell.Tab.0.center" />
+    <state width="1794" height="247" key="GridCell.Tab.0.center/70.27.1850.1053@70.27.1850.1053" />
+    <state width="1794" height="247" key="GridCell.Tab.0.left" />
+    <state width="1794" height="247" key="GridCell.Tab.0.left/70.27.1850.1053@70.27.1850.1053" />
+    <state width="1794" height="247" key="GridCell.Tab.0.right" />
+    <state width="1794" height="247" key="GridCell.Tab.0.right/70.27.1850.1053@70.27.1850.1053" />
+    <state x="359" y="27" width="1280" height="1053" key="SettingsEditor" />
+    <state x="359" y="27" width="1280" height="1053" key="SettingsEditor/70.27.1850.1053@70.27.1850.1053" />
   </component>
 </project>
