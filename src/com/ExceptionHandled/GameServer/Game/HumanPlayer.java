@@ -4,10 +4,7 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
-/**
- * Class that handles
- */
-public class HumanPlayer extends Player {
+public class HumanPlayer{
 
     private String username;
     private String password;
@@ -16,11 +13,6 @@ public class HumanPlayer extends Player {
     public HumanPlayer(String username, String password){
         this.username = username;
         this.password = password;
-    }
-
-    public HumanPlayer() throws IOException {
-        this("Guest", "");
-        setToken(ImageIO.read(getClass().getResourceAsStream("/resources/images/XBlack.png")));
     }
 
     public String getUsername() {

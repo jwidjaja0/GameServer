@@ -1,15 +1,12 @@
 package com.ExceptionHandled.GameServer;
 
-import com.ExceptionHandled.GameMessages.Connection.ConnectionRequest;
-import com.ExceptionHandled.GameMessages.Game.MoveMade;
+import com.ExceptionHandled.GameMessages.Connection.*;
+import com.ExceptionHandled.GameMessages.Game.*;
 import com.ExceptionHandled.GameMessages.Interfaces.*;
 import com.ExceptionHandled.GameMessages.Login.*;
 import com.ExceptionHandled.GameMessages.MainMenu.*;
-import com.ExceptionHandled.GameMessages.Stats.GameHistoryRequest;
-import com.ExceptionHandled.GameMessages.Stats.PlayerStatsInfo;
-import com.ExceptionHandled.GameMessages.Stats.PlayerStatsRequest;
-import com.ExceptionHandled.GameMessages.UserUpdate.UserDeleteRequest;
-import com.ExceptionHandled.GameMessages.UserUpdate.UserUpdateRequest;
+import com.ExceptionHandled.GameMessages.Stats.*;
+import com.ExceptionHandled.GameMessages.UserUpdate.*;
 import com.ExceptionHandled.GameMessages.Wrappers.Packet;
 import com.ExceptionHandled.GameServer.Database.SQLiteQuery;
 
@@ -36,7 +33,7 @@ public class Server implements Runnable {
         listenNewClient = new ListenNewClient(clientConnectionList, messageQueue);
         activePlayerMapCC = new HashMap<>();
 
-        gameRoomList.add(new GameRoom("sampleID", "", "sample", "x"));
+        //gameRoomList.add(new GameRoom("sampleID", "", "sample", "x"));
 
         thread = new Thread(this);
         thread.start();
@@ -139,7 +136,7 @@ public class Server implements Runnable {
 
                 //TODO: Add check two players already set, can't set p2 if another request comes.
                 if(g.getGameID().equals(idRequest) && g.getRoomPassword().equals(pw)){
-                    g.setPlayer2(request.getRequestingPlayerId());
+                    g.setPlayer2(request.getRequestingPlayerId(), serverPacket.getClientConnection());
                     response = SQLiteQuery.getInstance().joinGame(packet);
                 }
             }
@@ -159,7 +156,7 @@ public class Server implements Runnable {
 
             for(GameRoom gm : gameRoomList){
                 if(gm.getGameID().equals(gameID)){
-                    gm.addSpectator(packet.getPlayerID());
+                    gm.addViewer(packet.getPlayerID(), serverPacket.getClientConnection());
                     response = SQLiteQuery.getInstance().insertViewerToGame(packet);
                 }
             }
@@ -170,7 +167,7 @@ public class Server implements Runnable {
         serverPacket.getClientConnection().getObjectOutputStream().writeObject(response);
     }
 
-    private void handleGameMessage(ServerPacket serverPacket) {
+    private void handleGameMessage(ServerPacket serverPacket) throws IOException {
         Packet packet = serverPacket.getPacket();
         Packet notice = null;
 
@@ -187,13 +184,21 @@ public class Server implements Runnable {
 
                     else if (gameMessage instanceof RematchRequest) {
                         RematchRequest message = (RematchRequest) gameMessage;
-                        notice = new Packet("RematchRequest", message.getGameID(), message.getOpponentPlayer());
+                        String pID = packet.getPlayerID();
+                        if (pID.equals(gm.getPlayer1())) {
+                            pID = gm.getPlayer2();
+                        }
+                        notice = new Packet("RematchRequest", message.getGameID(), pID);
                         serverPacket.getClientConnection().getObjectOutputStream().writeObject(notice);
                     }
 
                     else if (gameMessage instanceof RematchRespond) {
                         RematchRespond message = (RematchRespond) gameMessage;
-                        notice = new Packet("RematchRespond", message.getGameID(), message.getRequesterPlayerID());
+                        String pID = packet.getPlayerID();
+                        if (pID.equals(gm.getPlayer1())) {
+                            pID = gm.getPlayer2();
+                        }
+                        notice = new Packet("RematchRespond", message.getGameID(), pID);
                         serverPacket.getClientConnection().getObjectOutputStream().writeObject(notice);
                     }
                     //TODO: currently can only forfeit on your turn, fix to forfeit whenever
@@ -201,7 +206,7 @@ public class Server implements Runnable {
                         gm.gameOver();
                     }
                     else {
-                        gm.addToMessageQ(gameMessage);
+                        gm.addToMessageQ(serverPacket);
                     }
                 }
             }

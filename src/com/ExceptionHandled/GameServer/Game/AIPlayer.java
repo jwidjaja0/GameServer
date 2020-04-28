@@ -1,9 +1,8 @@
 package com.ExceptionHandled.GameServer.Game;
 
 import java.io.IOException;
-import com.ExceptionHandled.GameServer.Player;
 
-public class AIPlayer extends Player {//have implement observable
+public class AIPlayer {//have implement observable
     private TicTacToe board;
 
     public AIPlayer() throws IOException {

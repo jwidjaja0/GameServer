@@ -54,6 +54,14 @@ public class GameRoom implements Runnable {
         return roomPassword;
     }
 
+    protected String getPlayer1() {
+        return player1;
+    }
+
+    protected String getPlayer2() {
+        return player2;
+    }
+
     public void setPlayer2(String player2, ClientConnection connection2) {
         players.put(player2, connection2);
         this.player2 = player2;

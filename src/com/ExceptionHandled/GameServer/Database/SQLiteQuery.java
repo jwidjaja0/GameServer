@@ -155,16 +155,16 @@ public class SQLiteQuery {
                 if(rs.getString(1).equals(gameID) && rs.getString(5).equals("")){
                     PreparedStatement prep1 = connection.prepareStatement(
                             "UPDATE gameList SET player2ID = ? " +
-                            "WHERE gameID = ? ");
+                                    "WHERE gameID = ? ");
                     prep1.setString(1, playerID);
                     prep1.setString(2, gameID);
                     prep1.executeUpdate();
 
                     PreparedStatement preparedStatement = connection.prepareStatement(
                             "select gameID, gl.gameName, pi.playerID, pi.firstname, pi.lastname\n" +
-                            "from gameList gl\n" +
-                            "join playerInfo pi \n" +
-                            "ON gl.player1ID = pi.playerID");
+                                    "from gameList gl\n" +
+                                    "join playerInfo pi \n" +
+                                    "ON gl.player1ID = pi.playerID");
                     ResultSet resultSet = preparedStatement.executeQuery();
                     String opponentPlayerName = resultSet.getString(4) + " " + resultSet.getString(5);
                     String gameName = resultSet.getString(2);
@@ -191,7 +191,6 @@ public class SQLiteQuery {
     }
 
     public Packet getGameHistoryDetail(Packet packet, String gameID){
-    public Packet insertViewerToGame(Packet packet){
         String playerID = packet.getPlayerID();
 
         try {
@@ -315,6 +314,7 @@ public class SQLiteQuery {
             e.printStackTrace();
         }
     }
+
 
     public Packet insertNewGame(Packet packet){
         String gameID = UUID.randomUUID().toString();
@@ -471,4 +471,5 @@ public class SQLiteQuery {
         }
         return false;
     }
+
 }
