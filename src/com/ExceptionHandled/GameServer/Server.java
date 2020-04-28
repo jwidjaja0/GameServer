@@ -2,12 +2,12 @@ package com.ExceptionHandled.GameServer;
 
 import com.ExceptionHandled.GameMessages.Connection.ConnectionRequest;
 import com.ExceptionHandled.GameMessages.Game.MoveMade;
-import com.ExceptionHandled.GameMessages.Interfaces.Game;
-import com.ExceptionHandled.GameMessages.Interfaces.Login;
-import com.ExceptionHandled.GameMessages.Interfaces.MainMenu;
-import com.ExceptionHandled.GameMessages.Interfaces.UserUpdate;
+import com.ExceptionHandled.GameMessages.Interfaces.*;
 import com.ExceptionHandled.GameMessages.Login.*;
 import com.ExceptionHandled.GameMessages.MainMenu.*;
+import com.ExceptionHandled.GameMessages.Stats.GameHistoryRequest;
+import com.ExceptionHandled.GameMessages.Stats.PlayerStatsInfo;
+import com.ExceptionHandled.GameMessages.Stats.PlayerStatsRequest;
 import com.ExceptionHandled.GameMessages.UserUpdate.UserDeleteRequest;
 import com.ExceptionHandled.GameMessages.UserUpdate.UserUpdateRequest;
 import com.ExceptionHandled.GameMessages.Wrappers.Packet;
@@ -24,9 +24,7 @@ public class Server implements Runnable {
 
     private List<ClientConnection> clientConnectionList;
     private List<GameRoom> gameRoomList;
-
     private Map<String, ClientConnection> activePlayerMapCC;
-
     private ListenNewClient listenNewClient;
 
     private Thread thread;
@@ -37,6 +35,8 @@ public class Server implements Runnable {
         gameRoomList = new ArrayList<>(100);
         listenNewClient = new ListenNewClient(clientConnectionList, messageQueue);
         activePlayerMapCC = new HashMap<>();
+
+        gameRoomList.add(new GameRoom("sampleID", "", "sample", "x"));
 
         thread = new Thread(this);
         thread.start();
@@ -68,16 +68,35 @@ public class Server implements Runnable {
                 else if(packet.getMessage() instanceof UserUpdate){
                     handleUserUpdateMessage(serverPacket);
                 }
+                else if(packet.getMessage() instanceof Stats){
+                    handleStatsMessage(serverPacket);
+                }
 
             } catch (InterruptedException | IOException e) {
                 e.printStackTrace();
             }
         }
+    }
 
+    private void handleStatsMessage(ServerPacket serverPacket) throws IOException {
+        Packet packet = serverPacket.getPacket();
+        System.out.println("handleStatsMessage, playerID: " + packet.getPlayerID());
+        Packet response = null;
+
+        if(packet.getMessage() instanceof GameHistoryRequest){
+            GameHistoryRequest request = (GameHistoryRequest)packet.getMessage();
+            response = SQLiteQuery.getInstance().getGameHistoryDetail(packet, request.getGameId());
+        }
+        else if(packet.getMessage() instanceof PlayerStatsRequest){
+            PlayerStatsRequest playerStatsRequest = (PlayerStatsRequest)packet.getMessage();
+            response = SQLiteQuery.getInstance().getPlayerStatsInfo(packet);
+        }
+        serverPacket.getClientConnection().getObjectOutputStream().writeObject(response);
     }
 
     private void handleUserUpdateMessage(ServerPacket serverPacket) throws IOException {
         Packet packet = serverPacket.getPacket();
+        System.out.println("handleUserUpdateMessage, playerID: " + packet.getPlayerID());
         Packet response = null;
 
         if(packet.getMessage() instanceof UserUpdateRequest){
@@ -125,13 +144,27 @@ public class Server implements Runnable {
                 }
             }
         }
-
         else if(packet.getMessage() instanceof ListActiveGamesRequest){
-            List<ActiveGameHeader> gameList = new ArrayList<>(gameRoomList.size());
-            for(int i = 0; i < gameList.size(); i++){
-                gameList.set(i, gameRoomList.get(i).getActiveGameHeader());
+            List<ActiveGameHeader> gameList = new ArrayList<>();
+            for(int i = 0; i < gameRoomList.size(); i++){
+                gameList.add(gameRoomList.get(i).getActiveGameHeader());
             }
+            System.out.println("Sending list active games, size: " + gameList.size());
             response = new Packet("MainMenu", packet.getPlayerID(), new ListActiveGames(gameList));
+        }
+        //TODO: write functions for spectator to request joining game
+        else if(packet.getMessage() instanceof SpectateRequest){
+            SpectateRequest sr = (SpectateRequest)packet.getMessage();
+            String gameID = sr.getGameId();
+
+            for(GameRoom gm : gameRoomList){
+                if(gm.getGameID().equals(gameID)){
+                    gm.addSpectator(packet.getPlayerID());
+                    response = SQLiteQuery.getInstance().insertViewerToGame(packet);
+                }
+            }
+
+
         }
 
         serverPacket.getClientConnection().getObjectOutputStream().writeObject(response);
@@ -187,6 +220,7 @@ public class Server implements Runnable {
         }
         else if(packet.getMessage() instanceof LoginRequest){
             response = SQLiteQuery.getInstance().userLoggingIn(packet);
+            System.out.println("LoginSuccess response");
 
             if(response.getMessage() instanceof LoginSuccess){
                 LoginSuccess lg = (LoginSuccess) response.getMessage();
@@ -194,13 +228,24 @@ public class Server implements Runnable {
             }
         }
 
-        else if(packet.getMessage() instanceof SignOutRequest){
+        else if(packet.getMessage() instanceof LogoutRequest){
             String playerID = packet.getPlayerID();
-            activePlayerMapCC.remove(playerID);
-
-            response = new Packet("Login", playerID, new SignOutSuccess());
+            if(playerID.equals(null)){
+                //TODO: FIX LOGOUTFAIL
+                response = new Packet("Login", playerID, new LogoutFail(""));
+            }
+            else{
+                activePlayerMapCC.remove(playerID);
+                response = new Packet("Login", playerID, new LogoutSuccess());
+            }
         }
 
+        //TODO: delete later, only for debugging
+        if(response.getMessage() instanceof LoginSuccess){
+
+            System.out.println(response.getPlayerID());
+            System.out.println(response.getPlayerID());
+        }
         serverPacket.getClientConnection().getObjectOutputStream().writeObject(response);
     }
 }

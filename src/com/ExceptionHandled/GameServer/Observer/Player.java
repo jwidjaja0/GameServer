@@ -1,4 +1,4 @@
-package com.ExceptionHandled.GameServer;
+package com.ExceptionHandled.GameServer.Observer;
 
 import java.util.UUID;
 
