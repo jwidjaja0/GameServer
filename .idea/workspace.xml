@@ -19,11 +19,9 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ed5a9275-b353-4784-9717-d5e8f1700b19" name="Default Changelist" comment="">
+    <list default="true" id="afcba8bb-2dcc-4c39-a46c-20e6a4323c82" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TicTacToe.db" beforeDir="false" afterPath="$PROJECT_DIR$/TicTacToe.db" afterDir="false" />
     </list>
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -85,18 +83,6 @@
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="application.passwordSafe" />
   </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
-  </component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true">
       <option name="MAIN_CLASS_NAME" value="com.ExceptionHandled.GameServer.Main" />
@@ -118,7 +104,7 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="ed5a9275-b353-4784-9717-d5e8f1700b19" name="Default Changelist" comment="" />
+      <changelist id="afcba8bb-2dcc-4c39-a46c-20e6a4323c82" name="Default Changelist" comment="" />
       <created>1585630159474</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -141,6 +127,8 @@
       <workItem from="1587489763336" duration="4232000" />
       <workItem from="1587533982017" duration="2627000" />
       <workItem from="1587869457364" duration="1176000" />
+      <workItem from="1587924000991" duration="220000" />
+      <workItem from="1587930919158" duration="813000" />
     </task>
     <servers />
   </component>
@@ -182,25 +170,33 @@
     </state>
     <state x="421" y="97" key="FileChooserDialogImpl/0.0.1280.680@0.0.1280.680" timestamp="1587534884760" />
     <state x="421" y="97" width="878" height="654" key="FileChooserDialogImpl/70.27.1850.1053@70.27.1850.1053" timestamp="1587535548806" />
-    <state width="1794" height="247" key="GridCell.Tab.0.bottom" timestamp="1587535335944">
-      <screen x="70" y="27" width="1850" height="1053" />
+    <state width="1877" height="295" key="GridCell.Tab.0.bottom" timestamp="1587871053001">
+      <screen x="-1920" y="0" width="1920" height="1080" />
     </state>
+    <state width="1877" height="295" key="GridCell.Tab.0.bottom/-1920.0.1920.1080/0.0.2560.1440@-1920.0.1920.1080" timestamp="1587871053001" />
     <state width="1794" height="247" key="GridCell.Tab.0.bottom/70.27.1850.1053@70.27.1850.1053" timestamp="1587535335944" />
-    <state width="1794" height="247" key="GridCell.Tab.0.center" timestamp="1587535335941">
-      <screen x="70" y="27" width="1850" height="1053" />
+    <state width="1877" height="295" key="GridCell.Tab.0.center" timestamp="1587871053000">
+      <screen x="-1920" y="0" width="1920" height="1080" />
     </state>
+    <state width="1877" height="295" key="GridCell.Tab.0.center/-1920.0.1920.1080/0.0.2560.1440@-1920.0.1920.1080" timestamp="1587871053000" />
     <state width="1794" height="247" key="GridCell.Tab.0.center/70.27.1850.1053@70.27.1850.1053" timestamp="1587535335941" />
-    <state width="1794" height="247" key="GridCell.Tab.0.left" timestamp="1587535335939">
-      <screen x="70" y="27" width="1850" height="1053" />
+    <state width="1877" height="295" key="GridCell.Tab.0.left" timestamp="1587871053000">
+      <screen x="-1920" y="0" width="1920" height="1080" />
     </state>
+    <state width="1877" height="295" key="GridCell.Tab.0.left/-1920.0.1920.1080/0.0.2560.1440@-1920.0.1920.1080" timestamp="1587871053000" />
     <state width="1794" height="247" key="GridCell.Tab.0.left/70.27.1850.1053@70.27.1850.1053" timestamp="1587535335939" />
-    <state width="1794" height="247" key="GridCell.Tab.0.right" timestamp="1587535335942">
-      <screen x="70" y="27" width="1850" height="1053" />
+    <state width="1877" height="295" key="GridCell.Tab.0.right" timestamp="1587871053001">
+      <screen x="-1920" y="0" width="1920" height="1080" />
     </state>
+    <state width="1877" height="295" key="GridCell.Tab.0.right/-1920.0.1920.1080/0.0.2560.1440@-1920.0.1920.1080" timestamp="1587871053001" />
     <state width="1794" height="247" key="GridCell.Tab.0.right/70.27.1850.1053@70.27.1850.1053" timestamp="1587535335942" />
     <state x="359" y="27" width="1280" height="1053" key="SettingsEditor" timestamp="1587535638788">
       <screen x="70" y="27" width="1850" height="1053" />
     </state>
     <state x="359" y="27" width="1280" height="1053" key="SettingsEditor/70.27.1850.1053@70.27.1850.1053" timestamp="1587535638788" />
+    <state x="-1264" y="364" key="com.intellij.ide.util.TipDialog" timestamp="1587931481323">
+      <screen x="-1920" y="0" width="1920" height="1080" />
+    </state>
+    <state x="-1264" y="364" key="com.intellij.ide.util.TipDialog/-1920.0.1920.1080/0.0.2560.1440@-1920.0.1920.1080" timestamp="1587931481323" />
   </component>
 </project>
