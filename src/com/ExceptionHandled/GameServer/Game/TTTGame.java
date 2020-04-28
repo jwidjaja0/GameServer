@@ -4,10 +4,10 @@ package com.ExceptionHandled.GameServer.Game;
 public class TTTGame {
     private TicTacToe ticTacToe;
     private boolean player2Turn;
-    private char firstTurn;
+    private String firstTurn;
 
-    final char player1 = 'X';
-    final char player2 = 'O';
+    final String player1 = "X";
+    final String player2 = "O";
 
     //create new board, let player1 start, add observer
     public TTTGame() {
@@ -17,14 +17,14 @@ public class TTTGame {
     }
 
     //returns the winner if someone won, "D" for draw, or "-" if the game isn't over yet
-    public char whoWon(){
+    public String whoWon(){
         if (ticTacToe.isWon('X'))
-            return 'X';
+            return "X";
         else if (ticTacToe.isWon('O'))
-            return 'O';
+            return "O";
         else if (ticTacToe.isFull())
-                return 'D';
-        return '-';
+                return "D";
+        return "-";
     }
 
     public boolean validMove (int row, int col) {
@@ -43,7 +43,7 @@ public class TTTGame {
         player2Turn = !player2Turn;
     }
 
-    public char getTurnToken(){
+    public String getTurnToken(){
         if (player2Turn)
             return player2;
         return player1;
@@ -58,9 +58,9 @@ public class TTTGame {
     }
 
     public void reset(){
-        char first = firstTurn;
+        String first = firstTurn;
         ticTacToe = new TicTacToe();
-        if (first == player1){
+        if (first.equals(player1)){
             player2Turn = true;
             firstTurn = player2;
         }

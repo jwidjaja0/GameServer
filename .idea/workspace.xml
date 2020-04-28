@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="ed5a9275-b353-4784-9717-d5e8f1700b19" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Game/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Game/TTTGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Game/TTTGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Game/TTTGame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/GameRoom.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/GameRoom.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -146,7 +146,7 @@
       <workItem from="1587686269851" duration="4189000" />
       <workItem from="1587836063560" duration="2139000" />
       <workItem from="1588029450352" duration="5744000" />
-      <workItem from="1588040450929" duration="1398000" />
+      <workItem from="1588040450929" duration="3826000" />
     </task>
     <task id="LOCAL-00001" summary="have duplicates in the code">
       <created>1587415756635</created>
@@ -190,7 +190,14 @@
       <option name="project" value="LOCAL" />
       <updated>1587686025176</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="cleaning up refractor bugs in game room">
+      <created>1588041891530</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1588041891530</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -216,7 +223,8 @@
     <MESSAGE value="moving connections from gameroom to server" />
     <MESSAGE value="making gameroom and server communicate properly" />
     <MESSAGE value="let gameroom handle connections to players/viewers in the game" />
-    <option name="LAST_COMMIT_MESSAGE" value="let gameroom handle connections to players/viewers in the game" />
+    <MESSAGE value="cleaning up refractor bugs in game room" />
+    <option name="LAST_COMMIT_MESSAGE" value="cleaning up refractor bugs in game room" />
   </component>
   <component name="WindowStateProjectService">
     <state x="446" y="50" key="#com.intellij.ide.util.MemberChooser" timestamp="1588040937258">
@@ -231,10 +239,10 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="371" y="87" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1280.680@0.0.1280.680" timestamp="1587423383717" />
-    <state x="249" y="0" key="CommitChangelistDialog2" timestamp="1587686023351">
+    <state x="249" y="0" key="CommitChangelistDialog2" timestamp="1588044360327">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="249" y="0" key="CommitChangelistDialog2/0.0.1280.680@0.0.1280.680" timestamp="1587686023351" />
+    <state x="249" y="0" key="CommitChangelistDialog2/0.0.1280.680@0.0.1280.680" timestamp="1588044360327" />
     <state x="421" y="97" key="FileChooserDialogImpl" timestamp="1587415173128">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
@@ -251,6 +259,10 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="337" y="164" key="com.intellij.ide.util.TipDialog/0.0.1280.680@0.0.1280.680" timestamp="1588029550312" />
+    <state x="297" y="151" key="run.anything.popup" timestamp="1588042514878">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="297" y="151" key="run.anything.popup/0.0.1280.680@0.0.1280.680" timestamp="1588042514878" />
   </component>
   <component name="simpleUML.UMLToolWindowPlugin">
     <General>

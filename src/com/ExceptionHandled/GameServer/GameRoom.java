@@ -7,6 +7,7 @@ import com.ExceptionHandled.GameServer.Database.SQLiteQuery;
 import com.ExceptionHandled.GameServer.Game.TTTGame;
 
 
+import java.io.IOException;
 import java.util.*;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
@@ -62,17 +63,17 @@ public class GameRoom implements Runnable {
         serverPacketQ.add(sp);
     }
 
-    public void addViewer (String viewer, ClientConnection connection) {
+    public void addViewer (String viewer, ClientConnection connection) throws IOException {
         viewers.put(viewer, connection);
         SpectateSuccess join = new SpectateSuccess (gameID, gameName, player1, player2, moves);
         Packet notice = new Packet("EnterGame", viewer, join);
         connection.getObjectOutputStream().writeObject(notice);
     }
 
-    public void removeViewer (String viewer) {
+    public void removeViewer (String viewer) throws IOException {
         SpectatorLeave leave = new SpectatorLeave(gameID);
         Packet notice = new Packet("EnterGame", viewer, leave);
-        viewers.get(viewer).getConnectionID().getObjectOutputStream().writeObject(notice);
+        viewers.get(viewer).getObjectOutputStream().writeObject(notice);
         viewers.remove(viewer);
     }
 
@@ -80,44 +81,43 @@ public class GameRoom implements Runnable {
         return new ActiveGameHeader(gameID, gameName, player1, player2);
     }
 
-    public void gameOver () {
+    //TODO: fix this method to take input
+    public void gameOver () throws IOException {
         game.switchTurn();
         gameOver(game.getTurnToken());
         game.switchTurn();
     }
 
-    private void gameOver(char whoWon) {
+    private void gameOver(String whoWon) throws IOException {
         Packet notice;
 
         GameOverOutcome gameOver = new GameOverOutcome(gameID, whoWon);
 
-        notice = new Packet("GameOverOutcome", player1, gameOver);
-        serverPacket.getClientConnection().getObjectOutputStream().writeObject(notice);
+        for (String player : players.keySet()) {
+            notice = new Packet("GameOverOutcome", player, gameOver);
+            players.get(player).getObjectOutputStream().writeObject(notice);
+        }
 
-        notice = new Packet("GameOverOutcome", player2, gameOver);
-        serverPacket.getClientConnection().getObjectOutputStream().writeObject(notice);
-
-        for (String viewer : viewers) {
+        for (String viewer : viewers.keySet()) {
             notice = new Packet("GameOverOutcome", viewer, gameOver);
-            serverPacket.getClientConnection().getObjectOutputStream().writeObject(notice);
+            viewers.get(viewer).getObjectOutputStream().writeObject(notice);
         }
     }
 
-    private void makeValidMove(MoveValid move) {
+    private void makeValidMove(MoveValid move) throws IOException {
         Packet notice;
 
-        notice = new Packet("MoveValid", player1, move);
-        serverPacket.getClientConnection().getObjectOutputStream().writeObject(notice);
-
-        notice = new Packet("MoveValid", player2, move);
-        serverPacket.getClientConnection().getObjectOutputStream().writeObject(notice);
-
-        for (String viewer : viewers) {
-            notice = new Packet("MoveValid", viewer, move);
-            serverPacket.getClientConnection().getObjectOutputStream().writeObject(notice);
+        for (String player : players.keySet()) {
+            notice = new Packet("MoveValid", player, move);
+            players.get(player).getObjectOutputStream().writeObject(notice);
         }
 
-        game.setMove(move.getxCoord(), move.getyCoord(), game.getTurnToken());
+        for (String viewer : viewers.keySet()) {
+            notice = new Packet("MoveValid", viewer, move);
+            viewers.get(viewer).getObjectOutputStream().writeObject(notice);
+        }
+
+        game.setMove(move.getxCoord(), move.getyCoord(), game.getTurnToken().charAt(0));
 
         if (game.gameOver()) {
             gameOver(game.whoWon());
@@ -125,22 +125,21 @@ public class GameRoom implements Runnable {
 
         else {
             game.switchTurn();
-            WhoseTurn turn = new WhoseTurn(gameID, game.getWhoseTurn());
+            WhoseTurn turn = new WhoseTurn(gameID, game.getTurnToken());
 
-            notice = new Package("WhoseTurn", player1, turn);
-            serverPacket.getClientConnection().getObjectOutputStream().writeObject(notice);
-
-            notice = new Package("WhoseTurn", player2, turn);
-            serverPacket.getClientConnection().getObjectOutputStream().writeObject(notice);
+            for (String player : players.keySet()) {
+                notice = new Packet ("WhoseTurn", player, turn);
+                players.get(player).getObjectOutputStream().writeObject(notice);
+            }
         }
     }
 
-    public void makeMove(MoveMade move) {
+    public void makeMove(MoveMade move) throws IOException {
         //if invalid move
         if (!game.validMove(move.getxCoord(), move.getyCoord())) {
             MoveInvalid moveInvalid = new MoveInvalid(gameID, game.getTurnToken(), move.getxCoord(), move.getyCoord());
             Packet notice = new Packet("MoveInvalid", move.getPlayer(), moveInvalid);
-            serverPacket.getClientConnection().getObjectOutputStream().writeObject(notice);
+            players.get(move.getPlayer()).getObjectOutputStream().writeObject(notice);
         }
         //otherwise make the move
         else {
