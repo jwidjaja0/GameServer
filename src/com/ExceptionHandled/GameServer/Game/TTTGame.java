@@ -1,7 +1,7 @@
 package com.ExceptionHandled.GameServer.Game;
 
 
-public class Game {
+public class TTTGame {
     private TicTacToe ticTacToe;
     private boolean player2Turn;
     private char firstTurn;
@@ -10,7 +10,7 @@ public class Game {
     final char player2 = 'O';
 
     //create new board, let player1 start, add observer
-    public Game() {
+    public TTTGame() {
         ticTacToe = new TicTacToe();
         player2Turn = false;
         firstTurn = player1;

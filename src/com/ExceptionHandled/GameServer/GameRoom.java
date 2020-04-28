@@ -1,11 +1,11 @@
 package com.ExceptionHandled.GameServer;
 
 import com.ExceptionHandled.GameMessages.Game.*;
-import com.ExceptionHandled.GameMessages.Interfaces.Game;
-import com.ExceptionHandled.GameMessages.MainMenu.ActiveGameHeader;
+import com.ExceptionHandled.GameMessages.MainMenu.*;
 import com.ExceptionHandled.GameMessages.Wrappers.Packet;
 import com.ExceptionHandled.GameServer.Database.SQLiteQuery;
-import com.ExceptionHandled.GameServer.Game.Game;
+import com.ExceptionHandled.GameServer.Game.TTTGame;
+
 
 import java.util.*;
 import java.util.concurrent.ArrayBlockingQueue;
@@ -18,8 +18,10 @@ public class GameRoom implements Runnable {
 
     private Map<String, ClientConnection> players;
     private Map<String, ClientConnection> viewers;
+    private String player1;
+    private String player2;
 
-    private Game game;
+    private TTTGame game;
     private ArrayList<MoveValid> moves;
 
     private BlockingQueue<ServerPacket> serverPacketQ;
@@ -30,12 +32,13 @@ public class GameRoom implements Runnable {
         this.roomPassword = roomPassword;
         this.gameName = gameName;
 
-        game = new Game();
+        game = new TTTGame();
         moves = new ArrayList<MoveValid>();
 
         players = new HashMap<>();
         players.put(player1, connection1);
         viewers = new HashMap<>();
+        this.player1 = player1;
 
         serverPacketQ = new ArrayBlockingQueue<>(20);
         thread = new Thread(this);
@@ -50,7 +53,8 @@ public class GameRoom implements Runnable {
         return roomPassword;
     }
 
-    public void setPlayer2(String player2) {
+    public void setPlayer2(String player2, ClientConnection connection2) {
+        players.put(player2, connection2);
         this.player2 = player2;
     }
 
@@ -67,6 +71,7 @@ public class GameRoom implements Runnable {
 
     public void removeViewer (String viewer) {
         SpectatorLeave leave = new SpectatorLeave(gameID);
+        Packet notice = new Packet("EnterGame", viewer, leave);
         viewers.get(viewer).getConnectionID().getObjectOutputStream().writeObject(notice);
         viewers.remove(viewer);
     }
@@ -82,6 +87,8 @@ public class GameRoom implements Runnable {
     }
 
     private void gameOver(char whoWon) {
+        Packet notice;
+
         GameOverOutcome gameOver = new GameOverOutcome(gameID, whoWon);
 
         notice = new Packet("GameOverOutcome", player1, gameOver);
@@ -97,14 +104,16 @@ public class GameRoom implements Runnable {
     }
 
     private void makeValidMove(MoveValid move) {
-        notice = new Packet("MoveValid", player1, moveValid);
+        Packet notice;
+
+        notice = new Packet("MoveValid", player1, move);
         serverPacket.getClientConnection().getObjectOutputStream().writeObject(notice);
 
-        notice = new Packet("MoveValid", player2, moveValid);
+        notice = new Packet("MoveValid", player2, move);
         serverPacket.getClientConnection().getObjectOutputStream().writeObject(notice);
 
         for (String viewer : viewers) {
-            notice = new Packet("MoveValid", viewer, moveValid);
+            notice = new Packet("MoveValid", viewer, move);
             serverPacket.getClientConnection().getObjectOutputStream().writeObject(notice);
         }
 
@@ -129,13 +138,13 @@ public class GameRoom implements Runnable {
     public void makeMove(MoveMade move) {
         //if invalid move
         if (!game.validMove(move.getxCoord(), move.getyCoord())) {
-            MoveInvalid moveInvalid = new MoveInvalid(gameID, game.getTurnToken(), message.getxCoord(), message.getyCoord());
-            notice = new Packet("MoveInvalid", message.getPlayer(), moveInvalid);
+            MoveInvalid moveInvalid = new MoveInvalid(gameID, game.getTurnToken(), move.getxCoord(), move.getyCoord());
+            Packet notice = new Packet("MoveInvalid", move.getPlayer(), moveInvalid);
             serverPacket.getClientConnection().getObjectOutputStream().writeObject(notice);
         }
         //otherwise make the move
         else {
-            MoveValid moveValid = new MoveValid(gameID, game.getTurnToken(), move.getxCoord(), move.getyCoord();
+            MoveValid moveValid = new MoveValid(gameID, game.getTurnToken(), move.getxCoord(), move.getyCoord());
             SQLiteQuery.getInstance().insertMoveHistory(moveValid);
             makeValidMove(moveValid);
         }
