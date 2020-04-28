@@ -6,6 +6,8 @@ import com.ExceptionHandled.GameMessages.MainMenu.ActiveGameHeader;
 import com.ExceptionHandled.GameMessages.Wrappers.Packet;
 import com.ExceptionHandled.GameServer.Game.TicTacToe;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 
@@ -18,6 +20,7 @@ public class GameRoom implements Runnable {
     private String p2;
 
     private TicTacToe ttt;
+    private List<String>spectatorListID;
 
     private BlockingQueue<ServerPacket> serverPacketQ;
     private Thread thread;
@@ -27,6 +30,8 @@ public class GameRoom implements Runnable {
         this.roomPassword = roomPassword;
         this.gameName = gameName;
         this.p1 = p1;
+
+        spectatorListID = new ArrayList<>();
 
         ttt = new TicTacToe();
 
@@ -51,6 +56,13 @@ public class GameRoom implements Runnable {
         serverPacketQ.add(sp);
     }
 
+    public void addSpectator(String id){
+        spectatorListID.add(id);
+    }
+
+    public List<String> getSpectatorListID(){
+        return spectatorListID;
+    }
 
     public ActiveGameHeader getActiveGameHeader(){
         return new ActiveGameHeader(gameID, gameName, p1, p2);

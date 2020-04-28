@@ -2,12 +2,12 @@ package com.ExceptionHandled.GameServer;
 
 import com.ExceptionHandled.GameMessages.Connection.ConnectionRequest;
 import com.ExceptionHandled.GameMessages.Game.MoveMade;
-import com.ExceptionHandled.GameMessages.Interfaces.Game;
-import com.ExceptionHandled.GameMessages.Interfaces.Login;
-import com.ExceptionHandled.GameMessages.Interfaces.MainMenu;
-import com.ExceptionHandled.GameMessages.Interfaces.UserUpdate;
+import com.ExceptionHandled.GameMessages.Interfaces.*;
 import com.ExceptionHandled.GameMessages.Login.*;
 import com.ExceptionHandled.GameMessages.MainMenu.*;
+import com.ExceptionHandled.GameMessages.Stats.GameHistoryRequest;
+import com.ExceptionHandled.GameMessages.Stats.PlayerStatsInfo;
+import com.ExceptionHandled.GameMessages.Stats.PlayerStatsRequest;
 import com.ExceptionHandled.GameMessages.UserUpdate.UserDeleteRequest;
 import com.ExceptionHandled.GameMessages.UserUpdate.UserUpdateRequest;
 import com.ExceptionHandled.GameMessages.Wrappers.Packet;
@@ -66,17 +66,35 @@ public class Server implements Runnable {
                     handleGameMessage(serverPacket);
                 }
                 else if(packet.getMessage() instanceof UserUpdate){
-                    handeUserUpdateMessage(serverPacket);
+                    handleUserUpdateMessage(serverPacket);
+                }
+                else if(packet.getMessage() instanceof Stats){
+                    handleStatsMessage(serverPacket);
                 }
 
             } catch (InterruptedException | IOException e) {
                 e.printStackTrace();
             }
         }
-
     }
 
-    private void handeUserUpdateMessage(ServerPacket serverPacket) throws IOException {
+    private void handleStatsMessage(ServerPacket serverPacket) throws IOException {
+        Packet packet = serverPacket.getPacket();
+        System.out.println("handleStatsMessage, playerID: " + packet.getPlayerID());
+        Packet response = null;
+
+        if(packet.getMessage() instanceof GameHistoryRequest){
+            GameHistoryRequest request = (GameHistoryRequest)packet.getMessage();
+            response = SQLiteQuery.getInstance().getGameHistoryDetail(packet, request.getGameId());
+        }
+        else if(packet.getMessage() instanceof PlayerStatsRequest){
+            PlayerStatsRequest playerStatsRequest = (PlayerStatsRequest)packet.getMessage();
+            response = SQLiteQuery.getInstance().getPlayerStatsInfo(packet);
+        }
+        serverPacket.getClientConnection().getObjectOutputStream().writeObject(response);
+    }
+
+    private void handleUserUpdateMessage(ServerPacket serverPacket) throws IOException {
         Packet packet = serverPacket.getPacket();
         System.out.println("handleUserUpdateMessage, playerID: " + packet.getPlayerID());
         Packet response = null;
@@ -124,7 +142,6 @@ public class Server implements Runnable {
                 }
             }
         }
-
         else if(packet.getMessage() instanceof ListActiveGamesRequest){
             List<ActiveGameHeader> gameList = new ArrayList<>();
             for(int i = 0; i < gameRoomList.size(); i++){
@@ -132,6 +149,20 @@ public class Server implements Runnable {
             }
             System.out.println("Sending list active games, size: " + gameList.size());
             response = new Packet("MainMenu", packet.getPlayerID(), new ListActiveGames(gameList));
+        }
+        //TODO: write functions for spectator to request joining game
+        else if(packet.getMessage() instanceof SpectateRequest){
+            SpectateRequest sr = (SpectateRequest)packet.getMessage();
+            String gameID = sr.getGameId();
+
+            for(GameRoom gm : gameRoomList){
+                if(gm.getGameID().equals(gameID)){
+                    gm.addSpectator(packet.getPlayerID());
+                    response = SQLiteQuery.getInstance().insertViewerToGame(packet);
+                }
+            }
+
+
         }
 
         serverPacket.getClientConnection().getObjectOutputStream().writeObject(response);
