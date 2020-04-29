@@ -19,9 +19,10 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ed5a9275-b353-4784-9717-d5e8f1700b19" name="Default Changelist" comment="builds without errors">
+    <list default="true" id="ed5a9275-b353-4784-9717-d5e8f1700b19" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameServer.iml" beforeDir="false" afterPath="$PROJECT_DIR$/GameServer.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/GameRoom.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/GameRoom.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Server.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,7 +64,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="master" />
+        <entry key="$PROJECT_DIR$" value="GameLogic" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -78,8 +79,12 @@
               <option name="branches">
                 <list>
                   <RecentBranch>
+                    <option name="branchName" value="connections" />
+                    <option name="lastUsedInstant" value="1588127926" />
+                  </RecentBranch>
+                  <RecentBranch>
                     <option name="branchName" value="GameLogic" />
-                    <option name="lastUsedInstant" value="1588045279" />
+                    <option name="lastUsedInstant" value="1588051781" />
                   </RecentBranch>
                   <RecentBranch>
                     <option name="branchName" value="master" />
@@ -128,6 +133,7 @@
       <list>
         <item itemvalue="Application.Main" />
         <item itemvalue="Application.Main" />
+        <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
   </component>
@@ -162,6 +168,7 @@
       <workItem from="1587949648891" duration="9231000" />
       <workItem from="1588044978969" duration="1648000" />
       <workItem from="1588048659135" duration="1416000" />
+      <workItem from="1588127900234" duration="1965000" />
     </task>
     <task id="LOCAL-00001" summary="builds without errors">
       <created>1588046625789</created>
@@ -212,40 +219,48 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="490" y="229" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog/0.0.1280.680@0.0.1280.680" timestamp="1588045327597" />
-    <state x="252" y="0" key="CommitChangelistDialog2" timestamp="1588049161217">
+    <state x="203" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1588128345249">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="252" y="0" key="CommitChangelistDialog2/0.0.1280.680@0.0.1280.680" timestamp="1588049161217" />
+    <state x="203" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1280.680@0.0.1280.680" timestamp="1588128345249" />
+    <state x="252" y="0" key="CommitChangelistDialog2" timestamp="1588129989691">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="252" y="0" key="CommitChangelistDialog2/0.0.1280.680@0.0.1280.680" timestamp="1588129989691" />
     <state x="421" y="97" width="878" height="654" key="FileChooserDialogImpl" timestamp="1588049606887">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="421" y="97" key="FileChooserDialogImpl/0.0.1280.680@0.0.1280.680" timestamp="1588049606887" />
     <state x="421" y="97" width="878" height="654" key="FileChooserDialogImpl/70.27.1850.1053@70.27.1850.1053" timestamp="1587535548806" />
-    <state width="1237" height="289" key="GridCell.Tab.0.bottom" timestamp="1588049694560">
+    <state width="1237" height="121" key="GridCell.Tab.0.bottom" timestamp="1588129682669">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="289" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1588049694560" />
+    <state width="1237" height="121" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1588129682669" />
     <state width="1794" height="247" key="GridCell.Tab.0.bottom/70.27.1850.1053@70.27.1850.1053" timestamp="1587535335944" />
-    <state width="1237" height="289" key="GridCell.Tab.0.center" timestamp="1588049694560">
+    <state width="1237" height="121" key="GridCell.Tab.0.center" timestamp="1588129682669">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="289" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1588049694560" />
+    <state width="1237" height="121" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1588129682669" />
     <state width="1794" height="247" key="GridCell.Tab.0.center/70.27.1850.1053@70.27.1850.1053" timestamp="1587535335941" />
-    <state width="1237" height="289" key="GridCell.Tab.0.left" timestamp="1588049694559">
+    <state width="1237" height="121" key="GridCell.Tab.0.left" timestamp="1588129682669">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="289" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1588049694559" />
+    <state width="1237" height="121" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1588129682669" />
     <state width="1794" height="247" key="GridCell.Tab.0.left/70.27.1850.1053@70.27.1850.1053" timestamp="1587535335939" />
-    <state width="1237" height="289" key="GridCell.Tab.0.right" timestamp="1588049694560">
+    <state width="1237" height="121" key="GridCell.Tab.0.right" timestamp="1588129682669">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="289" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1588049694560" />
+    <state width="1237" height="121" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1588129682669" />
     <state width="1794" height="247" key="GridCell.Tab.0.right/70.27.1850.1053@70.27.1850.1053" timestamp="1587535335942" />
     <state x="200" y="0" width="1280" height="1053" key="SettingsEditor" timestamp="1588049618048">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="200" y="0" key="SettingsEditor/0.0.1280.680@0.0.1280.680" timestamp="1588049618048" />
     <state x="359" y="27" width="1280" height="1053" key="SettingsEditor/70.27.1850.1053@70.27.1850.1053" timestamp="1587535638788" />
+    <state x="337" y="164" key="com.intellij.ide.util.TipDialog" timestamp="1588127900215">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="337" y="164" key="com.intellij.ide.util.TipDialog/0.0.1280.680@0.0.1280.680" timestamp="1588127900215" />
   </component>
   <component name="simpleUML.UMLToolWindowPlugin">
     <General>

@@ -121,7 +121,7 @@ public class Server implements Runnable {
                 String gameName = newGameRequest.getGameName();
 
                 String playerID = packet.getPlayerID();
-                GameRoom gm = new GameRoom(gameID, pw, gameName, playerID, activePlayerMapCC.get(playerID));
+                GameRoom gm = new GameRoom(gameID, pw, gameName, playerID);
                 System.out.println("New Game added");
                 gameRoomList.add(gm);
             }
@@ -133,10 +133,9 @@ public class Server implements Runnable {
             String pw = request.getGamePassword();
 
             for(GameRoom g : gameRoomList){
-
-                //TODO: Add check two players already set, can't set p2 if another request comes.
+            //TODO: Add check two players already set, can't set p2 if another request comes.
                 if(g.getGameID().equals(idRequest) && g.getRoomPassword().equals(pw)){
-                    g.setPlayer2(request.getRequestingPlayerId(), serverPacket.getClientConnection());
+                    g.setPlayer2(request.getRequestingPlayerId());
                     response = SQLiteQuery.getInstance().joinGame(packet);
                 }
             }
@@ -156,30 +155,27 @@ public class Server implements Runnable {
 
             for(GameRoom gm : gameRoomList){
                 if(gm.getGameID().equals(gameID)){
-                    gm.addViewer(packet.getPlayerID(), serverPacket.getClientConnection());
+                    Packet notice = gm.addViewer(packet.getPlayerID());
+                    activePlayerMapCC.get(notice.getPlayerID()).getObjectOutputStream().writeObject(notice);
                     response = SQLiteQuery.getInstance().insertViewerToGame(packet);
                 }
             }
-
-
         }
-
         serverPacket.getClientConnection().getObjectOutputStream().writeObject(response);
     }
 
     private void handleGameMessage(ServerPacket serverPacket) throws IOException {
         Packet packet = serverPacket.getPacket();
-        Packet notice = null;
-
         Game gameMessage = (Game)packet.getMessage();
         String gameID = gameMessage.getGameID();
 
             //find the correct gameID
             for(GameRoom gm : gameRoomList) {
                 if (gm.getGameID().equals(gameID)) {
+                    ArrayList<Packet> packets = new ArrayList<Packet>();
 
                     if (gameMessage instanceof MoveMade) {
-                        gm.makeMove((MoveMade) gameMessage);
+                        packets.addAll(gm.makeMove((MoveMade) gameMessage));
                     }
 
                     else if (gameMessage instanceof RematchRequest) {
@@ -188,8 +184,7 @@ public class Server implements Runnable {
                         if (pID.equals(gm.getPlayer1())) {
                             pID = gm.getPlayer2();
                         }
-                        notice = new Packet("RematchRequest", message.getGameID(), pID);
-                        serverPacket.getClientConnection().getObjectOutputStream().writeObject(notice);
+                        packets.add(new Packet("RematchRequest", message.getGameID(), pID));
                     }
 
                     else if (gameMessage instanceof RematchRespond) {
@@ -198,15 +193,16 @@ public class Server implements Runnable {
                         if (pID.equals(gm.getPlayer1())) {
                             pID = gm.getPlayer2();
                         }
-                        notice = new Packet("RematchRespond", message.getGameID(), pID);
-                        serverPacket.getClientConnection().getObjectOutputStream().writeObject(notice);
+                        packets.add(new Packet("RematchRespond", message.getGameID(), pID));
                     }
                     //TODO: currently can only forfeit on your turn, fix to forfeit whenever
                     else if (gameMessage instanceof ForfeitGame) {
-                        gm.gameOver();
+                        packets.addAll(gm.gameForfeit());
                     }
-                    else {
-                        gm.addToMessageQ(serverPacket);
+
+                    //send all packets
+                    for (Packet notice : packets) {
+                        activePlayerMapCC.get(notice.getPlayerID()).getObjectOutputStream().writeObject(notice);
                     }
                 }
             }
