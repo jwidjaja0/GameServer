@@ -315,7 +315,6 @@ public class SQLiteQuery {
         }
     }
 
-
     public Packet insertNewGame(Packet packet){
         String gameID = UUID.randomUUID().toString();
         String player1ID = packet.getPlayerID();

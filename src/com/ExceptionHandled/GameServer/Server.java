@@ -140,6 +140,7 @@ public class Server implements Runnable {
                 }
             }
         }
+
         else if(packet.getMessage() instanceof ListActiveGamesRequest){
             List<ActiveGameHeader> gameList = new ArrayList<>();
             for(int i = 0; i < gameRoomList.size(); i++){
@@ -148,7 +149,7 @@ public class Server implements Runnable {
             System.out.println("Sending list active games, size: " + gameList.size());
             response = new Packet("MainMenu", packet.getPlayerID(), new ListActiveGames(gameList));
         }
-        //TODO: write functions for spectator to request joining game
+
         else if(packet.getMessage() instanceof SpectateRequest){
             SpectateRequest sr = (SpectateRequest)packet.getMessage();
             String gameID = sr.getGameId();
@@ -161,6 +162,18 @@ public class Server implements Runnable {
                 }
             }
         }
+
+        else if(packet.getMessage() instanceof SpectatorLeave){
+            SpectatorLeave sl = (SpectatorLeave)packet.getMessage();
+            String gameID = sl.getGameID();
+
+            for(GameRoom gm : gameRoomList){
+                if(gm.getGameID().equals(gameID)){
+                    gm.removeViewer(packet.getPlayerID());
+                }
+            }
+        }
+
         serverPacket.getClientConnection().getObjectOutputStream().writeObject(response);
     }
 

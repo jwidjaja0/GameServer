@@ -60,14 +60,14 @@ public class GameRoom {
 
     public Packet addViewer (String viewer) {
         viewers.add(viewer);
-        SpectateSuccess join = new SpectateSuccess (gameID, gameName, player1, player2, moves);
-        return new Packet("EnterGame", viewer, join);
+        String p1Name = SQLiteQuery.getInstance().getUerName(player1);
+        String p2Name = SQLiteQuery.getInstance().getUerName(player2);
+        SpectateSuccess join = new SpectateSuccess (gameID, gameName, p1Name, p2Name, moves);
+        return new Packet("SpectateSuccess", viewer, join);
     }
 
-    public Packet removeViewer (String viewer)  {
-        SpectatorLeave leave = new SpectatorLeave(gameID);
+    public void removeViewer (String viewer)  {
         viewers.remove(viewer);
-        return new Packet("EnterGame", viewer, leave);
     }
 
     public ActiveGameHeader getActiveGameHeader(){
@@ -83,16 +83,21 @@ public class GameRoom {
     }
 
     private ArrayList<Packet> gameOver(String whoWon) {
-        ArrayList<Packet> packets = new ArrayList<Packet>();
+        int winner;
+        if (game.getWhoseTurn()) winner = 2;
+        else winner = 1;
+        SQLiteQuery.getInstance().updateGameOver(gameID, winner);
 
+
+        ArrayList<Packet> packets = new ArrayList<Packet>();
         GameOverOutcome gameOver = new GameOverOutcome(gameID, whoWon);
 
         packets.add(new Packet("GameOverOutcome", player1, gameOver));
         packets.add(new Packet("GameOverOutcome", player2, gameOver));
-
         for (String viewer : viewers) {
             packets.add(new Packet("GameOverOutcome", viewer, gameOver));
         }
+
         return packets;
     }
 
