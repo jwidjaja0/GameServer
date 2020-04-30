@@ -315,6 +315,20 @@ public class SQLiteQuery {
         }
     }
 
+    public void updateGameOver(String gameID, int gameStatus){
+        //-1: incomplete, 0: draw, 1: player1Won, 2:player2Won
+        try {
+            PreparedStatement prep = connection.prepareStatement("UPDATE gameList SET gameStatus = ? WHERE gameID = ?");
+            prep.setString(2, gameID);
+            prep.setInt(1,gameStatus);
+            prep.execute();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
 
     public Packet insertNewGame(Packet packet){
         String gameID = UUID.randomUUID().toString();
