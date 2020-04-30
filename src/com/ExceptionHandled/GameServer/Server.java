@@ -106,7 +106,7 @@ public class Server implements Runnable {
         serverPacket.getClientConnection().getObjectOutputStream().writeObject(response);
     }
 
-    private void handleMainMenuMessage(ServerPacket serverPacket) throws IOException {
+    private void handleMainMenuMessage(ServerPacket serverPacket) throws IOException, InterruptedException {
         Packet packet = serverPacket.getPacket();
         Packet response = null;
 
@@ -124,6 +124,13 @@ public class Server implements Runnable {
                 GameRoom gm = new GameRoom(gameID, pw, gameName, playerID);
                 System.out.println("New Game added");
                 gameRoomList.add(gm);
+
+                if (newGameRequest.getOpponent().equalsIgnoreCase("AI")) {
+                    String aiID = "a1234bcd";
+                    JoinGameRequest aiJoin = new JoinGameRequest(gameID, pw, aiID);
+                    Packet sPacket = new Packet("JoinGameRequest", aiID, aiJoin);
+                    messageQueue.put(new ServerPacket(serverPacket.getClientConnection(), sPacket));
+                }
             }
         }
 
