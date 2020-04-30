@@ -78,7 +78,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$USER_HOME$/JavaLib/4BLibrary/sqlite-jdbc-3.30.1.jar!/" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../GameMessages/out/artifacts/GameMessages_jar/GameMessages.jar!/" />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -117,7 +117,7 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="ed5a9275-b353-4784-9717-d5e8f1700b19" name="Default Changelist" comment="" />
+      <changelist id="aefb3591-25b9-418d-8adf-7b35b803d267" name="Default Changelist" comment="Merge branch 'master' into connections&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml" />
       <created>1585630159474</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -142,6 +142,7 @@
       <workItem from="1587869457364" duration="2656000" />
       <workItem from="1587949648891" duration="9231000" />
       <workItem from="1588036048876" duration="7148000" />
+      <workItem from="1588209969773" duration="349000" />
     </task>
     <servers />
   </component>
