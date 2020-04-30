@@ -133,10 +133,15 @@ public class Server implements Runnable {
             String pw = request.getGamePassword();
 
             for(GameRoom g : gameRoomList){
-            //TODO: Add check two players already set, can't set p2 if another request comes.
                 if(g.getGameID().equals(idRequest) && g.getRoomPassword().equals(pw)){
-                    g.setPlayer2(request.getRequestingPlayerId());
-                    response = SQLiteQuery.getInstance().joinGame(packet);
+                    if (g.getPlayer2() != null) {
+                        g.setPlayer2(request.getRequestingPlayerId());
+                        response = SQLiteQuery.getInstance().joinGame(packet);
+                    }
+                    else {
+                        Packet notice = new Packet ("JoinGameFail", request.getRequestingPlayerId(), new JoinGameFail(idRequest));
+                        serverPacket.getClientConnection().getObjectOutputStream().writeObject(notice);
+                    }
                 }
             }
         }

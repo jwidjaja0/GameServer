@@ -19,9 +19,10 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="aefb3591-25b9-418d-8adf-7b35b803d267" name="Default Changelist" comment="Merge branch 'master' into connections&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml">
+    <list default="true" id="aefb3591-25b9-418d-8adf-7b35b803d267" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/GameRoom.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/GameRoom.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TicTacToe.db" beforeDir="false" afterPath="$PROJECT_DIR$/TicTacToe.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Server.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -131,8 +132,16 @@
       <workItem from="1587949648891" duration="9231000" />
       <workItem from="1588036048876" duration="7148000" />
       <workItem from="1588209969773" duration="3258000" />
-      <workItem from="1588214692120" duration="1430000" />
+      <workItem from="1588214692120" duration="4082000" />
     </task>
+    <task id="LOCAL-00001" summary="updated connections">
+      <created>1588216562932</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1588216562932</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -278,25 +287,43 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/GameServer" />
     </ignored-roots>
+    <MESSAGE value="updated connections" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated connections" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="252" y="0" key="CommitChangelistDialog2" timestamp="1588215162299">
+    <state x="252" y="0" key="CommitChangelistDialog2" timestamp="1588216560570">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="252" y="0" key="CommitChangelistDialog2/0.0.1280.680@0.0.1280.680" timestamp="1588215162299" />
+    <state x="252" y="0" key="CommitChangelistDialog2/0.0.1280.680@0.0.1280.680" timestamp="1588216560570" />
     <state x="421" y="97" width="878" height="654" key="FileChooserDialogImpl" timestamp="1588215158561" />
     <state x="421" y="97" key="FileChooserDialogImpl/0.0.1280.680@0.0.1280.680" timestamp="1588215158561" />
     <state x="421" y="97" width="878" height="654" key="FileChooserDialogImpl/70.27.1850.1053@70.27.1850.1053" timestamp="1588215158561" />
-    <state width="1794" height="247" key="GridCell.Tab.0.bottom" timestamp="1588215158561" />
+    <state width="1237" height="229" key="GridCell.Tab.0.bottom" timestamp="1588217719697">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1237" height="229" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1588217719697" />
     <state width="1794" height="247" key="GridCell.Tab.0.bottom/70.27.1850.1053@70.27.1850.1053" timestamp="1588215158561" />
-    <state width="1794" height="247" key="GridCell.Tab.0.center" timestamp="1588215158561" />
+    <state width="1237" height="229" key="GridCell.Tab.0.center" timestamp="1588217719697">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1237" height="229" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1588217719697" />
     <state width="1794" height="247" key="GridCell.Tab.0.center/70.27.1850.1053@70.27.1850.1053" timestamp="1588215158561" />
-    <state width="1794" height="247" key="GridCell.Tab.0.left" timestamp="1588215158561" />
+    <state width="1237" height="229" key="GridCell.Tab.0.left" timestamp="1588217719697">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1237" height="229" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1588217719697" />
     <state width="1794" height="247" key="GridCell.Tab.0.left/70.27.1850.1053@70.27.1850.1053" timestamp="1588215158561" />
-    <state width="1794" height="247" key="GridCell.Tab.0.right" timestamp="1588215158561" />
+    <state width="1237" height="229" key="GridCell.Tab.0.right" timestamp="1588217719697">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1237" height="229" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1588217719697" />
     <state width="1794" height="247" key="GridCell.Tab.0.right/70.27.1850.1053@70.27.1850.1053" timestamp="1588215158561" />
     <state x="359" y="27" width="1280" height="1053" key="SettingsEditor" timestamp="1588215158561" />
     <state x="359" y="27" width="1280" height="1053" key="SettingsEditor/70.27.1850.1053@70.27.1850.1053" timestamp="1588215158561" />
+    <state x="233" y="62" key="Vcs.Push.Dialog.v2" timestamp="1588216571863">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="233" y="62" key="Vcs.Push.Dialog.v2/0.0.1280.680@0.0.1280.680" timestamp="1588216571863" />
   </component>
   <component name="simpleUML.UMLToolWindowPlugin">
     <General>
