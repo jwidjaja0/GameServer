@@ -19,12 +19,11 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ed5a9275-b353-4784-9717-d5e8f1700b19" name="Default Changelist" comment="">
+    <list default="true" id="aefb3591-25b9-418d-8adf-7b35b803d267" name="Default Changelist" comment="Merge branch 'master' into connections&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Database/SQLiteQuery.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Database/SQLiteQuery.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/GameRoom.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/GameRoom.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Server.java" afterDir="false" />
     </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -63,42 +62,8 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_BRANCH_BY_REPOSITORY">
-      <map>
-        <entry key="$PROJECT_DIR$" value="GameLogic" />
-      </map>
-    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="ROOT_SYNC" value="SYNC" />
-  </component>
-  <component name="GitToolBoxStore">
-    <option name="recentBranches">
-      <RecentBranches>
-        <option name="branchesForRepo">
-          <list>
-            <RecentBranchesForRepo>
-              <option name="branches">
-                <list>
-                  <RecentBranch>
-                    <option name="branchName" value="connections" />
-                    <option name="lastUsedInstant" value="1588127926" />
-                  </RecentBranch>
-                  <RecentBranch>
-                    <option name="branchName" value="GameLogic" />
-                    <option name="lastUsedInstant" value="1588051781" />
-                  </RecentBranch>
-                  <RecentBranch>
-                    <option name="branchName" value="master" />
-                    <option name="lastUsedInstant" value="1588045262" />
-                  </RecentBranch>
-                </list>
-              </option>
-              <option name="repositoryRootUrl" value="file://$PROJECT_DIR$" />
-            </RecentBranchesForRepo>
-          </list>
-        </option>
-      </RecentBranches>
-    </option>
   </component>
   <component name="ProjectId" id="1ZsaGSXhdwZoYhkDHVXYnxdD3JR" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -114,11 +79,23 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../sqlite-jdbc-3.30.1.jar!/" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../GameMessages/out/artifacts/GameMessages_jar/GameMessages.jar!/" />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="application.passwordSafe" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
   </component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true">
@@ -133,8 +110,6 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.Main" />
-        <item itemvalue="Application.Main" />
-        <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
   </component>
@@ -143,7 +118,7 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="ed5a9275-b353-4784-9717-d5e8f1700b19" name="Default Changelist" comment="" />
+      <changelist id="aefb3591-25b9-418d-8adf-7b35b803d267" name="Default Changelist" comment="Merge branch 'master' into connections&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml" />
       <created>1585630159474</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -167,26 +142,9 @@
       <workItem from="1587533982017" duration="2627000" />
       <workItem from="1587869457364" duration="2656000" />
       <workItem from="1587949648891" duration="9231000" />
-      <workItem from="1588044978969" duration="1648000" />
-      <workItem from="1588048659135" duration="1416000" />
-      <workItem from="1588127900234" duration="3273000" />
-      <workItem from="1588210637212" duration="2316000" />
+      <workItem from="1588036048876" duration="7148000" />
+      <workItem from="1588209969773" duration="3258000" />
     </task>
-    <task id="LOCAL-00001" summary="builds without errors">
-      <created>1588046625789</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1588046625789</updated>
-    </task>
-    <task id="LOCAL-00002" summary="moved the connections out of gameroom so only server handles client connections">
-      <created>1588130068460</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1588130068460</updated>
-    </task>
-    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -195,6 +153,108 @@
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
+        <entry key="1">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="range">
+                    <value>
+                      <list>
+                        <option value="HEAD..origin/connections" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+        <entry key="2">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="range">
+                    <value>
+                      <list>
+                        <option value="HEAD..origin/connections" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+        <entry key="3">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="range">
+                    <value>
+                      <list>
+                        <option value="HEAD..origin/master" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+        <entry key="4">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="range">
+                    <value>
+                      <list>
+                        <option value="HEAD..origin/connections" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+        <entry key="5">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="range">
+                    <value>
+                      <list>
+                        <option value="HEAD..origin/connections" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+        <entry key="6">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="range">
+                    <value>
+                      <list>
+                        <option value="HEAD..origin/connections" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
         <entry key="MAIN">
           <value>
             <State>
@@ -215,115 +275,35 @@
         </entry>
       </map>
     </option>
+    <option name="OPEN_TABS">
+      <set>
+        <option value="1" />
+        <option value="2" />
+        <option value="3" />
+        <option value="4" />
+        <option value="5" />
+        <option value="6" />
+      </set>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <ignored-roots>
       <path value="$PROJECT_DIR$/GameServer" />
     </ignored-roots>
-    <MESSAGE value="builds without errors" />
-    <MESSAGE value="moved the connections out of gameroom so only server handles client connections" />
-    <option name="LAST_COMMIT_MESSAGE" value="moved the connections out of gameroom so only server handles client connections" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="490" y="229" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog" timestamp="1588045327597">
-      <screen x="0" y="0" width="1280" height="680" />
-    </state>
-    <state x="490" y="229" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog/0.0.1280.680@0.0.1280.680" timestamp="1588045327597" />
-    <state x="203" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1588128345249">
-      <screen x="0" y="0" width="1280" height="680" />
-    </state>
-    <state x="203" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1280.680@0.0.1280.680" timestamp="1588128345249" />
-    <state x="252" y="0" key="CommitChangelistDialog2" timestamp="1588213206879">
-      <screen x="0" y="0" width="1280" height="680" />
-    </state>
-    <state x="252" y="0" key="CommitChangelistDialog2/0.0.1280.680@0.0.1280.680" timestamp="1588213206879" />
-    <state x="421" y="97" width="878" height="654" key="FileChooserDialogImpl" timestamp="1588049606887">
-      <screen x="0" y="0" width="1280" height="680" />
-    </state>
-    <state x="421" y="97" key="FileChooserDialogImpl/0.0.1280.680@0.0.1280.680" timestamp="1588049606887" />
-    <state x="421" y="97" width="878" height="654" key="FileChooserDialogImpl/70.27.1850.1053@70.27.1850.1053" timestamp="1587535548806" />
-    <state width="1237" height="121" key="GridCell.Tab.0.bottom" timestamp="1588142164809">
-      <screen x="0" y="0" width="1280" height="680" />
-    </state>
-    <state width="1237" height="121" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1588142164809" />
-    <state width="1794" height="247" key="GridCell.Tab.0.bottom/70.27.1850.1053@70.27.1850.1053" timestamp="1587535335944" />
-    <state width="1237" height="121" key="GridCell.Tab.0.center" timestamp="1588142164808">
-      <screen x="0" y="0" width="1280" height="680" />
-    </state>
-    <state width="1237" height="121" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1588142164808" />
-    <state width="1794" height="247" key="GridCell.Tab.0.center/70.27.1850.1053@70.27.1850.1053" timestamp="1587535335941" />
-    <state width="1237" height="121" key="GridCell.Tab.0.left" timestamp="1588142164808">
-      <screen x="0" y="0" width="1280" height="680" />
-    </state>
-    <state width="1237" height="121" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1588142164808" />
-    <state width="1794" height="247" key="GridCell.Tab.0.left/70.27.1850.1053@70.27.1850.1053" timestamp="1587535335939" />
-    <state width="1237" height="121" key="GridCell.Tab.0.right" timestamp="1588142164808">
-      <screen x="0" y="0" width="1280" height="680" />
-    </state>
-    <state width="1237" height="121" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1588142164808" />
-    <state width="1794" height="247" key="GridCell.Tab.0.right/70.27.1850.1053@70.27.1850.1053" timestamp="1587535335942" />
-    <state x="200" y="0" width="1280" height="1053" key="SettingsEditor" timestamp="1588049618048">
-      <screen x="0" y="0" width="1280" height="680" />
-    </state>
-    <state x="200" y="0" key="SettingsEditor/0.0.1280.680@0.0.1280.680" timestamp="1588049618048" />
-    <state x="359" y="27" width="1280" height="1053" key="SettingsEditor/70.27.1850.1053@70.27.1850.1053" timestamp="1587535638788" />
-    <state x="233" y="62" key="Vcs.Push.Dialog.v2" timestamp="1588130072854">
-      <screen x="0" y="0" width="1280" height="680" />
-    </state>
-    <state x="233" y="62" key="Vcs.Push.Dialog.v2/0.0.1280.680@0.0.1280.680" timestamp="1588130072854" />
-    <state x="337" y="164" key="com.intellij.ide.util.TipDialog" timestamp="1588210637370">
-      <screen x="0" y="0" width="1280" height="680" />
-    </state>
-    <state x="337" y="164" key="com.intellij.ide.util.TipDialog/0.0.1280.680@0.0.1280.680" timestamp="1588210637370" />
-  </component>
-  <component name="simpleUML.UMLToolWindowPlugin">
-    <General>
-      <option name="birdViewUpdateDelay" value="2000" />
-      <option name="defaultFileLocation" value="file://$PROJECT_DIR$/.." />
-    </General>
-    <Classdiagram>
-      <option name="diagramTitleFont" value="SansSerif,1,12" />
-      <option name="diagramFont" value="SansSerif,0,10" />
-      <option name="defaultFieldsExpanded" value="false" />
-      <option name="defaultContructorsExpanded" value="false" />
-      <option name="defaultMethodsExpanded" value="false" />
-      <option name="showParameters" value="true" />
-      <option name="showTooltip" value="true" />
-      <option name="showReturnValues" value="true" />
-      <option name="longModifier" value="true" />
-      <option name="implementsBehaviour" value="1" />
-      <option name="extendsBehaviour" value="1" />
-      <option name="compartmentBehaviour" value="1" />
-      <option name="interfaceBackgroundColor" value="-6494306" />
-      <option name="abstractClassBackgroundColor" value="-1580132" />
-      <option name="classBackgroundColor" value="-6508057" />
-      <option name="diagramBackgroundColor" value="-1" />
-      <option name="useAntialiasedConnectors" value="true" />
-      <option name="quickSourceLinkColor" value="-16776961" />
-      <option name="quickDiagramLinkColor" value="-8454144" />
-      <option name="drawDecorations" value="false" />
-      <option name="hideFieldList" value="" />
-      <option name="showFieldList" value="" />
-      <option name="hideConstructorList" value="" />
-      <option name="showConstructorList" value="" />
-      <option name="hideMethodList" value="" />
-      <option name="showMethodList" value="" />
-      <option name="minimumFigureSize" value="0,0" />
-    </Classdiagram>
-    <Dependencydiagram>
-      <option name="diagramTitleFont" value="SansSerif,1,12" />
-      <option name="diagramFont" value="SansSerif,0,10" />
-      <option name="diagramBackgroundColor" value="-1" />
-      <option name="useAntialiasedConnectors" value="true" />
-      <option name="packageNameCompressionLevel" value="0" />
-    </Dependencydiagram>
-    <Packagediagram>
-      <option name="diagramTitleFont" value="SansSerif,0,12" />
-      <option name="diagramFont" value="SansSerif,0,10" />
-      <option name="packageBackgroundColor" value="-4144960" />
-      <option name="diagramBackgroundColor" value="-1" />
-      <option name="useAntialiasedConnectors" value="true" />
-      <option name="packageNameCompressionLevel" value="2" />
-    </Packagediagram>
+    <state x="421" y="97" width="878" height="654" key="FileChooserDialogImpl" />
+    <state x="421" y="97" key="FileChooserDialogImpl/0.0.1280.680@0.0.1280.680" />
+    <state x="421" y="97" width="878" height="654" key="FileChooserDialogImpl/70.27.1850.1053@70.27.1850.1053" />
+    <state width="1794" height="247" key="GridCell.Tab.0.bottom" />
+    <state width="1794" height="247" key="GridCell.Tab.0.bottom/70.27.1850.1053@70.27.1850.1053" />
+    <state width="1794" height="247" key="GridCell.Tab.0.center" />
+    <state width="1794" height="247" key="GridCell.Tab.0.center/70.27.1850.1053@70.27.1850.1053" />
+    <state width="1794" height="247" key="GridCell.Tab.0.left" />
+    <state width="1794" height="247" key="GridCell.Tab.0.left/70.27.1850.1053@70.27.1850.1053" />
+    <state width="1794" height="247" key="GridCell.Tab.0.right" />
+    <state width="1794" height="247" key="GridCell.Tab.0.right/70.27.1850.1053@70.27.1850.1053" />
+    <state x="359" y="27" width="1280" height="1053" key="SettingsEditor" />
+    <state x="359" y="27" width="1280" height="1053" key="SettingsEditor/70.27.1850.1053@70.27.1850.1053" />
   </component>
 </project>
