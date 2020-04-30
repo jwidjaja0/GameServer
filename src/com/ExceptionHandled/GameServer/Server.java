@@ -135,7 +135,10 @@ public class Server implements Runnable {
             for(GameRoom g : gameRoomList){
                 if(g.getGameID().equals(idRequest) && g.getRoomPassword().equals(pw)){
                     if (g.getPlayer2() != null) {
-                        g.setPlayer2(request.getRequestingPlayerId());
+                        ArrayList<Packet> packets = g.setPlayer2(request.getRequestingPlayerId());
+                        for (Packet notice : packets) {
+                            activePlayerMapCC.get(notice.getPlayerID()).getObjectOutputStream().writeObject(notice);
+                        }
                         response = SQLiteQuery.getInstance().joinGame(packet);
                     }
                     else {

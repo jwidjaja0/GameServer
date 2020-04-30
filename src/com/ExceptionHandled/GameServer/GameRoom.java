@@ -52,8 +52,16 @@ public class GameRoom {
         return player2;
     }
 
-    public void setPlayer2(String player2) {
+    public ArrayList<Packet> setPlayer2(String player2) {
         this.player2 = player2;
+
+        PlayerJoined joined = new PlayerJoined(gameID, SQLiteQuery.getInstance().getUsername(player2), gameName);
+        JoinGameSuccess join = new JoinGameSuccess(gameID, SQLiteQuery.getInstance().getUsername(player1), gameName, moves);
+
+        ArrayList<Packet> packets = new ArrayList<Packet>();
+        packets.add(new Packet ("PlayerJoined", player1, joined));
+        packets.add(new Packet("JoinGameSuccess", player2, join));
+        return packets;
     }
 
     public Packet addViewer (String viewer) {
