@@ -317,10 +317,14 @@ public class SQLiteQuery {
 
     public void updateGameOver(String gameID, int gameStatus){
         //-1: incomplete, 0: draw, 1: player1Won, 2:player2Won
+        java.util.Date endDate = new java.util.Date();
+        java.sql.Date date2 = new Date(endDate.getTime());
+
         try {
-            PreparedStatement prep = connection.prepareStatement("UPDATE gameList SET gameStatus = ? WHERE gameID = ?");
-            prep.setString(2, gameID);
+            PreparedStatement prep = connection.prepareStatement("UPDATE gameList SET gameStatus = ?, endTime = ? WHERE gameID = ?");
+            prep.setString(3, gameID);
             prep.setInt(1,gameStatus);
+            prep.setDate(2,date2);
             prep.execute();
 
         } catch (SQLException e) {
