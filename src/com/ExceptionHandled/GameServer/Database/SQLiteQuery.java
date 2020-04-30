@@ -315,10 +315,46 @@ public class SQLiteQuery {
         }
     }
 
+    public void updateGameOver(String gameID, int gameStatus){
+        //-1: incomplete, 0: draw, 1: player1Won, 2:player2Won
+        java.util.Date endDate = new java.util.Date();
+        java.sql.Date date2 = new Date(endDate.getTime());
+
+        try {
+            PreparedStatement prep = connection.prepareStatement("UPDATE gameList SET gameStatus = ?, endTime = ? WHERE gameID = ?");
+            prep.setString(3, gameID);
+            prep.setInt(1,gameStatus);
+            prep.setDate(2,date2);
+            prep.execute();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public String getUsername(String userID){
+        try {
+            PreparedStatement prep = connection.prepareStatement("SELECT username FROM playerInfo where playerID = ?");
+            prep.setString(1, userID);
+            ResultSet rs = prep.executeQuery();
+
+            String username = "";
+            while(rs.next()){
+                username = rs.getString(1);
+            }
+
+            return username;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
     public Packet insertNewGame(Packet packet){
         String gameID = UUID.randomUUID().toString();
         String player1ID = packet.getPlayerID();
+        String player2Type = "";
 
         NewGameRequest request = (NewGameRequest)packet.getMessage();
 
@@ -329,6 +365,7 @@ public class SQLiteQuery {
             prep.setString(3,player1ID);
             if(request.getOpponent().equals("Ai")){
                 prep.setString(4,"Ai");
+                player2Type = "Ai";
             }
             else{
                 prep.setString(4, "");
@@ -336,7 +373,7 @@ public class SQLiteQuery {
             prep.setString(5, request.getGameName());
             prep.execute();
 
-            return new Packet("MainMenu", player1ID, new NewGameSuccess(gameID, request.getGameName()));
+            return new Packet("MainMenu", player1ID, new NewGameSuccess(gameID, request.getGameName(), player2Type));
         }
         catch (SQLException e) {
             e.printStackTrace();
