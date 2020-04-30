@@ -24,8 +24,6 @@ public class GameRoom {
     private TTTGame game;
     private ArrayList<MoveValid> moves;
 
-    private Thread thread;
-
     public GameRoom(String gameID, String roomPassword, String gameName, String player1) {
         this.gameID = gameID;
         this.roomPassword = roomPassword;
@@ -60,8 +58,8 @@ public class GameRoom {
 
     public Packet addViewer (String viewer) {
         viewers.add(viewer);
-        String p1Name = SQLiteQuery.getInstance().getUerName(player1);
-        String p2Name = SQLiteQuery.getInstance().getUerName(player2);
+        String p1Name = SQLiteQuery.getInstance().getUsername(player1);
+        String p2Name = SQLiteQuery.getInstance().getUsername(player2);
         SpectateSuccess join = new SpectateSuccess (gameID, gameName, p1Name, p2Name, moves);
         return new Packet("SpectateSuccess", viewer, join);
     }
