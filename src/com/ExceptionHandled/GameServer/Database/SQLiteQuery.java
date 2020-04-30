@@ -333,6 +333,23 @@ public class SQLiteQuery {
 
     }
 
+    public String getUsername(String userID){
+        try {
+            PreparedStatement prep = connection.prepareStatement("SELECT username FROM playerInfo where playerID = ?");
+            prep.setString(1, userID);
+            ResultSet rs = prep.executeQuery();
+
+            String username = "";
+            while(rs.next()){
+                username = rs.getString(1);
+            }
+
+            return username;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
     public Packet insertNewGame(Packet packet){
         String gameID = UUID.randomUUID().toString();
