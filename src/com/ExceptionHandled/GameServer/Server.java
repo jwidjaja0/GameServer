@@ -109,6 +109,7 @@ public class Server implements Runnable {
     private void handleMainMenuMessage(ServerPacket serverPacket) throws IOException, InterruptedException {
         Packet packet = serverPacket.getPacket();
         Packet response = null;
+        String playerID = packet.getPlayerID();
 
         if(packet.getMessage() instanceof NewGameRequest){
             NewGameRequest newGameRequest = (NewGameRequest)packet.getMessage();
@@ -120,14 +121,13 @@ public class Server implements Runnable {
                 String pw = newGameRequest.getGamePassword();
                 String gameName = newGameRequest.getGameName();
 
-                String playerID = packet.getPlayerID();
                 GameRoom gm = new GameRoom(gameID, pw, gameName, playerID);
                 System.out.println("New Game added");
                 gameRoomList.add(gm);
 
                 if (newGameRequest.getOpponent().equalsIgnoreCase("AI")) {
                     String aiID = "a1234bcd";
-                    JoinGameRequest aiJoin = new JoinGameRequest(gameID, pw, aiID);
+                    JoinGameRequest aiJoin = new JoinGameRequest(gameID, pw);
                     Packet sPacket = new Packet("JoinGameRequest", aiID, aiJoin);
                     messageQueue.put(new ServerPacket(serverPacket.getClientConnection(), sPacket));
                 }
@@ -138,18 +138,21 @@ public class Server implements Runnable {
             JoinGameRequest request = (JoinGameRequest)packet.getMessage();
             String idRequest = request.getGameId();
             String pw = request.getGamePassword();
+            System.out.println("received joinGameRequest");
 
             for(GameRoom g : gameRoomList){
-                if(g.getGameID().equals(idRequest) && g.getRoomPassword().equals(pw)){
-                    if (g.getPlayer2() != null) {
-                        ArrayList<Packet> packets = g.setPlayer2(request.getRequestingPlayerId());
+                //TODO: removed password check, reimplement to next line when fixed
+                if(g.getGameID().equals(idRequest)){
+                    if (g.getPlayer2() == null) {
+                        ArrayList<Packet> packets = g.setPlayer2(playerID);
                         for (Packet notice : packets) {
+                            System.out.println("sending to player");
                             activePlayerMapCC.get(notice.getPlayerID()).getObjectOutputStream().writeObject(notice);
                         }
                         response = SQLiteQuery.getInstance().joinGame(packet);
                     }
                     else {
-                        Packet notice = new Packet ("JoinGameFail", request.getRequestingPlayerId(), new JoinGameFail(idRequest));
+                        Packet notice = new Packet ("JoinGameFail", playerID, new JoinGameFail(idRequest));
                         serverPacket.getClientConnection().getObjectOutputStream().writeObject(notice);
                     }
                 }
