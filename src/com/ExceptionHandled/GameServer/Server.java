@@ -203,9 +203,10 @@ public class Server implements Runnable {
             //find the correct gameID
             for(GameRoom gm : gameRoomList) {
                 if (gm.getGameID().equals(gameID)) {
-                    ArrayList<Packet> packets = new ArrayList<Packet>();
+                    ArrayList<Packet> packets = new ArrayList<Packet>(); //to send back
 
                     if (gameMessage instanceof MoveMade) {
+                        System.out.println("MoveMade, setting packet back");
                         packets.addAll(gm.makeMove((MoveMade) gameMessage));
                     }
 

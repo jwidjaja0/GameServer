@@ -61,6 +61,8 @@ public class GameRoom {
         ArrayList<Packet> packets = new ArrayList<Packet>();
         packets.add(new Packet ("PlayerJoined", player1, joined));
         packets.add(new Packet("JoinGameSuccess", player2, join));
+        packets.add(new Packet("WhoseTurn", player1, new WhoseTurn(gameID, "x")));
+        packets.add(new Packet("WhoseTurn", player2, new WhoseTurn(gameID, "x")));
         return packets;
     }
 
