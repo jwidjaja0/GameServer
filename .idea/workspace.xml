@@ -19,13 +19,10 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="aefb3591-25b9-418d-8adf-7b35b803d267" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="c446b26e-0aa8-4765-b240-c4f7869b9537" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TicTacToe.db" beforeDir="false" afterPath="$PROJECT_DIR$/TicTacToe.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Server.java" afterDir="false" />
     </list>
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -86,18 +83,6 @@
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="application.passwordSafe" />
-  </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
   </component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true">
@@ -324,27 +309,39 @@
     <option name="LAST_COMMIT_MESSAGE" value="fixed packets for player2 joining the game" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="252" y="0" key="CommitChangelistDialog2" />
-    <state x="252" y="0" key="CommitChangelistDialog2/0.0.1280.680@0.0.1280.680" />
-    <state x="421" y="97" width="878" height="654" key="FileChooserDialogImpl" />
-    <state x="421" y="97" key="FileChooserDialogImpl/0.0.1280.680@0.0.1280.680" />
-    <state x="421" y="97" width="878" height="654" key="FileChooserDialogImpl/70.27.1850.1053@70.27.1850.1053" />
-    <state width="1237" height="480" key="GridCell.Tab.0.bottom" />
-    <state width="1237" height="480" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" />
-    <state width="1794" height="247" key="GridCell.Tab.0.bottom/70.27.1850.1053@70.27.1850.1053" />
-    <state width="1237" height="480" key="GridCell.Tab.0.center" />
-    <state width="1237" height="480" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" />
-    <state width="1794" height="247" key="GridCell.Tab.0.center/70.27.1850.1053@70.27.1850.1053" />
-    <state width="1237" height="480" key="GridCell.Tab.0.left" />
-    <state width="1237" height="480" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" />
-    <state width="1794" height="247" key="GridCell.Tab.0.left/70.27.1850.1053@70.27.1850.1053" />
-    <state width="1237" height="480" key="GridCell.Tab.0.right" />
-    <state width="1237" height="480" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" />
-    <state width="1794" height="247" key="GridCell.Tab.0.right/70.27.1850.1053@70.27.1850.1053" />
-    <state x="359" y="27" width="1280" height="1053" key="SettingsEditor" />
-    <state x="359" y="27" width="1280" height="1053" key="SettingsEditor/70.27.1850.1053@70.27.1850.1053" />
-    <state x="233" y="62" key="Vcs.Push.Dialog.v2" />
-    <state x="233" y="62" key="Vcs.Push.Dialog.v2/0.0.1280.680@0.0.1280.680" />
+    <state x="252" y="0" key="CommitChangelistDialog2" timestamp="1588458486617" />
+    <state x="252" y="0" key="CommitChangelistDialog2/0.0.1280.680@0.0.1280.680" timestamp="1588458486617" />
+    <state x="421" y="97" width="878" height="654" key="FileChooserDialogImpl" timestamp="1588458486617" />
+    <state x="421" y="97" key="FileChooserDialogImpl/0.0.1280.680@0.0.1280.680" timestamp="1588458486617" />
+    <state x="421" y="97" width="878" height="654" key="FileChooserDialogImpl/70.27.1850.1053@70.27.1850.1053" timestamp="1588458486617" />
+    <state width="1877" height="211" key="GridCell.Tab.0.bottom" timestamp="1588458959351">
+      <screen x="-1920" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1877" height="211" key="GridCell.Tab.0.bottom/-1920.0.1920.1080/0.0.2560.1440@-1920.0.1920.1080" timestamp="1588458959351" />
+    <state width="1237" height="480" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1588458486617" />
+    <state width="1794" height="247" key="GridCell.Tab.0.bottom/70.27.1850.1053@70.27.1850.1053" timestamp="1588458486617" />
+    <state width="1877" height="211" key="GridCell.Tab.0.center" timestamp="1588458959351">
+      <screen x="-1920" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1877" height="211" key="GridCell.Tab.0.center/-1920.0.1920.1080/0.0.2560.1440@-1920.0.1920.1080" timestamp="1588458959351" />
+    <state width="1237" height="480" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1588458486617" />
+    <state width="1794" height="247" key="GridCell.Tab.0.center/70.27.1850.1053@70.27.1850.1053" timestamp="1588458486617" />
+    <state width="1877" height="211" key="GridCell.Tab.0.left" timestamp="1588458959351">
+      <screen x="-1920" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1877" height="211" key="GridCell.Tab.0.left/-1920.0.1920.1080/0.0.2560.1440@-1920.0.1920.1080" timestamp="1588458959351" />
+    <state width="1237" height="480" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1588458486617" />
+    <state width="1794" height="247" key="GridCell.Tab.0.left/70.27.1850.1053@70.27.1850.1053" timestamp="1588458486617" />
+    <state width="1877" height="211" key="GridCell.Tab.0.right" timestamp="1588458959351">
+      <screen x="-1920" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1877" height="211" key="GridCell.Tab.0.right/-1920.0.1920.1080/0.0.2560.1440@-1920.0.1920.1080" timestamp="1588458959351" />
+    <state width="1237" height="480" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1588458486617" />
+    <state width="1794" height="247" key="GridCell.Tab.0.right/70.27.1850.1053@70.27.1850.1053" timestamp="1588458486617" />
+    <state x="359" y="27" width="1280" height="1053" key="SettingsEditor" timestamp="1588458486617" />
+    <state x="359" y="27" width="1280" height="1053" key="SettingsEditor/70.27.1850.1053@70.27.1850.1053" timestamp="1588458486617" />
+    <state x="233" y="62" key="Vcs.Push.Dialog.v2" timestamp="1588458486617" />
+    <state x="233" y="62" key="Vcs.Push.Dialog.v2/0.0.1280.680@0.0.1280.680" timestamp="1588458486617" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -356,11 +353,6 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Server.java</url>
-          <line>120</line>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Server.java</url>
           <line>139</line>
           <option name="timeStamp" value="4" />
         </line-breakpoint>
@@ -368,6 +360,11 @@
           <url>file://$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Server.java</url>
           <line>151</line>
           <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Server.java</url>
+          <line>120</line>
+          <option name="timeStamp" value="6" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
