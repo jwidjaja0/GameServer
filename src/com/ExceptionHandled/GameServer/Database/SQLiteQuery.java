@@ -236,7 +236,7 @@ public class SQLiteQuery {
             int win = -1;
             int loss = -1;
             int draw = -1;
-            //TODO: fix later to only get once. this works because sql only return one row
+
             while(rs.next()){
                 win = rs.getInt(3);
                 loss = rs.getInt(4);
@@ -323,8 +323,8 @@ public class SQLiteQuery {
         try {
             PreparedStatement prep = connection.prepareStatement("UPDATE gameList SET gameStatus = ?, endTime = ? WHERE gameID = ?");
             prep.setString(3, gameID);
-            prep.setInt(1,gameStatus);
-            prep.setDate(2,date2);
+            prep.setInt(1, gameStatus);
+            prep.setDate(2, date2);
             prep.execute();
 
         } catch (SQLException e) {
