@@ -6,8 +6,8 @@ public class TTTGame {
     private boolean player2Turn;
     private String firstTurn;
 
-    final String player1 = "X";
-    final String player2 = "O";
+    final String player1 = "x";
+    final String player2 = "o";
 
     //create new board, let player1 start, add observer
     public TTTGame() {
@@ -18,10 +18,10 @@ public class TTTGame {
 
     //returns the winner if someone won, "D" for draw, or "-" if the game isn't over yet
     public String whoWon(){
-        if (ticTacToe.isWon('X'))
-            return "X";
-        else if (ticTacToe.isWon('O'))
-            return "O";
+        if (ticTacToe.isWon('x'))
+            return "x";
+        else if (ticTacToe.isWon('o'))
+            return "o";
         else if (ticTacToe.isFull())
                 return "D";
         return "-";
