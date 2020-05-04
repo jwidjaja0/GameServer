@@ -96,7 +96,6 @@ public class GameRoom {
         else winner = 1;
         SQLiteQuery.getInstance().updateGameOver(gameID, winner);
 
-
         ArrayList<Packet> packets = new ArrayList<Packet>();
         GameOverOutcome gameOver = new GameOverOutcome(gameID, whoWon);
 
