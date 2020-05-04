@@ -59,10 +59,10 @@ public class GameRoom {
         JoinGameSuccess join = new JoinGameSuccess(gameID, SQLiteQuery.getInstance().getUsername(player1), gameName, moves);
 
         ArrayList<Packet> packets = new ArrayList<Packet>();
-        packets.add(new Packet ("PlayerJoined", player1, joined));
-        packets.add(new Packet("JoinGameSuccess", player2, join));
-        packets.add(new Packet("WhoseTurn", player1, new WhoseTurn(gameID, "x")));
-        packets.add(new Packet("WhoseTurn", player2, new WhoseTurn(gameID, "x")));
+        packets.add(new Packet ("MainMenu", player1, joined));
+        packets.add(new Packet("MainMenu", player2, join));
+        packets.add(new Packet("Game", player1, new WhoseTurn(gameID, "x")));
+        packets.add(new Packet("Game", player2, new WhoseTurn(gameID, "x")));
         return packets;
     }
 
@@ -71,7 +71,7 @@ public class GameRoom {
         String p1Name = SQLiteQuery.getInstance().getUsername(player1);
         String p2Name = SQLiteQuery.getInstance().getUsername(player2);
         SpectateSuccess join = new SpectateSuccess (gameID, gameName, p1Name, p2Name, moves);
-        return new Packet("SpectateSuccess", viewer, join);
+        return new Packet("MainMenu", viewer, join);
     }
 
     public void removeViewer (String viewer)  {
@@ -100,10 +100,10 @@ public class GameRoom {
         ArrayList<Packet> packets = new ArrayList<Packet>();
         GameOverOutcome gameOver = new GameOverOutcome(gameID, whoWon);
 
-        packets.add(new Packet("GameOverOutcome", player1, gameOver));
-        packets.add(new Packet("GameOverOutcome", player2, gameOver));
+        packets.add(new Packet("Game", player1, gameOver));
+        packets.add(new Packet("Game", player2, gameOver));
         for (String viewer : viewers) {
-            packets.add(new Packet("GameOverOutcome", viewer, gameOver));
+            packets.add(new Packet("Game", viewer, gameOver));
         }
 
         return packets;
@@ -112,11 +112,11 @@ public class GameRoom {
     private ArrayList<Packet> makeValidMove(MoveValid move) {
         ArrayList<Packet> packets = new ArrayList<Packet>();
 
-        packets.add(new Packet("MoveValid", player1, move));
-        packets.add(new Packet("MoveValid", player2, move));
+        packets.add(new Packet("Game", player1, move));
+        packets.add(new Packet("Game", player2, move));
 
         for (String viewer : viewers) {
-            packets.add(new Packet("MoveValid", viewer, move));
+            packets.add(new Packet("Game", viewer, move));
         }
 
         game.setMove(move.getxCoord(), move.getyCoord(), game.getTurnToken().charAt(0));
@@ -129,8 +129,8 @@ public class GameRoom {
             game.switchTurn();
             WhoseTurn turn = new WhoseTurn(gameID, game.getTurnToken());
 
-            packets.add(new Packet ("WhoseTurn", player1, turn));
-            packets.add(new Packet ("WhoseTurn", player2, turn));
+            packets.add(new Packet ("Game", player1, turn));
+            packets.add(new Packet ("Game", player2, turn));
         }
         return packets;
     }
@@ -140,7 +140,7 @@ public class GameRoom {
         //if invalid move
         if (!game.validMove(move.getxCoord(), move.getyCoord())) {
             MoveInvalid moveInvalid = new MoveInvalid(gameID, game.getTurnToken(), move.getxCoord(), move.getyCoord());
-            packets.add(new Packet("MoveInvalid", move.getPlayer(), moveInvalid));
+            packets.add(new Packet("Game", move.getPlayer(), moveInvalid));
         }
         //otherwise make the move
         else {

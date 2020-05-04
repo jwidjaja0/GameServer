@@ -128,7 +128,7 @@ public class Server implements Runnable {
                 if (newGameRequest.getOpponent().equalsIgnoreCase("AI")) {
                     String aiID = "a1234bcd";
                     JoinGameRequest aiJoin = new JoinGameRequest(gameID, pw);
-                    Packet sPacket = new Packet("JoinGameRequest", aiID, aiJoin);
+                    Packet sPacket = new Packet("MainMenu", aiID, aiJoin);
                     messageQueue.put(new ServerPacket(serverPacket.getClientConnection(), sPacket));
                 }
             }
@@ -152,7 +152,7 @@ public class Server implements Runnable {
                         response = SQLiteQuery.getInstance().joinGame(packet);
                     }
                     else {
-                        Packet notice = new Packet ("JoinGameFail", playerID, new JoinGameFail(idRequest));
+                        Packet notice = new Packet ("MainMenu", playerID, new JoinGameFail(idRequest));
                         serverPacket.getClientConnection().getObjectOutputStream().writeObject(notice);
                     }
                 }
@@ -216,7 +216,7 @@ public class Server implements Runnable {
                         if (pID.equals(gm.getPlayer1())) {
                             pID = gm.getPlayer2();
                         }
-                        packets.add(new Packet("RematchRequest", message.getGameID(), pID));
+                        packets.add(new Packet("Game", message.getGameID(), pID));
                     }
 
                     else if (gameMessage instanceof RematchRespond) {
@@ -225,7 +225,7 @@ public class Server implements Runnable {
                         if (pID.equals(gm.getPlayer1())) {
                             pID = gm.getPlayer2();
                         }
-                        packets.add(new Packet("RematchRespond", message.getGameID(), pID));
+                        packets.add(new Packet("Game", message.getGameID(), pID));
                     }
                     //TODO: currently can only forfeit on your turn, fix to forfeit whenever
                     else if (gameMessage instanceof ForfeitGame) {
