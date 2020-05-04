@@ -150,7 +150,6 @@ public class Server implements Runnable {
                             activePlayerMapCC.get(notice.getPlayerID()).getObjectOutputStream().writeObject(notice);
                         }
                         response = SQLiteQuery.getInstance().joinGame(packet);
-                        return;
                     }
                     else {
                         Packet notice = new Packet ("MainMenu", playerID, new JoinGameFail(idRequest));
@@ -158,6 +157,7 @@ public class Server implements Runnable {
                     }
                 }
             }
+            return;
         }
 
         else if(packet.getMessage() instanceof ListActiveGamesRequest){
