@@ -25,7 +25,7 @@ public class TicTacToe{
 
     //game is over if either player won or the board is full
     public boolean isGameOver(){
-        return isWon('X') || isWon('O') || isFull();
+        return isWon('x') || isWon('o') || isFull();
     }
 
     //places the player token in a specific spot on the board
@@ -69,7 +69,7 @@ public class TicTacToe{
 
     //returns true if neither player won but the board is full
     public boolean isDraw(){
-        if (isFull() && !isWon('X') && !isWon('O'))
+        if (isFull() && !isWon('x') && !isWon('o'))
             return true;
         else
             return false;
