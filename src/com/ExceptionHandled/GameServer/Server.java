@@ -131,6 +131,7 @@ public class Server implements Runnable {
                     Packet sPacket = new Packet("MainMenu", aiID, aiJoin);
                     messageQueue.put(new ServerPacket(serverPacket.getClientConnection(), sPacket));
                 }
+                return;
             }
         }
 
