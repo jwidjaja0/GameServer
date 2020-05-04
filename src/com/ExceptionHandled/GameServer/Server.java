@@ -131,7 +131,6 @@ public class Server implements Runnable {
                     Packet sPacket = new Packet("MainMenu", aiID, aiJoin);
                     messageQueue.put(new ServerPacket(serverPacket.getClientConnection(), sPacket));
                 }
-                return;
             }
         }
 
@@ -158,6 +157,7 @@ public class Server implements Runnable {
                     }
                 }
             }
+            return;
         }
 
         else if(packet.getMessage() instanceof ListActiveGamesRequest){
