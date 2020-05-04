@@ -363,9 +363,9 @@ public class SQLiteQuery {
             prep.setString(1, gameID);
             prep.setDate(2, new Date(System.currentTimeMillis()));
             prep.setString(3,player1ID);
-            if(request.getOpponent().equals("Ai")){
-                prep.setString(4,"Ai");
-                player2Type = "Ai";
+            if(request.getOpponent().equals("AI")){
+                prep.setString(4,"AI");
+                player2Type = "AI";
             }
             else{
                 prep.setString(4, "");
