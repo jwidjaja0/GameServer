@@ -131,7 +131,6 @@ public class Server implements Runnable {
                     Packet sPacket = new Packet("MainMenu", aiID, aiJoin);
                     messageQueue.put(new ServerPacket(serverPacket.getClientConnection(), sPacket));
                 }
-                return;
             }
         }
 
@@ -151,6 +150,7 @@ public class Server implements Runnable {
                             activePlayerMapCC.get(notice.getPlayerID()).getObjectOutputStream().writeObject(notice);
                         }
                         response = SQLiteQuery.getInstance().joinGame(packet);
+                        return;
                     }
                     else {
                         Packet notice = new Packet ("MainMenu", playerID, new JoinGameFail(idRequest));
