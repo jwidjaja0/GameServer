@@ -59,7 +59,7 @@ public class GameRoom {
         JoinGameSuccess join = new JoinGameSuccess(gameID, SQLiteQuery.getInstance().getUsername(player1), gameName, moves);
 
         ArrayList<Packet> packets = new ArrayList<Packet>();
-        packets.add(new Packet ("MainMenu", player1, joined));
+        packets.add(new Packet ("Game", player1, joined));
         packets.add(new Packet("MainMenu", player2, join));
         packets.add(new Packet("Game", player1, new WhoseTurn(gameID, "x")));
         packets.add(new Packet("Game", player2, new WhoseTurn(gameID, "x")));
