@@ -271,7 +271,7 @@ public class SQLiteQuery {
             }
 
             PlayerStatsInfo info = new PlayerStatsInfo(win, loss, draw, gameHistorySummaries);
-            return new Packet("PlayerStatsInfo", playerID, info);
+            return new Packet("Stats", playerID, info);
 
         } catch (SQLException e) {
             e.printStackTrace();
