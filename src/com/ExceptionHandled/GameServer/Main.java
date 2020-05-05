@@ -1,17 +1,23 @@
 package com.ExceptionHandled.GameServer;
 
 import com.ExceptionHandled.GameServer.Database.SQLiteQuery;
+import javafx.application.Application;
+import javafx.stage.Stage;
 
-public class Main {
+public class Main extends Application {
 
     public static void main(String[] args) {
 
         Server gameServer = new Server();
+        Application.launch(args);
+
 
     }
 
-    public static void main2(String[] args) {
-
+    @Override
+    public void start(Stage stage) throws Exception {
+        stage.setTitle("My app");
+        stage.show();
     }
 }
 
