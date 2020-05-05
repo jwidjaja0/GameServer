@@ -212,14 +212,18 @@ public class Server implements Runnable {
                         System.out.println("MoveMade, setting packet back");
                         packets.addAll(gm.makeMove((MoveMade) gameMessage));
 
+                        boolean isGameOver = false;
                         //remove game from gameList if game over
                         for(Packet p: packets){
                             if(p.getMessage() instanceof GameOverOutcome){
-                                for(GameRoom g: gameRoomList){
-                                    if(g.getGameID().equals(gameID)){
-                                        gameRoomList.remove(g);
-                                        break;
-                                    }
+                                isGameOver = true;
+                            }
+                        }
+                        if(isGameOver){
+                            for(GameRoom g: gameRoomList){
+                                if(g.getGameID().equals(gameID)){
+                                    gameRoomList.remove(g);
+                                    break;
                                 }
                             }
                         }
