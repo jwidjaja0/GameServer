@@ -1,7 +1,5 @@
 package com.ExceptionHandled.GameServer;
 
-import com.ExceptionHandled.GameMessages.Game.MoveMade;
-
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.ServerSocket;
@@ -26,7 +24,6 @@ public class ListenNewClient implements Runnable {
         thread.start();
     }
 
-
     @Override
     public void run() {
         try {
@@ -46,9 +43,7 @@ public class ListenNewClient implements Runnable {
 
                 ClientConnection clientConnection = new ClientConnection(socket,clientNo, messageQueue, clientConnectionList);
                 clientConnectionList.add(clientConnection);
-
             }
-
 
         } catch (IOException e) {
             e.printStackTrace();

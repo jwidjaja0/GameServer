@@ -155,16 +155,16 @@ public class SQLiteQuery {
                 if(rs.getString(1).equals(gameID) && rs.getString(5).equals("")){
                     PreparedStatement prep1 = connection.prepareStatement(
                             "UPDATE gameList SET player2ID = ? " +
-                            "WHERE gameID = ? ");
+                                    "WHERE gameID = ? ");
                     prep1.setString(1, playerID);
                     prep1.setString(2, gameID);
                     prep1.executeUpdate();
 
                     PreparedStatement preparedStatement = connection.prepareStatement(
                             "select gameID, gl.gameName, pi.playerID, pi.firstname, pi.lastname\n" +
-                            "from gameList gl\n" +
-                            "join playerInfo pi \n" +
-                            "ON gl.player1ID = pi.playerID");
+                                    "from gameList gl\n" +
+                                    "join playerInfo pi \n" +
+                                    "ON gl.player1ID = pi.playerID");
                     ResultSet resultSet = preparedStatement.executeQuery();
                     String opponentPlayerName = resultSet.getString(4) + " " + resultSet.getString(5);
                     String gameName = resultSet.getString(2);
@@ -236,7 +236,7 @@ public class SQLiteQuery {
             int win = -1;
             int loss = -1;
             int draw = -1;
-            //TODO: fix later to only get once. this works because sql only return one row
+
             while(rs.next()){
                 win = rs.getInt(3);
                 loss = rs.getInt(4);
@@ -323,8 +323,8 @@ public class SQLiteQuery {
         try {
             PreparedStatement prep = connection.prepareStatement("UPDATE gameList SET gameStatus = ?, endTime = ? WHERE gameID = ?");
             prep.setString(3, gameID);
-            prep.setInt(1,gameStatus);
-            prep.setDate(2,date2);
+            prep.setInt(1, gameStatus);
+            prep.setDate(2, date2);
             prep.execute();
 
         } catch (SQLException e) {
@@ -363,9 +363,9 @@ public class SQLiteQuery {
             prep.setString(1, gameID);
             prep.setDate(2, new Date(System.currentTimeMillis()));
             prep.setString(3,player1ID);
-            if(request.getOpponent().equals("Ai")){
-                prep.setString(4,"Ai");
-                player2Type = "Ai";
+            if(request.getOpponent().equals("AI")){
+                prep.setString(4,"AI");
+                player2Type = "AI";
             }
             else{
                 prep.setString(4, "");

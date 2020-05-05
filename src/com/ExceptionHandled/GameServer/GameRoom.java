@@ -1,43 +1,41 @@
 package com.ExceptionHandled.GameServer;
 
-import com.ExceptionHandled.GameMessages.Game.MoveMade;
-import com.ExceptionHandled.GameMessages.Interfaces.Game;
-import com.ExceptionHandled.GameMessages.MainMenu.ActiveGameHeader;
+import com.ExceptionHandled.GameMessages.Game.*;
+import com.ExceptionHandled.GameMessages.MainMenu.*;
 import com.ExceptionHandled.GameMessages.Wrappers.Packet;
-import com.ExceptionHandled.GameServer.Game.TicTacToe;
+import com.ExceptionHandled.GameServer.Database.SQLiteQuery;
+import com.ExceptionHandled.GameServer.Game.TTTGame;
 
-import java.util.ArrayList;
-import java.util.List;
+
+import java.io.IOException;
+import java.util.*;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 
-public class GameRoom implements Runnable {
+public class GameRoom {
     private String gameID;
     private String roomPassword;
     private String gameName;
 
-    private String p1;
-    private String p2;
+    private ArrayList<String> viewers;
+    private String player1;
+    private String player2;
 
-    private TicTacToe ttt;
-    private List<String>spectatorListID;
+    private TTTGame game;
+    private ArrayList<MoveValid> moves;
 
-    private BlockingQueue<ServerPacket> serverPacketQ;
-    private Thread thread;
 
-    public GameRoom(String gameID, String roomPassword, String gameName, String p1) {
+
+    public GameRoom(String gameID, String roomPassword, String gameName, String player1) {
         this.gameID = gameID;
         this.roomPassword = roomPassword;
         this.gameName = gameName;
-        this.p1 = p1;
 
-        spectatorListID = new ArrayList<>();
+        game = new TTTGame();
+        moves = new ArrayList<MoveValid>();
 
-        ttt = new TicTacToe();
-
-        serverPacketQ = new ArrayBlockingQueue<>(20);
-        thread = new Thread(this);
-        thread.start();
+        viewers = new ArrayList<String>();
+        this.player1 = player1;
     }
 
     public String getGameID() {
@@ -48,46 +46,111 @@ public class GameRoom implements Runnable {
         return roomPassword;
     }
 
-    public void setP2(String p2) {
-        this.p2 = p2;
+    protected String getPlayer1() {
+        return player1;
     }
 
-    public void addToMessageQ(ServerPacket sp){
-        serverPacketQ.add(sp);
+    protected String getPlayer2() {
+        return player2;
     }
 
-    public void addSpectator(String id){
-        spectatorListID.add(id);
+    public ArrayList<Packet> setPlayer2(String player2) {
+        this.player2 = player2;
+        ArrayList<Packet> packets = new ArrayList<Packet>();
+        if (!player2.equals("a1234bcd")){//Dont send this message if player is playing vsAI, breaks client
+            PlayerJoined joined = new PlayerJoined(gameID, SQLiteQuery.getInstance().getUsername(player2), gameName);
+            packets.add(new Packet ("Game", player1, joined));
+        }
+        JoinGameSuccess join = new JoinGameSuccess(gameID, SQLiteQuery.getInstance().getUsername(player1), gameName, moves);
+
+        packets.add(new Packet("MainMenu", player2, join));
+        packets.add(new Packet("Game", player1, new WhoseTurn(gameID, "x")));
+        packets.add(new Packet("Game", player2, new WhoseTurn(gameID, "x")));
+        return packets;
     }
 
-    public List<String> getSpectatorListID(){
-        return spectatorListID;
+    public Packet addViewer (String viewer) {
+        viewers.add(viewer);
+        String p1Name = SQLiteQuery.getInstance().getUsername(player1);
+        String p2Name = SQLiteQuery.getInstance().getUsername(player2);
+        SpectateSuccess join = new SpectateSuccess (gameID, gameName, p1Name, p2Name, moves);
+        return new Packet("MainMenu", viewer, join);
+    }
+
+    public void removeViewer (String viewer)  {
+        viewers.remove(viewer);
     }
 
     public ActiveGameHeader getActiveGameHeader(){
-        return new ActiveGameHeader(gameID, gameName, p1, p2);
+        return new ActiveGameHeader(gameID, gameName, player1, player2);
     }
 
-    @Override
-    public void run() {
-        while(true){
-            try {
-                ServerPacket serverPacket = serverPacketQ.take();
-                Packet packet = serverPacket.getPacket();
+    //TODO: fix this method to take input
+    public ArrayList<Packet> gameForfeit() {
+        game.switchTurn();
+        ArrayList<Packet> packets = gameOver(game.getTurnToken());
+        game.switchTurn();
+        return packets;
+    }
 
-                //handle moves
-                if(packet.getMessage() instanceof Game){
+    private ArrayList<Packet> gameOver(String whoWon) {
+        int winner;
+        if (game.getWhoseTurn()) winner = 2;
+        else winner = 1;
+        SQLiteQuery.getInstance().updateGameOver(gameID, winner);
 
-                    if(packet.getMessage() instanceof MoveMade){
-                        MoveMade move = (MoveMade)packet.getMessage();
-                        //TODO: Send move to tictactoe game;
-                    }
-                }
+        ArrayList<Packet> packets = new ArrayList<Packet>();
+        GameOverOutcome gameOver = new GameOverOutcome(gameID, whoWon);
 
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-
+        packets.add(new Packet("Game", player1, gameOver));
+        packets.add(new Packet("Game", player2, gameOver));
+        for (String viewer : viewers) {
+            packets.add(new Packet("Game", viewer, gameOver));
         }
+
+        return packets;
+    }
+
+    private ArrayList<Packet> makeValidMove(MoveValid move) {
+        ArrayList<Packet> packets = new ArrayList<Packet>();
+
+        packets.add(new Packet("Game", player1, move));
+        packets.add(new Packet("Game", player2, move));
+
+        for (String viewer : viewers) {
+            packets.add(new Packet("Game", viewer, move));
+        }
+
+        game.setMove(move.getxCoord(), move.getyCoord(), game.getTurnToken().charAt(0));
+
+        if (game.gameOver()) {
+            packets.addAll(gameOver(game.whoWon()));
+        }
+
+        else {
+            game.switchTurn();
+            WhoseTurn turn = new WhoseTurn(gameID, game.getTurnToken());
+
+            packets.add(new Packet ("Game", player1, turn));
+            packets.add(new Packet ("Game", player2, turn));
+        }
+        return packets;
+    }
+
+    public ArrayList<Packet> makeMove(MoveMade move) {
+        ArrayList<Packet> packets = new ArrayList<Packet>();
+        //if invalid move
+        if (!game.validMove(move.getxCoord(), move.getyCoord())) {
+            MoveInvalid moveInvalid = new MoveInvalid(gameID, game.getTurnToken(), move.getxCoord(), move.getyCoord());
+            packets.add(new Packet("Game", move.getPlayer(), moveInvalid));
+        }
+        //otherwise make the move
+        else {
+            MoveValid moveValid = new MoveValid(gameID, game.getTurnToken(), move.getxCoord(), move.getyCoord());
+            SQLiteQuery.getInstance().insertMoveHistory(moveValid);
+            packets.addAll(makeValidMove(moveValid));
+        }
+
+        return packets;
     }
 }
