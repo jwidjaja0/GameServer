@@ -208,8 +208,21 @@ public class SQLiteQuery {
             prep1.setString(1, gameID);
             ResultSet gameSet = prep1.executeQuery();
 
-            GameHistorySummary gameHistorySummary = new GameHistorySummary(gameID, gameSet.getString(4), gameSet.getString(5), gameSet.getInt(6));
-            java.sql.Date startDate = gameSet.getDate(2);
+            int winner = gameSet.getInt(6);
+            String player = packet.getPlayerID();
+            String p1 = gameSet.getString(4);
+            String p2 = gameSet.getString(5);
+            String matchResult;
+            if (winner == 0) {
+                matchResult = "Tie";
+            }
+            else if ((player.equalsIgnoreCase(p1) && winner == 1) || (player.equalsIgnoreCase(p2) && winner == 2)) {
+                matchResult = "Win";
+            }
+            else {
+                matchResult = "Loss";
+            }
+            GameHistorySummary gameHistorySummary = new GameHistorySummary(gameID, p1, p2, matchResult);            java.sql.Date startDate = gameSet.getDate(2);
             java.sql.Date endDate = gameSet.getDate(3);
 
             java.util.Date sDate = new Date(startDate.getTime());
@@ -255,7 +268,7 @@ public class SQLiteQuery {
                         rs1.getString(1),
                         playerID,
                         rs1.getString(5),
-                        rs1.getInt(6)));
+                        rs1.getString(6)));
             }
 
             //Now get games where this player is player2
@@ -267,7 +280,7 @@ public class SQLiteQuery {
                         rs2.getString(1),
                         rs2.getString(4),
                         playerID,
-                        rs2.getInt(6)));
+                        rs2.getString(6)));
             }
 
             PlayerStatsInfo info = new PlayerStatsInfo(win, loss, draw, gameHistorySummaries);
