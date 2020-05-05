@@ -216,13 +216,13 @@ public class SQLiteQuery {
             java.util.Date eDate = new Date(endDate.getTime());
 
             GameHistoryDetail detail = new GameHistoryDetail(gameHistorySummary, sDate, eDate, moveList, null);
-            return new Packet("GameHistoryDetail", playerID, detail);
+            return new Packet("Stats", playerID, detail);
 
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return new Packet("GameHistoryDetailFail", playerID, null);
+        return new Packet("Stats", playerID, null);
     }
 
     public Packet getPlayerStatsInfo(Packet packet){
@@ -277,7 +277,7 @@ public class SQLiteQuery {
             e.printStackTrace();
         }
 
-        return new Packet("PlayerStatsInfo", playerID, null);
+        return new Packet("Stats", playerID, null);
     }
 
     public Packet insertViewerToGame(Packet packet){
