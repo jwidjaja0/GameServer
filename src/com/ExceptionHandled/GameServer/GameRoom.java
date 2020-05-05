@@ -56,12 +56,13 @@ public class GameRoom {
 
     public ArrayList<Packet> setPlayer2(String player2) {
         this.player2 = player2;
-
-        PlayerJoined joined = new PlayerJoined(gameID, SQLiteQuery.getInstance().getUsername(player2), gameName);
+        ArrayList<Packet> packets = new ArrayList<Packet>();
+        if (!player2.equals("a1234bcd")){//Dont send this message if player is playing vsAI, breaks client
+            PlayerJoined joined = new PlayerJoined(gameID, SQLiteQuery.getInstance().getUsername(player2), gameName);
+            packets.add(new Packet ("Game", player1, joined));
+        }
         JoinGameSuccess join = new JoinGameSuccess(gameID, SQLiteQuery.getInstance().getUsername(player1), gameName, moves);
 
-        ArrayList<Packet> packets = new ArrayList<Packet>();
-        packets.add(new Packet ("Game", player1, joined));
         packets.add(new Packet("MainMenu", player2, join));
         packets.add(new Packet("Game", player1, new WhoseTurn(gameID, "x")));
         packets.add(new Packet("Game", player2, new WhoseTurn(gameID, "x")));

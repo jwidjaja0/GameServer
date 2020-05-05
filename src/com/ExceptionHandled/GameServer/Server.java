@@ -147,7 +147,8 @@ public class Server implements Runnable {
                         ArrayList<Packet> packets = g.setPlayer2(playerID);
                         for (Packet notice : packets) {
                             System.out.println("sending to player");
-                            activePlayerMapCC.get(notice.getPlayerID()).getObjectOutputStream().writeObject(notice);
+                            if (!notice.getPlayerID().equals("a1234bcd"))
+                                activePlayerMapCC.get(notice.getPlayerID()).getObjectOutputStream().writeObject(notice);
                         }
                         response = SQLiteQuery.getInstance().joinGame(packet);
                     }
@@ -176,7 +177,8 @@ public class Server implements Runnable {
             for(GameRoom gm : gameRoomList){
                 if(gm.getGameID().equals(gameID)){
                     Packet notice = gm.addViewer(packet.getPlayerID());
-                    activePlayerMapCC.get(notice.getPlayerID()).getObjectOutputStream().writeObject(notice);
+                    if (!notice.getPlayerID().equals("a1234bcd"))
+                        activePlayerMapCC.get(notice.getPlayerID()).getObjectOutputStream().writeObject(notice);
                     response = SQLiteQuery.getInstance().insertViewerToGame(packet);
                 }
             }
@@ -248,7 +250,8 @@ public class Server implements Runnable {
 
                     //send all packets
                     for (Packet notice : packets) {
-                        activePlayerMapCC.get(notice.getPlayerID()).getObjectOutputStream().writeObject(notice);
+                        if (!notice.getPlayerID().equals("a1234bcd"))
+                            activePlayerMapCC.get(notice.getPlayerID()).getObjectOutputStream().writeObject(notice);
                     }
                 }
             }
