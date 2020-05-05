@@ -23,7 +23,7 @@ public class TTTGame {
         else if (ticTacToe.isWon('o'))
             return "o";
         else if (ticTacToe.isFull())
-                return "D";
+                return "d";
         return "-";
     }
 

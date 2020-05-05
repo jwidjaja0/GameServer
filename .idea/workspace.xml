@@ -19,9 +19,12 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="903b4c15-9d8a-46a5-922a-0b217067a632" name="Default Changelist" comment="">
+    <list default="true" id="aefb3591-25b9-418d-8adf-7b35b803d267" name="Default Changelist" comment="Merge branch 'master' into connections&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TicTacToe.db" beforeDir="false" afterPath="$PROJECT_DIR$/TicTacToe.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Game/TTTGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Game/TTTGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/GameRoom.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/GameRoom.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Server.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,6 +64,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="ROOT_SYNC" value="SYNC" />
   </component>
@@ -83,6 +91,18 @@
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="application.passwordSafe" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
   </component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true">
@@ -135,7 +155,7 @@
       <workItem from="1588363393693" duration="1835000" />
       <workItem from="1588379971273" duration="1981000" />
       <workItem from="1588449552052" duration="16036000" />
-      <workItem from="1588556702108" duration="1964000" />
+      <workItem from="1588556702108" duration="530000" />
     </task>
     <task id="LOCAL-00001" summary="updated connections">
       <created>1588216562932</created>
@@ -310,50 +330,52 @@
     <option name="LAST_COMMIT_MESSAGE" value="fixed packets for player2 joining the game" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="252" y="0" key="CommitChangelistDialog2" timestamp="1588553902944" />
-    <state x="252" y="0" key="CommitChangelistDialog2/0.0.1280.680@0.0.1280.680" timestamp="1588553902944" />
-    <state x="421" y="97" width="878" height="654" key="FileChooserDialogImpl" timestamp="1588553902944" />
-    <state x="421" y="97" key="FileChooserDialogImpl/0.0.1280.680@0.0.1280.680" timestamp="1588553902944" />
-    <state x="421" y="97" width="878" height="654" key="FileChooserDialogImpl/70.27.1850.1053@70.27.1850.1053" timestamp="1588553902944" />
-    <state width="1877" height="211" key="GridCell.Tab.0.bottom" timestamp="1588558667286">
-      <screen x="-1920" y="0" width="1920" height="1080" />
-    </state>
-    <state width="1877" height="211" key="GridCell.Tab.0.bottom/-1920.0.1920.1080/0.0.2560.1440@-1920.0.1920.1080" timestamp="1588558667286" />
-    <state width="1237" height="480" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1588553902944" />
-    <state width="1794" height="247" key="GridCell.Tab.0.bottom/70.27.1850.1053@70.27.1850.1053" timestamp="1588553902944" />
-    <state width="1877" height="211" key="GridCell.Tab.0.center" timestamp="1588558667286">
-      <screen x="-1920" y="0" width="1920" height="1080" />
-    </state>
-    <state width="1877" height="211" key="GridCell.Tab.0.center/-1920.0.1920.1080/0.0.2560.1440@-1920.0.1920.1080" timestamp="1588558667286" />
-    <state width="1237" height="480" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1588553902944" />
-    <state width="1794" height="247" key="GridCell.Tab.0.center/70.27.1850.1053@70.27.1850.1053" timestamp="1588553902944" />
-    <state width="1877" height="211" key="GridCell.Tab.0.left" timestamp="1588558667286">
-      <screen x="-1920" y="0" width="1920" height="1080" />
-    </state>
-    <state width="1877" height="211" key="GridCell.Tab.0.left/-1920.0.1920.1080/0.0.2560.1440@-1920.0.1920.1080" timestamp="1588558667286" />
-    <state width="1237" height="480" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1588553902944" />
-    <state width="1794" height="247" key="GridCell.Tab.0.left/70.27.1850.1053@70.27.1850.1053" timestamp="1588553902944" />
-    <state width="1877" height="211" key="GridCell.Tab.0.right" timestamp="1588558667286">
-      <screen x="-1920" y="0" width="1920" height="1080" />
-    </state>
-    <state width="1877" height="211" key="GridCell.Tab.0.right/-1920.0.1920.1080/0.0.2560.1440@-1920.0.1920.1080" timestamp="1588558667286" />
-    <state width="1237" height="480" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1588553902944" />
-    <state width="1794" height="247" key="GridCell.Tab.0.right/70.27.1850.1053@70.27.1850.1053" timestamp="1588553902944" />
-    <state x="359" y="27" width="1280" height="1053" key="SettingsEditor" timestamp="1588553902944" />
-    <state x="359" y="27" width="1280" height="1053" key="SettingsEditor/70.27.1850.1053@70.27.1850.1053" timestamp="1588553902944" />
-    <state x="233" y="62" key="Vcs.Push.Dialog.v2" timestamp="1588553902944" />
-    <state x="233" y="62" key="Vcs.Push.Dialog.v2/0.0.1280.680@0.0.1280.680" timestamp="1588553902944" />
+    <state x="252" y="0" key="CommitChangelistDialog2" />
+    <state x="252" y="0" key="CommitChangelistDialog2/0.0.1280.680@0.0.1280.680" />
+    <state x="421" y="97" width="878" height="654" key="FileChooserDialogImpl" />
+    <state x="421" y="97" key="FileChooserDialogImpl/0.0.1280.680@0.0.1280.680" />
+    <state x="421" y="97" width="878" height="654" key="FileChooserDialogImpl/70.27.1850.1053@70.27.1850.1053" />
+    <state width="1877" height="211" key="GridCell.Tab.0.bottom" />
+    <state width="1877" height="211" key="GridCell.Tab.0.bottom/-1920.0.1920.1080/0.0.2560.1440@-1920.0.1920.1080" />
+    <state width="1237" height="480" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" />
+    <state width="1794" height="247" key="GridCell.Tab.0.bottom/70.27.1850.1053@70.27.1850.1053" />
+    <state width="1877" height="211" key="GridCell.Tab.0.center" />
+    <state width="1877" height="211" key="GridCell.Tab.0.center/-1920.0.1920.1080/0.0.2560.1440@-1920.0.1920.1080" />
+    <state width="1237" height="480" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" />
+    <state width="1794" height="247" key="GridCell.Tab.0.center/70.27.1850.1053@70.27.1850.1053" />
+    <state width="1877" height="211" key="GridCell.Tab.0.left" />
+    <state width="1877" height="211" key="GridCell.Tab.0.left/-1920.0.1920.1080/0.0.2560.1440@-1920.0.1920.1080" />
+    <state width="1237" height="480" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" />
+    <state width="1794" height="247" key="GridCell.Tab.0.left/70.27.1850.1053@70.27.1850.1053" />
+    <state width="1877" height="211" key="GridCell.Tab.0.right" />
+    <state width="1877" height="211" key="GridCell.Tab.0.right/-1920.0.1920.1080/0.0.2560.1440@-1920.0.1920.1080" />
+    <state width="1237" height="480" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" />
+    <state width="1794" height="247" key="GridCell.Tab.0.right/70.27.1850.1053@70.27.1850.1053" />
+    <state x="359" y="27" width="1280" height="1053" key="SettingsEditor" />
+    <state x="359" y="27" width="1280" height="1053" key="SettingsEditor/70.27.1850.1053@70.27.1850.1053" />
+    <state x="233" y="62" key="Vcs.Push.Dialog.v2" />
+    <state x="233" y="62" key="Vcs.Push.Dialog.v2/0.0.1280.680@0.0.1280.680" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Server.java</url>
-          <line>120</line>
-          <option name="timeStamp" value="3" />
+          <line>210</line>
+          <option name="timeStamp" value="12" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Server.java</url>
+          <line>218</line>
+          <option name="timeStamp" value="16" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
+    <watches-manager>
+      <configuration name="Application">
+        <watch expression="packets" />
+      </configuration>
+    </watches-manager>
   </component>
   <component name="simpleUML.UMLToolWindowPlugin">
     <General>
