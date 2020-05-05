@@ -24,7 +24,7 @@
                         <Font size="18.0" />
                      </font>
                   </Text>
-                  <ListView fx:id="ActivePlayerListView" prefHeight="399.0" prefWidth="400.0">
+                  <ListView fx:id="activePlayerListView" prefHeight="399.0" prefWidth="400.0">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
@@ -41,7 +41,7 @@
                         <Font size="18.0" />
                      </font>
                   </Text>
-                  <ListView fx:id="ActiveGamesListView" prefHeight="399.0" prefWidth="400.0">
+                  <ListView fx:id="activeGamesListView" prefHeight="399.0" prefWidth="400.0">
                      <VBox.margin>
                         <Insets right="20.0" />
                      </VBox.margin>

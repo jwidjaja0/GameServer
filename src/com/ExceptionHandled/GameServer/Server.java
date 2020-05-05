@@ -9,6 +9,8 @@ import com.ExceptionHandled.GameMessages.Stats.*;
 import com.ExceptionHandled.GameMessages.UserUpdate.*;
 import com.ExceptionHandled.GameMessages.Wrappers.Packet;
 import com.ExceptionHandled.GameServer.Database.SQLiteQuery;
+import com.ExceptionHandled.GameServer.Observer.GameLogicObserver;
+import com.ExceptionHandled.GameServer.Observer.GameLogicSubject;
 
 
 import java.io.IOException;
@@ -16,7 +18,7 @@ import java.util.*;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 
-public class Server implements Runnable {
+public class Server implements Runnable, GameLogicSubject {
     private BlockingQueue<ServerPacket> messageQueue;
 
     private List<ClientConnection> clientConnectionList;
@@ -26,6 +28,8 @@ public class Server implements Runnable {
 
     private Thread thread;
 
+    private List<GameLogicObserver> observerList;
+
     public Server() {
         messageQueue = new ArrayBlockingQueue<>(500);
         clientConnectionList = new ArrayList<>(100);
@@ -34,6 +38,7 @@ public class Server implements Runnable {
         activePlayerMapCC = new HashMap<>();
 
         //gameRoomList.add(new GameRoom("sampleID", "", "sample", "x"));
+        observerList = new ArrayList<>();
 
         thread = new Thread(this);
         thread.start();
@@ -125,6 +130,8 @@ public class Server implements Runnable {
                 System.out.println("New Game added");
                 gameRoomList.add(gm);
 
+                notifyGameLogicObserver(getListActiveGames());
+
                 if (newGameRequest.getOpponent().equalsIgnoreCase("AI")) {
                     String aiID = "a1234bcd";
                     JoinGameRequest aiJoin = new JoinGameRequest(gameID, pw);
@@ -147,10 +154,11 @@ public class Server implements Runnable {
                         ArrayList<Packet> packets = g.setPlayer2(playerID);
                         for (Packet notice : packets) {
                             System.out.println("sending to player");
-                            if (!notice.getPlayerID().equals("a1234bcd"))
+                            if (!notice.getPlayerID().equals("a1234bcd")) //if not to Ai
                                 activePlayerMapCC.get(notice.getPlayerID()).getObjectOutputStream().writeObject(notice);
                         }
                         response = SQLiteQuery.getInstance().joinGame(packet);
+
                     }
                     else {
                         Packet notice = new Packet ("MainMenu", playerID, new JoinGameFail(idRequest));
@@ -162,12 +170,10 @@ public class Server implements Runnable {
         }
 
         else if(packet.getMessage() instanceof ListActiveGamesRequest){
-            List<ActiveGameHeader> gameList = new ArrayList<>();
-            for(int i = 0; i < gameRoomList.size(); i++){
-                gameList.add(gameRoomList.get(i).getActiveGameHeader());
-            }
-            System.out.println("Sending list active games, size: " + gameList.size());
-            response = new Packet("MainMenu", packet.getPlayerID(), new ListActiveGames(gameList));
+
+            ListActiveGames listAG = getListActiveGames();
+            response = new Packet("MainMenu", packet.getPlayerID(), listAG);
+
         }
 
         else if(packet.getMessage() instanceof SpectateRequest){
@@ -223,6 +229,7 @@ public class Server implements Runnable {
                             }
                         }
 
+
                     }
 
                     else if (gameMessage instanceof RematchRequest) {
@@ -261,6 +268,7 @@ public class Server implements Runnable {
         //removes game later from gameList if game over
         if (removeGame) {
             gameRoomList.remove(gr);
+            notifyGameLogicObserver(getListActiveGames());
         }
     }
 
@@ -304,6 +312,33 @@ public class Server implements Runnable {
             System.out.println(response.getPlayerID());
         }
         serverPacket.getClientConnection().getObjectOutputStream().writeObject(response);
+    }
+
+    private ListActiveGames getListActiveGames(){
+        List<ActiveGameHeader> gameList = new ArrayList<>();
+        for(int i = 0; i < gameRoomList.size(); i++){
+            gameList.add(gameRoomList.get(i).getActiveGameHeader());
+        }
+        System.out.println("Sending list active games, size: " + gameList.size());
+        ListActiveGames listAG = new ListActiveGames(gameList);
+        return listAG;
+    }
+
+    @Override
+    public void addGameLogicObserver(GameLogicObserver obs) {
+        observerList.add(obs);
+    }
+
+    @Override
+    public void removeGameLogicObserver(GameLogicObserver obs) {
+        observerList.remove(obs);
+    }
+
+    @Override
+    public void notifyGameLogicObserver(Object arg) {
+        for(GameLogicObserver g: observerList){
+            g.update(this, arg);
+        }
     }
 }
 
