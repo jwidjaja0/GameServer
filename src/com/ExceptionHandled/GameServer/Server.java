@@ -205,6 +205,8 @@ public class Server implements Runnable {
 
             //find the correct gameID
             for(GameRoom gm : gameRoomList) {
+                boolean removeGame = false;
+
                 if (gm.getGameID().equals(gameID)) {
                     ArrayList<Packet> packets = new ArrayList<Packet>(); //to send back
 
@@ -212,21 +214,12 @@ public class Server implements Runnable {
                         System.out.println("MoveMade, setting packet back");
                         packets.addAll(gm.makeMove((MoveMade) gameMessage));
 
-//                        boolean isGameOver = false;
-//                        //remove game from gameList if game over
-//                        for(Packet p: packets){
-//                            if(p.getMessage() instanceof GameOverOutcome){
-//                                isGameOver = true;
-//                            }
-//                        }
-//                        if(isGameOver){
-//                            for(GameRoom g: gameRoomList){
-//                                if(g.getGameID().equals(gameID)){
-//                                    gameRoomList.remove(g);
-//                                    break;
-//                                }
-//                            }
-//                        }
+                        //to remove game later from gameList if game over
+                        for(Packet p: packets){
+                            if(p.getMessage() instanceof GameOverOutcome){
+                                removeGame = true;
+                            }
+                        }
 
                     }
 
@@ -250,12 +243,19 @@ public class Server implements Runnable {
                     //TODO: currently can only forfeit on your turn, fix to forfeit whenever
                     else if (gameMessage instanceof ForfeitGame) {
                         packets.addAll(gm.gameForfeit());
+                        //to remove game later from gameList if game over
+                        removeGame = true;
                     }
 
                     //send all packets
                     for (Packet notice : packets) {
                         if (!notice.getPlayerID().equals("a1234bcd"))
                             activePlayerMapCC.get(notice.getPlayerID()).getObjectOutputStream().writeObject(notice);
+                    }
+
+                    //removes game later from gameList if game over
+                    if (removeGame) {
+                        gameRoomList.remove(gm);
                     }
                 }
             }
