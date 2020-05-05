@@ -66,6 +66,31 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="ROOT_SYNC" value="SYNC" />
   </component>
+  <component name="GitToolBoxStore">
+    <option name="recentBranches">
+      <RecentBranches>
+        <option name="branchesForRepo">
+          <list>
+            <RecentBranchesForRepo>
+              <option name="branches">
+                <list>
+                  <RecentBranch>
+                    <option name="branchName" value="master" />
+                    <option name="lastUsedInstant" value="1588654021" />
+                  </RecentBranch>
+                  <RecentBranch>
+                    <option name="branchName" value="connections" />
+                    <option name="lastUsedInstant" value="1588654020" />
+                  </RecentBranch>
+                </list>
+              </option>
+              <option name="repositoryRootUrl" value="file://$PROJECT_DIR$" />
+            </RecentBranchesForRepo>
+          </list>
+        </option>
+      </RecentBranches>
+    </option>
+  </component>
   <component name="ProjectId" id="1ZsaGSXhdwZoYhkDHVXYnxdD3JR" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -161,7 +186,14 @@
       <option name="project" value="LOCAL" />
       <updated>1588222647994</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="game history shows win/loss/tie instead of number">
+      <created>1588654225367</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1588654225367</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -310,11 +342,14 @@
     <MESSAGE value="updated connections" />
     <MESSAGE value="prevents 2 players from joining the same game as player 2" />
     <MESSAGE value="fixed packets for player2 joining the game" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed packets for player2 joining the game" />
+    <MESSAGE value="game history shows win/loss/tie instead of number" />
+    <option name="LAST_COMMIT_MESSAGE" value="game history shows win/loss/tie instead of number" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="252" y="0" key="CommitChangelistDialog2" timestamp="1588641933288" />
-    <state x="252" y="0" key="CommitChangelistDialog2/0.0.1280.680@0.0.1280.680" timestamp="1588641933288" />
+    <state x="252" y="0" key="CommitChangelistDialog2" timestamp="1588654222815">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="252" y="0" key="CommitChangelistDialog2/0.0.1280.680@0.0.1280.680" timestamp="1588654222815" />
     <state x="421" y="97" width="878" height="654" key="FileChooserDialogImpl" timestamp="1588641933288" />
     <state x="421" y="97" key="FileChooserDialogImpl/0.0.1280.680@0.0.1280.680" timestamp="1588641933288" />
     <state x="421" y="97" width="878" height="654" key="FileChooserDialogImpl/70.27.1850.1053@70.27.1850.1053" timestamp="1588641933288" />
@@ -344,12 +379,14 @@
     <state width="1794" height="247" key="GridCell.Tab.0.right/70.27.1850.1053@70.27.1850.1053" timestamp="1588641933288" />
     <state x="359" y="27" width="1280" height="1053" key="SettingsEditor" timestamp="1588641933288" />
     <state x="359" y="27" width="1280" height="1053" key="SettingsEditor/70.27.1850.1053@70.27.1850.1053" timestamp="1588641933288" />
-    <state x="233" y="62" key="Vcs.Push.Dialog.v2" timestamp="1588641933288" />
-    <state x="233" y="62" key="Vcs.Push.Dialog.v2/0.0.1280.680@0.0.1280.680" timestamp="1588641933288" />
-    <state x="450" y="254" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1588654039021">
+    <state x="233" y="62" key="Vcs.Push.Dialog.v2" timestamp="1588654229126">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="450" y="254" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1280.680@0.0.1280.680" timestamp="1588654039021" />
+    <state x="233" y="62" key="Vcs.Push.Dialog.v2/0.0.1280.680@0.0.1280.680" timestamp="1588654229126" />
+    <state x="450" y="254" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1588655056465">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="450" y="254" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1280.680@0.0.1280.680" timestamp="1588655056465" />
   </component>
   <component name="simpleUML.UMLToolWindowPlugin">
     <General>
