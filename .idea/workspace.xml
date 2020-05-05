@@ -19,7 +19,10 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="aefb3591-25b9-418d-8adf-7b35b803d267" name="Default Changelist" comment="" />
+    <list default="true" id="aefb3591-25b9-418d-8adf-7b35b803d267" name="Default Changelist" comment="Merge branch 'master' into connections&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TicTacToe.db" beforeDir="false" afterPath="$PROJECT_DIR$/TicTacToe.db" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -85,6 +88,18 @@
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="application.passwordSafe" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
   </component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true">
@@ -286,22 +301,12 @@
                   </entry>
                 </map>
               </option>
+              <option name="COLUMN_ORDER" />
             </State>
           </value>
         </entry>
       </map>
     </option>
-    <option name="OPEN_GENERIC_TABS">
-      <map>
-        <entry key="1" value="TOOL_WINDOW" />
-        <entry key="2" value="TOOL_WINDOW" />
-        <entry key="3" value="TOOL_WINDOW" />
-        <entry key="4" value="TOOL_WINDOW" />
-        <entry key="5" value="TOOL_WINDOW" />
-        <entry key="6" value="TOOL_WINDOW" />
-      </map>
-    </option>
-    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <ignored-roots>
