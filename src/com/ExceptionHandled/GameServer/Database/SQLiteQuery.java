@@ -11,6 +11,7 @@ import com.ExceptionHandled.GameMessages.UserUpdate.UserDeleteSuccess;
 import com.ExceptionHandled.GameMessages.UserUpdate.UserUpdateRequest;
 import com.ExceptionHandled.GameMessages.UserUpdate.UserUpdateSuccess;
 import com.ExceptionHandled.GameMessages.Wrappers.Packet;
+import com.ExceptionHandled.GameServer.Player;
 
 
 import java.sql.*;
@@ -291,6 +292,24 @@ public class SQLiteQuery {
         }
 
         return new Packet("Stats", playerID, null);
+    }
+
+    public Player getPlayerDetail(String id){
+        Player p = null;
+        try {
+            PreparedStatement prep = connection.prepareStatement("SELECT playerID, username, firstname, lastname, isActive FROM gamelist WHERE playerID = ?");
+            prep.setString(1, id);
+            ResultSet rs = prep.executeQuery();
+
+            rs.next();
+            p = new Player(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4));
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return p;
     }
 
     public Packet insertViewerToGame(Packet packet){

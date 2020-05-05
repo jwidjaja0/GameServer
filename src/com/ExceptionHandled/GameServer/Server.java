@@ -9,6 +9,8 @@ import com.ExceptionHandled.GameMessages.Stats.*;
 import com.ExceptionHandled.GameMessages.UserUpdate.*;
 import com.ExceptionHandled.GameMessages.Wrappers.Packet;
 import com.ExceptionHandled.GameServer.Database.SQLiteQuery;
+import com.ExceptionHandled.GameServer.InternalMessage.ActivePlayerList;
+import com.ExceptionHandled.GameServer.InternalMessage.ServerPacket;
 import com.ExceptionHandled.GameServer.Observer.GameLogicObserver;
 import com.ExceptionHandled.GameServer.Observer.GameLogicSubject;
 
@@ -290,6 +292,8 @@ public class Server implements Runnable, GameLogicSubject {
             if(response.getMessage() instanceof LoginSuccess){
                 LoginSuccess lg = (LoginSuccess) response.getMessage();
                 activePlayerMapCC.put(lg.getPlayerID(), serverPacket.getClientConnection());
+
+                notifyGameLogicObserver(getActivePlayers());
             }
         }
 
@@ -302,6 +306,7 @@ public class Server implements Runnable, GameLogicSubject {
             else{
                 activePlayerMapCC.remove(playerID);
                 response = new Packet("Login", playerID, new LogoutSuccess());
+                notifyGameLogicObserver(getActivePlayers());
             }
         }
 
@@ -322,6 +327,14 @@ public class Server implements Runnable, GameLogicSubject {
         System.out.println("Sending list active games, size: " + gameList.size());
         ListActiveGames listAG = new ListActiveGames(gameList);
         return listAG;
+    }
+
+    private ActivePlayerList getActivePlayers(){
+        List<String> idList = new ArrayList<>();
+        for(String key : activePlayerMapCC.keySet()){
+            idList.add(key);
+        }
+        return new ActivePlayerList(idList);
     }
 
     @Override
