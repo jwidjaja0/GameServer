@@ -202,10 +202,11 @@ public class Server implements Runnable {
         Packet packet = serverPacket.getPacket();
         Game gameMessage = (Game)packet.getMessage();
         String gameID = gameMessage.getGameID();
+        GameRoom gr = null;
+        boolean removeGame = false;
 
             //find the correct gameID
-            for(GameRoom gm : gameRoomList) {
-                boolean removeGame = false;
+            for (GameRoom gm : gameRoomList) {
 
                 if (gm.getGameID().equals(gameID)) {
                     ArrayList<Packet> packets = new ArrayList<Packet>(); //to send back
@@ -218,6 +219,7 @@ public class Server implements Runnable {
                         for(Packet p: packets){
                             if(p.getMessage() instanceof GameOverOutcome){
                                 removeGame = true;
+                                gr = gm;
                             }
                         }
 
@@ -245,6 +247,7 @@ public class Server implements Runnable {
                         packets.addAll(gm.gameForfeit());
                         //to remove game later from gameList if game over
                         removeGame = true;
+                        gr = gm;
                     }
 
                     //send all packets
@@ -252,13 +255,13 @@ public class Server implements Runnable {
                         if (!notice.getPlayerID().equals("a1234bcd"))
                             activePlayerMapCC.get(notice.getPlayerID()).getObjectOutputStream().writeObject(notice);
                     }
-
-                    //removes game later from gameList if game over
-                    if (removeGame) {
-                        gameRoomList.remove(gm);
-                    }
                 }
             }
+
+        //removes game later from gameList if game over
+        if (removeGame) {
+            gameRoomList.remove(gr);
+        }
     }
 
     public void handleConnectionRequest(ServerPacket serverPacket){
