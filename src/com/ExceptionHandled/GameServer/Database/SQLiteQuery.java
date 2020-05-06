@@ -297,7 +297,7 @@ public class SQLiteQuery {
     public Player getPlayerDetail(String id){
         Player p = null;
         try {
-            PreparedStatement prep = connection.prepareStatement("SELECT playerID, username, firstname, lastname, isActive FROM gamelist WHERE playerID = ?");
+            PreparedStatement prep = connection.prepareStatement("SELECT playerID, username, firstname, lastname, isActive FROM playerInfo WHERE playerID = ?");
             prep.setString(1, id);
             ResultSet rs = prep.executeQuery();
 

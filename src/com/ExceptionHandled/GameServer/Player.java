@@ -20,6 +20,10 @@ public class Player {
         return id;
     }
 
+    public String getUsername() {
+        return username;
+    }
+
     public String getFirstName() {
         return firstName;
     }

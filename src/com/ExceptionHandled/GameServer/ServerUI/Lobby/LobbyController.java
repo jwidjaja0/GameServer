@@ -2,16 +2,23 @@ package com.ExceptionHandled.GameServer.ServerUI.Lobby;
 
 import com.ExceptionHandled.GameMessages.MainMenu.ActiveGameHeader;
 import com.ExceptionHandled.GameMessages.MainMenu.ListActiveGames;
+import com.ExceptionHandled.GameServer.Database.SQLiteQuery;
 import com.ExceptionHandled.GameServer.InternalMessage.ActivePlayerList;
 import com.ExceptionHandled.GameServer.Observer.GameLogicObserver;
 import com.ExceptionHandled.GameServer.Observer.GameLogicSubject;
+import com.ExceptionHandled.GameServer.Player;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.List;
 
 public class LobbyController implements GameLogicObserver {
@@ -32,9 +39,37 @@ public class LobbyController implements GameLogicObserver {
         playerButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-
+                getPlayerDetail();
             }
         });
+    }
+
+    private void getPlayerDetail() {
+        String playerID = (String)activePlayerListView.getSelectionModel().getSelectedItem();
+        Player player = SQLiteQuery.getInstance().getPlayerDetail(playerID);
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("PlayerDetail.fxml"));
+
+        PlayerDetailController pdc;
+        try {
+            Parent root = loader.load();
+            pdc = loader.getController();
+            pdc.setFields(player);
+            Stage stage = new Stage();
+            stage.setTitle("Player Detail");
+            stage.setScene(new Scene(root));
+
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+
+
+
+
+
     }
 
 
