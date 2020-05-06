@@ -30,6 +30,10 @@ public class LobbyController implements GameLogicObserver {
     Button playerButton;
     @FXML
     Button gameButton;
+    @FXML
+    Button allPlayersButton;
+    @FXML
+    Button allGamesButton;
 
 
     public LobbyController() {
@@ -40,6 +44,13 @@ public class LobbyController implements GameLogicObserver {
             @Override
             public void handle(ActionEvent actionEvent) {
                 getPlayerDetail();
+            }
+        });
+
+        gameButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+
             }
         });
     }
@@ -63,12 +74,9 @@ public class LobbyController implements GameLogicObserver {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
 
-
-
-
-
-
+    public void getGameDetail(String gameID){
 
     }
 

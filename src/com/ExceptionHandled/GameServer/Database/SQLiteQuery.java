@@ -223,7 +223,8 @@ public class SQLiteQuery {
             else {
                 matchResult = "Loss";
             }
-            GameHistorySummary gameHistorySummary = new GameHistorySummary(gameID, p1, p2, matchResult);            java.sql.Date startDate = gameSet.getDate(2);
+            GameHistorySummary gameHistorySummary = new GameHistorySummary(gameID, p1, p2, matchResult);
+            java.sql.Date startDate = gameSet.getDate(2);
             java.sql.Date endDate = gameSet.getDate(3);
 
             java.util.Date sDate = new Date(startDate.getTime());
@@ -232,11 +233,16 @@ public class SQLiteQuery {
             GameHistoryDetail detail = new GameHistoryDetail(gameHistorySummary, sDate, eDate, moveList, null);
             return new Packet("Stats", playerID, detail);
 
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return new Packet("Stats", playerID, null);
+    }
+
+    public Packet getGameDetail(String gameID){
+
+
+        return null;
     }
 
     public Packet getPlayerStatsInfo(Packet packet){
@@ -335,11 +341,15 @@ public class SQLiteQuery {
 
     public void insertMoveHistory(MoveValid moveValid){
         try {
-            PreparedStatement prep = connection.prepareStatement("INSERT INTO moveList(gameID, playerID, x_coord, y_coord) values (?,?,?,?)");
+            PreparedStatement prep = connection.prepareStatement("INSERT INTO moveList(gameID, playerID, x_coord, y_coord,time) values (?,?,?,?,?)");
             prep.setString(1, moveValid.getGameID());
             prep.setString(2, moveValid.getPlayer());
             prep.setInt(3,moveValid.getxCoord());
             prep.setInt(4, moveValid.getyCoord());
+
+            //add date to move history, need to test!
+            Date date = new Date(new java.util.Date().getTime());
+            prep.setDate(5, date);
 
             prep.execute();
         } catch (SQLException e) {
@@ -467,11 +477,6 @@ public class SQLiteQuery {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-        if(!userUpdateRequest.getNewPassword().equals("")){
-            isPasswordChanged = updatePassword(playerID, userUpdateRequest.getNewPassword());
-            updateStatus = isPasswordChanged;
-        }
         if(!userUpdateRequest.getNewFirstName().equals("")){
             updateStatus = updateFirstName(playerID, userUpdateRequest.getNewFirstName());
         }
@@ -490,21 +495,6 @@ public class SQLiteQuery {
         try{
             PreparedStatement prep = connection.prepareStatement("UPDATE playerInfo SET username = ? WHERE playerID = ?");
             prep.setString(1, newUsername);
-            prep.setString(2, playerID);
-            prep.executeUpdate();
-
-            return true;
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
-
-    private boolean updatePassword(String playerID, String newPassword){
-        System.out.println("updatePassword called");
-        try{
-            PreparedStatement prep = connection.prepareStatement("UPDATE playerInfo SET password = ? WHERE playerID = ?");
-            prep.setString(1, newPassword);
             prep.setString(2, playerID);
             prep.executeUpdate();
 

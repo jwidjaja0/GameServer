@@ -61,5 +61,7 @@
             </VBox>
          </children>
       </HBox>
+      <Button fx:id="allPlayersButton" layoutX="25.0" layoutY="536.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="126.0" text="All Players" />
+      <Button fx:id="allGamesButton" layoutX="425.0" layoutY="536.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="126.0" text="All Games" />
    </children>
 </AnchorPane>
