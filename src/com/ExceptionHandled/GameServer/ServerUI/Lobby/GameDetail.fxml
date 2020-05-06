@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="490.0" prefWidth="696.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TableView layoutX="24.0" layoutY="182.0" prefHeight="244.0" prefWidth="330.0">
+        <columns>
+          <TableColumn prefWidth="76.0" text="Player " />
+          <TableColumn prefWidth="74.0" text="X" />
+            <TableColumn prefWidth="75.0" text="Y" />
+            <TableColumn prefWidth="103.0" text="Time" />
+        </columns>
+      </TableView>
+      <VBox layoutX="24.0" layoutY="14.0" prefHeight="150.0" prefWidth="284.0">
+         <children>
+            <HBox prefHeight="20.0" prefWidth="509.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="GameID: " wrappingWidth="90.0" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+               </children>
+            </HBox>
+            <HBox prefHeight="20.0" prefWidth="509.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Game Name:" wrappingWidth="90.0" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+               </children>
+            </HBox>
+            <HBox prefHeight="20.0" prefWidth="509.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Player1:" wrappingWidth="90.0" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+               </children>
+            </HBox>
+            <HBox prefHeight="20.0" prefWidth="509.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Player2:" wrappingWidth="90.0" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+               </children>
+            </HBox>
+            <HBox prefHeight="20.0" prefWidth="509.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Match Result: " wrappingWidth="90.0" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+               </children>
+            </HBox>
+            <HBox prefHeight="20.0" prefWidth="509.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Start Time:" wrappingWidth="90.0" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+               </children>
+            </HBox>
+            <HBox prefHeight="20.0" prefWidth="509.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="End Time: " wrappingWidth="90.0" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <TableView layoutX="437.0" layoutY="42.0" prefHeight="244.0" prefWidth="213.0">
+         <columns>
+            <TableColumn prefWidth="212.0" text="Viewers ID" />
+         </columns>
+      </TableView>
+   </children>
+</AnchorPane>

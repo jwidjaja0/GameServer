@@ -191,7 +191,7 @@ public class SQLiteQuery {
         return new Packet("MainMenu", playerID, new JoinGameFail("Unknown join game error"));
     }
 
-    public Packet getGameHistoryDetail(Packet packet, String gameID){
+    public Packet getGameHistoryDetailForPlayer(Packet packet, String gameID){
         String playerID = packet.getPlayerID();
 
         try {
@@ -239,9 +239,45 @@ public class SQLiteQuery {
         return new Packet("Stats", playerID, null);
     }
 
-    public Packet getGameDetail(String gameID){
+    public GameHistoryDetail getGameDetail(String gameID){
+        try {
+            PreparedStatement prep = connection.prepareStatement("SELECT * FROM gameList WHERE gameID = ?");
+            prep.setString(1, gameID);
+            ResultSet gameRS = prep.executeQuery();
+            gameRS.next();
 
+            Date sqlStartDate = gameRS.getDate("startTime");
+            java.util.Date utilStartDate = new Date(sqlStartDate.getTime());
+            Date sqlEndDate = gameRS.getDate("endTime");
+            java.util.Date utilEndDate = new Date(sqlEndDate.getTime());
+            String result = String.valueOf(gameRS.getInt(6));
 
+            GameHistorySummary ghSummary = new GameHistorySummary(gameID, gameRS.getString(4), gameRS.getString(5), result, gameRS.getString("gameName"),
+                    utilStartDate, utilEndDate);
+
+            PreparedStatement prep1 = connection.prepareStatement("SELECT playerID, x_coord, y_coord, time WHERE gameID = ?");
+            ResultSet moveRS = prep1.executeQuery();
+            List<MoveValid> moveValids = new ArrayList<>();
+            while(moveRS.next()){
+                MoveValid mv = new MoveValid(gameID, moveRS.getString("playerID"), moveRS.getInt("x_coord"),
+                        moveRS.getInt("y_coord"), moveRS.getDate("time"));
+                moveValids.add(mv);
+            }
+
+            PreparedStatement prep2 = connection.prepareStatement("SELECT userID WHERE gameID = ?");
+            prep2.setString(1, gameID);
+            ResultSet viewerRS = prep2.executeQuery();
+            List<String> viewers = new ArrayList<>();
+            while(viewerRS.next()){
+                viewers.add(viewerRS.getString(1));
+            }
+
+            GameHistoryDetail detail = new GameHistoryDetail(ghSummary,moveValids,viewers);
+            return detail;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return null;
     }
 
@@ -329,7 +365,7 @@ public class SQLiteQuery {
             prep.execute();
 
             //TODO: reimplement this.. perhaps it's better to send SpectateSuccess and put the GameHistoryDetail inside that.
-            Packet toReturn = getGameHistoryDetail(packet, sp.getGameId());
+            Packet toReturn = getGameHistoryDetailForPlayer(packet, sp.getGameId());
             return toReturn;
 
         } catch (SQLException e) {

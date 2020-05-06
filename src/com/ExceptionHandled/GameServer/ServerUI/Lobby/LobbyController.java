@@ -2,6 +2,7 @@ package com.ExceptionHandled.GameServer.ServerUI.Lobby;
 
 import com.ExceptionHandled.GameMessages.MainMenu.ActiveGameHeader;
 import com.ExceptionHandled.GameMessages.MainMenu.ListActiveGames;
+import com.ExceptionHandled.GameMessages.Stats.GameHistoryDetail;
 import com.ExceptionHandled.GameServer.Database.SQLiteQuery;
 import com.ExceptionHandled.GameServer.InternalMessage.ActivePlayerList;
 import com.ExceptionHandled.GameServer.Observer.GameLogicObserver;
@@ -77,6 +78,7 @@ public class LobbyController implements GameLogicObserver {
     }
 
     public void getGameDetail(String gameID){
+        GameHistoryDetail detail = SQLiteQuery.getInstance().getGameDetail(gameID);
 
     }
 

@@ -89,7 +89,7 @@ public class Server implements Runnable, GameLogicSubject {
 
         if(packet.getMessage() instanceof GameHistoryRequest){
             GameHistoryRequest request = (GameHistoryRequest)packet.getMessage();
-            response = SQLiteQuery.getInstance().getGameHistoryDetail(packet, request.getGameId());
+            response = SQLiteQuery.getInstance().getGameHistoryDetailForPlayer(packet, request.getGameId());
         }
         else if(packet.getMessage() instanceof PlayerStatsRequest){
             PlayerStatsRequest playerStatsRequest = (PlayerStatsRequest)packet.getMessage();
