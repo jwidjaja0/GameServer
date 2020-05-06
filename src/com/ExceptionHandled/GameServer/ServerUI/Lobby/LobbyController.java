@@ -3,6 +3,7 @@ package com.ExceptionHandled.GameServer.ServerUI.Lobby;
 import com.ExceptionHandled.GameMessages.MainMenu.ActiveGameHeader;
 import com.ExceptionHandled.GameMessages.MainMenu.ListActiveGames;
 import com.ExceptionHandled.GameMessages.Stats.GameHistoryDetail;
+import com.ExceptionHandled.GameMessages.UserInfo;
 import com.ExceptionHandled.GameServer.Database.SQLiteQuery;
 import com.ExceptionHandled.GameServer.InternalMessage.ActivePlayerList;
 import com.ExceptionHandled.GameServer.Observer.GameLogicObserver;
@@ -36,7 +37,8 @@ public class LobbyController implements GameLogicObserver {
     @FXML
     Button allGamesButton;
 
-    List<ActiveGameHeader> games;
+    private List<ActiveGameHeader> games;
+    private List<UserInfo> players;
 
 
     public LobbyController() {
@@ -57,6 +59,18 @@ public class LobbyController implements GameLogicObserver {
                 getGameDetail(game.getGameID());
             }
         });
+    }
+
+    public void setPlayers(List<UserInfo> players) {
+        this.players = players;
+    }
+
+    public void setPlayersFromDB(){
+        this.players = SQLiteQuery.getInstance().getAllPlayersInfo();
+    }
+
+    private void showAllPlayers(){
+
     }
 
     private void getPlayerDetail() {

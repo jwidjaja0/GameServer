@@ -376,6 +376,26 @@ public class SQLiteQuery {
         return p;
     }
 
+    public List<UserInfo> getAllPlayersInfo(){
+        List<UserInfo> allPlayers = new ArrayList<>();
+        try {
+            PreparedStatement prep = connection.prepareStatement("SELECT playerID, username, firstname, lastname, isActive\n" +
+                    "FROM playerInfo");
+            ResultSet playersRS = prep.executeQuery();
+
+            while(playersRS.next()){
+                UserInfo user = new UserInfo(playersRS.getString(1), playersRS.getString(2),
+                        playersRS.getString(3), playersRS.getString(4), playersRS.getBoolean(5));
+                allPlayers.add(user);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return allPlayers;
+    }
+
     public Packet insertViewerToGame(Packet packet){
         String playerID = packet.getPlayerID();
         SpectateRequest sp = (SpectateRequest)packet.getMessage();
