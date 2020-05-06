@@ -59,6 +59,13 @@ public class LobbyController implements GameLogicObserver {
                 getGameDetail(game.getGameID());
             }
         });
+
+        allPlayersButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                showAllPlayers();
+            }
+        });
     }
 
     public void setPlayers(List<UserInfo> players) {
@@ -70,7 +77,23 @@ public class LobbyController implements GameLogicObserver {
     }
 
     private void showAllPlayers(){
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("AllPlayers.fxml"));
+        players = SQLiteQuery.getInstance().getAllPlayersInfo();
 
+        try {
+            Parent root = loader.load();
+            AllPlayersController apc = loader.getController();
+            apc.setPlayersInfo(players);
+            apc.populate();
+
+            Stage stage = new Stage();
+            stage.setTitle("All Players");
+            stage.setScene(new Scene(root));
+            stage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void getPlayerDetail() {

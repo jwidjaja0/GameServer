@@ -383,9 +383,12 @@ public class SQLiteQuery {
                     "FROM playerInfo");
             ResultSet playersRS = prep.executeQuery();
 
+
             while(playersRS.next()){
+                Boolean b = playersRS.getBoolean(5);
+
                 UserInfo user = new UserInfo(playersRS.getString(1), playersRS.getString(2),
-                        playersRS.getString(3), playersRS.getString(4), playersRS.getBoolean(5));
+                        playersRS.getString(3), playersRS.getString(4), b);
                 allPlayers.add(user);
             }
 

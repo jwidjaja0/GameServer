@@ -4,16 +4,15 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="418.0" prefWidth="627.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="418.0" prefWidth="627.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ExceptionHandled.GameServer.ServerUI.Lobby.AllPlayersController">
    <children>
-      <TableView layoutX="21.0" layoutY="18.0" prefHeight="372.0" prefWidth="575.0">
+      <TableView fx:id="userTableView" layoutX="21.0" layoutY="18.0" prefHeight="372.0" prefWidth="575.0">
         <columns>
-          <TableColumn prefWidth="85.0" text="User ID" />
-          <TableColumn prefWidth="90.0" text="Username" />
-            <TableColumn prefWidth="126.0" text="First Name" />
-            <TableColumn prefWidth="152.0" text="Last Name" />
-            <TableColumn prefWidth="121.0" text="Status" />
+          <TableColumn fx:id="userIDCol" prefWidth="85.0" text="User ID" />
+          <TableColumn fx:id="usernameCol" prefWidth="90.0" text="Username" />
+            <TableColumn fx:id="fNameCol" prefWidth="126.0" text="First Name" />
+            <TableColumn fx:id="lNameCol" prefWidth="152.0" text="Last Name" />
+            <TableColumn fx:id="statusCol" prefWidth="121.0" text="Status" />
         </columns>
       </TableView>
    </children>
