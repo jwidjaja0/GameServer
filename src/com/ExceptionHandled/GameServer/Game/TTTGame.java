@@ -49,7 +49,7 @@ public class TTTGame {
         return player1;
     }
 
-    public boolean gameOver(){
+    public boolean isGameOver(){
         return board.isGameOver();
     }
 

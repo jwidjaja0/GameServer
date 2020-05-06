@@ -36,6 +36,8 @@ public class LobbyController implements GameLogicObserver {
     @FXML
     Button allGamesButton;
 
+    List<ActiveGameHeader> games;
+
 
     public LobbyController() {
     }
@@ -51,7 +53,8 @@ public class LobbyController implements GameLogicObserver {
         gameButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-
+                ActiveGameHeader game = games.get(activeGamesListView.getSelectionModel().getSelectedIndex());
+                getGameDetail(game.getGameID());
             }
         });
     }
@@ -79,14 +82,29 @@ public class LobbyController implements GameLogicObserver {
 
     public void getGameDetail(String gameID){
         GameHistoryDetail detail = SQLiteQuery.getInstance().getGameDetail(gameID);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("GameDetail.fxml"));
+        GameDetailController gdc;
 
+        try {
+            Parent root = loader.load();
+            gdc = loader.getController();
+            gdc.setGameHistoryDetail(detail);
+            gdc.setInfo();
+
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 
     @Override
     public void update(GameLogicSubject s, Object arg) {
         if(arg instanceof ListActiveGames){
-            List<ActiveGameHeader> games = ((ListActiveGames) arg).getActiveGameHeaderList();
+            games = ((ListActiveGames) arg).getActiveGameHeaderList();
             Platform.runLater(new Runnable() {
                 @Override
                 public void run() {

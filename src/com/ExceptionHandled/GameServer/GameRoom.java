@@ -7,10 +7,7 @@ import com.ExceptionHandled.GameServer.Database.SQLiteQuery;
 import com.ExceptionHandled.GameServer.Game.TTTGame;
 
 
-import java.io.IOException;
 import java.util.*;
-import java.util.concurrent.ArrayBlockingQueue;
-import java.util.concurrent.BlockingQueue;
 
 public class GameRoom {
     private String gameID;
@@ -110,7 +107,7 @@ public class GameRoom {
 
         game.setMove(move.getxCoord(), move.getyCoord(), game.getTurnToken().charAt(0));
 
-        if (game.gameOver()) {
+        if (game.isGameOver()) {
             packets.addAll(gameOver(game.whoWon()));
         }
 

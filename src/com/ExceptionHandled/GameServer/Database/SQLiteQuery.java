@@ -214,7 +214,7 @@ public class SQLiteQuery {
             String p1 = gameSet.getString(4);
             String p2 = gameSet.getString(5);
             String matchResult;
-            if (winner == 0) {
+            if (winner == 3) {
                 matchResult = "Tie";
             }
             else if ((player.equalsIgnoreCase(p1) && winner == 1) || (player.equalsIgnoreCase(p2) && winner == 2)) {
@@ -249,13 +249,29 @@ public class SQLiteQuery {
             Date sqlStartDate = gameRS.getDate("startTime");
             java.util.Date utilStartDate = new Date(sqlStartDate.getTime());
             Date sqlEndDate = gameRS.getDate("endTime");
-            java.util.Date utilEndDate = new Date(sqlEndDate.getTime());
+            java.util.Date utilEndDate;
+            if(sqlEndDate == null){
+                utilEndDate = new java.util.Date(0);
+            }
+            else{
+                utilEndDate = new Date(sqlEndDate.getTime());
+            }
+
+            //TODO: process match result
+//            int matchResult = gameRS.getInt(6);
+//            String result;
+//            switch(matchResult){
+//                case 0:
+//                    result = ""
+//            }
+            System.out.println("int match result: " + gameRS.getInt(6));
             String result = String.valueOf(gameRS.getInt(6));
 
             GameHistorySummary ghSummary = new GameHistorySummary(gameID, gameRS.getString(4), gameRS.getString(5), result, gameRS.getString("gameName"),
                     utilStartDate, utilEndDate);
 
-            PreparedStatement prep1 = connection.prepareStatement("SELECT playerID, x_coord, y_coord, time WHERE gameID = ?");
+            PreparedStatement prep1 = connection.prepareStatement("SELECT playerID, x_coord, y_coord, time from moveList WHERE gameID = ?");
+            prep1.setString(1,gameID);
             ResultSet moveRS = prep1.executeQuery();
             List<MoveValid> moveValids = new ArrayList<>();
             while(moveRS.next()){
@@ -264,7 +280,7 @@ public class SQLiteQuery {
                 moveValids.add(mv);
             }
 
-            PreparedStatement prep2 = connection.prepareStatement("SELECT userID WHERE gameID = ?");
+            PreparedStatement prep2 = connection.prepareStatement("SELECT userID FROM viewers WHERE gameID = ?");
             prep2.setString(1, gameID);
             ResultSet viewerRS = prep2.executeQuery();
             List<String> viewers = new ArrayList<>();
