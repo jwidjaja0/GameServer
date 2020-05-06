@@ -52,12 +52,9 @@ public class LobbyController implements GameLogicObserver {
             }
         });
 
-        gameButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                ActiveGameHeader game = games.get(activeGamesListView.getSelectionModel().getSelectedIndex());
-                getGameDetail(game.getGameID());
-            }
+        gameButton.setOnAction(actionEvent -> {
+            ActiveGameHeader game = games.get(activeGamesListView.getSelectionModel().getSelectedIndex());
+            getGameDetail(game.getGameID());
         });
 
         allPlayersButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -66,6 +63,17 @@ public class LobbyController implements GameLogicObserver {
                 showAllPlayers();
             }
         });
+
+        allGamesButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                showAllGames();
+            }
+        });
+    }
+
+    private void showAllGames() {
+
     }
 
     public void setPlayers(List<UserInfo> players) {

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="418.0" prefWidth="894.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ExceptionHandled.GameServer.ServerUI.Lobby.AllPlayersController">
+   <children>
+      <TableView fx:id="userTableView" layoutX="21.0" layoutY="18.0" prefHeight="372.0" prefWidth="850.0">
+         <columns>
+            <TableColumn fx:id="userIDCol" prefWidth="101.0" text="gameID" />
+            <TableColumn fx:id="usernameCol" prefWidth="92.0" text="Game Name" />
+            <TableColumn fx:id="fNameCol" prefWidth="94.0" text="Player 1" />
+            <TableColumn fx:id="lNameCol" prefWidth="138.0" text="Player 2" />
+            <TableColumn fx:id="statusCol" prefWidth="146.0" text="Match Result" />
+            <TableColumn fx:id="statusCol1" prefWidth="135.0" text="Start Date" />
+            <TableColumn fx:id="statusCol2" prefWidth="143.0" text="End Date" />
+         </columns>
+      </TableView>
+   </children>
+</AnchorPane>

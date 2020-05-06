@@ -303,6 +303,41 @@ public class SQLiteQuery {
         return null;
     }
 
+    public List<GameHistorySummary> getAllGameHistorySummary(){
+        List<GameHistorySummary> gameHistorySummaries = new ArrayList<>();
+
+        try {
+            PreparedStatement prep = connection.prepareStatement("SELECT * FROM gameList");
+            ResultSet gameRS = prep.executeQuery();
+            while(gameRS.next()){
+//                java.util.Date startDate = gameRS.getDate("startTime");
+//                java.util.Date endDate = gameRS.getDate("endTime");
+                int matchResult = gameRS.getInt("gameStatus");
+                String stat = "No conclusion";
+                switch(matchResult){
+                    case 1:
+                        stat = "player 1 won";
+                        break;
+                    case 2:
+                        stat = "player 3 won";
+                        break;
+                    case 3:
+                        stat = "draw";
+                }
+
+                GameHistorySummary ghs = new GameHistorySummary(gameRS.getString("gameID"), gameRS.getString("player1ID"),
+                        gameRS.getString("player2ID"), stat, gameRS.getString("gameName"), gameRS.getDate("startTime"),
+                        gameRS.getDate("endTime"));
+                gameHistorySummaries.add(ghs);
+
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return gameHistorySummaries;
+    }
+
     public Packet getPlayerStatsInfo(Packet packet){
         String playerID = packet.getPlayerID();
 
