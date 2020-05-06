@@ -20,6 +20,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="aefb3591-25b9-418d-8adf-7b35b803d267" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TicTacToe.db" beforeDir="false" afterPath="$PROJECT_DIR$/TicTacToe.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Database/SQLiteQuery.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Database/SQLiteQuery.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Game/AIPlayer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Game/HumanPlayer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Game/TTTGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Game/TTTGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Game/TicTacToe.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Game/TTTBoard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/GameRoom.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/GameRoom.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Server.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -62,7 +70,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="connections" />
+        <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -76,6 +84,10 @@
             <RecentBranchesForRepo>
               <option name="branches">
                 <list>
+                  <RecentBranch>
+                    <option name="branchName" value="removeGamePassword" />
+                    <option name="lastUsedInstant" value="1588719496" />
+                  </RecentBranch>
                   <RecentBranch>
                     <option name="branchName" value="master" />
                     <option name="lastUsedInstant" value="1588654021" />
@@ -135,7 +147,7 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="903b4c15-9d8a-46a5-922a-0b217067a632" name="Default Changelist" comment="" />
+      <changelist id="aefb3591-25b9-418d-8adf-7b35b803d267" name="Default Changelist" comment="" />
       <created>1585630159474</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -166,6 +178,7 @@
       <workItem from="1588379971273" duration="1981000" />
       <workItem from="1588449552052" duration="16036000" />
       <workItem from="1588556702108" duration="530000" />
+      <workItem from="1588719069912" duration="4650000" />
     </task>
     <task id="LOCAL-00001" summary="updated connections">
       <created>1588216562932</created>
@@ -206,7 +219,7 @@
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="1" />
+    <option name="version" value="2" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -356,6 +369,10 @@
     <option name="LAST_COMMIT_MESSAGE" value="removes game from list if game is over" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="250" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1588721809466">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="250" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1280.680@0.0.1280.680" timestamp="1588721809466" />
     <state x="252" y="0" key="CommitChangelistDialog2" timestamp="1588655336911">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
@@ -363,29 +380,29 @@
     <state x="421" y="97" width="878" height="654" key="FileChooserDialogImpl" timestamp="1588641933288" />
     <state x="421" y="97" key="FileChooserDialogImpl/0.0.1280.680@0.0.1280.680" timestamp="1588641933288" />
     <state x="421" y="97" width="878" height="654" key="FileChooserDialogImpl/70.27.1850.1053@70.27.1850.1053" timestamp="1588641933288" />
-    <state width="1877" height="211" key="GridCell.Tab.0.bottom" timestamp="1588649626930">
-      <screen x="-1920" y="0" width="1920" height="1080" />
+    <state width="1237" height="480" key="GridCell.Tab.0.bottom" timestamp="1588723556120">
+      <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state width="1877" height="211" key="GridCell.Tab.0.bottom/-1920.0.1920.1080/0.0.2560.1440@-1920.0.1920.1080" timestamp="1588649626930" />
-    <state width="1237" height="480" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1588641933288" />
+    <state width="1237" height="480" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1588723556120" />
     <state width="1794" height="247" key="GridCell.Tab.0.bottom/70.27.1850.1053@70.27.1850.1053" timestamp="1588641933288" />
-    <state width="1877" height="211" key="GridCell.Tab.0.center" timestamp="1588649626929">
-      <screen x="-1920" y="0" width="1920" height="1080" />
+    <state width="1237" height="480" key="GridCell.Tab.0.center" timestamp="1588723556120">
+      <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state width="1877" height="211" key="GridCell.Tab.0.center/-1920.0.1920.1080/0.0.2560.1440@-1920.0.1920.1080" timestamp="1588649626929" />
-    <state width="1237" height="480" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1588641933288" />
+    <state width="1237" height="480" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1588723556120" />
     <state width="1794" height="247" key="GridCell.Tab.0.center/70.27.1850.1053@70.27.1850.1053" timestamp="1588641933288" />
-    <state width="1877" height="211" key="GridCell.Tab.0.left" timestamp="1588649626929">
-      <screen x="-1920" y="0" width="1920" height="1080" />
+    <state width="1237" height="480" key="GridCell.Tab.0.left" timestamp="1588723556120">
+      <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state width="1877" height="211" key="GridCell.Tab.0.left/-1920.0.1920.1080/0.0.2560.1440@-1920.0.1920.1080" timestamp="1588649626929" />
-    <state width="1237" height="480" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1588641933288" />
+    <state width="1237" height="480" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1588723556120" />
     <state width="1794" height="247" key="GridCell.Tab.0.left/70.27.1850.1053@70.27.1850.1053" timestamp="1588641933288" />
-    <state width="1877" height="211" key="GridCell.Tab.0.right" timestamp="1588649626929">
-      <screen x="-1920" y="0" width="1920" height="1080" />
+    <state width="1237" height="480" key="GridCell.Tab.0.right" timestamp="1588723556120">
+      <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state width="1877" height="211" key="GridCell.Tab.0.right/-1920.0.1920.1080/0.0.2560.1440@-1920.0.1920.1080" timestamp="1588649626929" />
-    <state width="1237" height="480" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1588641933288" />
+    <state width="1237" height="480" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1588723556120" />
     <state width="1794" height="247" key="GridCell.Tab.0.right/70.27.1850.1053@70.27.1850.1053" timestamp="1588641933288" />
     <state x="359" y="27" width="1280" height="1053" key="SettingsEditor" timestamp="1588641933288" />
     <state x="359" y="27" width="1280" height="1053" key="SettingsEditor/70.27.1850.1053@70.27.1850.1053" timestamp="1588641933288" />

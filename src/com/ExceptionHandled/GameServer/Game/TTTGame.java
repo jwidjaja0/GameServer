@@ -2,7 +2,7 @@ package com.ExceptionHandled.GameServer.Game;
 
 
 public class TTTGame {
-    private TicTacToe ticTacToe;
+    private TTTBoard board;
     private boolean player2Turn;
     private String firstTurn;
 
@@ -11,28 +11,28 @@ public class TTTGame {
 
     //create new board, let player1 start, add observer
     public TTTGame() {
-        ticTacToe = new TicTacToe();
+        board = new TTTBoard();
         player2Turn = false;
         firstTurn = player1;
     }
 
     //returns the winner if someone won, "D" for draw, or "-" if the game isn't over yet
     public String whoWon(){
-        if (ticTacToe.isWon('x'))
+        if (board.isWon('x'))
             return "x";
-        else if (ticTacToe.isWon('o'))
+        else if (board.isWon('o'))
             return "o";
-        else if (ticTacToe.isFull())
+        else if (board.isFull())
                 return "d";
         return "-";
     }
 
     public boolean validMove (int row, int col) {
-        return ticTacToe.getCharAt(row, col) == ' ';
+        return board.getCharAt(row, col) == ' ';
     }
 
     public void setMove(int row, int col, char token){
-        ticTacToe.setMove(row, col, token);
+        board.setMove(row, col, token);
     }
 
     public boolean getWhoseTurn(){
@@ -50,16 +50,16 @@ public class TTTGame {
     }
 
     public boolean gameOver(){
-        return ticTacToe.isGameOver();
+        return board.isGameOver();
     }
 
-    public TicTacToe getBoard(){
-        return ticTacToe;
+    public TTTBoard getBoard(){
+        return board;
     }
 
     public void reset(){
         String first = firstTurn;
-        ticTacToe = new TicTacToe();
+        board = new TTTBoard();
         if (first.equals(player1)){
             player2Turn = true;
             firstTurn = player2;
