@@ -7,14 +7,14 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="490.0" prefWidth="696.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ExceptionHandled.GameServer.ServerUI.Lobby.GameDetailController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="490.0" prefWidth="802.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ExceptionHandled.GameServer.ServerUI.Lobby.GameDetailController">
    <children>
-      <TableView layoutX="24.0" layoutY="215.0" prefHeight="244.0" prefWidth="330.0">
+      <TableView layoutX="24.0" layoutY="215.0" prefHeight="244.0" prefWidth="384.0">
         <columns>
           <TableColumn fx:id="playerCol" prefWidth="76.0" text="Player " />
-          <TableColumn prefWidth="74.0" text="X" fx:id="xCol" />
-            <TableColumn fx:id="yCol" prefWidth="75.0" text="Y" />
-            <TableColumn fx:id="timeCol" prefWidth="103.0" text="Time" />
+          <TableColumn prefWidth="59.0" text="X" fx:id="xCol" />
+            <TableColumn fx:id="yCol" prefWidth="60.0" text="Y" />
+            <TableColumn fx:id="timeCol" prefWidth="188.0" text="Time" />
         </columns>
       </TableView>
       <VBox layoutX="24.0" layoutY="42.0" prefHeight="150.0" prefWidth="284.0">
@@ -63,9 +63,12 @@
             </HBox>
          </children>
       </VBox>
-      <TableView layoutX="437.0" layoutY="42.0" prefHeight="244.0" prefWidth="213.0">
+      <TableView layoutX="425.0" layoutY="48.0" prefHeight="409.0" prefWidth="363.0">
          <columns>
-            <TableColumn prefWidth="212.0" text="Viewers ID" />
+            <TableColumn fx:id="vidCol" prefWidth="87.0" text="Viewers ID" />
+            <TableColumn fx:id="userCol" prefWidth="89.0" text="username" />
+            <TableColumn fx:id="fNameCol" prefWidth="85.0" text="First Name" />
+            <TableColumn fx:id="lNameCol" prefWidth="101.0" text="Last Name" />
          </columns>
       </TableView>
    </children>

@@ -1,0 +1,5 @@
+SELECT viewers.userID, playerInfo.username, playerInfo.firstname, playerInfo.lastname
+FROM viewers
+JOIN playerInfo ON viewers.userID = playerInfo.playerID
+WHERE gameID = "972fb2f4-f0b4-4618-ae2a-fe5bd54ac7c0"
+

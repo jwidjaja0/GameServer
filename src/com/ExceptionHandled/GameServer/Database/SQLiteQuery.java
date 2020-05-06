@@ -6,6 +6,7 @@ import com.ExceptionHandled.GameMessages.MainMenu.*;
 import com.ExceptionHandled.GameMessages.Stats.GameHistoryDetail;
 import com.ExceptionHandled.GameMessages.Stats.GameHistorySummary;
 import com.ExceptionHandled.GameMessages.Stats.PlayerStatsInfo;
+import com.ExceptionHandled.GameMessages.UserInfo;
 import com.ExceptionHandled.GameMessages.UserUpdate.UserDeleteFail;
 import com.ExceptionHandled.GameMessages.UserUpdate.UserDeleteSuccess;
 import com.ExceptionHandled.GameMessages.UserUpdate.UserUpdateRequest;
@@ -280,12 +281,17 @@ public class SQLiteQuery {
                 moveValids.add(mv);
             }
 
-            PreparedStatement prep2 = connection.prepareStatement("SELECT userID FROM viewers WHERE gameID = ?");
+            PreparedStatement prep2 = connection.prepareStatement("SELECT viewers.userID, playerInfo.username, playerInfo.firstname, playerInfo.lastname\n" +
+                    "FROM viewers\n" +
+                    "JOIN playerInfo ON viewers.userID = playerInfo.playerID\n" +
+                    "WHERE gameID = ?");
             prep2.setString(1, gameID);
             ResultSet viewerRS = prep2.executeQuery();
-            List<String> viewers = new ArrayList<>();
+            List<UserInfo> viewers = new ArrayList<>();
             while(viewerRS.next()){
-                viewers.add(viewerRS.getString(1));
+                UserInfo viewerInfo = new UserInfo(viewerRS.getString(1), viewerRS.getString(2),
+                        viewerRS.getString(3), viewerRS.getString(4));
+                viewers.add(viewerInfo);
             }
 
             GameHistoryDetail detail = new GameHistoryDetail(ghSummary,moveValids,viewers);
