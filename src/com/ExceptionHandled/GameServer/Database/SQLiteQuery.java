@@ -310,8 +310,6 @@ public class SQLiteQuery {
             PreparedStatement prep = connection.prepareStatement("SELECT * FROM gameList");
             ResultSet gameRS = prep.executeQuery();
             while(gameRS.next()){
-//                java.util.Date startDate = gameRS.getDate("startTime");
-//                java.util.Date endDate = gameRS.getDate("endTime");
                 int matchResult = gameRS.getInt("gameStatus");
                 String stat = "No conclusion";
                 switch(matchResult){
@@ -319,7 +317,7 @@ public class SQLiteQuery {
                         stat = "player 1 won";
                         break;
                     case 2:
-                        stat = "player 3 won";
+                        stat = "player 2 won";
                         break;
                     case 3:
                         stat = "draw";
@@ -346,9 +344,9 @@ public class SQLiteQuery {
             prep.setString(1, playerID);
             ResultSet rs = prep.executeQuery();
 
-            int win = -1;
-            int loss = -1;
-            int draw = -1;
+            int win = 0;
+            int loss = 0;
+            int draw = 0;
 
             while(rs.next()){
                 win = rs.getInt(3);
