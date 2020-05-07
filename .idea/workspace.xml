@@ -19,7 +19,17 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="903b4c15-9d8a-46a5-922a-0b217067a632" name="Default Changelist" comment="" />
+    <list default="true" id="aefb3591-25b9-418d-8adf-7b35b803d267" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TicTacToe.db" beforeDir="false" afterPath="$PROJECT_DIR$/TicTacToe.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Database/SQLiteQuery.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Database/SQLiteQuery.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Game/AIPlayer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Game/HumanPlayer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Game/TTTGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Game/TTTGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Game/TicTacToe.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Game/TTTBoard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/GameRoom.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/GameRoom.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Server.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -60,11 +70,40 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="connections" />
+        <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="ROOT_SYNC" value="SYNC" />
+  </component>
+  <component name="GitToolBoxStore">
+    <option name="recentBranches">
+      <RecentBranches>
+        <option name="branchesForRepo">
+          <list>
+            <RecentBranchesForRepo>
+              <option name="branches">
+                <list>
+                  <RecentBranch>
+                    <option name="branchName" value="removeGamePassword" />
+                    <option name="lastUsedInstant" value="1588719496" />
+                  </RecentBranch>
+                  <RecentBranch>
+                    <option name="branchName" value="master" />
+                    <option name="lastUsedInstant" value="1588654021" />
+                  </RecentBranch>
+                  <RecentBranch>
+                    <option name="branchName" value="connections" />
+                    <option name="lastUsedInstant" value="1588654020" />
+                  </RecentBranch>
+                </list>
+              </option>
+              <option name="repositoryRootUrl" value="file://$PROJECT_DIR$" />
+            </RecentBranchesForRepo>
+          </list>
+        </option>
+      </RecentBranches>
+    </option>
   </component>
   <component name="ProjectId" id="1ZsaGSXhdwZoYhkDHVXYnxdD3JR" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -108,7 +147,7 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="903b4c15-9d8a-46a5-922a-0b217067a632" name="Default Changelist" comment="" />
+      <changelist id="aefb3591-25b9-418d-8adf-7b35b803d267" name="Default Changelist" comment="" />
       <created>1585630159474</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -139,6 +178,7 @@
       <workItem from="1588379971273" duration="1981000" />
       <workItem from="1588449552052" duration="16036000" />
       <workItem from="1588556702108" duration="530000" />
+      <workItem from="1588719069912" duration="4650000" />
     </task>
     <task id="LOCAL-00001" summary="updated connections">
       <created>1588216562932</created>
@@ -161,11 +201,25 @@
       <option name="project" value="LOCAL" />
       <updated>1588222647994</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="game history shows win/loss/tie instead of number">
+      <created>1588654225367</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1588654225367</updated>
+    </task>
+    <task id="LOCAL-00005" summary="removes game from list if game is over">
+      <created>1588655339216</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1588655339216</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="1" />
+    <option name="version" value="2" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -286,12 +340,22 @@
                   </entry>
                 </map>
               </option>
-              <option name="COLUMN_ORDER" />
             </State>
           </value>
         </entry>
       </map>
     </option>
+    <option name="OPEN_GENERIC_TABS">
+      <map>
+        <entry key="1" value="TOOL_WINDOW" />
+        <entry key="2" value="TOOL_WINDOW" />
+        <entry key="3" value="TOOL_WINDOW" />
+        <entry key="4" value="TOOL_WINDOW" />
+        <entry key="5" value="TOOL_WINDOW" />
+        <entry key="6" value="TOOL_WINDOW" />
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <ignored-roots>
@@ -300,62 +364,56 @@
     <MESSAGE value="updated connections" />
     <MESSAGE value="prevents 2 players from joining the same game as player 2" />
     <MESSAGE value="fixed packets for player2 joining the game" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed packets for player2 joining the game" />
+    <MESSAGE value="game history shows win/loss/tie instead of number" />
+    <MESSAGE value="removes game from list if game is over" />
+    <option name="LAST_COMMIT_MESSAGE" value="removes game from list if game is over" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="252" y="0" key="CommitChangelistDialog2" timestamp="1588641933288" />
-    <state x="252" y="0" key="CommitChangelistDialog2/0.0.1280.680@0.0.1280.680" timestamp="1588641933288" />
+    <state x="250" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1588721809466">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="250" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1280.680@0.0.1280.680" timestamp="1588721809466" />
+    <state x="252" y="0" key="CommitChangelistDialog2" timestamp="1588655336911">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="252" y="0" key="CommitChangelistDialog2/0.0.1280.680@0.0.1280.680" timestamp="1588655336911" />
     <state x="421" y="97" width="878" height="654" key="FileChooserDialogImpl" timestamp="1588641933288" />
     <state x="421" y="97" key="FileChooserDialogImpl/0.0.1280.680@0.0.1280.680" timestamp="1588641933288" />
     <state x="421" y="97" width="878" height="654" key="FileChooserDialogImpl/70.27.1850.1053@70.27.1850.1053" timestamp="1588641933288" />
-    <state width="1877" height="363" key="GridCell.Tab.0.bottom" timestamp="1588654908830">
-      <screen x="-1920" y="0" width="1920" height="1080" />
-    </state>
-    <state width="1877" height="363" key="GridCell.Tab.0.bottom/-1920.0.1920.1080/0.0.2560.1440@-1920.0.1920.1080" timestamp="1588654908830" />
-    <state width="1237" height="480" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1588641933288" />
-    <state width="1794" height="247" key="GridCell.Tab.0.bottom/70.27.1850.1053@70.27.1850.1053" timestamp="1588641933288" />
-    <state width="1877" height="363" key="GridCell.Tab.0.center" timestamp="1588654908830">
-      <screen x="-1920" y="0" width="1920" height="1080" />
-    </state>
-    <state width="1877" height="363" key="GridCell.Tab.0.center/-1920.0.1920.1080/0.0.2560.1440@-1920.0.1920.1080" timestamp="1588654908830" />
-    <state width="1237" height="480" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1588641933288" />
-    <state width="1794" height="247" key="GridCell.Tab.0.center/70.27.1850.1053@70.27.1850.1053" timestamp="1588641933288" />
-    <state width="1877" height="363" key="GridCell.Tab.0.left" timestamp="1588654908830">
-      <screen x="-1920" y="0" width="1920" height="1080" />
-    </state>
-    <state width="1877" height="363" key="GridCell.Tab.0.left/-1920.0.1920.1080/0.0.2560.1440@-1920.0.1920.1080" timestamp="1588654908830" />
-    <state width="1237" height="480" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1588641933288" />
-    <state width="1794" height="247" key="GridCell.Tab.0.left/70.27.1850.1053@70.27.1850.1053" timestamp="1588641933288" />
-    <state width="1877" height="363" key="GridCell.Tab.0.right" timestamp="1588654908830">
-      <screen x="-1920" y="0" width="1920" height="1080" />
-    </state>
-    <state width="1877" height="363" key="GridCell.Tab.0.right/-1920.0.1920.1080/0.0.2560.1440@-1920.0.1920.1080" timestamp="1588654908830" />
-    <state width="1237" height="480" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1588641933288" />
-    <state width="1794" height="247" key="GridCell.Tab.0.right/70.27.1850.1053@70.27.1850.1053" timestamp="1588641933288" />
-    <state width="1877" height="363" key="GridCell.Tab.1.bottom" timestamp="1588654908830">
-      <screen x="-1920" y="0" width="1920" height="1080" />
-    </state>
-    <state width="1877" height="363" key="GridCell.Tab.1.bottom/-1920.0.1920.1080/0.0.2560.1440@-1920.0.1920.1080" timestamp="1588654908830" />
-    <state width="1877" height="363" key="GridCell.Tab.1.center" timestamp="1588654908830">
-      <screen x="-1920" y="0" width="1920" height="1080" />
-    </state>
-    <state width="1877" height="363" key="GridCell.Tab.1.center/-1920.0.1920.1080/0.0.2560.1440@-1920.0.1920.1080" timestamp="1588654908830" />
-    <state width="1877" height="363" key="GridCell.Tab.1.left" timestamp="1588654908830">
-      <screen x="-1920" y="0" width="1920" height="1080" />
-    </state>
-    <state width="1877" height="363" key="GridCell.Tab.1.left/-1920.0.1920.1080/0.0.2560.1440@-1920.0.1920.1080" timestamp="1588654908830" />
-    <state width="1877" height="363" key="GridCell.Tab.1.right" timestamp="1588654908830">
-      <screen x="-1920" y="0" width="1920" height="1080" />
-    </state>
-    <state width="1877" height="363" key="GridCell.Tab.1.right/-1920.0.1920.1080/0.0.2560.1440@-1920.0.1920.1080" timestamp="1588654908830" />
-    <state x="359" y="27" width="1280" height="1053" key="SettingsEditor" timestamp="1588641933288" />
-    <state x="359" y="27" width="1280" height="1053" key="SettingsEditor/70.27.1850.1053@70.27.1850.1053" timestamp="1588641933288" />
-    <state x="233" y="62" key="Vcs.Push.Dialog.v2" timestamp="1588641933288" />
-    <state x="233" y="62" key="Vcs.Push.Dialog.v2/0.0.1280.680@0.0.1280.680" timestamp="1588641933288" />
-    <state x="450" y="254" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1588654039021">
+    <state width="1237" height="480" key="GridCell.Tab.0.bottom" timestamp="1588723556120">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="450" y="254" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1280.680@0.0.1280.680" timestamp="1588654039021" />
+    <state width="1877" height="211" key="GridCell.Tab.0.bottom/-1920.0.1920.1080/0.0.2560.1440@-1920.0.1920.1080" timestamp="1588649626930" />
+    <state width="1237" height="480" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1588723556120" />
+    <state width="1794" height="247" key="GridCell.Tab.0.bottom/70.27.1850.1053@70.27.1850.1053" timestamp="1588641933288" />
+    <state width="1237" height="480" key="GridCell.Tab.0.center" timestamp="1588723556120">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1877" height="211" key="GridCell.Tab.0.center/-1920.0.1920.1080/0.0.2560.1440@-1920.0.1920.1080" timestamp="1588649626929" />
+    <state width="1237" height="480" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1588723556120" />
+    <state width="1794" height="247" key="GridCell.Tab.0.center/70.27.1850.1053@70.27.1850.1053" timestamp="1588641933288" />
+    <state width="1237" height="480" key="GridCell.Tab.0.left" timestamp="1588723556120">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1877" height="211" key="GridCell.Tab.0.left/-1920.0.1920.1080/0.0.2560.1440@-1920.0.1920.1080" timestamp="1588649626929" />
+    <state width="1237" height="480" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1588723556120" />
+    <state width="1794" height="247" key="GridCell.Tab.0.left/70.27.1850.1053@70.27.1850.1053" timestamp="1588641933288" />
+    <state width="1237" height="480" key="GridCell.Tab.0.right" timestamp="1588723556120">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1877" height="211" key="GridCell.Tab.0.right/-1920.0.1920.1080/0.0.2560.1440@-1920.0.1920.1080" timestamp="1588649626929" />
+    <state width="1237" height="480" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1588723556120" />
+    <state width="1794" height="247" key="GridCell.Tab.0.right/70.27.1850.1053@70.27.1850.1053" timestamp="1588641933288" />
+    <state x="359" y="27" width="1280" height="1053" key="SettingsEditor" timestamp="1588641933288" />
+    <state x="359" y="27" width="1280" height="1053" key="SettingsEditor/70.27.1850.1053@70.27.1850.1053" timestamp="1588641933288" />
+    <state x="233" y="62" key="Vcs.Push.Dialog.v2" timestamp="1588655355543">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="233" y="62" key="Vcs.Push.Dialog.v2/0.0.1280.680@0.0.1280.680" timestamp="1588655355543" />
+    <state x="450" y="254" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1588655056465">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="450" y="254" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1280.680@0.0.1280.680" timestamp="1588655056465" />
   </component>
   <component name="simpleUML.UMLToolWindowPlugin">
     <General>

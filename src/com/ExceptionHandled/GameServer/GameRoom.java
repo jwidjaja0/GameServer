@@ -14,7 +14,6 @@ import java.util.concurrent.BlockingQueue;
 
 public class GameRoom {
     private String gameID;
-    private String roomPassword;
     private String gameName;
 
     private ArrayList<String> viewers;
@@ -24,11 +23,8 @@ public class GameRoom {
     private TTTGame game;
     private ArrayList<MoveValid> moves;
 
-
-
-    public GameRoom(String gameID, String roomPassword, String gameName, String player1) {
+    public GameRoom(String gameID, String gameName, String player1) {
         this.gameID = gameID;
-        this.roomPassword = roomPassword;
         this.gameName = gameName;
 
         game = new TTTGame();
@@ -42,10 +38,6 @@ public class GameRoom {
         return gameID;
     }
 
-    public String getRoomPassword() {
-        return roomPassword;
-    }
-
     protected String getPlayer1() {
         return player1;
     }
@@ -57,13 +49,16 @@ public class GameRoom {
     public ArrayList<Packet> setPlayer2(String player2) {
         this.player2 = player2;
         ArrayList<Packet> packets = new ArrayList<Packet>();
+
+
         if (!player2.equals("a1234bcd")){//Dont send this message if player is playing vsAI, breaks client
             PlayerJoined joined = new PlayerJoined(gameID, SQLiteQuery.getInstance().getUsername(player2), gameName);
             packets.add(new Packet ("Game", player1, joined));
         }
-        JoinGameSuccess join = new JoinGameSuccess(gameID, SQLiteQuery.getInstance().getUsername(player1), gameName, moves);
 
+        JoinGameSuccess join = new JoinGameSuccess(gameID, SQLiteQuery.getInstance().getUsername(player1), gameName, moves);
         packets.add(new Packet("MainMenu", player2, join));
+
         packets.add(new Packet("Game", player1, new WhoseTurn(gameID, "x")));
         packets.add(new Packet("Game", player2, new WhoseTurn(gameID, "x")));
         return packets;
@@ -83,14 +78,6 @@ public class GameRoom {
 
     public ActiveGameHeader getActiveGameHeader(){
         return new ActiveGameHeader(gameID, gameName, player1, player2);
-    }
-
-    //TODO: fix this method to take input
-    public ArrayList<Packet> gameForfeit() {
-        game.switchTurn();
-        ArrayList<Packet> packets = gameOver(game.getTurnToken());
-        game.switchTurn();
-        return packets;
     }
 
     private ArrayList<Packet> gameOver(String whoWon) {

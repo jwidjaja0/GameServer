@@ -1,6 +1,6 @@
 package com.ExceptionHandled.GameServer.Game;
 
-public class TicTacToe{
+public class TTTBoard {
     private char[][] board;//represents the bame board
 
     /**
@@ -9,7 +9,7 @@ public class TicTacToe{
      */
 
     //makes an empty board
-    public TicTacToe(){
+    public TTTBoard(){
         board = new char[3][3];
         fillBoard();
     }
@@ -19,7 +19,7 @@ public class TicTacToe{
      * @param game
      */
     //creates an identical board
-    public TicTacToe(TicTacToe game){
+    public TTTBoard(TTTBoard game){
         this.board = game.deepCopyBoard();
     }
 

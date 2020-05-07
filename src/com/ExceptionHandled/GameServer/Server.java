@@ -118,16 +118,15 @@ public class Server implements Runnable {
             if(response.getMessage() instanceof NewGameSuccess){
                 NewGameSuccess ngs = (NewGameSuccess)response.getMessage();
                 String gameID = ngs.getGameId();
-                String pw = newGameRequest.getGamePassword();
                 String gameName = newGameRequest.getGameName();
 
-                GameRoom gm = new GameRoom(gameID, pw, gameName, playerID);
+                GameRoom gm = new GameRoom(gameID, gameName, playerID);
                 System.out.println("New Game added");
                 gameRoomList.add(gm);
 
                 if (newGameRequest.getOpponent().equalsIgnoreCase("AI")) {
                     String aiID = "a1234bcd";
-                    JoinGameRequest aiJoin = new JoinGameRequest(gameID, pw);
+                    JoinGameRequest aiJoin = new JoinGameRequest(gameID);
                     Packet sPacket = new Packet("MainMenu", aiID, aiJoin);
                     messageQueue.put(new ServerPacket(serverPacket.getClientConnection(), sPacket));
                 }
@@ -137,14 +136,12 @@ public class Server implements Runnable {
         else if(packet.getMessage() instanceof JoinGameRequest){
             JoinGameRequest request = (JoinGameRequest)packet.getMessage();
             String idRequest = request.getGameId();
-            String pw = request.getGamePassword();
             System.out.println("received joinGameRequest");
 
-            for(GameRoom g : gameRoomList){
-                //TODO: removed password check, reimplement to next line when fixed
-                if(g.getGameID().equals(idRequest)){
-                    if (g.getPlayer2() == null) {
-                        ArrayList<Packet> packets = g.setPlayer2(playerID);
+            for(GameRoom gm : gameRoomList){
+                if(gm.getGameID().equals(idRequest)){
+                    if (gm.getPlayer2() == null && !gm.getPlayer1().equalsIgnoreCase(playerID)) {
+                        ArrayList<Packet> packets = gm.setPlayer2(playerID);
                         for (Packet notice : packets) {
                             System.out.println("sending to player");
                             if (!notice.getPlayerID().equals("a1234bcd"))
@@ -158,13 +155,12 @@ public class Server implements Runnable {
                     }
                 }
             }
-            return;
         }
 
         else if(packet.getMessage() instanceof ListActiveGamesRequest){
             List<ActiveGameHeader> gameList = new ArrayList<>();
-            for(int i = 0; i < gameRoomList.size(); i++){
-                gameList.add(gameRoomList.get(i).getActiveGameHeader());
+            for(GameRoom gm : gameRoomList){
+                gameList.add(gm.getActiveGameHeader());
             }
             System.out.println("Sending list active games, size: " + gameList.size());
             response = new Packet("MainMenu", packet.getPlayerID(), new ListActiveGames(gameList));
@@ -202,9 +198,12 @@ public class Server implements Runnable {
         Packet packet = serverPacket.getPacket();
         Game gameMessage = (Game)packet.getMessage();
         String gameID = gameMessage.getGameID();
+        GameRoom gr = null;
+        boolean removeGame = false;
 
             //find the correct gameID
-            for(GameRoom gm : gameRoomList) {
+            for (GameRoom gm : gameRoomList) {
+
                 if (gm.getGameID().equals(gameID)) {
                     ArrayList<Packet> packets = new ArrayList<Packet>(); //to send back
 
@@ -212,15 +211,11 @@ public class Server implements Runnable {
                         System.out.println("MoveMade, setting packet back");
                         packets.addAll(gm.makeMove((MoveMade) gameMessage));
 
-                        //remove game from gameList if game over
+                        //to remove game later from gameList if game over
                         for(Packet p: packets){
                             if(p.getMessage() instanceof GameOverOutcome){
-                                for(GameRoom g: gameRoomList){
-                                    if(g.getGameID().equals(gameID)){
-                                        gameRoomList.remove(g);
-                                        break;
-                                    }
-                                }
+                                removeGame = true;
+                                gr = gm;
                             }
                         }
 
@@ -243,10 +238,6 @@ public class Server implements Runnable {
                         }
                         packets.add(new Packet("Game", message.getGameID(), pID));
                     }
-                    //TODO: currently can only forfeit on your turn, fix to forfeit whenever
-                    else if (gameMessage instanceof ForfeitGame) {
-                        packets.addAll(gm.gameForfeit());
-                    }
 
                     //send all packets
                     for (Packet notice : packets) {
@@ -255,6 +246,11 @@ public class Server implements Runnable {
                     }
                 }
             }
+
+        //removes game later from gameList if game over
+        if (removeGame) {
+            gameRoomList.remove(gr);
+        }
     }
 
     public void handleConnectionRequest(ServerPacket serverPacket){

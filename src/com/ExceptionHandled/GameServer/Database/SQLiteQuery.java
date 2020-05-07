@@ -448,11 +448,6 @@ public class SQLiteQuery {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-        if(!userUpdateRequest.getNewPassword().equals("")){
-            isPasswordChanged = updatePassword(playerID, userUpdateRequest.getNewPassword());
-            updateStatus = isPasswordChanged;
-        }
         if(!userUpdateRequest.getNewFirstName().equals("")){
             updateStatus = updateFirstName(playerID, userUpdateRequest.getNewFirstName());
         }
@@ -471,21 +466,6 @@ public class SQLiteQuery {
         try{
             PreparedStatement prep = connection.prepareStatement("UPDATE playerInfo SET username = ? WHERE playerID = ?");
             prep.setString(1, newUsername);
-            prep.setString(2, playerID);
-            prep.executeUpdate();
-
-            return true;
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
-
-    private boolean updatePassword(String playerID, String newPassword){
-        System.out.println("updatePassword called");
-        try{
-            PreparedStatement prep = connection.prepareStatement("UPDATE playerInfo SET password = ? WHERE playerID = ?");
-            prep.setString(1, newPassword);
             prep.setString(2, playerID);
             prep.executeUpdate();
 
