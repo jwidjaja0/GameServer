@@ -3,6 +3,7 @@ package com.ExceptionHandled.GameServer.ServerUI.Lobby;
 import com.ExceptionHandled.GameMessages.MainMenu.ActiveGameHeader;
 import com.ExceptionHandled.GameMessages.MainMenu.ListActiveGames;
 import com.ExceptionHandled.GameMessages.Stats.GameHistoryDetail;
+import com.ExceptionHandled.GameMessages.Stats.GameHistorySummary;
 import com.ExceptionHandled.GameMessages.UserInfo;
 import com.ExceptionHandled.GameServer.Database.SQLiteQuery;
 import com.ExceptionHandled.GameServer.InternalMessage.ActivePlayerList;
@@ -21,6 +22,8 @@ import javafx.scene.control.ListView;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.PreparedStatement;
+import java.util.ArrayList;
 import java.util.List;
 
 public class LobbyController implements GameLogicObserver {
@@ -73,7 +76,24 @@ public class LobbyController implements GameLogicObserver {
     }
 
     private void showAllGames() {
+        List<GameHistorySummary> ghs = SQLiteQuery.getInstance().getAllGameHistorySummary();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("AllGames.fxml"));
 
+        try {
+            Parent root = loader.load();
+            AllGamesController agc = loader.getController();
+            agc.setGameHistorySummaries(ghs);
+            agc.populate();
+
+            Stage stage = new Stage();
+            stage.setTitle("All Games");
+            stage.setScene(new Scene(root));
+            stage.show();
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void setPlayers(List<UserInfo> players) {
