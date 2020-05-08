@@ -4,6 +4,8 @@ import com.ExceptionHandled.GameMessages.Game.MoveValid;
 import com.ExceptionHandled.GameMessages.Stats.GameHistoryDetail;
 import com.ExceptionHandled.GameMessages.Stats.GameHistorySummary;
 import com.ExceptionHandled.GameMessages.UserInfo;
+import com.ExceptionHandled.GameServer.ServerUI.GameHistoryDetailUI;
+import com.ExceptionHandled.GameServer.ServerUI.MoveValidUI;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -20,46 +22,40 @@ import java.util.Date;
 import java.util.List;
 
 public class GameDetailController {
-    @FXML Text gameIDText;
-    @FXML Text gameNameText;
-    @FXML Text player1Text;
-    @FXML Text player2Text;
-    @FXML Text matchResultText;
-    @FXML Text startTimeText;
-    @FXML Text endTimeText;
+    @FXML private Text gameIDText;
+    @FXML private Text gameNameText;
+    @FXML private Text player1Text;
+    @FXML private Text player2Text;
+    @FXML private Text matchResultText;
+    @FXML private Text startTimeText;
+    @FXML private Text endTimeText;
 
-    @FXML TableView<MoveValid> moveHistoryView;
-    @FXML TableColumn<MoveValid,String> playerCol;
-    @FXML TableColumn<MoveValid, Integer> xCol;
-    @FXML TableColumn<MoveValid, Integer> yCol;
-    @FXML TableColumn<MoveValid, Date> timeCol;
+    @FXML  TableView<MoveValidUI> moveHistoryView;
+    @FXML  TableColumn<MoveValidUI, String> playerCol;
+    @FXML  TableColumn<MoveValidUI, String> xCol;
+    @FXML  TableColumn<MoveValidUI, String> yCol;
+    @FXML  TableColumn<MoveValidUI, Date> timeCol;
 
-    @FXML TableView<UserInfo> viewersView;
-    @FXML TableColumn<UserInfo,String> vidCol;
-    @FXML TableColumn<UserInfo,String> userCol;
-    @FXML TableColumn<UserInfo,String> fNameCol;
-    @FXML TableColumn<UserInfo,String> lNameCol;
+    @FXML private TableView<UserInfo> viewersView;
+    @FXML private TableColumn<UserInfo,String> vidCol;
+    @FXML private TableColumn<UserInfo,String> userCol;
+    @FXML private TableColumn<UserInfo,String> fNameCol;
+    @FXML private TableColumn<UserInfo,String> lNameCol;
 
 
-    GameHistoryDetail gameHistoryDetail;
+    GameHistoryDetailUI gameHistoryDetailUI;
+
+    public void setGameHistoryDetailUI(GameHistoryDetailUI gameHistoryDetailUI) {
+        this.gameHistoryDetailUI = gameHistoryDetailUI;
+    }
 
     public GameDetailController() {
     }
 
     public void initialize(){
         playerCol.setCellValueFactory(new PropertyValueFactory<>("player"));
-        xCol.setCellValueFactory(new PropertyValueFactory<>("xCoord"));
-
-        //TODO: fix this to be able to set int
-        xCol.setCellFactory(new Callback<TableColumn<MoveValid, Integer>, TableCell<MoveValid, Integer>>() {
-            @Override
-            public TableCell<MoveValid, Integer> call(TableColumn<MoveValid, Integer> moveValidIntegerTableColumn) {
-                return null;
-            }
-        });
-
-
-        yCol.setCellValueFactory(new PropertyValueFactory<>("yCoord"));
+        xCol.setCellValueFactory(new PropertyValueFactory<>("xcoord"));
+        yCol.setCellValueFactory(new PropertyValueFactory<>("ycoord"));
         timeCol.setCellValueFactory(new PropertyValueFactory<>("date"));
 
         vidCol.setCellValueFactory(new PropertyValueFactory<>("userID"));
@@ -68,12 +64,9 @@ public class GameDetailController {
         lNameCol.setCellValueFactory(new PropertyValueFactory<>("lastName"));
     }
 
-    public void setGameHistoryDetail(GameHistoryDetail gameHistoryDetail) {
-        this.gameHistoryDetail = gameHistoryDetail;
-    }
 
     public void setInfo(){
-        GameHistorySummary summary = gameHistoryDetail.getGameHistorySummary();
+        GameHistorySummary summary = gameHistoryDetailUI.getGameHistorySummary();
         gameIDText.setText(summary.getGameID());
         gameNameText.setText(summary.getGameName());
         player1Text.setText(summary.getPlayer1());
@@ -87,22 +80,12 @@ public class GameDetailController {
             endTimeText.setText(summary.getEndDate().toString());
         }
 
-        populateMoveList(gameHistoryDetail.getMoveMadeList());
-        populateViewers(gameHistoryDetail.getViewersInfo());
+        populateMoveList(gameHistoryDetailUI.getMoveValidUIList());
+        populateViewers(gameHistoryDetailUI.getViewersInfo());
     }
 
-    private void populateMoveList(List<MoveValid> moveList){
+    private void populateMoveList(List<MoveValidUI> moveList){
         moveHistoryView.getItems().addAll(moveList);
-        List<Integer> xCoord = new ArrayList<>();
-        List<Integer> yCoord = new ArrayList<>();
-
-        for(int i = 0; i < moveList.size(); i++){
-            xCoord.add(moveList.get(i).getxCoord());
-            yCoord.add(moveList.get(i).getyCoord());
-        }
-        ObservableList<Integer> xList = FXCollections.observableArrayList();
-
-
     }
 
     private void populateViewers(List<UserInfo> viewerList){

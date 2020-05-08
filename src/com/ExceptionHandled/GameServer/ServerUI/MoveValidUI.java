@@ -7,15 +7,15 @@ import java.util.Date;
 public class MoveValidUI {
     private String gameID;
     private String player;
-    private Integer xCoord;
-    private Integer yCoord;
+    private String xcoord;
+    private String ycoord;
     private Date date;
 
     public MoveValidUI(MoveValid mv) {
         gameID = mv.getGameID();
         player = mv.getPlayer();
-        xCoord = mv.getxCoord();
-        yCoord = mv.getyCoord();
+        xcoord = String.valueOf(mv.getxCoord());
+        ycoord = String.valueOf(mv.getyCoord());
         date = mv.getDate();
     }
 
@@ -27,12 +27,12 @@ public class MoveValidUI {
         return player;
     }
 
-    public Integer getxCoord() {
-        return xCoord;
+    public String getXcoord() {
+        return xcoord;
     }
 
-    public Integer getyCoord() {
-        return yCoord;
+    public String getYcoord() {
+        return ycoord;
     }
 
     public Date getDate() {
@@ -47,12 +47,12 @@ public class MoveValidUI {
         this.player = player;
     }
 
-    public void setxCoord(Integer xCoord) {
-        this.xCoord = xCoord;
+    public void setXcoord(String xcoord) {
+        this.xcoord = xcoord;
     }
 
-    public void setyCoord(Integer yCoord) {
-        this.yCoord = yCoord;
+    public void setYcoord(String ycoord) {
+        this.ycoord = ycoord;
     }
 
     public void setDate(Date date) {
