@@ -4,10 +4,19 @@ import com.ExceptionHandled.GameMessages.Game.MoveValid;
 import com.ExceptionHandled.GameMessages.Stats.GameHistoryDetail;
 import com.ExceptionHandled.GameMessages.Stats.GameHistorySummary;
 import com.ExceptionHandled.GameMessages.UserInfo;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
+import javafx.util.Callback;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class GameDetailController {
@@ -19,16 +28,17 @@ public class GameDetailController {
     @FXML Text startTimeText;
     @FXML Text endTimeText;
 
-    @FXML
-    TableColumn playerCol;
-    @FXML TableColumn xCol;
-    @FXML TableColumn yCol;
-    @FXML TableColumn timeCol;
+    @FXML TableView<MoveValid> moveHistoryView;
+    @FXML TableColumn<MoveValid,String> playerCol;
+    @FXML TableColumn<MoveValid, Integer> xCol;
+    @FXML TableColumn<MoveValid, Integer> yCol;
+    @FXML TableColumn<MoveValid, Date> timeCol;
 
-    @FXML TableColumn vidCol;
-    @FXML TableColumn userCol;
-    @FXML TableColumn fNameCol;
-    @FXML TableColumn lNameCol;
+    @FXML TableView<UserInfo> viewersView;
+    @FXML TableColumn<UserInfo,String> vidCol;
+    @FXML TableColumn<UserInfo,String> userCol;
+    @FXML TableColumn<UserInfo,String> fNameCol;
+    @FXML TableColumn<UserInfo,String> lNameCol;
 
 
     GameHistoryDetail gameHistoryDetail;
@@ -36,7 +46,27 @@ public class GameDetailController {
     public GameDetailController() {
     }
 
-    public void initialize(){}
+    public void initialize(){
+        playerCol.setCellValueFactory(new PropertyValueFactory<>("player"));
+        xCol.setCellValueFactory(new PropertyValueFactory<>("xCoord"));
+
+        //TODO: fix this to be able to set int
+        xCol.setCellFactory(new Callback<TableColumn<MoveValid, Integer>, TableCell<MoveValid, Integer>>() {
+            @Override
+            public TableCell<MoveValid, Integer> call(TableColumn<MoveValid, Integer> moveValidIntegerTableColumn) {
+                return null;
+            }
+        });
+
+
+        yCol.setCellValueFactory(new PropertyValueFactory<>("yCoord"));
+        timeCol.setCellValueFactory(new PropertyValueFactory<>("date"));
+
+        vidCol.setCellValueFactory(new PropertyValueFactory<>("userID"));
+        userCol.setCellValueFactory(new PropertyValueFactory<>("username"));
+        fNameCol.setCellValueFactory(new PropertyValueFactory<>("firstName"));
+        lNameCol.setCellValueFactory(new PropertyValueFactory<>("lastName"));
+    }
 
     public void setGameHistoryDetail(GameHistoryDetail gameHistoryDetail) {
         this.gameHistoryDetail = gameHistoryDetail;
@@ -62,21 +92,20 @@ public class GameDetailController {
     }
 
     private void populateMoveList(List<MoveValid> moveList){
-        for(MoveValid mv : moveList){
-            playerCol.getColumns().add(mv.getPlayer());
-            xCol.getColumns().add(mv.getxCoord());
-            yCol.getColumns().add(mv.getyCoord());
-            timeCol.getColumns().add(mv.getUtilDate());
+        moveHistoryView.getItems().addAll(moveList);
+        List<Integer> xCoord = new ArrayList<>();
+        List<Integer> yCoord = new ArrayList<>();
+
+        for(int i = 0; i < moveList.size(); i++){
+            xCoord.add(moveList.get(i).getxCoord());
+            yCoord.add(moveList.get(i).getyCoord());
         }
+        ObservableList<Integer> xList = FXCollections.observableArrayList();
+
+
     }
 
     private void populateViewers(List<UserInfo> viewerList){
-        for(UserInfo info : viewerList){
-            vidCol.getColumns().add(info.getUserID());
-            userCol.getColumns().add(info.getUsername());
-            fNameCol.getColumns().add(info.getFirstName());
-            lNameCol.getColumns().add(info.getLastName());
-        }
-
+        viewersView.getItems().addAll(viewerList);
     }
 }

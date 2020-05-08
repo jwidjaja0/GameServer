@@ -9,7 +9,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="490.0" prefWidth="802.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ExceptionHandled.GameServer.ServerUI.Lobby.GameDetailController">
    <children>
-      <TableView layoutX="24.0" layoutY="215.0" prefHeight="244.0" prefWidth="384.0">
+      <TableView fx:id="moveHistoryView" layoutX="24.0" layoutY="215.0" prefHeight="244.0" prefWidth="384.0">
         <columns>
           <TableColumn fx:id="playerCol" prefWidth="76.0" text="Player " />
           <TableColumn prefWidth="59.0" text="X" fx:id="xCol" />
@@ -63,7 +63,7 @@
             </HBox>
          </children>
       </VBox>
-      <TableView layoutX="425.0" layoutY="48.0" prefHeight="409.0" prefWidth="363.0">
+      <TableView fx:id="viewersView" layoutX="425.0" layoutY="48.0" prefHeight="409.0" prefWidth="363.0">
          <columns>
             <TableColumn fx:id="vidCol" prefWidth="87.0" text="Viewers ID" />
             <TableColumn fx:id="userCol" prefWidth="89.0" text="username" />

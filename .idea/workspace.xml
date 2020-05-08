@@ -20,16 +20,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="aefb3591-25b9-418d-8adf-7b35b803d267" name="Default Changelist" comment="Merge branch 'master' into connections&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml">
-      <change afterPath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/ServerUI/AlertFactory.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/ServerUI/Lobby/GetUserInfo.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/ServerUI/Lobby/GetUserInfoController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/ServerUI/Lobby/StatsViewer.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/ServerUI/Lobby/StatsViewerController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/ServerUI/MoveValidUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TicTacToe.db" beforeDir="false" afterPath="$PROJECT_DIR$/TicTacToe.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Database/SQLiteQuery.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Database/SQLiteQuery.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/ServerUI/Lobby/AllPlayers.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/ServerUI/Lobby/AllPlayers.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/ServerUI/Lobby/AllPlayersController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/ServerUI/Lobby/AllPlayersController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/ServerUI/Lobby/AllGames.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/ServerUI/Lobby/AllGames.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/ServerUI/Lobby/AllGamesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/ServerUI/Lobby/AllGamesController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/ServerUI/Lobby/GameDetail.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/ServerUI/Lobby/GameDetail.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/ServerUI/Lobby/GameDetailController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/ServerUI/Lobby/GameDetailController.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -206,7 +203,7 @@
       <workItem from="1588784235164" duration="21231000" />
       <workItem from="1588811448622" duration="89000" />
       <workItem from="1588818287525" duration="16279000" />
-      <workItem from="1588890688517" duration="585000" />
+      <workItem from="1588890688517" duration="8260000" />
     </task>
     <task id="LOCAL-00001" summary="updated connections">
       <created>1588216562932</created>
