@@ -19,16 +19,12 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="aefb3591-25b9-418d-8adf-7b35b803d267" name="Default Changelist" comment="Merge branch 'master' into connections&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml">
-      <change afterPath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/ServerUI/MoveValidUI.java" afterDir="false" />
+    <list default="true" id="aefb3591-25b9-418d-8adf-7b35b803d267" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TicTacToe.db" beforeDir="false" afterPath="$PROJECT_DIR$/TicTacToe.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/ServerUI/Lobby/AllGames.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/ServerUI/Lobby/AllGames.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/ServerUI/Lobby/AllGamesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/ServerUI/Lobby/AllGamesController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/ServerUI/Lobby/GameDetail.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/ServerUI/Lobby/GameDetail.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/ServerUI/Lobby/GameDetailController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/ServerUI/Lobby/GameDetailController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/GameRoom.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/GameRoom.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Server.java" afterDir="false" />
     </list>
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -84,6 +80,10 @@
               <option name="branches">
                 <list>
                   <RecentBranch>
+                    <option name="branchName" value="serverUI" />
+                    <option name="lastUsedInstant" value="1588812526" />
+                  </RecentBranch>
+                  <RecentBranch>
                     <option name="branchName" value="removeGamePassword" />
                     <option name="lastUsedInstant" value="1588719496" />
                   </RecentBranch>
@@ -114,42 +114,25 @@
   </component>
   <component name="PropertiesComponent">
     <property name="DatabaseDriversLRU" value="sqlite" />
+    <property name="Downloaded.Files.Path.Enabled" value="false" />
+    <property name="Repository.Attach.Annotations" value="false" />
+    <property name="Repository.Attach.JavaDocs" value="false" />
+    <property name="Repository.Attach.Sources" value="false" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/ServerUI/Lobby" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Downloads/openjfx-11.0.2_windows-x64_bin-sdk/javafx-sdk-11.0.2/lib" />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="application.passwordSafe" />
   </component>
-  <component name="RecentsManager">
-    <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="com.ExceptionHandled.GameServer.ServerUI" />
-      <recent name="com.ExceptionHandled.GameServer.ServerUI.Lobby" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="F:\Documents\GitHub\GameServer\src\com\ExceptionHandled\GameServer\ServerUI\Lobby" />
-    </key>
-  </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
-  </component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true">
       <option name="MAIN_CLASS_NAME" value="com.ExceptionHandled.GameServer.Main" />
       <module name="GameServer" />
-      <option name="VM_PARAMETERS" value="--module-path C:\Code\Java\openjfx-11.0.2_windows-x64_bin-sdk\javafx-sdk-11.0.2\lib --add-modules javafx.controls,javafx.fxml" />
+      <option name="VM_PARAMETERS" value="--module-path $PROJECT_DIR$/../../../../../&quot;Program Files&quot;/&quot;Java&quot;/&quot;javafx-sdk-13.0.2&quot;/&quot;lib&quot; --add-modules javafx.controls,javafx.fxml" />
       <RunnerSettings RunnerId="Run" />
       <ConfigurationWrapper RunnerId="Run" />
       <method v="2">
@@ -201,9 +184,7 @@
       <workItem from="1588556702108" duration="530000" />
       <workItem from="1588719069912" duration="4650000" />
       <workItem from="1588784235164" duration="21231000" />
-      <workItem from="1588811448622" duration="89000" />
-      <workItem from="1588818287525" duration="16279000" />
-      <workItem from="1588890688517" duration="8260000" />
+      <workItem from="1588819155717" duration="4813000" />
     </task>
     <task id="LOCAL-00001" summary="updated connections">
       <created>1588216562932</created>
@@ -244,7 +225,7 @@
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="1" />
+    <option name="version" value="2" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -365,12 +346,12 @@
                   </entry>
                 </map>
               </option>
-              <option name="COLUMN_ORDER" />
             </State>
           </value>
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <ignored-roots>
@@ -384,6 +365,10 @@
     <option name="LAST_COMMIT_MESSAGE" value="removes game from list if game is over" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="96" y="0" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1588812957343">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="96" y="0" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1280.680@0.0.1280.680" timestamp="1588812957343" />
     <state x="250" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1588721809466">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
@@ -392,43 +377,75 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="252" y="0" key="CommitChangelistDialog2/0.0.1280.680@0.0.1280.680" timestamp="1588655336911" />
-    <state x="421" y="97" width="878" height="654" key="FileChooserDialogImpl" timestamp="1588641933288" />
-    <state x="421" y="97" key="FileChooserDialogImpl/0.0.1280.680@0.0.1280.680" timestamp="1588641933288" />
+    <state x="421" y="97" width="878" height="654" key="FileChooserDialogImpl" timestamp="1588813240899">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="421" y="97" key="FileChooserDialogImpl/0.0.1280.680@0.0.1280.680" timestamp="1588813240899" />
     <state x="421" y="97" width="878" height="654" key="FileChooserDialogImpl/70.27.1850.1053@70.27.1850.1053" timestamp="1588641933288" />
-    <state width="1237" height="480" key="GridCell.Tab.0.bottom" timestamp="1588723556120">
+    <state width="1237" height="198" key="GridCell.Tab.0.bottom" timestamp="1588823714415">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state width="1877" height="211" key="GridCell.Tab.0.bottom/-1920.0.1920.1080/0.0.2560.1440@-1920.0.1920.1080" timestamp="1588649626930" />
-    <state width="1237" height="480" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1588723556120" />
+    <state width="1237" height="198" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1588823714415" />
     <state width="1794" height="247" key="GridCell.Tab.0.bottom/70.27.1850.1053@70.27.1850.1053" timestamp="1588641933288" />
-    <state width="1237" height="480" key="GridCell.Tab.0.center" timestamp="1588723556120">
+    <state width="1237" height="198" key="GridCell.Tab.0.center" timestamp="1588823714415">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state width="1877" height="211" key="GridCell.Tab.0.center/-1920.0.1920.1080/0.0.2560.1440@-1920.0.1920.1080" timestamp="1588649626929" />
-    <state width="1237" height="480" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1588723556120" />
+    <state width="1237" height="198" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1588823714415" />
     <state width="1794" height="247" key="GridCell.Tab.0.center/70.27.1850.1053@70.27.1850.1053" timestamp="1588641933288" />
-    <state width="1237" height="480" key="GridCell.Tab.0.left" timestamp="1588723556120">
+    <state width="1237" height="198" key="GridCell.Tab.0.left" timestamp="1588823714415">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state width="1877" height="211" key="GridCell.Tab.0.left/-1920.0.1920.1080/0.0.2560.1440@-1920.0.1920.1080" timestamp="1588649626929" />
-    <state width="1237" height="480" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1588723556120" />
+    <state width="1237" height="198" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1588823714415" />
     <state width="1794" height="247" key="GridCell.Tab.0.left/70.27.1850.1053@70.27.1850.1053" timestamp="1588641933288" />
-    <state width="1237" height="480" key="GridCell.Tab.0.right" timestamp="1588723556120">
+    <state width="1237" height="198" key="GridCell.Tab.0.right" timestamp="1588823714415">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state width="1877" height="211" key="GridCell.Tab.0.right/-1920.0.1920.1080/0.0.2560.1440@-1920.0.1920.1080" timestamp="1588649626929" />
-    <state width="1237" height="480" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1588723556120" />
+    <state width="1237" height="198" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1588823714415" />
     <state width="1794" height="247" key="GridCell.Tab.0.right/70.27.1850.1053@70.27.1850.1053" timestamp="1588641933288" />
-    <state x="359" y="27" width="1280" height="1053" key="SettingsEditor" timestamp="1588641933288" />
+    <state width="1237" height="228" key="GridCell.Tab.1.bottom" timestamp="1588823540255">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1237" height="228" key="GridCell.Tab.1.bottom/0.0.1280.680@0.0.1280.680" timestamp="1588823540255" />
+    <state width="1237" height="228" key="GridCell.Tab.1.center" timestamp="1588823540255">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1237" height="228" key="GridCell.Tab.1.center/0.0.1280.680@0.0.1280.680" timestamp="1588823540255" />
+    <state width="1237" height="228" key="GridCell.Tab.1.left" timestamp="1588823540255">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1237" height="228" key="GridCell.Tab.1.left/0.0.1280.680@0.0.1280.680" timestamp="1588823540255" />
+    <state width="1237" height="228" key="GridCell.Tab.1.right" timestamp="1588823540255">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1237" height="228" key="GridCell.Tab.1.right/0.0.1280.680@0.0.1280.680" timestamp="1588823540255" />
+    <state x="0" y="0" width="1280" height="680" key="SettingsEditor" timestamp="1588813244080">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="0" y="0" width="1280" height="680" key="SettingsEditor/0.0.1280.680@0.0.1280.680" timestamp="1588813244080" />
     <state x="359" y="27" width="1280" height="1053" key="SettingsEditor/70.27.1850.1053@70.27.1850.1053" timestamp="1588641933288" />
     <state x="233" y="62" key="Vcs.Push.Dialog.v2" timestamp="1588655355543">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="233" y="62" key="Vcs.Push.Dialog.v2/0.0.1280.680@0.0.1280.680" timestamp="1588655355543" />
-    <state x="450" y="254" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1588655056465">
+    <state x="375" y="232" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD" timestamp="1588813072069">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="450" y="254" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1280.680@0.0.1280.680" timestamp="1588655056465" />
+    <state x="375" y="232" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD/0.0.1280.680@0.0.1280.680" timestamp="1588813072069" />
+    <state x="450" y="254" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1588812777547">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="450" y="254" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1280.680@0.0.1280.680" timestamp="1588812777547" />
+  </component>
+  <component name="XDebuggerManager">
+    <watches-manager>
+      <configuration name="Application">
+        <watch expression="((HashMap)activePlayerMapCC).entrySet().toArray()[0]" custom="java.util.HashMap" />
+      </configuration>
+    </watches-manager>
   </component>
   <component name="simpleUML.UMLToolWindowPlugin">
     <General>

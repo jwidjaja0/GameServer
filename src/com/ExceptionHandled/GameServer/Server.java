@@ -16,6 +16,7 @@ import com.ExceptionHandled.GameServer.Observer.GameLogicSubject;
 
 
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.*;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
@@ -31,6 +32,9 @@ public class Server implements Runnable, GameLogicSubject {
     private Thread thread;
 
     private List<GameLogicObserver> observerList;
+
+    private final String aiID = "a1234bcd";
+
 
     public Server() {
         messageQueue = new ArrayBlockingQueue<>(500);
@@ -134,7 +138,6 @@ public class Server implements Runnable, GameLogicSubject {
                 notifyGameLogicObserver(getListActiveGames());
 
                 if (newGameRequest.getOpponent().equalsIgnoreCase("AI")) {
-                    String aiID = "a1234bcd";
                     JoinGameRequest aiJoin = new JoinGameRequest(gameID);
                     Packet sPacket = new Packet("MainMenu", aiID, aiJoin);
                     messageQueue.put(new ServerPacket(serverPacket.getClientConnection(), sPacket));
@@ -153,7 +156,7 @@ public class Server implements Runnable, GameLogicSubject {
                         ArrayList<Packet> packets = gm.setPlayer2(playerID);
                         for (Packet notice : packets) {
                             System.out.println("sending to player");
-                            if (!notice.getPlayerID().equals("a1234bcd")) //if not to Ai
+                            if (!notice.getPlayerID().equals(aiID)) //if not to Ai
                                 activePlayerMapCC.get(notice.getPlayerID()).getObjectOutputStream().writeObject(notice);
                         }
                         response = SQLiteQuery.getInstance().joinGame(packet);
@@ -182,7 +185,7 @@ public class Server implements Runnable, GameLogicSubject {
             for(GameRoom gm : gameRoomList){
                 if(gm.getGameID().equals(gameID)){
                     Packet notice = gm.addViewer(packet.getPlayerID());
-                    if (!notice.getPlayerID().equals("a1234bcd"))
+                    if (!notice.getPlayerID().equals(aiID))
                         activePlayerMapCC.get(notice.getPlayerID()).getObjectOutputStream().writeObject(notice);
                     response = SQLiteQuery.getInstance().insertViewerToGame(packet);
                 }
@@ -218,7 +221,7 @@ public class Server implements Runnable, GameLogicSubject {
 
                     if (gameMessage instanceof MoveMade) {
                         System.out.println("MoveMade, setting packet back");
-                        packets.addAll(gm.makeMove((MoveMade) gameMessage));
+                        packets.addAll(gm.makeMove((MoveMade) gameMessage, packet.getPlayerID()));
 
                         //to remove game later from gameList if game over
                         for(Packet p: packets){
@@ -227,32 +230,19 @@ public class Server implements Runnable, GameLogicSubject {
                                 gr = gm;
                             }
                         }
-
-
-                    }
-
-                    else if (gameMessage instanceof RematchRequest) {
-                        RematchRequest message = (RematchRequest) gameMessage;
-                        String pID = packet.getPlayerID();
-                        if (pID.equals(gm.getPlayer1())) {
-                            pID = gm.getPlayer2();
-                        }
-                        packets.add(new Packet("Game", message.getGameID(), pID));
-                    }
-
-                    else if (gameMessage instanceof RematchRespond) {
-                        RematchRespond message = (RematchRespond) gameMessage;
-                        String pID = packet.getPlayerID();
-                        if (pID.equals(gm.getPlayer1())) {
-                            pID = gm.getPlayer2();
-                        }
-                        packets.add(new Packet("Game", message.getGameID(), pID));
                     }
 
                     //send all packets
                     for (Packet notice : packets) {
-                        if (!notice.getPlayerID().equals("a1234bcd"))
-                            activePlayerMapCC.get(notice.getPlayerID()).getObjectOutputStream().writeObject(notice);
+                        if (!notice.getPlayerID().equals(aiID)) {
+                            ClientConnection con = activePlayerMapCC.get(notice.getPlayerID());
+                            ObjectOutputStream os = con.getObjectOutputStream();
+                            os.writeObject(notice);
+                            //originally: activePlayerMapCC.get(notice.getPlayerID()).getObjectOutputStream().writeObject(notice);
+                        }
+                        else {
+                            System.out.println("dont send to AI " + packet.getMessageType());
+                        }
                     }
                 }
             }
