@@ -291,9 +291,10 @@ public class SQLiteQuery {
             prep2.setString(1, gameID);
             ResultSet viewerRS = prep2.executeQuery();
             List<UserInfo> viewers = new ArrayList<>();
-            //Password is not included.
-            String pw = "";
+
             while(viewerRS.next()){
+                //Password is not included.
+                String pw = "";
                 UserInfo viewerInfo = new UserInfo(viewerRS.getString(1), viewerRS.getString(2), pw,
                         viewerRS.getString(3), viewerRS.getString(4));
                 viewers.add(viewerInfo);

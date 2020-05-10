@@ -17,9 +17,12 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
 import javafx.util.Callback;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class GameDetailController {
     @FXML private Text gameIDText;
@@ -72,12 +75,18 @@ public class GameDetailController {
         player1Text.setText(summary.getPlayer1());
         player2Text.setText(summary.getPlayer2());
         matchResultText.setText(summary.getMatchResult());
-        startTimeText.setText(summary.getStartDate().toString()); //TODO: figure out add hours if possible
+
+        String pattern = "MM/dd/yyy HH:mm:ss";
+        DateFormat df = new SimpleDateFormat(pattern);
+        String startDateString = df.format(summary.getStartDate());
+        String endDateString = df.format(summary.getEndDate());
+
+        startTimeText.setText(startDateString); //TODO: figure out add hours if possible
         if(summary.getEndDate().getTime() < summary.getStartDate().getTime()){
             endTimeText.setText("-");
         }
         else{
-            endTimeText.setText(summary.getEndDate().toString());
+            endTimeText.setText(endDateString);
         }
 
         populateMoveList(gameHistoryDetailUI.getMoveValidUIList());
