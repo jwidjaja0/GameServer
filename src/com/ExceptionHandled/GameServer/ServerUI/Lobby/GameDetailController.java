@@ -4,9 +4,12 @@ import com.ExceptionHandled.GameMessages.Game.MoveValid;
 import com.ExceptionHandled.GameMessages.Stats.GameHistoryDetail;
 import com.ExceptionHandled.GameMessages.Stats.GameHistorySummary;
 import com.ExceptionHandled.GameMessages.UserInfo;
-import com.ExceptionHandled.GameServer.ServerUI.GameHistoryDetailUI;
-import com.ExceptionHandled.GameServer.ServerUI.MoveValidUI;
+
+
 import javafx.beans.property.SimpleIntegerProperty;
+
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -33,11 +36,11 @@ public class GameDetailController {
     @FXML private Text startTimeText;
     @FXML private Text endTimeText;
 
-    @FXML  TableView<MoveValidUI> moveHistoryView;
-    @FXML  TableColumn<MoveValidUI, String> playerCol;
-    @FXML  TableColumn<MoveValidUI, String> xCol;
-    @FXML  TableColumn<MoveValidUI, String> yCol;
-    @FXML  TableColumn<MoveValidUI, Date> timeCol;
+    @FXML  TableView<MoveValid> moveHistoryView;
+    @FXML  TableColumn<MoveValid, String> playerCol;
+    @FXML  TableColumn<MoveValid, String> xCol;
+    @FXML  TableColumn<MoveValid, String> yCol;
+    @FXML  TableColumn<MoveValid, Date> timeCol;
 
     @FXML private TableView<UserInfo> viewersView;
     @FXML private TableColumn<UserInfo,String> vidCol;
@@ -46,10 +49,10 @@ public class GameDetailController {
     @FXML private TableColumn<UserInfo,String> lNameCol;
 
 
-    GameHistoryDetailUI gameHistoryDetailUI;
+    GameHistoryDetail gameHistoryDetail;
 
-    public void setGameHistoryDetailUI(GameHistoryDetailUI gameHistoryDetailUI) {
-        this.gameHistoryDetailUI = gameHistoryDetailUI;
+    public void setGameHistoryDetailUI(GameHistoryDetail gameHistoryDetail) {
+        this.gameHistoryDetail = gameHistoryDetail;
     }
 
     public GameDetailController() {
@@ -57,8 +60,24 @@ public class GameDetailController {
 
     public void initialize(){
         playerCol.setCellValueFactory(new PropertyValueFactory<>("player"));
-        xCol.setCellValueFactory(new PropertyValueFactory<>("xcoord"));
-        yCol.setCellValueFactory(new PropertyValueFactory<>("ycoord"));
+        //xCol.setCellValueFactory(new PropertyValueFactory<>("xcoord"));
+
+        xCol.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<MoveValid, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TableColumn.CellDataFeatures<MoveValid, String> moveValidStringCellDataFeatures) {
+                Integer c = moveValidStringCellDataFeatures.getValue().getxCoord();
+                return new SimpleStringProperty(c.toString());
+            }
+        });
+        yCol.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<MoveValid, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TableColumn.CellDataFeatures<MoveValid, String> moveValidStringCellDataFeatures) {
+                Integer c = moveValidStringCellDataFeatures.getValue().getyCoord();
+                return new SimpleStringProperty(c.toString());
+            }
+        });
+
+//        yCol.setCellValueFactory(new PropertyValueFactory<>("ycoord"));
         timeCol.setCellValueFactory(new PropertyValueFactory<>("date"));
 
         vidCol.setCellValueFactory(new PropertyValueFactory<>("userID"));
@@ -69,7 +88,7 @@ public class GameDetailController {
 
 
     public void setInfo(){
-        GameHistorySummary summary = gameHistoryDetailUI.getGameHistorySummary();
+        GameHistorySummary summary = gameHistoryDetail.getGameHistorySummary();
         gameIDText.setText(summary.getGameID());
         gameNameText.setText(summary.getGameName());
         player1Text.setText(summary.getPlayer1());
@@ -89,11 +108,11 @@ public class GameDetailController {
             endTimeText.setText(endDateString);
         }
 
-        populateMoveList(gameHistoryDetailUI.getMoveValidUIList());
-        populateViewers(gameHistoryDetailUI.getViewersInfo());
+        populateMoveList(gameHistoryDetail.getMoveMadeList());
+        populateViewers(gameHistoryDetail.getViewersInfo());
     }
 
-    private void populateMoveList(List<MoveValidUI> moveList){
+    private void populateMoveList(List<MoveValid> moveList){
         moveHistoryView.getItems().addAll(moveList);
     }
 

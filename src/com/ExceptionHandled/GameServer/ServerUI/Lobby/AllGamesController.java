@@ -3,7 +3,7 @@ package com.ExceptionHandled.GameServer.ServerUI.Lobby;
 import com.ExceptionHandled.GameMessages.Stats.GameHistoryDetail;
 import com.ExceptionHandled.GameMessages.Stats.GameHistorySummary;
 import com.ExceptionHandled.GameServer.Database.SQLiteQuery;
-import com.ExceptionHandled.GameServer.ServerUI.GameHistoryDetailUI;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -59,7 +59,6 @@ public class AllGamesController {
 
     public void getGameDetail(String gameID){
         GameHistoryDetail detail = SQLiteQuery.getInstance().getGameDetail(gameID);
-        GameHistoryDetailUI detailUI = new GameHistoryDetailUI(detail);
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("GameDetail.fxml"));
         GameDetailController gdc;
@@ -67,7 +66,7 @@ public class AllGamesController {
         try {
             Parent root = loader.load();
             gdc = loader.getController();
-            gdc.setGameHistoryDetailUI(detailUI);
+            gdc.setGameHistoryDetailUI(detail);
             gdc.setInfo();
 
             Stage stage = new Stage();
