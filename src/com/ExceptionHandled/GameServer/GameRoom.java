@@ -121,12 +121,12 @@ public class GameRoom {
         return packets;
     }
 
-    public ArrayList<Packet> makeMove(MoveMade move) {
+    public ArrayList<Packet> makeMove(MoveMade move, String playerID) {
         ArrayList<Packet> packets = new ArrayList<Packet>();
         //if invalid move
         if (!game.validMove(move.getxCoord(), move.getyCoord())) {
             MoveInvalid moveInvalid = new MoveInvalid(gameID, game.getTurnToken(), move.getxCoord(), move.getyCoord());
-            packets.add(new Packet("Game", move.getPlayer(), moveInvalid));
+            packets.add(new Packet("Game", playerID, moveInvalid));
         }
         //otherwise make the move
         else {
@@ -134,7 +134,6 @@ public class GameRoom {
             SQLiteQuery.getInstance().insertMoveHistory(moveValid);
             packets.addAll(makeValidMove(moveValid));
         }
-
         return packets;
     }
 }

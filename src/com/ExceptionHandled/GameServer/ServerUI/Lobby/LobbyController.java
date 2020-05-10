@@ -10,6 +10,7 @@ import com.ExceptionHandled.GameServer.InternalMessage.ActivePlayerList;
 import com.ExceptionHandled.GameServer.Observer.GameLogicObserver;
 import com.ExceptionHandled.GameServer.Observer.GameLogicSubject;
 import com.ExceptionHandled.GameServer.Player;
+import com.ExceptionHandled.GameServer.ServerUI.GameHistoryDetailUI;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -147,13 +148,14 @@ public class LobbyController implements GameLogicObserver {
 
     public void getGameDetail(String gameID){
         GameHistoryDetail detail = SQLiteQuery.getInstance().getGameDetail(gameID);
+
         FXMLLoader loader = new FXMLLoader(getClass().getResource("GameDetail.fxml"));
         GameDetailController gdc;
 
         try {
             Parent root = loader.load();
             gdc = loader.getController();
-            gdc.setGameHistoryDetail(detail);
+            gdc.setGameHistoryDetailUI(new GameHistoryDetailUI(detail));
             gdc.setInfo();
 
             Stage stage = new Stage();
