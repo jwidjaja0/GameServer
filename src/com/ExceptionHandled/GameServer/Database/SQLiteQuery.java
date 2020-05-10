@@ -75,7 +75,6 @@ public class SQLiteQuery {
                 return new Packet("Login", null, new SignUpFail("Username already exist"));
             }
 
-
             while(!isSignUpIDUnique(id)){
                 id = UUID.randomUUID().toString().substring(0,8);
             }
@@ -92,6 +91,10 @@ public class SQLiteQuery {
             prep.setString(5,request.getLastName());
             prep.setBoolean(6,true);
             prep.execute();
+
+            PreparedStatement prep2 = connection.prepareStatement("INSERT INTO playerStats(playerID) values(?)");
+            prep2.setString(1, id);
+            prep2.execute();
 
             return new Packet("Login", id, new SignUpSuccess());
         }
@@ -471,8 +474,8 @@ public class SQLiteQuery {
         }
     }
 
-    public void updateGameOver(String gameID, int gameStatus){
-        //-1: incomplete, 0: draw, 1: player1Won, 2:player2Won
+    public void updateGameOver(String gameID, int gameStatus, String p1ID, String p2ID){
+        //1: player1Won, 2:player2Won, 3: draw
         java.util.Date endDate = new java.util.Date();
         java.sql.Date date2 = new Date(endDate.getTime());
 
@@ -483,6 +486,32 @@ public class SQLiteQuery {
             prep.setDate(2, date2);
             prep.execute();
 
+            if(gameStatus == 1 || gameStatus == 2){
+                //player1 won
+                PreparedStatement ps = connection.prepareStatement("UPDATE playerStats SET win = win + 1 WHERE playerID = ?");
+                PreparedStatement ps2 = connection.prepareStatement("UPDATE playerStats SET lose = lose + 1 WHERE playerID = ?");
+
+                if(gameStatus == 1){
+                    ps.setString(1, p1ID);
+                    ps2.setString(1,p2ID);
+                }
+                else{
+                    ps.setString(1, p2ID);
+                    ps2.setString(1,p1ID);
+                }
+                ps.execute();
+                ps2.execute();
+            }
+            else{
+                //game draw
+                PreparedStatement preparedStatement =  connection.prepareStatement("UPDATE playerStats set draw = draw + 1 WHERE playerID = ?");
+                PreparedStatement preparedStatement2 =  connection.prepareStatement("UPDATE playerStats set draw = draw + 1 WHERE playerID = ?");
+                preparedStatement.setString(1, p1ID);
+                preparedStatement2.setString(1,p2ID);
+
+                preparedStatement.execute();
+                preparedStatement2.execute();
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }

@@ -81,7 +81,7 @@ public class GameRoom {
         int winner;
         if (game.getWhoseTurn()) winner = 2;
         else winner = 1;
-        SQLiteQuery.getInstance().updateGameOver(gameID, winner);
+        SQLiteQuery.getInstance().updateGameOver(gameID, winner, player1, player1);
 
         ArrayList<Packet> packets = new ArrayList<Packet>();
         GameOverOutcome gameOver = new GameOverOutcome(gameID, whoWon);

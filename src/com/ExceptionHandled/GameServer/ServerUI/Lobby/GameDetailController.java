@@ -72,7 +72,7 @@ public class GameDetailController {
         player1Text.setText(summary.getPlayer1());
         player2Text.setText(summary.getPlayer2());
         matchResultText.setText(summary.getMatchResult());
-        startTimeText.setText(summary.getStartDate().toString());
+        startTimeText.setText(summary.getStartDate().toString()); //TODO: figure out add hours if possible
         if(summary.getEndDate().getTime() < summary.getStartDate().getTime()){
             endTimeText.setText("-");
         }
