@@ -23,8 +23,6 @@ import javafx.stage.Stage;
 import java.io.Serializable;
 import java.util.Observable;
 
-
-//TODO: Add error checking
 public class GetUserInfoController extends Observable {
     @FXML
     Button action;

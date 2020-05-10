@@ -30,6 +30,7 @@ public class AllPlayersController implements Observer {
     @FXML private TableView<UserInfo> userTableView;
     @FXML private TableColumn<UserInfo, String> userIDCol;
     @FXML private TableColumn<UserInfo, String> usernameCol;
+    @FXML private TableColumn<UserInfo, String> passwordCol;
     @FXML private TableColumn<UserInfo, String> fNameCol;
     @FXML private TableColumn<UserInfo, String> lNameCol;
     @FXML private TableColumn<UserInfo, Boolean> statusCol;
@@ -46,6 +47,7 @@ public class AllPlayersController implements Observer {
     public void initialize(){
         userIDCol.setCellValueFactory(new PropertyValueFactory<>("userID"));
         usernameCol.setCellValueFactory(new PropertyValueFactory<>("username"));
+        passwordCol.setCellValueFactory(new PropertyValueFactory<>("password"));
         fNameCol.setCellValueFactory(new PropertyValueFactory<>("firstName"));
         lNameCol.setCellValueFactory(new PropertyValueFactory<>("lastName"));
         statusCol.setCellValueFactory(new PropertyValueFactory<>("Active"));
@@ -88,8 +90,6 @@ public class AllPlayersController implements Observer {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
     }
 
     public void setPlayersInfo(List<UserInfo> playersInfo) {
