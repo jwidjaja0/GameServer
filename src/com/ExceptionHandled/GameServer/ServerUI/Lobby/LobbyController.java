@@ -10,7 +10,6 @@ import com.ExceptionHandled.GameServer.InternalMessage.ActivePlayerList;
 import com.ExceptionHandled.GameServer.Observer.GameLogicObserver;
 import com.ExceptionHandled.GameServer.Observer.GameLogicSubject;
 import com.ExceptionHandled.GameServer.Player;
-import com.ExceptionHandled.GameServer.ServerUI.GameHistoryDetailUI;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -155,7 +154,8 @@ public class LobbyController implements GameLogicObserver {
         try {
             Parent root = loader.load();
             gdc = loader.getController();
-            gdc.setGameHistoryDetailUI(new GameHistoryDetailUI(detail));
+//            gdc.setGameHistoryDetailUI(new GameHistoryDetailUI(detail));
+            gdc.setGameHistoryDetailUI(detail);
             gdc.setInfo();
 
             Stage stage = new Stage();
