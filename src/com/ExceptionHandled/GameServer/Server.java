@@ -280,7 +280,6 @@ public class Server implements Runnable, GameLogicSubject {
         else if(packet.getMessage() instanceof LogoutRequest){
             String playerID = packet.getPlayerID();
             if(playerID.equals(null)){
-                //TODO: FIX LOGOUTFAIL
                 response = new Packet("Login", playerID, new LogoutFail(""));
             }
             else{

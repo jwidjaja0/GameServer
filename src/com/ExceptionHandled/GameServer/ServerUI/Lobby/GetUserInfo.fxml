@@ -5,10 +5,11 @@
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="getInfoAnchor" prefHeight="224.0" prefWidth="324.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ExceptionHandled.GameServer.ServerUI.Lobby.GetUserInfoController">
+<AnchorPane fx:id="getInfoAnchor" prefHeight="224.0" prefWidth="324.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ExceptionHandled.GameServer.ServerUI.Lobby.GetUserInfoController">
    <children>
-      <Button fx:id="action" layoutX="184.0" layoutY="169.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="114.0" text="Register" />
+      <Button fx:id="action" layoutX="184.0" layoutY="169.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="114.0" text="Update" />
       <TextField fx:id="username" layoutX="98.0" layoutY="19.0" prefHeight="26.0" prefWidth="200.0" />
       <Label fx:id="usernameLabel" layoutX="16.0" layoutY="24.0" prefHeight="16.0" prefWidth="80.0" text="Username:" />
       <Label fx:id="passwordLabel" layoutX="16.0" layoutY="56.0" prefHeight="16.0" prefWidth="80.0" text="Password:" />
@@ -17,5 +18,6 @@
       <PasswordField fx:id="password" layoutX="98.0" layoutY="52.0" prefHeight="26.0" prefWidth="200.0" />
       <TextField fx:id="firstName" layoutX="98.0" layoutY="86.0" prefHeight="26.0" prefWidth="200.0" />
       <TextField fx:id="lastName" layoutX="98.0" layoutY="119.0" prefHeight="26.0" prefWidth="200.0" />
+      <Text layoutX="9.0" layoutY="178.0" strokeType="OUTSIDE" strokeWidth="0.0" text="*empty field will not be updated" wrappingWidth="93.923828125" />
    </children>
 </AnchorPane>
