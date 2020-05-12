@@ -105,7 +105,7 @@ public class GameRoom {
             packets.add(new Packet("Game", viewer, move));
         }
 
-        game.setMove(move.getxCoord(), move.getyCoord(), game.getTurnToken().charAt(0));
+        game.setMove(move.getXCoord(), move.getYCoord(), game.getTurnToken().charAt(0));
 
         if (game.isGameOver()) {
             packets.addAll(gameOver(game.whoWon()));
