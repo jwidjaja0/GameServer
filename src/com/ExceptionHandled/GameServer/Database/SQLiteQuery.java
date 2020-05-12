@@ -216,7 +216,7 @@ public class SQLiteQuery {
             prep1.setString(1, gameID);
             ResultSet gameSet = prep1.executeQuery();
 
-            int winner = gameSet.getInt(6);
+            int winner = gameSet.getInt("gameStatus");
             String player = packet.getPlayerID();
             String p1 = gameSet.getString(4);
             String p2 = gameSet.getString(5);
@@ -550,18 +550,19 @@ public class SQLiteQuery {
         NewGameRequest request = (NewGameRequest)packet.getMessage();
 
         try {
-            PreparedStatement prep = connection.prepareStatement("INSERT INTO gameList(gameID, startTime, player1ID, player2ID, gameName) values(?,?,?,?,?)");
+            PreparedStatement prep = connection.prepareStatement("INSERT INTO gameList(gameID, startTime, endTime, player1ID, player2ID, gameName) values(?,?,?,?,?,?)");
             prep.setString(1, gameID);
             prep.setDate(2, new Date(System.currentTimeMillis()));
-            prep.setString(3,player1ID);
+            prep.setDate(3, new Date(System.currentTimeMillis()));
+            prep.setString(4,player1ID);
             if(request.getOpponent().equals("AI")){
-                prep.setString(4,"AI");
+                prep.setString(5,"AI");
                 player2Type = "AI";
             }
             else{
-                prep.setString(4, "");
+                prep.setString(5, "");
             }
-            prep.setString(5, request.getGameName());
+            prep.setString(6, request.getGameName());
             prep.execute();
 
             return new Packet("MainMenu", player1ID, new NewGameSuccess(gameID, request.getGameName(), player2Type));

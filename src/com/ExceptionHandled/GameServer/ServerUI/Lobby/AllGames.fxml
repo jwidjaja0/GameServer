@@ -5,9 +5,9 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="462.0" prefWidth="896.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ExceptionHandled.GameServer.ServerUI.Lobby.AllGamesController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="460.0" prefWidth="924.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ExceptionHandled.GameServer.ServerUI.Lobby.AllGamesController">
    <children>
-      <TableView fx:id="gameTableView" layoutX="21.0" layoutY="18.0" prefHeight="372.0" prefWidth="850.0">
+      <TableView fx:id="gameTableView" layoutX="37.0" layoutY="22.0" prefHeight="372.0" prefWidth="850.0">
          <columns>
             <TableColumn fx:id="gameIDCol" maxWidth="80.0" text="gameID" />
             <TableColumn fx:id="gamenameCol" maxWidth="90.0" prefWidth="90.0" text="Game Name" />

@@ -22,8 +22,6 @@ import javafx.scene.control.ListView;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.sql.PreparedStatement;
-import java.util.ArrayList;
 import java.util.List;
 
 public class LobbyController implements GameLogicObserver {
@@ -155,7 +153,7 @@ public class LobbyController implements GameLogicObserver {
             Parent root = loader.load();
             gdc = loader.getController();
 //            gdc.setGameHistoryDetailUI(new GameHistoryDetailUI(detail));
-            gdc.setGameHistoryDetailUI(detail);
+            gdc.setGameHistoryDetail(detail);
             gdc.setInfo();
 
             Stage stage = new Stage();
