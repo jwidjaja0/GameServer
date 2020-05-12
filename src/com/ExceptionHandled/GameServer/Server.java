@@ -185,8 +185,7 @@ public class Server implements Runnable, GameLogicSubject {
             for(GameRoom gm : gameRoomList){
                 if(gm.getGameID().equals(gameID)){
                     Packet notice = gm.addViewer(packet.getPlayerID());
-                    if (!notice.getPlayerID().equals(aiID))
-                        activePlayerMapCC.get(notice.getPlayerID()).getObjectOutputStream().writeObject(notice);
+                    activePlayerMapCC.get(notice.getPlayerID()).getObjectOutputStream().writeObject(notice);
                     response = SQLiteQuery.getInstance().insertViewerToGame(packet);
                 }
             }

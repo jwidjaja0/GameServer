@@ -133,6 +133,7 @@ public class GameRoom {
             MoveValid moveValid = new MoveValid(gameID, game.getTurnToken(), move.getxCoord(), move.getyCoord());
             SQLiteQuery.getInstance().insertMoveHistory(moveValid);
             packets.addAll(makeValidMove(moveValid));
+            moves.add(moveValid);
         }
         return packets;
     }
