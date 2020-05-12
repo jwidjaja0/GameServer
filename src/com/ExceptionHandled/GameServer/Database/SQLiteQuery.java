@@ -464,8 +464,8 @@ public class SQLiteQuery {
             PreparedStatement prep = connection.prepareStatement("INSERT INTO moveList(gameID, playerID, x_coord, y_coord,time) values (?,?,?,?,?)");
             prep.setString(1, moveValid.getGameID());
             prep.setString(2, moveValid.getPlayer());
-            prep.setInt(3,moveValid.getxCoord());
-            prep.setInt(4, moveValid.getyCoord());
+            prep.setInt(3,moveValid.getXCoord());
+            prep.setInt(4, moveValid.getYCoord());
 
             //add date to move history, need to test!
             Date date = new Date(new java.util.Date().getTime());
