@@ -19,15 +19,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6ee0c525-a4c7-4786-b2d1-2baad30c76f8" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameServer.iml" beforeDir="false" afterPath="$PROJECT_DIR$/GameServer.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TicTacToe.db" beforeDir="false" afterPath="$PROJECT_DIR$/TicTacToe.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Database/SQLiteQuery.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Database/SQLiteQuery.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/GameRoom.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/GameRoom.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Server.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/ServerUI/Lobby/GameDetailController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/ServerUI/Lobby/GameDetailController.java" afterDir="false" />
-    </list>
+    <list default="true" id="6ee0c525-a4c7-4786-b2d1-2baad30c76f8" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -226,7 +218,14 @@
       <option name="project" value="LOCAL" />
       <updated>1588655339216</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="fixed the moves">
+      <created>1589255330171</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1589255330171</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -367,7 +366,8 @@
     <MESSAGE value="fixed packets for player2 joining the game" />
     <MESSAGE value="game history shows win/loss/tie instead of number" />
     <MESSAGE value="removes game from list if game is over" />
-    <option name="LAST_COMMIT_MESSAGE" value="removes game from list if game is over" />
+    <MESSAGE value="fixed the moves" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed the moves" />
   </component>
   <component name="WindowStateProjectService">
     <state x="96" y="0" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1589254552258">
@@ -379,10 +379,10 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="250" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1280.680@0.0.1280.680" timestamp="1588721809466" />
-    <state x="252" y="0" key="CommitChangelistDialog2" timestamp="1588655336911">
+    <state x="252" y="0" key="CommitChangelistDialog2" timestamp="1589255327200">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="252" y="0" key="CommitChangelistDialog2/0.0.1280.680@0.0.1280.680" timestamp="1588655336911" />
+    <state x="252" y="0" key="CommitChangelistDialog2/0.0.1280.680@0.0.1280.680" timestamp="1589255327200" />
     <state x="421" y="97" width="878" height="654" key="FileChooserDialogImpl" timestamp="1588813240899">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
@@ -432,16 +432,20 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="121" y="50" key="MergeDialog/0.0.1280.680@0.0.1280.680" timestamp="1589254390656" />
+    <state x="530" y="208" width="386" height="264" key="MultipleFileMergeDialog" timestamp="1589255484834">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="530" y="208" width="386" height="264" key="MultipleFileMergeDialog/0.0.1280.680@0.0.1280.680" timestamp="1589255484834" />
     <state x="0" y="0" width="1280" height="680" key="SettingsEditor" timestamp="1589254501156">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="-1920" y="0" key="SettingsEditor/-1920.0.1920.1080/0.0.2560.1440@-1920.0.1920.1080" timestamp="1589138396408" />
     <state x="0" y="0" width="1280" height="680" key="SettingsEditor/0.0.1280.680@0.0.1280.680" timestamp="1589254501156" />
     <state x="359" y="27" width="1280" height="1053" key="SettingsEditor/70.27.1850.1053@70.27.1850.1053" timestamp="1588641933288" />
-    <state x="233" y="62" key="Vcs.Push.Dialog.v2" timestamp="1588655355543">
+    <state x="233" y="62" key="Vcs.Push.Dialog.v2" timestamp="1589255332231">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="233" y="62" key="Vcs.Push.Dialog.v2/0.0.1280.680@0.0.1280.680" timestamp="1588655355543" />
+    <state x="233" y="62" key="Vcs.Push.Dialog.v2/0.0.1280.680@0.0.1280.680" timestamp="1589255332231" />
     <state x="-1264" y="364" key="com.intellij.ide.util.TipDialog" timestamp="1589243441111">
       <screen x="-1920" y="0" width="1920" height="1080" />
     </state>
@@ -450,10 +454,10 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="375" y="232" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD/0.0.1280.680@0.0.1280.680" timestamp="1588813072069" />
-    <state x="450" y="254" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1589254402900">
+    <state x="450" y="254" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1589255497368">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="450" y="254" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1280.680@0.0.1280.680" timestamp="1589254402900" />
+    <state x="450" y="254" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1280.680@0.0.1280.680" timestamp="1589255497368" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
