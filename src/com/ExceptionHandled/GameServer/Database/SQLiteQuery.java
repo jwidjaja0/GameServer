@@ -209,7 +209,10 @@ public class SQLiteQuery {
                 moveList.add(m);
             }
 
-            PreparedStatement prep1 = connection.prepareStatement("select * from gameList gL where gL.gameID = ?");
+            PreparedStatement prep1 = connection.prepareStatement("Select gL.gameID, gL.startTime, gL.endTime, pI.username, pI2.username, gL.gameStatus, gL.gameName from gameList gL \n" +
+                    "join playerInfo pI on pI.playerID = gL.player1ID\n" +
+                    "join playerInfo pI2 on pI2.playerID = gL.player2ID\n" +
+                    "where gL.gameID = ?");
             prep1.setString(1, gameID);
             ResultSet gameSet = prep1.executeQuery();
 
@@ -464,8 +467,8 @@ public class SQLiteQuery {
             PreparedStatement prep = connection.prepareStatement("INSERT INTO moveList(gameID, playerID, x_coord, y_coord,time) values (?,?,?,?,?)");
             prep.setString(1, moveValid.getGameID());
             prep.setString(2, moveValid.getPlayer());
-            prep.setInt(3,moveValid.getXCoord());
-            prep.setInt(4, moveValid.getYCoord());
+            prep.setInt(3,moveValid.getxCoord());
+            prep.setInt(4, moveValid.getyCoord());
 
             //add date to move history, need to test!
             Date date = new Date(new java.util.Date().getTime());
