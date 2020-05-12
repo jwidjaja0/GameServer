@@ -81,7 +81,7 @@ public class GameRoom {
         int winner;
         if (game.getWhoseTurn()) winner = 2;
         else winner = 1;
-        SQLiteQuery.getInstance().updateGameOver(gameID, winner, player1, player1);
+        SQLiteQuery.getInstance().updateGameOver(gameID, winner, player1, player2);
 
         ArrayList<Packet> packets = new ArrayList<Packet>();
         GameOverOutcome gameOver = new GameOverOutcome(gameID, whoWon);
@@ -105,7 +105,7 @@ public class GameRoom {
             packets.add(new Packet("Game", viewer, move));
         }
 
-        game.setMove(move.getXCoord(), move.getYCoord(), game.getTurnToken().charAt(0));
+        game.setMove(move.getxCoord(), move.getyCoord(), game.getTurnToken().charAt(0));
 
         if (game.isGameOver()) {
             packets.addAll(gameOver(game.whoWon()));
