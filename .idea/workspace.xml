@@ -125,6 +125,18 @@
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="application.passwordSafe" />
   </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true">
       <option name="MAIN_CLASS_NAME" value="com.ExceptionHandled.GameServer.Main" />
@@ -340,22 +352,12 @@
                   </entry>
                 </map>
               </option>
+              <option name="COLUMN_ORDER" />
             </State>
           </value>
         </entry>
       </map>
     </option>
-    <option name="OPEN_GENERIC_TABS">
-      <map>
-        <entry key="1" value="TOOL_WINDOW" />
-        <entry key="2" value="TOOL_WINDOW" />
-        <entry key="3" value="TOOL_WINDOW" />
-        <entry key="4" value="TOOL_WINDOW" />
-        <entry key="5" value="TOOL_WINDOW" />
-        <entry key="6" value="TOOL_WINDOW" />
-      </map>
-    </option>
-    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <ignored-roots>
