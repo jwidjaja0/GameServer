@@ -19,9 +19,9 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="aefb3591-25b9-418d-8adf-7b35b803d267" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="5b8c151f-4eb7-4d81-a3b3-4aab6a95ce90" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Database/SQLiteQuery.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Database/SQLiteQuery.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/GameRoom.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/GameRoom.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -126,23 +126,11 @@
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="application.passwordSafe" />
   </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
-  </component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true">
       <option name="MAIN_CLASS_NAME" value="com.ExceptionHandled.GameServer.Main" />
       <module name="GameServer" />
-      <option name="VM_PARAMETERS" value="--module-path C:\Code\Java\openjfx-11.0.2_windows-x64_bin-sdk\javafx-sdk-11.0.2\lib --add-modules javafx.controls,javafx.fxml" />
+      <option name="VM_PARAMETERS" value="--module-path C:/&quot;Program Files&quot;/Java/javafx-sdk-13.0.2/lib --add-modules javafx.controls,javafx.fxml" />
       <RunnerSettings RunnerId="Run" />
       <ConfigurationWrapper RunnerId="Run" />
       <method v="2">
@@ -395,28 +383,32 @@
     </state>
     <state x="421" y="97" key="FileChooserDialogImpl/0.0.1280.680@0.0.1280.680" timestamp="1588813240899" />
     <state x="421" y="97" width="878" height="654" key="FileChooserDialogImpl/70.27.1850.1053@70.27.1850.1053" timestamp="1588641933288" />
-    <state width="1877" height="211" key="GridCell.Tab.0.bottom" timestamp="1589247586521">
-      <screen x="-1920" y="0" width="1920" height="1080" />
+    <state width="2517" height="211" key="GridCell.Tab.0.bottom" timestamp="1589252654854">
+      <screen x="0" y="0" width="2560" height="1440" />
     </state>
-    <state width="1877" height="211" key="GridCell.Tab.0.bottom/-1920.0.1920.1080/0.0.2560.1440@-1920.0.1920.1080" timestamp="1589247586521" />
+    <state width="1877" height="211" key="GridCell.Tab.0.bottom/-1920.0.1920.1080/0.0.2560.1440@-1920.0.1920.1080" timestamp="1589251342298" />
+    <state width="2517" height="211" key="GridCell.Tab.0.bottom/-1920.0.1920.1080/0.0.2560.1440@0.0.2560.1440" timestamp="1589252654854" />
     <state width="1237" height="198" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1588823714415" />
     <state width="1794" height="247" key="GridCell.Tab.0.bottom/70.27.1850.1053@70.27.1850.1053" timestamp="1588641933288" />
-    <state width="1877" height="211" key="GridCell.Tab.0.center" timestamp="1589247586521">
-      <screen x="-1920" y="0" width="1920" height="1080" />
+    <state width="2517" height="211" key="GridCell.Tab.0.center" timestamp="1589252654854">
+      <screen x="0" y="0" width="2560" height="1440" />
     </state>
-    <state width="1877" height="211" key="GridCell.Tab.0.center/-1920.0.1920.1080/0.0.2560.1440@-1920.0.1920.1080" timestamp="1589247586521" />
+    <state width="1877" height="211" key="GridCell.Tab.0.center/-1920.0.1920.1080/0.0.2560.1440@-1920.0.1920.1080" timestamp="1589251342297" />
+    <state width="2517" height="211" key="GridCell.Tab.0.center/-1920.0.1920.1080/0.0.2560.1440@0.0.2560.1440" timestamp="1589252654854" />
     <state width="1237" height="198" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1588823714415" />
     <state width="1794" height="247" key="GridCell.Tab.0.center/70.27.1850.1053@70.27.1850.1053" timestamp="1588641933288" />
-    <state width="1877" height="211" key="GridCell.Tab.0.left" timestamp="1589247586521">
-      <screen x="-1920" y="0" width="1920" height="1080" />
+    <state width="2517" height="211" key="GridCell.Tab.0.left" timestamp="1589252654853">
+      <screen x="0" y="0" width="2560" height="1440" />
     </state>
-    <state width="1877" height="211" key="GridCell.Tab.0.left/-1920.0.1920.1080/0.0.2560.1440@-1920.0.1920.1080" timestamp="1589247586521" />
+    <state width="1877" height="211" key="GridCell.Tab.0.left/-1920.0.1920.1080/0.0.2560.1440@-1920.0.1920.1080" timestamp="1589251342297" />
+    <state width="2517" height="211" key="GridCell.Tab.0.left/-1920.0.1920.1080/0.0.2560.1440@0.0.2560.1440" timestamp="1589252654853" />
     <state width="1237" height="198" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1588823714415" />
     <state width="1794" height="247" key="GridCell.Tab.0.left/70.27.1850.1053@70.27.1850.1053" timestamp="1588641933288" />
-    <state width="1877" height="211" key="GridCell.Tab.0.right" timestamp="1589247586521">
-      <screen x="-1920" y="0" width="1920" height="1080" />
+    <state width="2517" height="211" key="GridCell.Tab.0.right" timestamp="1589252654854">
+      <screen x="0" y="0" width="2560" height="1440" />
     </state>
-    <state width="1877" height="211" key="GridCell.Tab.0.right/-1920.0.1920.1080/0.0.2560.1440@-1920.0.1920.1080" timestamp="1589247586521" />
+    <state width="1877" height="211" key="GridCell.Tab.0.right/-1920.0.1920.1080/0.0.2560.1440@-1920.0.1920.1080" timestamp="1589251342297" />
+    <state width="2517" height="211" key="GridCell.Tab.0.right/-1920.0.1920.1080/0.0.2560.1440@0.0.2560.1440" timestamp="1589252654854" />
     <state width="1237" height="198" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1588823714415" />
     <state width="1794" height="247" key="GridCell.Tab.0.right/70.27.1850.1053@70.27.1850.1053" timestamp="1588641933288" />
     <state width="1237" height="228" key="GridCell.Tab.1.bottom" timestamp="1588823540255">
@@ -457,6 +449,10 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="450" y="254" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1280.680@0.0.1280.680" timestamp="1588812777547" />
+    <state x="-1297" y="235" width="672" height="678" key="search.everywhere.popup" timestamp="1589248395204">
+      <screen x="-1920" y="0" width="1920" height="1080" />
+    </state>
+    <state x="-1297" y="235" width="672" height="678" key="search.everywhere.popup/-1920.0.1920.1080/0.0.2560.1440@-1920.0.1920.1080" timestamp="1589248395204" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
