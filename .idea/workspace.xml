@@ -21,8 +21,12 @@
   <component name="ChangeListManager">
     <list default="true" id="6ee0c525-a4c7-4786-b2d1-2baad30c76f8" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameServer.iml" beforeDir="false" afterPath="$PROJECT_DIR$/GameServer.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TicTacToe.db" beforeDir="false" afterPath="$PROJECT_DIR$/TicTacToe.db" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Database/SQLiteQuery.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Database/SQLiteQuery.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/ServerUI/Lobby/AllGames.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/ServerUI/Lobby/AllGames.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/GameRoom.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/GameRoom.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Server.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/ServerUI/Lobby/GameDetailController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/ServerUI/Lobby/GameDetailController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -122,28 +126,16 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$USER_HOME$/Downloads/openjfx-11.0.2_windows-x64_bin-sdk/javafx-sdk-11.0.2/lib" />
-    <property name="project.structure.last.edited" value="Libraries" />
+    <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="application.passwordSafe" />
-  </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
   </component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true">
       <option name="MAIN_CLASS_NAME" value="com.ExceptionHandled.GameServer.Main" />
       <module name="GameServer" />
-      <option name="VM_PARAMETERS" value="--module-path C:\Code\Java\openjfx-11.0.2_windows-x64_bin-sdk\javafx-sdk-11.0.2\lib --add-modules javafx.controls,javafx.fxml" />
+      <option name="VM_PARAMETERS" value="--module-path $PROJECT_DIR$/../../../../../&quot;Program Files&quot;/&quot;Java&quot;/&quot;javafx-sdk-13.0.2&quot;/&quot;lib&quot; --add-modules javafx.controls,javafx.fxml" />
       <RunnerSettings RunnerId="Run" />
       <ConfigurationWrapper RunnerId="Run" />
       <method v="2">
@@ -359,12 +351,12 @@
                   </entry>
                 </map>
               </option>
-              <option name="COLUMN_ORDER" />
             </State>
           </value>
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <ignored-roots>
@@ -378,11 +370,11 @@
     <option name="LAST_COMMIT_MESSAGE" value="removes game from list if game is over" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="-1776" y="0" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1589138521442">
-      <screen x="-1920" y="0" width="1920" height="1080" />
+    <state x="96" y="0" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1589254552258">
+      <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="-1776" y="0" key="#com.intellij.execution.impl.EditConfigurationsDialog/-1920.0.1920.1080/0.0.2560.1440@-1920.0.1920.1080" timestamp="1589138521442" />
-    <state x="96" y="0" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1280.680@0.0.1280.680" timestamp="1588812957343" />
+    <state x="96" y="0" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1280.680@0.0.1280.680" timestamp="1589254552258" />
     <state x="250" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1588721809466">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
@@ -396,29 +388,29 @@
     </state>
     <state x="421" y="97" key="FileChooserDialogImpl/0.0.1280.680@0.0.1280.680" timestamp="1588813240899" />
     <state x="421" y="97" width="878" height="654" key="FileChooserDialogImpl/70.27.1850.1053@70.27.1850.1053" timestamp="1588641933288" />
-    <state width="1877" height="211" key="GridCell.Tab.0.bottom" timestamp="1589247586521">
-      <screen x="-1920" y="0" width="1920" height="1080" />
+    <state width="1237" height="198" key="GridCell.Tab.0.bottom" timestamp="1589255175492">
+      <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state width="1877" height="211" key="GridCell.Tab.0.bottom/-1920.0.1920.1080/0.0.2560.1440@-1920.0.1920.1080" timestamp="1589247586521" />
-    <state width="1237" height="198" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1588823714415" />
+    <state width="1237" height="198" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1589255175492" />
     <state width="1794" height="247" key="GridCell.Tab.0.bottom/70.27.1850.1053@70.27.1850.1053" timestamp="1588641933288" />
-    <state width="1877" height="211" key="GridCell.Tab.0.center" timestamp="1589247586521">
-      <screen x="-1920" y="0" width="1920" height="1080" />
+    <state width="1237" height="198" key="GridCell.Tab.0.center" timestamp="1589255175492">
+      <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state width="1877" height="211" key="GridCell.Tab.0.center/-1920.0.1920.1080/0.0.2560.1440@-1920.0.1920.1080" timestamp="1589247586521" />
-    <state width="1237" height="198" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1588823714415" />
+    <state width="1237" height="198" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1589255175492" />
     <state width="1794" height="247" key="GridCell.Tab.0.center/70.27.1850.1053@70.27.1850.1053" timestamp="1588641933288" />
-    <state width="1877" height="211" key="GridCell.Tab.0.left" timestamp="1589247586521">
-      <screen x="-1920" y="0" width="1920" height="1080" />
+    <state width="1237" height="198" key="GridCell.Tab.0.left" timestamp="1589255175491">
+      <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state width="1877" height="211" key="GridCell.Tab.0.left/-1920.0.1920.1080/0.0.2560.1440@-1920.0.1920.1080" timestamp="1589247586521" />
-    <state width="1237" height="198" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1588823714415" />
+    <state width="1237" height="198" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1589255175491" />
     <state width="1794" height="247" key="GridCell.Tab.0.left/70.27.1850.1053@70.27.1850.1053" timestamp="1588641933288" />
-    <state width="1877" height="211" key="GridCell.Tab.0.right" timestamp="1589247586521">
-      <screen x="-1920" y="0" width="1920" height="1080" />
+    <state width="1237" height="198" key="GridCell.Tab.0.right" timestamp="1589255175492">
+      <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state width="1877" height="211" key="GridCell.Tab.0.right/-1920.0.1920.1080/0.0.2560.1440@-1920.0.1920.1080" timestamp="1589247586521" />
-    <state width="1237" height="198" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1588823714415" />
+    <state width="1237" height="198" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1589255175492" />
     <state width="1794" height="247" key="GridCell.Tab.0.right/70.27.1850.1053@70.27.1850.1053" timestamp="1588641933288" />
     <state width="1237" height="228" key="GridCell.Tab.1.bottom" timestamp="1588823540255">
       <screen x="0" y="0" width="1280" height="680" />
@@ -436,11 +428,15 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state width="1237" height="228" key="GridCell.Tab.1.right/0.0.1280.680@0.0.1280.680" timestamp="1588823540255" />
-    <state x="-1920" y="0" width="1280" height="680" key="SettingsEditor" timestamp="1589138396408">
-      <screen x="-1920" y="0" width="1920" height="1080" />
+    <state x="121" y="50" key="MergeDialog" timestamp="1589254390656">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="121" y="50" key="MergeDialog/0.0.1280.680@0.0.1280.680" timestamp="1589254390656" />
+    <state x="0" y="0" width="1280" height="680" key="SettingsEditor" timestamp="1589254501156">
+      <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="-1920" y="0" key="SettingsEditor/-1920.0.1920.1080/0.0.2560.1440@-1920.0.1920.1080" timestamp="1589138396408" />
-    <state x="0" y="0" width="1280" height="680" key="SettingsEditor/0.0.1280.680@0.0.1280.680" timestamp="1588813244080" />
+    <state x="0" y="0" width="1280" height="680" key="SettingsEditor/0.0.1280.680@0.0.1280.680" timestamp="1589254501156" />
     <state x="359" y="27" width="1280" height="1053" key="SettingsEditor/70.27.1850.1053@70.27.1850.1053" timestamp="1588641933288" />
     <state x="233" y="62" key="Vcs.Push.Dialog.v2" timestamp="1588655355543">
       <screen x="0" y="0" width="1280" height="680" />
@@ -454,10 +450,10 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="375" y="232" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD/0.0.1280.680@0.0.1280.680" timestamp="1588813072069" />
-    <state x="450" y="254" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1588812777547">
+    <state x="450" y="254" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1589254402900">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="450" y="254" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1280.680@0.0.1280.680" timestamp="1588812777547" />
+    <state x="450" y="254" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1280.680@0.0.1280.680" timestamp="1589254402900" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
