@@ -9,13 +9,13 @@
    <children>
       <TableView fx:id="gameTableView" layoutX="21.0" layoutY="18.0" prefHeight="372.0" prefWidth="850.0">
          <columns>
-            <TableColumn fx:id="gameIDCol" prefWidth="101.0" text="gameID" />
-            <TableColumn fx:id="gamenameCol" prefWidth="92.0" text="Game Name" />
-            <TableColumn fx:id="playerOneCol" prefWidth="94.0" text="Player 1" />
-            <TableColumn fx:id="playerTwoCol" prefWidth="138.0" text="Player 2" />
-            <TableColumn fx:id="matchCol" prefWidth="146.0" text="Match Result" />
-            <TableColumn fx:id="startDateCol" prefWidth="135.0" text="Start Date" />
-            <TableColumn fx:id="endDateCol" prefWidth="143.0" text="End Date" />
+            <TableColumn fx:id="gameIDCol" maxWidth="80.0" text="gameID" />
+            <TableColumn fx:id="gamenameCol" maxWidth="90.0" prefWidth="90.0" text="Game Name" />
+            <TableColumn fx:id="playerOneCol" maxWidth="100.0" prefWidth="100.0" text="Player 1" />
+            <TableColumn fx:id="playerTwoCol" maxWidth="100.0" prefWidth="100.0" text="Player 2" />
+            <TableColumn fx:id="matchCol" maxWidth="120.0" prefWidth="120.0" text="Match Result" />
+            <TableColumn fx:id="startDateCol" maxWidth="180.0" prefWidth="180.0" text="Start Date" />
+            <TableColumn fx:id="endDateCol" maxWidth="181.0" prefWidth="181.0" text="End Date" />
          </columns>
       </TableView>
       <Button fx:id="detailButton" layoutX="21.0" layoutY="414.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="136.0" text="Detail" />

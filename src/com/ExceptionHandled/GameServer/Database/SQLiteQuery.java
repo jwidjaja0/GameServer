@@ -333,8 +333,8 @@ public class SQLiteQuery {
                 }
 
                 GameHistorySummary ghs = new GameHistorySummary(gameRS.getString("gameID"), gameRS.getString("player1ID"),
-                        gameRS.getString("player2ID"), stat, gameRS.getString("gameName"), gameRS.getDate("startTime"),
-                        gameRS.getDate("endTime"));
+                        gameRS.getString("player2ID"), stat, gameRS.getString("gameName"), new java.util.Date(gameRS.getDate(2).getTime()),
+                        new java.util.Date(gameRS.getDate(2).getTime()));
                 gameHistorySummaries.add(ghs);
 
             }
