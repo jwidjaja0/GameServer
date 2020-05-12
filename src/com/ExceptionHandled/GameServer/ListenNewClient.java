@@ -1,5 +1,7 @@
 package com.ExceptionHandled.GameServer;
 
+import com.ExceptionHandled.GameServer.InternalMessage.ServerPacket;
+
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.ServerSocket;

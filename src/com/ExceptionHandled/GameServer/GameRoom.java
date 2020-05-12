@@ -7,10 +7,7 @@ import com.ExceptionHandled.GameServer.Database.SQLiteQuery;
 import com.ExceptionHandled.GameServer.Game.TTTGame;
 
 
-import java.io.IOException;
 import java.util.*;
-import java.util.concurrent.ArrayBlockingQueue;
-import java.util.concurrent.BlockingQueue;
 
 public class GameRoom {
     private String gameID;
@@ -84,7 +81,7 @@ public class GameRoom {
         int winner;
         if (game.getWhoseTurn()) winner = 2;
         else winner = 1;
-        SQLiteQuery.getInstance().updateGameOver(gameID, winner);
+        SQLiteQuery.getInstance().updateGameOver(gameID, winner, player1, player2);
 
         ArrayList<Packet> packets = new ArrayList<Packet>();
         GameOverOutcome gameOver = new GameOverOutcome(gameID, whoWon);
@@ -110,7 +107,7 @@ public class GameRoom {
 
         game.setMove(move.getxCoord(), move.getyCoord(), game.getTurnToken().charAt(0));
 
-        if (game.gameOver()) {
+        if (game.isGameOver()) {
             packets.addAll(gameOver(game.whoWon()));
         }
 
@@ -124,12 +121,12 @@ public class GameRoom {
         return packets;
     }
 
-    public ArrayList<Packet> makeMove(MoveMade move) {
+    public ArrayList<Packet> makeMove(MoveMade move, String playerID) {
         ArrayList<Packet> packets = new ArrayList<Packet>();
         //if invalid move
         if (!game.validMove(move.getxCoord(), move.getyCoord())) {
             MoveInvalid moveInvalid = new MoveInvalid(gameID, game.getTurnToken(), move.getxCoord(), move.getyCoord());
-            packets.add(new Packet("Game", move.getPlayer(), moveInvalid));
+            packets.add(new Packet("Game", playerID, moveInvalid));
         }
         //otherwise make the move
         else {
@@ -137,7 +134,6 @@ public class GameRoom {
             SQLiteQuery.getInstance().insertMoveHistory(moveValid);
             packets.addAll(makeValidMove(moveValid));
         }
-
         return packets;
     }
 }

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="468.0" prefWidth="716.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ExceptionHandled.GameServer.ServerUI.Lobby.AllPlayersController">
+   <children>
+      <TableView fx:id="userTableView" layoutX="21.0" layoutY="18.0" prefHeight="372.0" prefWidth="682.0">
+        <columns>
+          <TableColumn fx:id="userIDCol" prefWidth="85.0" text="User ID" />
+          <TableColumn fx:id="usernameCol" prefWidth="136.0" text="Username" />
+            <TableColumn fx:id="passwordCol" prefWidth="115.0" text="Passworrd" />
+            <TableColumn fx:id="fNameCol" prefWidth="112.0" text="First Name" />
+            <TableColumn fx:id="lNameCol" prefWidth="130.0" text="Last Name" />
+            <TableColumn fx:id="statusCol" prefWidth="103.0" text="Status" />
+        </columns>
+      </TableView>
+      <Button fx:id="modifyButton" layoutX="145.0" layoutY="412.0" mnemonicParsing="false" text="Modify Selected" />
+      <Button fx:id="playerButton" layoutX="21.0" layoutY="412.0" mnemonicParsing="false" text="Get Player Stats" />
+   </children>
+</AnchorPane>

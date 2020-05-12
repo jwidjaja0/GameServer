@@ -1,5 +1,5 @@
 package com.ExceptionHandled.GameServer.Observer;
 
 public interface GameLogicObserver {
-    public void onMessageNotification();
+    public void update(GameLogicSubject s, Object arg);
 }
