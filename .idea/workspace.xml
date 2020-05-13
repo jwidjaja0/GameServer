@@ -20,9 +20,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="aefb3591-25b9-418d-8adf-7b35b803d267" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/InternalMessage/UserInvolvement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameServer.iml" beforeDir="false" afterPath="$PROJECT_DIR$/GameServer.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/GameRoom.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/GameRoom.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Server.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/ServerUI/Lobby/PlayerDetail.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/ServerUI/Lobby/PlayerDetail.fxml" afterDir="false" />
     </list>
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -120,30 +125,18 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$USER_HOME$/Downloads/openjfx-11.0.2_windows-x64_bin-sdk/javafx-sdk-11.0.2/lib" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../sqlite-jdbc-3.30.1.jar!/" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="application.passwordSafe" />
   </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
-  </component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true">
       <option name="MAIN_CLASS_NAME" value="com.ExceptionHandled.GameServer.Main" />
       <module name="GameServer" />
-      <option name="VM_PARAMETERS" value="--module-path C:\Code\Java\openjfx-11.0.2_windows-x64_bin-sdk\javafx-sdk-11.0.2\lib --add-modules javafx.controls,javafx.fxml" />
+      <option name="VM_PARAMETERS" value="--module-path C:\Code\openjfx-11.0.2_windows-x64_bin-sdk(1)\javafx-sdk-11.0.2\lib --add-modules javafx.controls,javafx.fxml" />
       <RunnerSettings RunnerId="Run" />
       <ConfigurationWrapper RunnerId="Run" />
       <method v="2">
@@ -156,6 +149,18 @@
         <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -201,6 +206,8 @@
       <workItem from="1589302121559" duration="690000" />
       <workItem from="1589341292360" duration="733000" />
       <workItem from="1589352508373" duration="5871000" />
+      <workItem from="1589400175977" duration="519000" />
+      <workItem from="1589400730485" duration="1459000" />
     </task>
     <task id="LOCAL-00001" summary="updated connections">
       <created>1588216562932</created>
@@ -381,11 +388,20 @@
     <option name="LAST_COMMIT_MESSAGE" value="removes game from list if game is over" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="-1776" y="0" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1589138521442">
-      <screen x="-1920" y="0" width="1920" height="1080" />
+    <state x="144" y="0" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1589400577413">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="-1776" y="0" key="#com.intellij.execution.impl.EditConfigurationsDialog/-1920.0.1920.1080/0.0.2560.1440@-1920.0.1920.1080" timestamp="1589138521442" />
     <state x="96" y="0" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1280.680@0.0.1280.680" timestamp="1588812957343" />
+    <state x="144" y="0" key="#com.intellij.execution.impl.EditConfigurationsDialog/1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1589400577413" />
+    <state x="550" y="155" key="#com.intellij.ide.util.MemberChooser" timestamp="1589401714349">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="550" y="155" key="#com.intellij.ide.util.MemberChooser/1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1589401714349" />
+    <state x="596" y="340" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog" timestamp="1589400467671">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="596" y="340" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog/1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1589400467671" />
     <state x="250" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1588721809466">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
@@ -394,38 +410,43 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="252" y="0" key="CommitChangelistDialog2/0.0.1280.680@0.0.1280.680" timestamp="1588655336911" />
-    <state x="421" y="97" width="878" height="654" key="FileChooserDialogImpl" timestamp="1588813240899">
-      <screen x="0" y="0" width="1280" height="680" />
+    <state x="603" y="39" width="878" height="654" key="FileChooserDialogImpl" timestamp="1589400751251">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="421" y="97" key="FileChooserDialogImpl/0.0.1280.680@0.0.1280.680" timestamp="1588813240899" />
+    <state x="603" y="39" key="FileChooserDialogImpl/1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1589400751251" />
     <state x="421" y="97" width="878" height="654" key="FileChooserDialogImpl/70.27.1850.1053@70.27.1850.1053" timestamp="1588641933288" />
-    <state width="2517" height="211" key="GridCell.Tab.0.bottom" timestamp="1589252654854">
-      <screen x="0" y="0" width="2560" height="1440" />
+    <state width="1430" height="231" key="GridCell.Tab.0.bottom" timestamp="1589401204995">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1877" height="211" key="GridCell.Tab.0.bottom/-1920.0.1920.1080/0.0.2560.1440@-1920.0.1920.1080" timestamp="1589251342298" />
     <state width="2517" height="211" key="GridCell.Tab.0.bottom/-1920.0.1920.1080/0.0.2560.1440@0.0.2560.1440" timestamp="1589252654854" />
     <state width="1237" height="198" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1588823714415" />
+    <state width="1430" height="231" key="GridCell.Tab.0.bottom/1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1589401204995" />
     <state width="1794" height="247" key="GridCell.Tab.0.bottom/70.27.1850.1053@70.27.1850.1053" timestamp="1588641933288" />
-    <state width="2517" height="211" key="GridCell.Tab.0.center" timestamp="1589252654854">
-      <screen x="0" y="0" width="2560" height="1440" />
+    <state width="1430" height="231" key="GridCell.Tab.0.center" timestamp="1589401204995">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1877" height="211" key="GridCell.Tab.0.center/-1920.0.1920.1080/0.0.2560.1440@-1920.0.1920.1080" timestamp="1589251342297" />
     <state width="2517" height="211" key="GridCell.Tab.0.center/-1920.0.1920.1080/0.0.2560.1440@0.0.2560.1440" timestamp="1589252654854" />
     <state width="1237" height="198" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1588823714415" />
+    <state width="1430" height="231" key="GridCell.Tab.0.center/1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1589401204995" />
     <state width="1794" height="247" key="GridCell.Tab.0.center/70.27.1850.1053@70.27.1850.1053" timestamp="1588641933288" />
-    <state width="2517" height="211" key="GridCell.Tab.0.left" timestamp="1589252654853">
-      <screen x="0" y="0" width="2560" height="1440" />
+    <state width="1430" height="231" key="GridCell.Tab.0.left" timestamp="1589401204995">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1877" height="211" key="GridCell.Tab.0.left/-1920.0.1920.1080/0.0.2560.1440@-1920.0.1920.1080" timestamp="1589251342297" />
     <state width="2517" height="211" key="GridCell.Tab.0.left/-1920.0.1920.1080/0.0.2560.1440@0.0.2560.1440" timestamp="1589252654853" />
     <state width="1237" height="198" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1588823714415" />
+    <state width="1430" height="231" key="GridCell.Tab.0.left/1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1589401204995" />
     <state width="1794" height="247" key="GridCell.Tab.0.left/70.27.1850.1053@70.27.1850.1053" timestamp="1588641933288" />
-    <state width="2517" height="211" key="GridCell.Tab.0.right" timestamp="1589252654854">
-      <screen x="0" y="0" width="2560" height="1440" />
+    <state width="1430" height="231" key="GridCell.Tab.0.right" timestamp="1589401204995">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1877" height="211" key="GridCell.Tab.0.right/-1920.0.1920.1080/0.0.2560.1440@-1920.0.1920.1080" timestamp="1589251342297" />
     <state width="2517" height="211" key="GridCell.Tab.0.right/-1920.0.1920.1080/0.0.2560.1440@0.0.2560.1440" timestamp="1589252654854" />
     <state width="1237" height="198" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1588823714415" />
+    <state width="1430" height="231" key="GridCell.Tab.0.right/1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1589401204995" />
     <state width="1794" height="247" key="GridCell.Tab.0.right/70.27.1850.1053@70.27.1850.1053" timestamp="1588641933288" />
     <state width="1237" height="228" key="GridCell.Tab.1.bottom" timestamp="1588823540255">
       <screen x="0" y="0" width="1280" height="680" />
@@ -443,11 +464,12 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state width="1237" height="228" key="GridCell.Tab.1.right/0.0.1280.680@0.0.1280.680" timestamp="1588823540255" />
-    <state x="-1920" y="0" width="1280" height="680" key="SettingsEditor" timestamp="1589138396408">
-      <screen x="-1920" y="0" width="1920" height="1080" />
+    <state x="0" y="0" width="1280" height="680" key="SettingsEditor" timestamp="1589400755125">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="-1920" y="0" key="SettingsEditor/-1920.0.1920.1080/0.0.2560.1440@-1920.0.1920.1080" timestamp="1589138396408" />
     <state x="0" y="0" width="1280" height="680" key="SettingsEditor/0.0.1280.680@0.0.1280.680" timestamp="1588813244080" />
+    <state x="0" y="0" key="SettingsEditor/1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1589400755125" />
     <state x="359" y="27" width="1280" height="1053" key="SettingsEditor/70.27.1850.1053@70.27.1850.1053" timestamp="1588641933288" />
     <state x="233" y="62" key="Vcs.Push.Dialog.v2" timestamp="1588655355543">
       <screen x="0" y="0" width="1280" height="680" />
@@ -457,10 +479,11 @@
       <screen x="-1920" y="0" width="1920" height="1080" />
     </state>
     <state x="-1264" y="364" key="com.intellij.ide.util.TipDialog/-1920.0.1920.1080/0.0.2560.1440@-1920.0.1920.1080" timestamp="1589243441111" />
-    <state x="375" y="232" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD" timestamp="1588813072069">
-      <screen x="0" y="0" width="1280" height="680" />
+    <state x="563" y="355" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD" timestamp="1589400442712">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="375" y="232" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD/0.0.1280.680@0.0.1280.680" timestamp="1588813072069" />
+    <state x="563" y="355" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD/1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1589400442712" />
     <state x="450" y="254" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1588812777547">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
@@ -482,16 +505,6 @@
           <url>file://$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Database/SQLiteQuery.java</url>
           <line>232</line>
           <option name="timeStamp" value="19" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/GameRoom.java</url>
-          <line>50</line>
-          <option name="timeStamp" value="27" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/GameRoom.java</url>
-          <line>51</line>
-          <option name="timeStamp" value="28" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

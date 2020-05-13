@@ -11,6 +11,7 @@ import com.ExceptionHandled.GameMessages.Wrappers.Packet;
 import com.ExceptionHandled.GameServer.Database.SQLiteQuery;
 import com.ExceptionHandled.GameServer.InternalMessage.ActivePlayerList;
 import com.ExceptionHandled.GameServer.InternalMessage.ServerPacket;
+import com.ExceptionHandled.GameServer.InternalMessage.UserInvolvement;
 import com.ExceptionHandled.GameServer.Observer.GameLogicObserver;
 import com.ExceptionHandled.GameServer.Observer.GameLogicSubject;
 
@@ -313,6 +314,22 @@ public class Server implements Runnable, GameLogicSubject {
             idList.add(key);
         }
         return new ActivePlayerList(idList);
+    }
+
+    public UserInvolvement findUserInvolvement(String playerID){
+        List<String> listGamesPlaying = new ArrayList<>();
+        List<String> listGamesViewing = new ArrayList<>();
+
+        for(GameRoom gm : gameRoomList){
+            if(gm.isPlayerIDInGame(playerID)){
+                listGamesPlaying.add(gm.getGameName());
+            }
+            else if(gm.isPlayerIDViewer(playerID)){
+                listGamesViewing.add(gm.getGameName());
+            }
+        }
+        UserInvolvement userInvolvement = new UserInvolvement(listGamesPlaying, listGamesViewing);
+        return userInvolvement;
     }
 
     @Override
