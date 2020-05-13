@@ -6,6 +6,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 import javafx.scene.text.Text;
 
+import java.util.List;
+
 public class PlayerDetailController {
     @FXML
     Text idText;
@@ -45,6 +47,7 @@ public class PlayerDetailController {
 
         gamesPlayingList.getItems().addAll(userInvolvement.getGamesPlaying());
         gamesViewingList.getItems().addAll(userInvolvement.getGamesViewing());
+
     }
 
 

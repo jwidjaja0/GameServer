@@ -21,7 +21,7 @@ public class GameRoom {
     private ArrayList<MoveValid> moves;
 
     public boolean isPlayerIDInGame(String playerID){
-        if(playerID == player1 || playerID == player2){
+        if(playerID.equals(player1) || playerID.equals(player2)){
             return true;
         }
         return false;
