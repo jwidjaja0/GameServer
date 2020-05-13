@@ -25,6 +25,7 @@ public class Main extends Application {
         FXMLLoader lobbyLoader = new FXMLLoader(getClass().getResource("ServerUI/Lobby/Lobby.fxml"));
         Parent lobby = lobbyLoader.load();
         LobbyController lbc = lobbyLoader.getController();
+        lbc.setServer(gameServer);
 
         stage.setTitle("My app");
         stage.setScene(new Scene(lobby));

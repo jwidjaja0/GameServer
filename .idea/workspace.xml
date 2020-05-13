@@ -20,13 +20,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="aefb3591-25b9-418d-8adf-7b35b803d267" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/InternalMessage/UserInvolvement.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameServer.iml" beforeDir="false" afterPath="$PROJECT_DIR$/GameServer.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/GameRoom.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/GameRoom.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Server.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/ServerUI/Lobby/PlayerDetail.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/ServerUI/Lobby/PlayerDetail.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/ServerUI/Lobby/LobbyController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/ServerUI/Lobby/LobbyController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/ServerUI/Lobby/PlayerDetailController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/ServerUI/Lobby/PlayerDetailController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -207,7 +204,7 @@
       <workItem from="1589341292360" duration="733000" />
       <workItem from="1589352508373" duration="5871000" />
       <workItem from="1589400175977" duration="519000" />
-      <workItem from="1589400730485" duration="1459000" />
+      <workItem from="1589400730485" duration="1910000" />
     </task>
     <task id="LOCAL-00001" summary="updated connections">
       <created>1588216562932</created>
@@ -394,10 +391,10 @@
     <state x="-1776" y="0" key="#com.intellij.execution.impl.EditConfigurationsDialog/-1920.0.1920.1080/0.0.2560.1440@-1920.0.1920.1080" timestamp="1589138521442" />
     <state x="96" y="0" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1280.680@0.0.1280.680" timestamp="1588812957343" />
     <state x="144" y="0" key="#com.intellij.execution.impl.EditConfigurationsDialog/1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1589400577413" />
-    <state x="550" y="155" key="#com.intellij.ide.util.MemberChooser" timestamp="1589401714349">
+    <state x="550" y="155" key="#com.intellij.ide.util.MemberChooser" timestamp="1589402552252">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="550" y="155" key="#com.intellij.ide.util.MemberChooser/1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1589401714349" />
+    <state x="550" y="155" key="#com.intellij.ide.util.MemberChooser/1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1589402552252" />
     <state x="596" y="340" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog" timestamp="1589400467671">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
