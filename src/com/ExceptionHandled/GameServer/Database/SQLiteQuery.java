@@ -198,52 +198,8 @@ public class SQLiteQuery {
     public Packet getGameHistoryDetailForPlayer(Packet packet, String gameID){
         String playerID = packet.getPlayerID();
 
-        try {
-            PreparedStatement prep = connection.prepareStatement("SELECT * FROM moveList mL where mL.gameID = ?");
-            prep.setString(1, gameID);
-            ResultSet rs = prep.executeQuery();
-
-            List<MoveValid> moveList = new ArrayList<>();
-            while(rs.next()){
-                MoveValid m = new MoveValid(gameID, rs.getString(3), rs.getInt(4), rs.getInt(5));
-                moveList.add(m);
-            }
-
-            PreparedStatement prep1 = connection.prepareStatement("Select gL.gameID, gL.startTime, gL.endTime, pI.username, pI2.username, gL.gameStatus, gL.gameName from gameList gL \n" +
-                    "join playerInfo pI on pI.playerID = gL.player1ID\n" +
-                    "join playerInfo pI2 on pI2.playerID = gL.player2ID\n" +
-                    "where gL.gameID = ?");
-            prep1.setString(1, gameID);
-            ResultSet gameSet = prep1.executeQuery();
-
-            int winner = gameSet.getInt(6);
-            String player = packet.getPlayerID();
-            String p1 = gameSet.getString(4);
-            String p2 = gameSet.getString(5);
-            String matchResult;
-            if (winner == 3) {
-                matchResult = "Tie";
-            }
-            else if ((player.equalsIgnoreCase(p1) && winner == 1) || (player.equalsIgnoreCase(p2) && winner == 2)) {
-                matchResult = "Win";
-            }
-            else {
-                matchResult = "Loss";
-            }
-            GameHistorySummary gameHistorySummary = new GameHistorySummary(gameID, p1, p2, matchResult);
-            java.sql.Date startDate = gameSet.getDate(2);
-            java.sql.Date endDate = gameSet.getDate(3);
-
-            java.util.Date sDate = new Date(startDate.getTime());
-            java.util.Date eDate = new Date(endDate.getTime());
-
-            GameHistoryDetail detail = new GameHistoryDetail(gameHistorySummary, sDate, eDate, moveList, null);
-            return new Packet("Stats", playerID, detail);
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return new Packet("Stats", playerID, null);
+        GameHistoryDetail gameHistoryDetail = getGameDetail(gameID);
+        return new Packet("Stats", playerID, gameHistoryDetail);
     }
 
     public GameHistoryDetail getGameDetail(String gameID){
@@ -467,8 +423,8 @@ public class SQLiteQuery {
             PreparedStatement prep = connection.prepareStatement("INSERT INTO moveList(gameID, playerID, x_coord, y_coord,time) values (?,?,?,?,?)");
             prep.setString(1, moveValid.getGameID());
             prep.setString(2, moveValid.getPlayer());
-            prep.setInt(3,moveValid.getxCoord());
-            prep.setInt(4, moveValid.getyCoord());
+            prep.setInt(3,moveValid.getXCoord());
+            prep.setInt(4, moveValid.getYCoord());
 
             //add date to move history, need to test!
             Date date = new Date(new java.util.Date().getTime());
@@ -550,18 +506,19 @@ public class SQLiteQuery {
         NewGameRequest request = (NewGameRequest)packet.getMessage();
 
         try {
-            PreparedStatement prep = connection.prepareStatement("INSERT INTO gameList(gameID, startTime, player1ID, player2ID, gameName) values(?,?,?,?,?)");
+            PreparedStatement prep = connection.prepareStatement("INSERT INTO gameList(gameID, startTime, endTime, player1ID, player2ID, gameName) values(?,?,?,?,?,?)");
             prep.setString(1, gameID);
             prep.setDate(2, new Date(System.currentTimeMillis()));
-            prep.setString(3,player1ID);
+            prep.setDate(3, new Date(System.currentTimeMillis()));
+            prep.setString(4,player1ID);
             if(request.getOpponent().equals("AI")){
-                prep.setString(4,"AI");
+                prep.setString(5,"AI");
                 player2Type = "AI";
             }
             else{
-                prep.setString(4, "");
+                prep.setString(5, "");
             }
-            prep.setString(5, request.getGameName());
+            prep.setString(6, request.getGameName());
             prep.execute();
 
             return new Packet("MainMenu", player1ID, new NewGameSuccess(gameID, request.getGameName(), player2Type));

@@ -51,8 +51,9 @@ public class GameDetailController {
 
     GameHistoryDetail gameHistoryDetail;
 
-    public void setGameHistoryDetailUI(GameHistoryDetail gameHistoryDetail) {
+    public void setGameHistoryDetail(GameHistoryDetail gameHistoryDetail) {
         this.gameHistoryDetail = gameHistoryDetail;
+        setInfo();
     }
 
     public GameDetailController() {
@@ -65,14 +66,14 @@ public class GameDetailController {
         xCol.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<MoveValid, String>, ObservableValue<String>>() {
             @Override
             public ObservableValue<String> call(TableColumn.CellDataFeatures<MoveValid, String> moveValidStringCellDataFeatures) {
-                Integer c = moveValidStringCellDataFeatures.getValue().getxCoord();
+                Integer c = moveValidStringCellDataFeatures.getValue().getXCoord();
                 return new SimpleStringProperty(c.toString());
             }
         });
         yCol.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<MoveValid, String>, ObservableValue<String>>() {
             @Override
             public ObservableValue<String> call(TableColumn.CellDataFeatures<MoveValid, String> moveValidStringCellDataFeatures) {
-                Integer c = moveValidStringCellDataFeatures.getValue().getyCoord();
+                Integer c = moveValidStringCellDataFeatures.getValue().getYCoord();
                 return new SimpleStringProperty(c.toString());
             }
         });

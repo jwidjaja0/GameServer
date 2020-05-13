@@ -66,8 +66,7 @@ public class AllGamesController {
         try {
             Parent root = loader.load();
             gdc = loader.getController();
-            gdc.setGameHistoryDetailUI(detail);
-            gdc.setInfo();
+            gdc.setGameHistoryDetail(detail);
 
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
