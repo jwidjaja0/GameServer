@@ -48,7 +48,7 @@ public class GameRoom {
         ArrayList<Packet> packets = new ArrayList<Packet>();
 
 
-        if (!player2.equals("a1234bcd")){//Dont send this message if player is playing vsAI, breaks client
+        if (!player2.equals("AI")){//Dont send this message if player is playing vsAI, breaks client
             PlayerJoined joined = new PlayerJoined(gameID, SQLiteQuery.getInstance().getUsername(player2), gameName);
             packets.add(new Packet ("Game", player1, joined));
         }
