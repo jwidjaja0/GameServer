@@ -33,7 +33,7 @@ public class Server implements Runnable, GameLogicSubject {
 
     private List<GameLogicObserver> observerList;
 
-    private final String aiID = "a1234bcd";
+    private final String aiID = "Ai";
 
 
     public Server() {
