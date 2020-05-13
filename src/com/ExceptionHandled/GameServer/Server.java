@@ -9,14 +9,20 @@ import com.ExceptionHandled.GameMessages.Stats.*;
 import com.ExceptionHandled.GameMessages.UserUpdate.*;
 import com.ExceptionHandled.GameMessages.Wrappers.Packet;
 import com.ExceptionHandled.GameServer.Database.SQLiteQuery;
+import com.ExceptionHandled.GameServer.InternalMessage.ActivePlayerList;
+import com.ExceptionHandled.GameServer.InternalMessage.ServerPacket;
+import com.ExceptionHandled.GameServer.InternalMessage.UserInvolvement;
+import com.ExceptionHandled.GameServer.Observer.GameLogicObserver;
+import com.ExceptionHandled.GameServer.Observer.GameLogicSubject;
 
 
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.*;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 
-public class Server implements Runnable {
+public class Server implements Runnable, GameLogicSubject {
     private BlockingQueue<ServerPacket> messageQueue;
 
     private List<ClientConnection> clientConnectionList;
@@ -26,6 +32,11 @@ public class Server implements Runnable {
 
     private Thread thread;
 
+    private List<GameLogicObserver> observerList;
+
+    private final String aiID = "AI";
+
+
     public Server() {
         messageQueue = new ArrayBlockingQueue<>(500);
         clientConnectionList = new ArrayList<>(100);
@@ -34,6 +45,7 @@ public class Server implements Runnable {
         activePlayerMapCC = new HashMap<>();
 
         //gameRoomList.add(new GameRoom("sampleID", "", "sample", "x"));
+        observerList = new ArrayList<>();
 
         thread = new Thread(this);
         thread.start();
@@ -82,7 +94,7 @@ public class Server implements Runnable {
 
         if(packet.getMessage() instanceof GameHistoryRequest){
             GameHistoryRequest request = (GameHistoryRequest)packet.getMessage();
-            response = SQLiteQuery.getInstance().getGameHistoryDetail(packet, request.getGameId());
+            response = SQLiteQuery.getInstance().getGameHistoryDetailForPlayer(packet, request.getGameId());
         }
         else if(packet.getMessage() instanceof PlayerStatsRequest){
             PlayerStatsRequest playerStatsRequest = (PlayerStatsRequest)packet.getMessage();
@@ -124,8 +136,9 @@ public class Server implements Runnable {
                 System.out.println("New Game added");
                 gameRoomList.add(gm);
 
+                notifyGameLogicObserver(getListActiveGames());
+
                 if (newGameRequest.getOpponent().equalsIgnoreCase("AI")) {
-                    String aiID = "a1234bcd";
                     JoinGameRequest aiJoin = new JoinGameRequest(gameID);
                     Packet sPacket = new Packet("MainMenu", aiID, aiJoin);
                     messageQueue.put(new ServerPacket(serverPacket.getClientConnection(), sPacket));
@@ -144,10 +157,11 @@ public class Server implements Runnable {
                         ArrayList<Packet> packets = gm.setPlayer2(playerID);
                         for (Packet notice : packets) {
                             System.out.println("sending to player");
-                            if (!notice.getPlayerID().equals("a1234bcd"))
+                            if (!notice.getPlayerID().equals(aiID)) //if not to Ai
                                 activePlayerMapCC.get(notice.getPlayerID()).getObjectOutputStream().writeObject(notice);
                         }
                         response = SQLiteQuery.getInstance().joinGame(packet);
+
                     }
                     else {
                         Packet notice = new Packet ("MainMenu", playerID, new JoinGameFail(idRequest));
@@ -155,15 +169,14 @@ public class Server implements Runnable {
                     }
                 }
             }
+            return;
         }
 
         else if(packet.getMessage() instanceof ListActiveGamesRequest){
-            List<ActiveGameHeader> gameList = new ArrayList<>();
-            for(GameRoom gm : gameRoomList){
-                gameList.add(gm.getActiveGameHeader());
-            }
-            System.out.println("Sending list active games, size: " + gameList.size());
-            response = new Packet("MainMenu", packet.getPlayerID(), new ListActiveGames(gameList));
+
+            ListActiveGames listAG = getListActiveGames();
+            response = new Packet("MainMenu", packet.getPlayerID(), listAG);
+
         }
 
         else if(packet.getMessage() instanceof SpectateRequest){
@@ -173,8 +186,7 @@ public class Server implements Runnable {
             for(GameRoom gm : gameRoomList){
                 if(gm.getGameID().equals(gameID)){
                     Packet notice = gm.addViewer(packet.getPlayerID());
-                    if (!notice.getPlayerID().equals("a1234bcd"))
-                        activePlayerMapCC.get(notice.getPlayerID()).getObjectOutputStream().writeObject(notice);
+                    activePlayerMapCC.get(notice.getPlayerID()).getObjectOutputStream().writeObject(notice);
                     response = SQLiteQuery.getInstance().insertViewerToGame(packet);
                 }
             }
@@ -209,7 +221,7 @@ public class Server implements Runnable {
 
                     if (gameMessage instanceof MoveMade) {
                         System.out.println("MoveMade, setting packet back");
-                        packets.addAll(gm.makeMove((MoveMade) gameMessage));
+                        packets.addAll(gm.makeMove((MoveMade) gameMessage, packet.getPlayerID()));
 
                         //to remove game later from gameList if game over
                         for(Packet p: packets){
@@ -218,31 +230,19 @@ public class Server implements Runnable {
                                 gr = gm;
                             }
                         }
-
-                    }
-
-                    else if (gameMessage instanceof RematchRequest) {
-                        RematchRequest message = (RematchRequest) gameMessage;
-                        String pID = packet.getPlayerID();
-                        if (pID.equals(gm.getPlayer1())) {
-                            pID = gm.getPlayer2();
-                        }
-                        packets.add(new Packet("Game", message.getGameID(), pID));
-                    }
-
-                    else if (gameMessage instanceof RematchRespond) {
-                        RematchRespond message = (RematchRespond) gameMessage;
-                        String pID = packet.getPlayerID();
-                        if (pID.equals(gm.getPlayer1())) {
-                            pID = gm.getPlayer2();
-                        }
-                        packets.add(new Packet("Game", message.getGameID(), pID));
                     }
 
                     //send all packets
                     for (Packet notice : packets) {
-                        if (!notice.getPlayerID().equals("a1234bcd"))
-                            activePlayerMapCC.get(notice.getPlayerID()).getObjectOutputStream().writeObject(notice);
+                        if (!notice.getPlayerID().equals(aiID)) {
+                            ClientConnection con = activePlayerMapCC.get(notice.getPlayerID());
+                            ObjectOutputStream os = con.getObjectOutputStream();
+                            os.writeObject(notice);
+                            //originally: activePlayerMapCC.get(notice.getPlayerID()).getObjectOutputStream().writeObject(notice);
+                        }
+                        else {
+                            System.out.println("dont send to AI " + packet.getMessageType());
+                        }
                     }
                 }
             }
@@ -250,6 +250,7 @@ public class Server implements Runnable {
         //removes game later from gameList if game over
         if (removeGame) {
             gameRoomList.remove(gr);
+            notifyGameLogicObserver(getListActiveGames());
         }
     }
 
@@ -271,18 +272,20 @@ public class Server implements Runnable {
             if(response.getMessage() instanceof LoginSuccess){
                 LoginSuccess lg = (LoginSuccess) response.getMessage();
                 activePlayerMapCC.put(lg.getPlayerID(), serverPacket.getClientConnection());
+
+                notifyGameLogicObserver(getActivePlayers());
             }
         }
 
         else if(packet.getMessage() instanceof LogoutRequest){
             String playerID = packet.getPlayerID();
             if(playerID.equals(null)){
-                //TODO: FIX LOGOUTFAIL
                 response = new Packet("Login", playerID, new LogoutFail(""));
             }
             else{
                 activePlayerMapCC.remove(playerID);
                 response = new Packet("Login", playerID, new LogoutSuccess());
+                notifyGameLogicObserver(getActivePlayers());
             }
         }
 
@@ -293,6 +296,57 @@ public class Server implements Runnable {
             System.out.println(response.getPlayerID());
         }
         serverPacket.getClientConnection().getObjectOutputStream().writeObject(response);
+    }
+
+    private ListActiveGames getListActiveGames(){
+        List<ActiveGameHeader> gameList = new ArrayList<>();
+        for(int i = 0; i < gameRoomList.size(); i++){
+            gameList.add(gameRoomList.get(i).getActiveGameHeader());
+        }
+        System.out.println("Sending list active games, size: " + gameList.size());
+        ListActiveGames listAG = new ListActiveGames(gameList);
+        return listAG;
+    }
+
+    private ActivePlayerList getActivePlayers(){
+        List<String> idList = new ArrayList<>();
+        for(String key : activePlayerMapCC.keySet()){
+            idList.add(key);
+        }
+        return new ActivePlayerList(idList);
+    }
+
+    public UserInvolvement findUserInvolvement(String playerID){
+        List<String> listGamesPlaying = new ArrayList<>();
+        List<String> listGamesViewing = new ArrayList<>();
+
+        for(GameRoom gm : gameRoomList){
+            if(gm.isPlayerIDInGame(playerID)){
+                listGamesPlaying.add(gm.getGameName());
+            }
+            else if(gm.isPlayerIDViewer(playerID)){
+                listGamesViewing.add(gm.getGameName());
+            }
+        }
+        UserInvolvement userInvolvement = new UserInvolvement(listGamesPlaying, listGamesViewing);
+        return userInvolvement;
+    }
+
+    @Override
+    public void addGameLogicObserver(GameLogicObserver obs) {
+        observerList.add(obs);
+    }
+
+    @Override
+    public void removeGameLogicObserver(GameLogicObserver obs) {
+        observerList.remove(obs);
+    }
+
+    @Override
+    public void notifyGameLogicObserver(Object arg) {
+        for(GameLogicObserver g: observerList){
+            g.update(this, arg);
+        }
     }
 }
 

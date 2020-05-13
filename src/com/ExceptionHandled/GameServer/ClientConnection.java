@@ -1,6 +1,7 @@
 package com.ExceptionHandled.GameServer;
 
 import com.ExceptionHandled.GameMessages.Wrappers.Packet;
+import com.ExceptionHandled.GameServer.InternalMessage.ServerPacket;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;

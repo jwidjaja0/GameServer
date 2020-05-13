@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="460.0" prefWidth="924.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ExceptionHandled.GameServer.ServerUI.Lobby.AllGamesController">
+   <children>
+      <TableView fx:id="gameTableView" layoutX="37.0" layoutY="22.0" prefHeight="372.0" prefWidth="850.0">
+         <columns>
+            <TableColumn fx:id="gameIDCol" maxWidth="80.0" text="gameID" />
+            <TableColumn fx:id="gamenameCol" maxWidth="90.0" prefWidth="90.0" text="Game Name" />
+            <TableColumn fx:id="playerOneCol" maxWidth="100.0" prefWidth="100.0" text="Player 1" />
+            <TableColumn fx:id="playerTwoCol" maxWidth="100.0" prefWidth="100.0" text="Player 2" />
+            <TableColumn fx:id="matchCol" maxWidth="120.0" prefWidth="120.0" text="Match Result" />
+            <TableColumn fx:id="startDateCol" maxWidth="180.0" prefWidth="180.0" text="Start Date" />
+            <TableColumn fx:id="endDateCol" maxWidth="181.0" prefWidth="181.0" text="End Date" />
+         </columns>
+      </TableView>
+      <Button fx:id="detailButton" layoutX="21.0" layoutY="414.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="136.0" text="Detail" />
+   </children>
+</AnchorPane>

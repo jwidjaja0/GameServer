@@ -6,11 +6,13 @@ import com.ExceptionHandled.GameMessages.MainMenu.*;
 import com.ExceptionHandled.GameMessages.Stats.GameHistoryDetail;
 import com.ExceptionHandled.GameMessages.Stats.GameHistorySummary;
 import com.ExceptionHandled.GameMessages.Stats.PlayerStatsInfo;
+import com.ExceptionHandled.GameMessages.UserInfo;
 import com.ExceptionHandled.GameMessages.UserUpdate.UserDeleteFail;
 import com.ExceptionHandled.GameMessages.UserUpdate.UserDeleteSuccess;
 import com.ExceptionHandled.GameMessages.UserUpdate.UserUpdateRequest;
 import com.ExceptionHandled.GameMessages.UserUpdate.UserUpdateSuccess;
 import com.ExceptionHandled.GameMessages.Wrappers.Packet;
+import com.ExceptionHandled.GameServer.Player;
 
 
 import java.sql.*;
@@ -73,7 +75,6 @@ public class SQLiteQuery {
                 return new Packet("Login", null, new SignUpFail("Username already exist"));
             }
 
-
             while(!isSignUpIDUnique(id)){
                 id = UUID.randomUUID().toString().substring(0,8);
             }
@@ -90,6 +91,10 @@ public class SQLiteQuery {
             prep.setString(5,request.getLastName());
             prep.setBoolean(6,true);
             prep.execute();
+
+            PreparedStatement prep2 = connection.prepareStatement("INSERT INTO playerStats(playerID) values(?)");
+            prep2.setString(1, id);
+            prep2.execute();
 
             return new Packet("Login", id, new SignUpSuccess());
         }
@@ -190,52 +195,110 @@ public class SQLiteQuery {
         return new Packet("MainMenu", playerID, new JoinGameFail("Unknown join game error"));
     }
 
-    public Packet getGameHistoryDetail(Packet packet, String gameID){
+    public Packet getGameHistoryDetailForPlayer(Packet packet, String gameID){
         String playerID = packet.getPlayerID();
 
+        GameHistoryDetail gameHistoryDetail = getGameDetail(gameID);
+        return new Packet("Stats", playerID, gameHistoryDetail);
+    }
+
+    public GameHistoryDetail getGameDetail(String gameID){
         try {
-            PreparedStatement prep = connection.prepareStatement("SELECT * FROM moveList mL where mL.gameID = ?");
+            PreparedStatement prep = connection.prepareStatement("SELECT * FROM gameList WHERE gameID = ?");
             prep.setString(1, gameID);
-            ResultSet rs = prep.executeQuery();
+            ResultSet gameRS = prep.executeQuery();
+            gameRS.next();
 
-            List<MoveValid> moveList = new ArrayList<>();
-            while(rs.next()){
-                MoveValid m = new MoveValid(gameID, rs.getString(3), rs.getInt(4), rs.getInt(5));
-                moveList.add(m);
+            Date sqlStartDate = gameRS.getDate("startTime");
+            java.util.Date utilStartDate = new Date(sqlStartDate.getTime());
+            Date sqlEndDate = gameRS.getDate("endTime");
+            java.util.Date utilEndDate;
+            if(sqlEndDate == null){
+                utilEndDate = new java.util.Date(0);
+            }
+            else{
+                utilEndDate = new Date(sqlEndDate.getTime());
             }
 
-            PreparedStatement prep1 = connection.prepareStatement("select * from gameList gL where gL.gameID = ?");
-            prep1.setString(1, gameID);
-            ResultSet gameSet = prep1.executeQuery();
+            //TODO: process match result
+//            int matchResult = gameRS.getInt(6);
+//            String result;
+//            switch(matchResult){
+//                case 0:
+//                    result = ""
+//            }
+            System.out.println("int match result: " + gameRS.getInt(6));
+            String result = String.valueOf(gameRS.getInt(6));
 
-            int winner = gameSet.getInt(6);
-            String player = packet.getPlayerID();
-            String p1 = gameSet.getString(4);
-            String p2 = gameSet.getString(5);
-            String matchResult;
-            if (winner == 0) {
-                matchResult = "Tie";
+            GameHistorySummary ghSummary = new GameHistorySummary(gameID, gameRS.getString(4), gameRS.getString(5), result, gameRS.getString("gameName"),
+                    utilStartDate, utilEndDate);
+
+            PreparedStatement prep1 = connection.prepareStatement("SELECT playerID, x_coord, y_coord, time from moveList WHERE gameID = ?");
+            prep1.setString(1,gameID);
+            ResultSet moveRS = prep1.executeQuery();
+            List<MoveValid> moveValids = new ArrayList<>();
+            while(moveRS.next()){
+                MoveValid mv = new MoveValid(gameID, moveRS.getString("playerID"), moveRS.getInt("x_coord"),
+                        moveRS.getInt("y_coord"), moveRS.getDate("time"));
+                moveValids.add(mv);
             }
-            else if ((player.equalsIgnoreCase(p1) && winner == 1) || (player.equalsIgnoreCase(p2) && winner == 2)) {
-                matchResult = "Win";
+
+            PreparedStatement prep2 = connection.prepareStatement("SELECT viewers.userID, playerInfo.username, playerInfo.firstname, playerInfo.lastname\n" +
+                    "FROM viewers\n" +
+                    "JOIN playerInfo ON viewers.userID = playerInfo.playerID\n" +
+                    "WHERE gameID = ?");
+            prep2.setString(1, gameID);
+            ResultSet viewerRS = prep2.executeQuery();
+            List<UserInfo> viewers = new ArrayList<>();
+
+            while(viewerRS.next()){
+                //Password is not included.
+                String pw = "";
+                UserInfo viewerInfo = new UserInfo(viewerRS.getString(1), viewerRS.getString(2), pw,
+                        viewerRS.getString(3), viewerRS.getString(4));
+                viewers.add(viewerInfo);
             }
-            else {
-                matchResult = "Loss";
-            }
-            GameHistorySummary gameHistorySummary = new GameHistorySummary(gameID, p1, p2, matchResult);            java.sql.Date startDate = gameSet.getDate(2);
-            java.sql.Date endDate = gameSet.getDate(3);
 
-            java.util.Date sDate = new Date(startDate.getTime());
-            java.util.Date eDate = new Date(endDate.getTime());
-
-            GameHistoryDetail detail = new GameHistoryDetail(gameHistorySummary, sDate, eDate, moveList, null);
-            return new Packet("Stats", playerID, detail);
-
+            GameHistoryDetail detail = new GameHistoryDetail(ghSummary,moveValids,viewers);
+            return detail;
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return new Packet("Stats", playerID, null);
+        return null;
+    }
+
+    public List<GameHistorySummary> getAllGameHistorySummary(){
+        List<GameHistorySummary> gameHistorySummaries = new ArrayList<>();
+
+        try {
+            PreparedStatement prep = connection.prepareStatement("SELECT * FROM gameList");
+            ResultSet gameRS = prep.executeQuery();
+            while(gameRS.next()){
+                int matchResult = gameRS.getInt("gameStatus");
+                String stat = "No conclusion";
+                switch(matchResult){
+                    case 1:
+                        stat = "player 1 won";
+                        break;
+                    case 2:
+                        stat = "player 2 won";
+                        break;
+                    case 3:
+                        stat = "draw";
+                }
+
+                GameHistorySummary ghs = new GameHistorySummary(gameRS.getString("gameID"), gameRS.getString("player1ID"),
+                        gameRS.getString("player2ID"), stat, gameRS.getString("gameName"), new java.util.Date(gameRS.getDate(2).getTime()),
+                        new java.util.Date(gameRS.getDate(2).getTime()));
+                gameHistorySummaries.add(ghs);
+
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return gameHistorySummaries;
     }
 
     public Packet getPlayerStatsInfo(Packet packet){
@@ -246,9 +309,9 @@ public class SQLiteQuery {
             prep.setString(1, playerID);
             ResultSet rs = prep.executeQuery();
 
-            int win = -1;
-            int loss = -1;
-            int draw = -1;
+            int win = 0;
+            int loss = 0;
+            int draw = 0;
 
             while(rs.next()){
                 win = rs.getInt(3);
@@ -293,6 +356,47 @@ public class SQLiteQuery {
         return new Packet("Stats", playerID, null);
     }
 
+    public Player getPlayerDetail(String id){
+        Player p = null;
+        try {
+            PreparedStatement prep = connection.prepareStatement("SELECT playerID, username, firstname, lastname, isActive FROM playerInfo WHERE playerID = ?");
+            prep.setString(1, id);
+            ResultSet rs = prep.executeQuery();
+
+            rs.next();
+            p = new Player(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4));
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return p;
+    }
+
+    public List<UserInfo> getAllPlayersInfo(){
+        List<UserInfo> allPlayers = new ArrayList<>();
+        try {
+            PreparedStatement prep = connection.prepareStatement("SELECT playerID, username, password, firstname, lastname, isActive\n" +
+                    "FROM playerInfo");
+            ResultSet playersRS = prep.executeQuery();
+
+
+            while(playersRS.next()){
+                Boolean b = playersRS.getBoolean(6);
+
+                UserInfo user = new UserInfo(playersRS.getString(1), playersRS.getString(2),
+                        playersRS.getString(3), playersRS.getString(4), playersRS.getString(5), b);
+                allPlayers.add(user);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return allPlayers;
+    }
+
     public Packet insertViewerToGame(Packet packet){
         String playerID = packet.getPlayerID();
         SpectateRequest sp = (SpectateRequest)packet.getMessage();
@@ -304,7 +408,7 @@ public class SQLiteQuery {
             prep.execute();
 
             //TODO: reimplement this.. perhaps it's better to send SpectateSuccess and put the GameHistoryDetail inside that.
-            Packet toReturn = getGameHistoryDetail(packet, sp.getGameId());
+            Packet toReturn = getGameHistoryDetailForPlayer(packet, sp.getGameId());
             return toReturn;
 
         } catch (SQLException e) {
@@ -316,11 +420,15 @@ public class SQLiteQuery {
 
     public void insertMoveHistory(MoveValid moveValid){
         try {
-            PreparedStatement prep = connection.prepareStatement("INSERT INTO moveList(gameID, playerID, x_coord, y_coord) values (?,?,?,?)");
+            PreparedStatement prep = connection.prepareStatement("INSERT INTO moveList(gameID, playerID, x_coord, y_coord,time) values (?,?,?,?,?)");
             prep.setString(1, moveValid.getGameID());
             prep.setString(2, moveValid.getPlayer());
-            prep.setInt(3,moveValid.getxCoord());
-            prep.setInt(4, moveValid.getyCoord());
+            prep.setInt(3,moveValid.getXCoord());
+            prep.setInt(4, moveValid.getYCoord());
+
+            //add date to move history, need to test!
+            Date date = new Date(new java.util.Date().getTime());
+            prep.setDate(5, date);
 
             prep.execute();
         } catch (SQLException e) {
@@ -328,8 +436,8 @@ public class SQLiteQuery {
         }
     }
 
-    public void updateGameOver(String gameID, int gameStatus){
-        //-1: incomplete, 0: draw, 1: player1Won, 2:player2Won
+    public void updateGameOver(String gameID, int gameStatus, String p1ID, String p2ID){
+        //1: player1Won, 2:player2Won, 3: draw
         java.util.Date endDate = new java.util.Date();
         java.sql.Date date2 = new Date(endDate.getTime());
 
@@ -340,6 +448,32 @@ public class SQLiteQuery {
             prep.setDate(2, date2);
             prep.execute();
 
+            if(gameStatus == 1 || gameStatus == 2){
+                //player1 won
+                PreparedStatement ps = connection.prepareStatement("UPDATE playerStats SET win = win + 1 WHERE playerID = ?");
+                PreparedStatement ps2 = connection.prepareStatement("UPDATE playerStats SET lose = lose + 1 WHERE playerID = ?");
+
+                if(gameStatus == 1){
+                    ps.setString(1, p1ID);
+                    ps2.setString(1,p2ID);
+                }
+                else{
+                    ps.setString(1, p2ID);
+                    ps2.setString(1,p1ID);
+                }
+                ps.execute();
+                ps2.execute();
+            }
+            else{
+                //game draw
+                PreparedStatement preparedStatement =  connection.prepareStatement("UPDATE playerStats set draw = draw + 1 WHERE playerID = ?");
+                PreparedStatement preparedStatement2 =  connection.prepareStatement("UPDATE playerStats set draw = draw + 1 WHERE playerID = ?");
+                preparedStatement.setString(1, p1ID);
+                preparedStatement2.setString(1,p2ID);
+
+                preparedStatement.execute();
+                preparedStatement2.execute();
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -372,18 +506,19 @@ public class SQLiteQuery {
         NewGameRequest request = (NewGameRequest)packet.getMessage();
 
         try {
-            PreparedStatement prep = connection.prepareStatement("INSERT INTO gameList(gameID, startTime, player1ID, player2ID, gameName) values(?,?,?,?,?)");
+            PreparedStatement prep = connection.prepareStatement("INSERT INTO gameList(gameID, startTime, endTime, player1ID, player2ID, gameName) values(?,?,?,?,?,?)");
             prep.setString(1, gameID);
             prep.setDate(2, new Date(System.currentTimeMillis()));
-            prep.setString(3,player1ID);
+            prep.setDate(3, new Date(System.currentTimeMillis()));
+            prep.setString(4,player1ID);
             if(request.getOpponent().equals("AI")){
-                prep.setString(4,"AI");
+                prep.setString(5,"AI");
                 player2Type = "AI";
             }
             else{
-                prep.setString(4, "");
+                prep.setString(5, "");
             }
-            prep.setString(5, request.getGameName());
+            prep.setString(6, request.getGameName());
             prep.execute();
 
             return new Packet("MainMenu", player1ID, new NewGameSuccess(gameID, request.getGameName(), player2Type));

@@ -22,13 +22,8 @@
     <list default="true" id="aefb3591-25b9-418d-8adf-7b35b803d267" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TicTacToe.db" beforeDir="false" afterPath="$PROJECT_DIR$/TicTacToe.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Database/SQLiteQuery.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Database/SQLiteQuery.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Game/AIPlayer.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Game/HumanPlayer.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Game/TTTGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Game/TTTGame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Game/TicTacToe.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Game/TTTBoard.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/GameRoom.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/GameRoom.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Server.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/ServerUI/Lobby/PlayerDetailController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/ServerUI/Lobby/PlayerDetailController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -85,6 +80,10 @@
               <option name="branches">
                 <list>
                   <RecentBranch>
+                    <option name="branchName" value="serverUI" />
+                    <option name="lastUsedInstant" value="1588812526" />
+                  </RecentBranch>
+                  <RecentBranch>
                     <option name="branchName" value="removeGamePassword" />
                     <option name="lastUsedInstant" value="1588719496" />
                   </RecentBranch>
@@ -115,11 +114,16 @@
   </component>
   <component name="PropertiesComponent">
     <property name="DatabaseDriversLRU" value="sqlite" />
+    <property name="Downloaded.Files.Path.Enabled" value="false" />
+    <property name="Repository.Attach.Annotations" value="false" />
+    <property name="Repository.Attach.JavaDocs" value="false" />
+    <property name="Repository.Attach.Sources" value="false" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../GameMessages/out/artifacts/GameMessages_jar/GameMessages.jar!/" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../GameClient" />
+    <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -129,6 +133,7 @@
     <configuration name="Main" type="Application" factoryName="Application" temporary="true">
       <option name="MAIN_CLASS_NAME" value="com.ExceptionHandled.GameServer.Main" />
       <module name="GameServer" />
+      <option name="VM_PARAMETERS" value="--module-path C:\Code\openjfx-11.0.2_windows-x64_bin-sdk(1)\javafx-sdk-11.0.2\lib --add-modules javafx.controls,javafx.fxml" />
       <RunnerSettings RunnerId="Run" />
       <ConfigurationWrapper RunnerId="Run" />
       <method v="2">
@@ -141,6 +146,18 @@
         <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -179,6 +196,15 @@
       <workItem from="1588449552052" duration="16036000" />
       <workItem from="1588556702108" duration="530000" />
       <workItem from="1588719069912" duration="4650000" />
+      <workItem from="1588784235164" duration="21231000" />
+      <workItem from="1588819155717" duration="4813000" />
+      <workItem from="1589145541633" duration="1734000" />
+      <workItem from="1589243441091" duration="2966000" />
+      <workItem from="1589302121559" duration="690000" />
+      <workItem from="1589341292360" duration="733000" />
+      <workItem from="1589352508373" duration="5871000" />
+      <workItem from="1589400175977" duration="519000" />
+      <workItem from="1589400730485" duration="3777000" />
     </task>
     <task id="LOCAL-00001" summary="updated connections">
       <created>1588216562932</created>
@@ -219,7 +245,7 @@
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="2" />
+    <option name="version" value="1" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -340,22 +366,12 @@
                   </entry>
                 </map>
               </option>
+              <option name="COLUMN_ORDER" />
             </State>
           </value>
         </entry>
       </map>
     </option>
-    <option name="OPEN_GENERIC_TABS">
-      <map>
-        <entry key="1" value="TOOL_WINDOW" />
-        <entry key="2" value="TOOL_WINDOW" />
-        <entry key="3" value="TOOL_WINDOW" />
-        <entry key="4" value="TOOL_WINDOW" />
-        <entry key="5" value="TOOL_WINDOW" />
-        <entry key="6" value="TOOL_WINDOW" />
-      </map>
-    </option>
-    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <ignored-roots>
@@ -369,6 +385,20 @@
     <option name="LAST_COMMIT_MESSAGE" value="removes game from list if game is over" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="144" y="0" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1589403701204">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="-1776" y="0" key="#com.intellij.execution.impl.EditConfigurationsDialog/-1920.0.1920.1080/0.0.2560.1440@-1920.0.1920.1080" timestamp="1589138521442" />
+    <state x="96" y="0" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1280.680@0.0.1280.680" timestamp="1588812957343" />
+    <state x="144" y="0" key="#com.intellij.execution.impl.EditConfigurationsDialog/1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1589403701204" />
+    <state x="550" y="155" key="#com.intellij.ide.util.MemberChooser" timestamp="1589402552252">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="550" y="155" key="#com.intellij.ide.util.MemberChooser/1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1589402552252" />
+    <state x="596" y="340" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog" timestamp="1589400467671">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="596" y="340" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog/1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1589400467671" />
     <state x="250" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1588721809466">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
@@ -377,43 +407,129 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="252" y="0" key="CommitChangelistDialog2/0.0.1280.680@0.0.1280.680" timestamp="1588655336911" />
-    <state x="421" y="97" width="878" height="654" key="FileChooserDialogImpl" timestamp="1588641933288" />
-    <state x="421" y="97" key="FileChooserDialogImpl/0.0.1280.680@0.0.1280.680" timestamp="1588641933288" />
+    <state x="603" y="39" width="878" height="654" key="FileChooserDialogImpl" timestamp="1589403550342">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="421" y="97" key="FileChooserDialogImpl/0.0.1280.680@0.0.1280.680" timestamp="1588813240899" />
+    <state x="603" y="39" key="FileChooserDialogImpl/1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1589403550342" />
     <state x="421" y="97" width="878" height="654" key="FileChooserDialogImpl/70.27.1850.1053@70.27.1850.1053" timestamp="1588641933288" />
-    <state width="1237" height="480" key="GridCell.Tab.0.bottom" timestamp="1588723556120">
-      <screen x="0" y="0" width="1280" height="680" />
+    <state width="1430" height="231" key="GridCell.Tab.0.bottom" timestamp="1589404748932">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="211" key="GridCell.Tab.0.bottom/-1920.0.1920.1080/0.0.2560.1440@-1920.0.1920.1080" timestamp="1588649626930" />
-    <state width="1237" height="480" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1588723556120" />
+    <state width="1877" height="211" key="GridCell.Tab.0.bottom/-1920.0.1920.1080/0.0.2560.1440@-1920.0.1920.1080" timestamp="1589251342298" />
+    <state width="2517" height="211" key="GridCell.Tab.0.bottom/-1920.0.1920.1080/0.0.2560.1440@0.0.2560.1440" timestamp="1589252654854" />
+    <state width="1237" height="198" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1588823714415" />
+    <state width="1430" height="231" key="GridCell.Tab.0.bottom/1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1589404748932" />
     <state width="1794" height="247" key="GridCell.Tab.0.bottom/70.27.1850.1053@70.27.1850.1053" timestamp="1588641933288" />
-    <state width="1237" height="480" key="GridCell.Tab.0.center" timestamp="1588723556120">
-      <screen x="0" y="0" width="1280" height="680" />
+    <state width="1430" height="231" key="GridCell.Tab.0.center" timestamp="1589404748932">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="211" key="GridCell.Tab.0.center/-1920.0.1920.1080/0.0.2560.1440@-1920.0.1920.1080" timestamp="1588649626929" />
-    <state width="1237" height="480" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1588723556120" />
+    <state width="1877" height="211" key="GridCell.Tab.0.center/-1920.0.1920.1080/0.0.2560.1440@-1920.0.1920.1080" timestamp="1589251342297" />
+    <state width="2517" height="211" key="GridCell.Tab.0.center/-1920.0.1920.1080/0.0.2560.1440@0.0.2560.1440" timestamp="1589252654854" />
+    <state width="1237" height="198" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1588823714415" />
+    <state width="1430" height="231" key="GridCell.Tab.0.center/1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1589404748932" />
     <state width="1794" height="247" key="GridCell.Tab.0.center/70.27.1850.1053@70.27.1850.1053" timestamp="1588641933288" />
-    <state width="1237" height="480" key="GridCell.Tab.0.left" timestamp="1588723556120">
-      <screen x="0" y="0" width="1280" height="680" />
+    <state width="1430" height="231" key="GridCell.Tab.0.left" timestamp="1589404748930">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="211" key="GridCell.Tab.0.left/-1920.0.1920.1080/0.0.2560.1440@-1920.0.1920.1080" timestamp="1588649626929" />
-    <state width="1237" height="480" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1588723556120" />
+    <state width="1877" height="211" key="GridCell.Tab.0.left/-1920.0.1920.1080/0.0.2560.1440@-1920.0.1920.1080" timestamp="1589251342297" />
+    <state width="2517" height="211" key="GridCell.Tab.0.left/-1920.0.1920.1080/0.0.2560.1440@0.0.2560.1440" timestamp="1589252654853" />
+    <state width="1237" height="198" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1588823714415" />
+    <state width="1430" height="231" key="GridCell.Tab.0.left/1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1589404748930" />
     <state width="1794" height="247" key="GridCell.Tab.0.left/70.27.1850.1053@70.27.1850.1053" timestamp="1588641933288" />
-    <state width="1237" height="480" key="GridCell.Tab.0.right" timestamp="1588723556120">
-      <screen x="0" y="0" width="1280" height="680" />
+    <state width="1430" height="231" key="GridCell.Tab.0.right" timestamp="1589404748932">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="211" key="GridCell.Tab.0.right/-1920.0.1920.1080/0.0.2560.1440@-1920.0.1920.1080" timestamp="1588649626929" />
-    <state width="1237" height="480" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1588723556120" />
+    <state width="1877" height="211" key="GridCell.Tab.0.right/-1920.0.1920.1080/0.0.2560.1440@-1920.0.1920.1080" timestamp="1589251342297" />
+    <state width="2517" height="211" key="GridCell.Tab.0.right/-1920.0.1920.1080/0.0.2560.1440@0.0.2560.1440" timestamp="1589252654854" />
+    <state width="1237" height="198" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1588823714415" />
+    <state width="1430" height="231" key="GridCell.Tab.0.right/1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1589404748932" />
     <state width="1794" height="247" key="GridCell.Tab.0.right/70.27.1850.1053@70.27.1850.1053" timestamp="1588641933288" />
-    <state x="359" y="27" width="1280" height="1053" key="SettingsEditor" timestamp="1588641933288" />
+    <state width="1430" height="347" key="GridCell.Tab.1.bottom" timestamp="1589404616039">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1237" height="228" key="GridCell.Tab.1.bottom/0.0.1280.680@0.0.1280.680" timestamp="1588823540255" />
+    <state width="1430" height="347" key="GridCell.Tab.1.bottom/1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1589404616039" />
+    <state width="1430" height="347" key="GridCell.Tab.1.center" timestamp="1589404616039">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1237" height="228" key="GridCell.Tab.1.center/0.0.1280.680@0.0.1280.680" timestamp="1588823540255" />
+    <state width="1430" height="347" key="GridCell.Tab.1.center/1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1589404616039" />
+    <state width="1430" height="347" key="GridCell.Tab.1.left" timestamp="1589404616039">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1237" height="228" key="GridCell.Tab.1.left/0.0.1280.680@0.0.1280.680" timestamp="1588823540255" />
+    <state width="1430" height="347" key="GridCell.Tab.1.left/1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1589404616039" />
+    <state width="1430" height="347" key="GridCell.Tab.1.right" timestamp="1589404616039">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1237" height="228" key="GridCell.Tab.1.right/0.0.1280.680@0.0.1280.680" timestamp="1588823540255" />
+    <state width="1430" height="347" key="GridCell.Tab.1.right/1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1589404616039" />
+    <state x="0" y="0" width="1280" height="680" key="SettingsEditor" timestamp="1589400755125">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="-1920" y="0" key="SettingsEditor/-1920.0.1920.1080/0.0.2560.1440@-1920.0.1920.1080" timestamp="1589138396408" />
+    <state x="0" y="0" width="1280" height="680" key="SettingsEditor/0.0.1280.680@0.0.1280.680" timestamp="1588813244080" />
+    <state x="0" y="0" key="SettingsEditor/1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1589400755125" />
     <state x="359" y="27" width="1280" height="1053" key="SettingsEditor/70.27.1850.1053@70.27.1850.1053" timestamp="1588641933288" />
     <state x="233" y="62" key="Vcs.Push.Dialog.v2" timestamp="1588655355543">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="233" y="62" key="Vcs.Push.Dialog.v2/0.0.1280.680@0.0.1280.680" timestamp="1588655355543" />
-    <state x="450" y="254" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1588655056465">
+    <state x="-1264" y="364" key="com.intellij.ide.util.TipDialog" timestamp="1589243441111">
+      <screen x="-1920" y="0" width="1920" height="1080" />
+    </state>
+    <state x="-1264" y="364" key="com.intellij.ide.util.TipDialog/-1920.0.1920.1080/0.0.2560.1440@-1920.0.1920.1080" timestamp="1589243441111" />
+    <state x="563" y="355" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD" timestamp="1589400442712">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="375" y="232" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD/0.0.1280.680@0.0.1280.680" timestamp="1588813072069" />
+    <state x="563" y="355" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD/1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1589400442712" />
+    <state x="450" y="254" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1588812777547">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="450" y="254" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1280.680@0.0.1280.680" timestamp="1588655056465" />
+    <state x="450" y="254" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1280.680@0.0.1280.680" timestamp="1588812777547" />
+    <state x="-1297" y="235" width="672" height="678" key="search.everywhere.popup" timestamp="1589248395204">
+      <screen x="-1920" y="0" width="1920" height="1080" />
+    </state>
+    <state x="-1297" y="235" width="672" height="678" key="search.everywhere.popup/-1920.0.1920.1080/0.0.2560.1440@-1920.0.1920.1080" timestamp="1589248395204" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Database/SQLiteQuery.java</url>
+          <line>230</line>
+          <option name="timeStamp" value="18" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Database/SQLiteQuery.java</url>
+          <line>232</line>
+          <option name="timeStamp" value="19" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/ServerUI/Lobby/PlayerDetailController.java</url>
+          <line>54</line>
+          <option name="timeStamp" value="30" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Server.java</url>
+          <line>331</line>
+          <option name="timeStamp" value="31" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+    <watches-manager>
+      <configuration name="Application">
+        <watch expression="((HashMap)activePlayerMapCC).entrySet().toArray()[0]" custom="java.util.HashMap" />
+        <watch expression="moveList.get(2)" />
+        <watch expression="moveList.get(2)" language="JAVA" />
+        <watch expression="((HashMap)activePlayerMapCC).entrySet().toArray()[0]" custom="java.util.HashMap" />
+        <watch expression="this" />
+        <watch expression="this" language="JAVA" />
+        <watch expression="summary.gameID" />
+      </configuration>
+    </watches-manager>
   </component>
   <component name="simpleUML.UMLToolWindowPlugin">
     <General>
