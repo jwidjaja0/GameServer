@@ -20,10 +20,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="aefb3591-25b9-418d-8adf-7b35b803d267" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TicTacToe.db" beforeDir="false" afterPath="$PROJECT_DIR$/TicTacToe.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/GameRoom.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/GameRoom.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/ServerUI/Lobby/PlayerDetailController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/ServerUI/Lobby/PlayerDetailController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Database/SQLiteQuery.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Database/SQLiteQuery.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Server.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,7 +66,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="master" />
+        <entry key="$PROJECT_DIR$" value="serverUI" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -124,7 +125,7 @@
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../GameClient" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="project.structure.last.edited" value="Libraries" />
+    <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="application.passwordSafe" />
@@ -133,7 +134,7 @@
     <configuration name="Main" type="Application" factoryName="Application" temporary="true">
       <option name="MAIN_CLASS_NAME" value="com.ExceptionHandled.GameServer.Main" />
       <module name="GameServer" />
-      <option name="VM_PARAMETERS" value="--module-path C:\Code\openjfx-11.0.2_windows-x64_bin-sdk(1)\javafx-sdk-11.0.2\lib --add-modules javafx.controls,javafx.fxml" />
+      <option name="VM_PARAMETERS" value="--module-path $PROJECT_DIR$/../../../../../&quot;Program Files&quot;/&quot;Java&quot;/&quot;javafx-sdk-13.0.2&quot;/&quot;lib&quot; --add-modules javafx.controls,javafx.fxml" />
       <RunnerSettings RunnerId="Run" />
       <ConfigurationWrapper RunnerId="Run" />
       <method v="2">
@@ -146,18 +147,6 @@
         <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
-  </component>
-  <component name="ServiceViewManager">
-    <option name="viewStates">
-      <list>
-        <serviceView>
-          <treeState>
-            <expand />
-            <select />
-          </treeState>
-        </serviceView>
-      </list>
-    </option>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -366,12 +355,12 @@
                   </entry>
                 </map>
               </option>
-              <option name="COLUMN_ORDER" />
             </State>
           </value>
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <ignored-roots>
@@ -385,11 +374,11 @@
     <option name="LAST_COMMIT_MESSAGE" value="removes game from list if game is over" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="144" y="0" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1589403701204">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="96" y="0" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1589408507906">
+      <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="-1776" y="0" key="#com.intellij.execution.impl.EditConfigurationsDialog/-1920.0.1920.1080/0.0.2560.1440@-1920.0.1920.1080" timestamp="1589138521442" />
-    <state x="96" y="0" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1280.680@0.0.1280.680" timestamp="1588812957343" />
+    <state x="96" y="0" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1280.680@0.0.1280.680" timestamp="1589408507906" />
     <state x="144" y="0" key="#com.intellij.execution.impl.EditConfigurationsDialog/1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1589403701204" />
     <state x="550" y="155" key="#com.intellij.ide.util.MemberChooser" timestamp="1589402552252">
       <screen x="0" y="0" width="1920" height="1040" />
@@ -413,36 +402,36 @@
     <state x="421" y="97" key="FileChooserDialogImpl/0.0.1280.680@0.0.1280.680" timestamp="1588813240899" />
     <state x="603" y="39" key="FileChooserDialogImpl/1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1589403550342" />
     <state x="421" y="97" width="878" height="654" key="FileChooserDialogImpl/70.27.1850.1053@70.27.1850.1053" timestamp="1588641933288" />
-    <state width="1430" height="231" key="GridCell.Tab.0.bottom" timestamp="1589404748932">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1237" height="78" key="GridCell.Tab.0.bottom" timestamp="1589416679800">
+      <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state width="1877" height="211" key="GridCell.Tab.0.bottom/-1920.0.1920.1080/0.0.2560.1440@-1920.0.1920.1080" timestamp="1589251342298" />
     <state width="2517" height="211" key="GridCell.Tab.0.bottom/-1920.0.1920.1080/0.0.2560.1440@0.0.2560.1440" timestamp="1589252654854" />
-    <state width="1237" height="198" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1588823714415" />
+    <state width="1237" height="78" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1589416679800" />
     <state width="1430" height="231" key="GridCell.Tab.0.bottom/1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1589404748932" />
     <state width="1794" height="247" key="GridCell.Tab.0.bottom/70.27.1850.1053@70.27.1850.1053" timestamp="1588641933288" />
-    <state width="1430" height="231" key="GridCell.Tab.0.center" timestamp="1589404748932">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1237" height="78" key="GridCell.Tab.0.center" timestamp="1589416679800">
+      <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state width="1877" height="211" key="GridCell.Tab.0.center/-1920.0.1920.1080/0.0.2560.1440@-1920.0.1920.1080" timestamp="1589251342297" />
     <state width="2517" height="211" key="GridCell.Tab.0.center/-1920.0.1920.1080/0.0.2560.1440@0.0.2560.1440" timestamp="1589252654854" />
-    <state width="1237" height="198" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1588823714415" />
+    <state width="1237" height="78" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1589416679800" />
     <state width="1430" height="231" key="GridCell.Tab.0.center/1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1589404748932" />
     <state width="1794" height="247" key="GridCell.Tab.0.center/70.27.1850.1053@70.27.1850.1053" timestamp="1588641933288" />
-    <state width="1430" height="231" key="GridCell.Tab.0.left" timestamp="1589404748930">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1237" height="78" key="GridCell.Tab.0.left" timestamp="1589416679788">
+      <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state width="1877" height="211" key="GridCell.Tab.0.left/-1920.0.1920.1080/0.0.2560.1440@-1920.0.1920.1080" timestamp="1589251342297" />
     <state width="2517" height="211" key="GridCell.Tab.0.left/-1920.0.1920.1080/0.0.2560.1440@0.0.2560.1440" timestamp="1589252654853" />
-    <state width="1237" height="198" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1588823714415" />
+    <state width="1237" height="78" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1589416679788" />
     <state width="1430" height="231" key="GridCell.Tab.0.left/1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1589404748930" />
     <state width="1794" height="247" key="GridCell.Tab.0.left/70.27.1850.1053@70.27.1850.1053" timestamp="1588641933288" />
-    <state width="1430" height="231" key="GridCell.Tab.0.right" timestamp="1589404748932">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1237" height="78" key="GridCell.Tab.0.right" timestamp="1589416679800">
+      <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state width="1877" height="211" key="GridCell.Tab.0.right/-1920.0.1920.1080/0.0.2560.1440@-1920.0.1920.1080" timestamp="1589251342297" />
     <state width="2517" height="211" key="GridCell.Tab.0.right/-1920.0.1920.1080/0.0.2560.1440@0.0.2560.1440" timestamp="1589252654854" />
-    <state width="1237" height="198" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1588823714415" />
+    <state width="1237" height="78" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1589416679800" />
     <state width="1430" height="231" key="GridCell.Tab.0.right/1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1589404748932" />
     <state width="1794" height="247" key="GridCell.Tab.0.right/70.27.1850.1053@70.27.1850.1053" timestamp="1588641933288" />
     <state width="1430" height="347" key="GridCell.Tab.1.bottom" timestamp="1589404616039">
@@ -465,11 +454,11 @@
     </state>
     <state width="1237" height="228" key="GridCell.Tab.1.right/0.0.1280.680@0.0.1280.680" timestamp="1588823540255" />
     <state width="1430" height="347" key="GridCell.Tab.1.right/1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1589404616039" />
-    <state x="0" y="0" width="1280" height="680" key="SettingsEditor" timestamp="1589400755125">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="0" y="0" width="1280" height="680" key="SettingsEditor" timestamp="1589409118454">
+      <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="-1920" y="0" key="SettingsEditor/-1920.0.1920.1080/0.0.2560.1440@-1920.0.1920.1080" timestamp="1589138396408" />
-    <state x="0" y="0" width="1280" height="680" key="SettingsEditor/0.0.1280.680@0.0.1280.680" timestamp="1588813244080" />
+    <state x="0" y="0" width="1280" height="680" key="SettingsEditor/0.0.1280.680@0.0.1280.680" timestamp="1589409118454" />
     <state x="0" y="0" key="SettingsEditor/1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1589400755125" />
     <state x="359" y="27" width="1280" height="1053" key="SettingsEditor/70.27.1850.1053@70.27.1850.1053" timestamp="1588641933288" />
     <state x="233" y="62" key="Vcs.Push.Dialog.v2" timestamp="1588655355543">
@@ -489,6 +478,10 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="450" y="254" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1280.680@0.0.1280.680" timestamp="1588812777547" />
+    <state x="297" y="151" key="run.anything.popup" timestamp="1589414499413">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="297" y="151" key="run.anything.popup/0.0.1280.680@0.0.1280.680" timestamp="1589414499413" />
     <state x="-1297" y="235" width="672" height="678" key="search.everywhere.popup" timestamp="1589248395204">
       <screen x="-1920" y="0" width="1920" height="1080" />
     </state>
@@ -498,23 +491,13 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Database/SQLiteQuery.java</url>
-          <line>230</line>
-          <option name="timeStamp" value="18" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Database/SQLiteQuery.java</url>
-          <line>232</line>
-          <option name="timeStamp" value="19" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/ServerUI/Lobby/PlayerDetailController.java</url>
           <line>54</line>
           <option name="timeStamp" value="30" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/ExceptionHandled/GameServer/Server.java</url>
-          <line>331</line>
+          <line>333</line>
           <option name="timeStamp" value="31" />
         </line-breakpoint>
       </breakpoints>
