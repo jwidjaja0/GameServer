@@ -11,6 +11,7 @@ import com.ExceptionHandled.GameMessages.Wrappers.Packet;
 import com.ExceptionHandled.GameServer.Database.SQLiteQuery;
 import com.ExceptionHandled.GameServer.InternalMessage.ActivePlayerList;
 import com.ExceptionHandled.GameServer.InternalMessage.ServerPacket;
+import com.ExceptionHandled.GameServer.InternalMessage.UserInvolvement;
 import com.ExceptionHandled.GameServer.Observer.GameLogicObserver;
 import com.ExceptionHandled.GameServer.Observer.GameLogicSubject;
 
@@ -168,14 +169,11 @@ public class Server implements Runnable, GameLogicSubject {
                     }
                 }
             }
-            return;
         }
 
         else if(packet.getMessage() instanceof ListActiveGamesRequest){
-
             ListActiveGames listAG = getListActiveGames();
             response = new Packet("MainMenu", packet.getPlayerID(), listAG);
-
         }
 
         else if(packet.getMessage() instanceof SpectateRequest){
@@ -184,9 +182,11 @@ public class Server implements Runnable, GameLogicSubject {
 
             for(GameRoom gm : gameRoomList){
                 if(gm.getGameID().equals(gameID)){
-                    Packet notice = gm.addViewer(packet.getPlayerID());
-                    activePlayerMapCC.get(notice.getPlayerID()).getObjectOutputStream().writeObject(notice);
-                    response = SQLiteQuery.getInstance().insertViewerToGame(packet);
+                    SQLiteQuery.getInstance().insertViewerToGame(packet);
+                    response = gm.addViewer(packet.getPlayerID());
+                }
+                else {
+                    response = new Packet("MainMenu", playerID, new SpectateFail("Unknown spectate fail error"));
                 }
             }
         }
@@ -313,6 +313,22 @@ public class Server implements Runnable, GameLogicSubject {
             idList.add(key);
         }
         return new ActivePlayerList(idList);
+    }
+
+    public UserInvolvement findUserInvolvement(String playerID){
+        List<String> listGamesPlaying = new ArrayList<>();
+        List<String> listGamesViewing = new ArrayList<>();
+
+        for(GameRoom gm : gameRoomList){
+            if(gm.isPlayerIDInGame(playerID)){
+                listGamesPlaying.add(gm.getGameName());
+            }
+            else if(gm.isPlayerIDViewer(playerID)){
+                listGamesViewing.add(gm.getGameName());
+            }
+        }
+        UserInvolvement userInvolvement = new UserInvolvement(listGamesPlaying, listGamesViewing);
+        return userInvolvement;
     }
 
     @Override

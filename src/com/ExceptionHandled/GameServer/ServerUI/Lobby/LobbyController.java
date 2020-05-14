@@ -7,9 +7,11 @@ import com.ExceptionHandled.GameMessages.Stats.GameHistorySummary;
 import com.ExceptionHandled.GameMessages.UserInfo;
 import com.ExceptionHandled.GameServer.Database.SQLiteQuery;
 import com.ExceptionHandled.GameServer.InternalMessage.ActivePlayerList;
+import com.ExceptionHandled.GameServer.InternalMessage.UserInvolvement;
 import com.ExceptionHandled.GameServer.Observer.GameLogicObserver;
 import com.ExceptionHandled.GameServer.Observer.GameLogicSubject;
 import com.ExceptionHandled.GameServer.Player;
+import com.ExceptionHandled.GameServer.Server;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -40,6 +42,7 @@ public class LobbyController implements GameLogicObserver {
 
     private List<ActiveGameHeader> games;
     private List<UserInfo> players;
+    private Server server;
 
 
     public LobbyController() {
@@ -71,6 +74,10 @@ public class LobbyController implements GameLogicObserver {
                 showAllGames();
             }
         });
+    }
+
+    public void setServer(Server server) {
+        this.server = server;
     }
 
     private void showAllGames() {
@@ -125,6 +132,7 @@ public class LobbyController implements GameLogicObserver {
     private void getPlayerDetail() {
         String playerID = (String)activePlayerListView.getSelectionModel().getSelectedItem();
         Player player = SQLiteQuery.getInstance().getPlayerDetail(playerID);
+        UserInvolvement userInvolvement = server.findUserInvolvement(playerID);
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("PlayerDetail.fxml"));
 
@@ -132,7 +140,10 @@ public class LobbyController implements GameLogicObserver {
         try {
             Parent root = loader.load();
             pdc = loader.getController();
+
+            pdc.setUserInvolvement(userInvolvement);
             pdc.setFields(player);
+
             Stage stage = new Stage();
             stage.setTitle("Player Detail");
             stage.setScene(new Scene(root));

@@ -397,7 +397,7 @@ public class SQLiteQuery {
         return allPlayers;
     }
 
-    public Packet insertViewerToGame(Packet packet){
+    public void insertViewerToGame(Packet packet){
         String playerID = packet.getPlayerID();
         SpectateRequest sp = (SpectateRequest)packet.getMessage();
 
@@ -407,15 +407,16 @@ public class SQLiteQuery {
             prep.setString(2, playerID);
             prep.execute();
 
-            //TODO: reimplement this.. perhaps it's better to send SpectateSuccess and put the GameHistoryDetail inside that.
-            Packet toReturn = getGameHistoryDetailForPlayer(packet, sp.getGameId());
-            return toReturn;
+            GameHistorySummary info = getGameDetail(sp.getGameId()).getGameHistorySummary();
+            String player2 = info.getPlayer2();
+            if (player2 == null) {
+                player2 = "TBD";
+            }
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        return new Packet("MainMenu", playerID, new SpectateFail("Unknown spectate fail error"));
     }
 
     public void insertMoveHistory(MoveValid moveValid){

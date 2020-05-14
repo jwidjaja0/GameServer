@@ -14,11 +14,26 @@ public class GameRoom {
     private String gameName;
 
     private ArrayList<String> viewers;
-    private String player1;
-    private String player2;
+    private String player1; //ID of player1
+    private String player2; //ID of player2
 
     private TTTGame game;
     private ArrayList<MoveValid> moves;
+
+    public boolean isPlayerIDInGame(String playerID){
+        if(playerID.equals(player1) || playerID.equals(player2)){
+            return true;
+        }
+        return false;
+    }
+
+    public boolean isPlayerIDViewer(String playerID){
+        return viewers.contains(playerID);
+    }
+
+    public String getGameName() {
+        return gameName;
+    }
 
     public GameRoom(String gameID, String gameName, String player1) {
         this.gameID = gameID;
