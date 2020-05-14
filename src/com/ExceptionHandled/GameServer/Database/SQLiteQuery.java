@@ -166,10 +166,15 @@ public class SQLiteQuery {
                     prep1.executeUpdate();
 
                     PreparedStatement preparedStatement = connection.prepareStatement(
-                            "select gameID, gl.gameName, pi.playerID, pi.firstname, pi.lastname\n" +
-                                    "from gameList gl\n" +
-                                    "join playerInfo pi \n" +
-                                    "ON gl.player1ID = pi.playerID");
+                            "Select  gL.gameID, gL.gameName, pI.playerID, pI.firstName, pI.lastName\n" +
+                                    "From gameList gL\n" +
+                                    "join playerInfo pI \n" +
+                                    "join playerInfo pI2\n" +
+                                    "on gL.player1ID = pI.playerID and gL.player2ID = pI2.playerID\n" +
+                                    "where gL.gameID = ?"
+                    );
+
+                    preparedStatement.setString(1, gameID);
                     ResultSet resultSet = preparedStatement.executeQuery();
                     String opponentPlayerName = resultSet.getString(4) + " " + resultSet.getString(5);
                     String gameName = resultSet.getString(2);
@@ -185,7 +190,7 @@ public class SQLiteQuery {
                         moveList.add(m);
                     }
 
-                    return new Packet("MainMenu", playerID, new JoinGameSuccess(gameID, gameName, opponentPlayerName, moveList));
+                    return new Packet("MainMenu", playerID, new JoinGameSuccess(gameID, opponentPlayerName, gameName, moveList));
                 }
             }
         }

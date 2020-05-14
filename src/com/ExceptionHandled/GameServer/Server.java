@@ -169,6 +169,7 @@ public class Server implements Runnable, GameLogicSubject {
                     }
                 }
             }
+            return;
         }
 
         else if(packet.getMessage() instanceof ListActiveGamesRequest){
