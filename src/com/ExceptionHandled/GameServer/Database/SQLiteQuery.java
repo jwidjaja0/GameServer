@@ -595,6 +595,10 @@ public class SQLiteQuery {
         if(!userUpdateRequest.getNewLastName().equals("")){
             updateStatus = updateLastName(playerID, userUpdateRequest.getNewLastName());
         }
+        if(!userUpdateRequest.getNewPassword().equals("")){
+            updateStatus = updatePassword(playerID, userUpdateRequest.getNewPassword());
+            isPasswordChanged = true;
+        }
 
         //TODO: Figure out how to indicate firstname lastname is also changed
         return new Packet("UserUpdate", playerID, new UserUpdateSuccess(isUsernameChanged, isPasswordChanged));
@@ -634,6 +638,19 @@ public class SQLiteQuery {
         try{
             PreparedStatement prep = connection.prepareStatement("UPDATE playerInfo SET lastName = ? WHERE playerID = ?");
             prep.setString(1, newLname);
+            prep.setString(2, playerID);
+            prep.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    private boolean updatePassword(String playerID, String newPassword){
+        try{
+            PreparedStatement prep = connection.prepareStatement("UPDATE playerInfo SET password = ? WHERE playerID = ?");
+            prep.setString(1, newPassword);
             prep.setString(2, playerID);
             prep.executeUpdate();
             return true;
