@@ -18,14 +18,11 @@
         </library>
       </libraries>
     </data-source>
-    <data-source source="LOCAL" name="TicTacToe" uuid="75149942-7031-402f-8fd8-3355df263adf">
+    <data-source source="LOCAL" name="TicTacToe" uuid="bf1dfde6-036d-480f-8e52-916397589ba7">
       <driver-ref>sqlite.xerial</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
-      <jdbc-url>jdbc:sqlite:F:\Documents\GitHub\GameServer\TicTacToe.db</jdbc-url>
-      <driver-properties>
-        <property name="enable_load_extension" value="true" />
-      </driver-properties>
+      <jdbc-url>jdbc:sqlite:C:\Users\EdithStoll\Documents\GitHub\GameServer\TicTacToe.db</jdbc-url>
       <libraries>
         <library>
           <url>file://$APPLICATION_CONFIG_DIR$/jdbc-drivers/Xerial SQLiteJDBC/3.25.1/license.txt</url>
