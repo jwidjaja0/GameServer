@@ -93,10 +93,16 @@ public class GameRoom {
     }
 
     private ArrayList<Packet> gameOver(String whoWon) {
-        int winner;
-        if (game.isPlayer2Turn()) winner = 2;
-        else winner = 1;
-        SQLiteQuery.getInstance().updateGameOver(gameID, winner, player1, player2);
+        int gameStatus;
+        if(whoWon.equals("x")){
+            gameStatus = 1;
+        } else if(whoWon.equals("o")){
+            gameStatus = 2;
+        } else{
+            gameStatus = 3;
+        }
+
+        SQLiteQuery.getInstance().updateGameOver(gameID, gameStatus, player1, player2);
 
         ArrayList<Packet> packets = new ArrayList<Packet>();
         GameOverOutcome gameOver = new GameOverOutcome(gameID, whoWon);
