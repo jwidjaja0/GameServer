@@ -35,7 +35,7 @@ public class TTTGame {
         board.setMove(row, col, token);
     }
 
-    public boolean getWhoseTurn(){
+    public boolean isPlayer2Turn(){
         return player2Turn;
     }
 
