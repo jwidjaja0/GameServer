@@ -4,11 +4,14 @@ package com.ExceptionHandled.GameServer;
 import com.ExceptionHandled.GameMessages.Wrappers.Packet;
 import com.ExceptionHandled.GameServer.InternalMessage.ServerPacket;
 
+import java.util.Map;
 import java.util.concurrent.BlockingQueue;
 
 public class Outgoing {
     private BlockingQueue<ServerPacket> outgoingQueue;
     private static Outgoing instance = new Outgoing();
+
+    private Map<String, ClientConnection> activePlayerMapCC;
 
     private Outgoing() {
     }
@@ -38,9 +41,12 @@ public class Outgoing {
         }
     }
 
+    public void addToQueue(Packet packet, String playerID){
+        ClientConnection cc = activePlayerMapCC.get(playerID);
+        addToQueue(packet, cc);
+    }
 
-
-
-
-
+    public void setActivePlayerMapCC(Map<String, ClientConnection> activePlayerMapCC) {
+        this.activePlayerMapCC = activePlayerMapCC;
+    }
 }

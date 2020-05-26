@@ -24,11 +24,13 @@ import java.util.concurrent.BlockingQueue;
 
 public class Server implements Runnable, GameLogicSubject {
     private BlockingQueue<ServerPacket> messageQueue;
+    private BlockingQueue<ServerPacket> outgoingQueue;
 
     private List<ClientConnection> clientConnectionList;
     private List<GameRoom> gameRoomList;
     private Map<String, ClientConnection> activePlayerMapCC;
     private ListenNewClient listenNewClient;
+    private ServerSender serverSender;
 
     private Thread thread;
 
@@ -39,10 +41,17 @@ public class Server implements Runnable, GameLogicSubject {
 
     public Server() {
         messageQueue = new ArrayBlockingQueue<>(500);
+        outgoingQueue = new ArrayBlockingQueue<>(500);
+
         clientConnectionList = new ArrayList<>(100);
         gameRoomList = new ArrayList<>(100);
         listenNewClient = new ListenNewClient(clientConnectionList, messageQueue);
         activePlayerMapCC = new HashMap<>();
+
+        //setActivePlayerMap to OutGoing
+        Outgoing.getInstance().setActivePlayerMapCC(activePlayerMapCC);
+        Outgoing.getInstance().setOutgoingQueue(outgoingQueue);
+        serverSender = new ServerSender(outgoingQueue);
 
         //gameRoomList.add(new GameRoom("sampleID", "", "sample", "x"));
         observerList = new ArrayList<>();
@@ -89,6 +98,8 @@ public class Server implements Runnable, GameLogicSubject {
 
     private void handleStatsMessage(ServerPacket serverPacket) throws IOException {
         Packet packet = serverPacket.getPacket();
+        ClientConnection cc = serverPacket.getClientConnection();
+
         System.out.println("handleStatsMessage, playerID: " + packet.getPlayerID());
         Packet response = null;
 
@@ -100,11 +111,13 @@ public class Server implements Runnable, GameLogicSubject {
             PlayerStatsRequest playerStatsRequest = (PlayerStatsRequest)packet.getMessage();
             response = SQLiteQuery.getInstance().getPlayerStatsInfo(packet);
         }
-        serverPacket.getClientConnection().getObjectOutputStream().writeObject(response);
+        //serverPacket.getClientConnection().getObjectOutputStream().writeObject(response);
+        Outgoing.getInstance().addToQueue(response,cc);
     }
 
     private void handleUserUpdateMessage(ServerPacket serverPacket) throws IOException {
         Packet packet = serverPacket.getPacket();
+        ClientConnection cc = serverPacket.getClientConnection();
         System.out.println("handleUserUpdateMessage, playerID: " + packet.getPlayerID());
         Packet response = null;
 
@@ -115,12 +128,14 @@ public class Server implements Runnable, GameLogicSubject {
             response = SQLiteQuery.getInstance().userDelete(packet);
         }
 
-        serverPacket.getClientConnection().getObjectOutputStream().writeObject(response);
+        Outgoing.getInstance().addToQueue(response,cc);
+//        serverPacket.getClientConnection().getObjectOutputStream().writeObject(response);
     }
 
     private void handleMainMenuMessage(ServerPacket serverPacket) throws IOException, InterruptedException {
         Packet packet = serverPacket.getPacket();
         Packet response = null;
+        ClientConnection cc = serverPacket.getClientConnection();
         String playerID = packet.getPlayerID();
 
         if(packet.getMessage() instanceof NewGameRequest){
@@ -141,9 +156,10 @@ public class Server implements Runnable, GameLogicSubject {
                 if (newGameRequest.getOpponent().equalsIgnoreCase("AI")) {
                     JoinGameRequest aiJoin = new JoinGameRequest(gameID);
                     Packet sPacket = new Packet("MainMenu", aiID, aiJoin);
-                    messageQueue.put(new ServerPacket(serverPacket.getClientConnection(), sPacket));
+                    messageQueue.put(new ServerPacket(serverPacket.getClientConnection(), sPacket)); //Ai join game
                 }
             }
+            Outgoing.getInstance().addToQueue(response,cc);
         }
 
         else if(packet.getMessage() instanceof JoinGameRequest){
@@ -158,23 +174,26 @@ public class Server implements Runnable, GameLogicSubject {
                         for (Packet notice : packets) {
                             System.out.println("sending to player");
                             if (!notice.getPlayerID().equals(aiID)) //if not to Ai
-                                activePlayerMapCC.get(notice.getPlayerID()).getObjectOutputStream().writeObject(notice);
+                                Outgoing.getInstance().addToQueue(notice, notice.getPlayerID());
+                                //activePlayerMapCC.get(notice.getPlayerID()).getObjectOutputStream().writeObject(notice);
                         }
                         response = SQLiteQuery.getInstance().joinGame(packet);
+                        //not being sent anywhere
 
                     }
                     else {
                         Packet notice = new Packet ("MainMenu", playerID, new JoinGameFail(idRequest));
-                        serverPacket.getClientConnection().getObjectOutputStream().writeObject(notice);
+                        Outgoing.getInstance().addToQueue(notice, cc);
                     }
                 }
             }
-            return;
+//            return;
         }
 
         else if(packet.getMessage() instanceof ListActiveGamesRequest){
             ListActiveGames listAG = getListActiveGames();
             response = new Packet("MainMenu", packet.getPlayerID(), listAG);
+            Outgoing.getInstance().addToQueue(response, cc);
         }
 
         else if(packet.getMessage() instanceof SpectateRequest){
@@ -190,6 +209,7 @@ public class Server implements Runnable, GameLogicSubject {
                     response = new Packet("MainMenu", playerID, new SpectateFail("Unknown spectate fail error"));
                 }
             }
+            Outgoing.getInstance().addToQueue(response, cc);
         }
 
         else if(packet.getMessage() instanceof SpectatorLeave){
@@ -201,9 +221,10 @@ public class Server implements Runnable, GameLogicSubject {
                     gm.removeViewer(packet.getPlayerID());
                 }
             }
+            //before: send back response, which was null. Need to send to everyone in the room that a spectator leave, or send list of spectators
         }
 
-        serverPacket.getClientConnection().getObjectOutputStream().writeObject(response);
+        //serverPacket.getClientConnection().getObjectOutputStream().writeObject(response);
     }
 
     private void handleGameMessage(ServerPacket serverPacket) throws IOException {
@@ -235,9 +256,11 @@ public class Server implements Runnable, GameLogicSubject {
                     //send all packets
                     for (Packet notice : packets) {
                         if (!notice.getPlayerID().equals(aiID)) {
-                            ClientConnection con = activePlayerMapCC.get(notice.getPlayerID());
-                            ObjectOutputStream os = con.getObjectOutputStream();
-                            os.writeObject(notice);
+                            Outgoing.getInstance().addToQueue(notice, notice.getPlayerID());
+
+//                            ClientConnection con = activePlayerMapCC.get(notice.getPlayerID());
+//                            ObjectOutputStream os = con.getObjectOutputStream();
+//                            os.writeObject(notice);
                             //originally: activePlayerMapCC.get(notice.getPlayerID()).getObjectOutputStream().writeObject(notice);
                         }
                         else {
@@ -261,9 +284,11 @@ public class Server implements Runnable, GameLogicSubject {
     public void handleLoginMessages(ServerPacket serverPacket) throws IOException {
         Packet packet = serverPacket.getPacket();
         Packet response = null;
+        ClientConnection cc = serverPacket.getClientConnection();
 
         if(packet.getMessage() instanceof SignUpRequest){
             response = SQLiteQuery.getInstance().insertNewUser(packet);
+            Outgoing.getInstance().addToQueue(response, cc);
         }
         else if(packet.getMessage() instanceof LoginRequest){
             response = SQLiteQuery.getInstance().userLoggingIn(packet);
@@ -275,6 +300,7 @@ public class Server implements Runnable, GameLogicSubject {
 
                 notifyGameLogicObserver(getActivePlayers());
             }
+            Outgoing.getInstance().addToQueue(response, cc);
         }
 
         else if(packet.getMessage() instanceof LogoutRequest){
@@ -287,6 +313,7 @@ public class Server implements Runnable, GameLogicSubject {
                 response = new Packet("Login", playerID, new LogoutSuccess());
                 notifyGameLogicObserver(getActivePlayers());
             }
+            Outgoing.getInstance().addToQueue(response, cc);
         }
 
         //TODO: delete later, only for debugging
@@ -295,7 +322,7 @@ public class Server implements Runnable, GameLogicSubject {
             System.out.println(response.getPlayerID());
             System.out.println(response.getPlayerID());
         }
-        serverPacket.getClientConnection().getObjectOutputStream().writeObject(response);
+        //serverPacket.getClientConnection().getObjectOutputStream().writeObject(response);
     }
 
     private ListActiveGames getListActiveGames(){
