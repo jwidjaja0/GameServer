@@ -25,7 +25,7 @@ public class Main extends Application {
         LobbyController lbc = lobbyLoader.getController();
         lbc.setServer(gameServer);
 
-        stage.setTitle("My app");
+        stage.setTitle("Server");
         stage.setScene(new Scene(lobby));
         stage.show();
 
