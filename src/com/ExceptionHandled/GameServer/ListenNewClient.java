@@ -30,7 +30,7 @@ public class ListenNewClient implements Runnable {
     public void run() {
         try {
             System.out.println("ListenNewClient thread started");
-            ServerSocket serverSocket = new ServerSocket(8000);
+            ServerSocket serverSocket = new ServerSocket(8001);
 
             while(true){
                 Socket socket = serverSocket.accept();
